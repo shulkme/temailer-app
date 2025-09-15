@@ -1,0 +1,1234 @@
+{
+  "global": {
+    "country": {
+      "usa": "United States",
+      "pol": "Poland",
+      "nld": "Netherlands",
+      "bra": "Brazil",
+      "lva": "Latvia",
+      "fra": "France",
+      "rou": "Romania",
+      "can": "Canada",
+      "nor": "Norway",
+      "aut": "Austria",
+      "gbr": "United Kingdom",
+      "ukr": "Ukraine",
+      "tur": "Turkey",
+      "jpn": "Japan",
+      "isr": "Israel",
+      "twn": "Taiwan",
+      "kor": "South Korea",
+      "esp": "Spain",
+      "deu": "Germany",
+      "sgp": "Singapore",
+      "hkn": "Hong Kong",
+      "tha": "Thailand",
+      "ind": "India",
+      "ita": "Italy"
+    },
+    "continent": {
+      "na": "North America",
+      "sa": "South America",
+      "eu": "Europe",
+      "as": "Asia",
+      "af": "Africa",
+      "oc": "Oceania",
+      "an": "Antarctica"
+    },
+    "ip": {
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "expired": "Expired",
+        "deleted": "Deleted"
+      }
+    }
+  },
+  "app": {
+    "global": {
+      "sidebar": {
+        "menus": {
+          "dashboard": "Dashboard",
+          "proxies": "Proxies",
+          "residential": "Residential Proxies",
+          "static-isp": "Static ISP Proxies",
+          "datacenter": "Datacenter Proxies",
+          "mobile": "Mobile Proxies",
+          "proxy-settings": "Proxy Settings",
+          "scarping": "Scarping",
+          "serp-api": "Serp Api",
+          "menu": "Menu",
+          "account": "My Account",
+          "wallet": "Wallet",
+          "referral": "Referral",
+          "help": "Help",
+          "partners": "Partners",
+          "documentation": "Documentation",
+          "faq": "FAQ"
+        }
+      },
+      "header": {
+        "notification": "Notification",
+        "account": {
+          "account": "Account",
+          "billing": "Billing",
+          "wallet": "Wallet",
+          "logout": "Logout"
+        }
+      }
+    },
+    "pages": {
+      "dashboard": {
+        "title": "Dashboard",
+        "tabs": {
+          "isp": {
+            "title": "ISP Proxies",
+            "desc": "Form <strong>$0.15</strong> / IP / Day"
+          },
+          "datacenter": {
+            "title": "Datacenter Proxies",
+            "desc": "Form <strong></strong> / IP / Day"
+          },
+          "residential": {
+            "title": "Residential Proxies",
+            "desc": "Form <strong></strong> / IP / Day"
+          },
+          "mobile": {
+            "title": "Mobile Proxies",
+            "desc": "Form <strong></strong> / IP / Day"
+          }
+        },
+        "wallet": {
+          "title": "My Wallet",
+          "balance": "Current balance",
+          "recharge": "Recharge"
+        },
+        "referral": {
+          "title": "Referral program",
+          "subtitle": "Invite friends and get <percent></percent> commission",
+          "withdrawable": "Withdrawable",
+          "extract": "Extract",
+          "code": "Invitation Code:",
+          "link": "Invitation Link:"
+        },
+        "help": {
+          "title": "Get Help",
+          "desc": "Have any questions about our products or need a customized package?",
+          "contact": "Let's talk",
+          "links": {
+            "partners": "Partners",
+            "documentation": "Documentation",
+            "faq": "FAQ"
+          }
+        },
+        "traffic": {
+          "title": "Total traffic",
+          "detail": "Detailed statistics",
+          "filters": {
+            "duration": {
+              "options": {
+                "7": "7 Days",
+                "30": "30 Days",
+                "90": "90 Days"
+              }
+            }
+          }
+        },
+        "statistic": {
+          "isp": {
+            "title": "ISP Proxies",
+            "desc": "Trusted premium ISP proxy. Get uninterrupted connectivity and unlimited residential IP sessions for your business on a pay-per-IP basis.",
+            "statistics": {
+              "available": "Available",
+              "expiring": "Expiring soon",
+              "renewal": "Automatic renewal",
+              "expired": "Expired"
+            },
+            "links": {
+              "renewal": "Automatic renewal",
+              "documentation": "Documentation"
+            },
+            "actions": {
+              "using": "Start using"
+            },
+            "cover": {
+              "title": "Starts from",
+              "price": "<price></price> / IP / Day",
+              "features": [
+                "Dedicated IP",
+                "Unlimited duration sessions",
+                "Lifetime IP retention",
+                "Unlimited traffic"
+              ],
+              "buy": "Buy Now"
+            }
+          },
+          "datacenter": {
+            "title": "Datacenter Proxies",
+            "desc": "Purchase premium data center proxies with unlimited traffic and stable IP addresses. Experience enhanced privacy and speed at an exceptional value.",
+            "statistics": {
+              "available": "Available",
+              "expiring": "Expiring soon",
+              "renewal": "Automatic renewal",
+              "expired": "Expired"
+            },
+            "links": {
+              "renewal": "Automatic renewal",
+              "documentation": "Documentation"
+            },
+            "actions": {
+              "using": "Start using"
+            },
+            "cover": {
+              "title": "Starts from",
+              "price": "<price></price> / IP / Day",
+              "features": [
+                "Exclusive DC Proxies",
+                "Best price",
+                "Market-leading speed",
+                "Pay per IP, no GB limit"
+              ],
+              "buy": "Buy Now"
+            }
+          },
+          "residential": {
+            "title": "Residential Proxies",
+            "desc": "Discover over 200M+ ethically sourced residential IPs for seamless human-like crawling. Access local public data effortlessly and without barriers.",
+            "statistics": {
+              "remaining-traffic": "Available",
+              "expiration-time": "Expiration time"
+            },
+            "links": {
+              "renewal": "Automatic renewal",
+              "documentation": "Documentation"
+            },
+            "actions": {
+              "using": "Start using"
+            },
+            "cover": {
+              "title": "Starts from",
+              "price": "<price></price> / GB",
+              "features": [
+                "HTTP/HTTPS/SOCKS5 protocols",
+                "200 million ethical IPs",
+                "99.9% fast response time",
+                "Country and city-level targeting"
+              ],
+              "buy": "Buy Now"
+            }
+          },
+          "mobile": {
+            "title": "Mobile Proxies",
+            "desc": "Access millions of real mobile device IPs, provide native 4G/5G networks, and ultra-low latency connections, perfectly supporting ad verification and mobile acquisition services.",
+            "statistics": {
+              "remaining-traffic": "Available",
+              "expiration-time": "Expiration time"
+            },
+            "links": {
+              "renewal": "Automatic renewal",
+              "documentation": "Documentation"
+            },
+            "actions": {
+              "using": "Start using"
+            },
+            "cover": {
+              "title": "Starts from",
+              "price": "<price></price> / GB",
+              "features": [
+                "Real 4G/5G mobile IPs",
+                "Mobile network native exit",
+                "99.9% fast response time",
+                "Country and city-level targeting"
+              ],
+              "buy": "Buy Now"
+            }
+          }
+        }
+      },
+      "static-isp": {
+        "title": "Static ISP Proxies",
+        "menus": {
+          "pricing": "Pricing",
+          "ip-list": "IP List",
+          "guide": "Guide"
+        },
+        "pricing": {
+          "region": {
+            "title": "Region List",
+            "tips": "Haven't found the locations you need? <link>Contact us</link>",
+            "filters": {
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              },
+              "continent": {
+                "label": "Continent",
+                "default": "All"
+              }
+            }
+          },
+          "features": {
+            "title": "Features",
+            "items": [
+              "Real residential IP",
+              "Unlimited session duration",
+              "Http/https/socks5 protocol",
+              "Extremely fast response time",
+              "Pay by ip, no traffic limit",
+              "Applicable to ebay, paypal, amazon accounts, etc."
+            ]
+          },
+          "order": {
+            "title": "Order Summary",
+            "list": {
+              "empty": "Please select a region first"
+            },
+            "summary": {
+              "amount": "IP amount",
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              },
+              "subtotal": "Subtotal",
+              "total": "Total"
+            },
+            "actions": {
+              "reset": "Clear",
+              "submit": "Order Now"
+            }
+          }
+        },
+        "ip-list": {
+          "banner": "In order not to affect your use, please renew before the IP expires, cannot renew after expiration. You can also top up your wallet for auto-renewal. <link>Learn more</link>",
+          "statistics": {
+            "remaining": "Remaining IPs",
+            "extractable": "Extractable IPs",
+            "expiring": "Expiring Soon"
+          },
+          "table": {
+            "filters": {
+              "ip": {
+                "placeholder": "IP Address"
+              },
+              "status": {
+                "placeholder": "Status"
+              }
+            },
+            "actions": {
+              "refresh": "Refresh",
+              "renewal": "Renewal"
+            },
+            "columns": {
+              "ip": "IP Address",
+              "port": "Port",
+              "username": "Username",
+              "password": "Password",
+              "region": "Region",
+              "time-left": "Time Left",
+              "expire-time": "Expire Time",
+              "status": "Status",
+              "remark": "Remark",
+              "operate": "Operate"
+            }
+          }
+        }
+      },
+      "datacenter": {
+        "title": "Datacenter Proxies",
+        "menus": {
+          "pricing": "Pricing",
+          "ip-list": "IP List",
+          "guide": "Guide"
+        },
+        "pricing": {
+          "region": {
+            "title": "Region List",
+            "tips": "Haven't found the locations you need? <link>Contact us</link>",
+            "filters": {
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              },
+              "continent": {
+                "label": "Continent",
+                "default": "All"
+              }
+            }
+          },
+          "features": {
+            "title": "Features",
+            "items": [
+              "Real residential IP",
+              "Unlimited session duration",
+              "Http/https/socks5 protocol",
+              "Extremely fast response time",
+              "Pay by ip, no traffic limit",
+              "Applicable to ebay, paypal, amazon accounts, etc."
+            ]
+          },
+          "order": {
+            "title": "Order Summary",
+            "list": {
+              "empty": "Please select a region first"
+            },
+            "summary": {
+              "amount": "IP amount",
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              },
+              "subtotal": "Subtotal",
+              "total": "Total"
+            },
+            "actions": {
+              "reset": "Clear",
+              "submit": "Order Now"
+            }
+          }
+        },
+        "ip-list": {
+          "banner": "In order not to affect your use, please renew before the IP expires, cannot renew after expiration. You can also top up your wallet for auto-renewal. <link>Learn more</link>",
+          "statistics": {
+            "remaining": "Remaining IPs",
+            "extractable": "Extractable IPs",
+            "expiring": "Expiring Soon"
+          },
+          "table": {
+            "filters": {
+              "ip": {
+                "placeholder": "IP Address"
+              },
+              "status": {
+                "placeholder": "Status"
+              }
+            },
+            "actions": {
+              "refresh": "Refresh",
+              "renewal": "Renewal"
+            },
+            "columns": {
+              "ip": "IP Address",
+              "port": "Port",
+              "username": "Username",
+              "password": "Password",
+              "region": "Region",
+              "time-left": "Time Left",
+              "expire-time": "Expire Time",
+              "status": "Status",
+              "remark": "Remark",
+              "operate": "Operate"
+            }
+          }
+        }
+      },
+      "residential": {
+        "title": "Residential Proxies",
+        "menus": {
+          "pricing": "Pricing",
+          "setup": "Setup",
+          "statistics": "Statistics",
+          "guide": "Guide"
+        },
+        "pricing": {
+          "subscription": {
+            "title": "Subscription",
+            "tips": "Save 60% on 500GB+ Plans? <link>Contact us</link>",
+            "filters": {
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              }
+            },
+            "plan": {
+              "title": "Plans",
+              "item": {
+                "total": "Total:"
+              }
+            }
+          },
+          "features": {
+            "title": "Features",
+            "items": [
+              "Real residential IP",
+              "Unlimited session duration",
+              "Http/https/socks5 protocol",
+              "Extremely fast response time",
+              "Pay by ip, no traffic limit",
+              "Applicable to ebay, paypal, amazon accounts, etc."
+            ]
+          },
+          "order": {
+            "title": "Order Summary",
+            "list": {
+              "empty": "Please select a plan first",
+              "features": [
+                "Real residential IP",
+                "Unlimited session duration",
+                "Http/https/socks5 protocol",
+                "Extremely fast response time",
+                "Pay by ip, no traffic limit",
+                "Applicable to ebay, paypal, amazon accounts, etc."
+              ]
+            },
+            "summary": {
+              "per": "Price per GB",
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              },
+              "subtotal": "Subtotal",
+              "total": "Total"
+            },
+            "actions": {
+              "submit": "Order Now"
+            }
+          }
+        },
+        "setup": {
+          "generator": {
+            "tabs": {
+              "pwd": "Username/Password",
+              "whitelist": "Whitelist"
+            },
+            "form": {
+              "account": {
+                "items": {
+                  "sub-account": {
+                    "label": "Select account",
+                    "placeholder": "Select",
+                    "extra": {
+                      "add": "Add sub-account"
+                    }
+                  }
+                }
+              },
+              "proxy": {
+                "title": "Proxy generator",
+                "items": {
+                  "region": {
+                    "label": "Country/Region",
+                    "placeholder": "Random",
+                    "extra": {
+                      "code": "View country code"
+                    }
+                  },
+                  "host": {
+                    "label": "Host",
+                    "placeholder": "Random"
+                  },
+                  "continent": {
+                    "label": "Continent",
+                    "placeholder": "Random"
+                  },
+                  "state": {
+                    "label": "State",
+                    "placeholder": "Random"
+                  },
+                  "city": {
+                    "label": "City",
+                    "placeholder": "Random"
+                  },
+                  "number": {
+                    "label": "Number",
+                    "placeholder": "0"
+                  },
+                  "endpoint-type": {
+                    "label": "Endpoint type",
+                    "options": {
+                      "country": "Country entry",
+                      "api": "API link"
+                    }
+                  },
+                  "username": {
+                    "label": "Username",
+                    "placeholder": "Random"
+                  },
+                  "password": {
+                    "label": "Password",
+                    "placeholder": "Random"
+                  }
+                }
+              },
+              "session": {
+                "title": "Session settings",
+                "items": {
+                  "type": {
+                    "label": "Session type",
+                    "placeholder": "Random"
+                  },
+                  "duration": {
+                    "label": "Duration",
+                    "placeholder": "Random",
+                    "suffix": "Mins"
+                  }
+                }
+              }
+            }
+          },
+          "result": {
+            "title": "Result",
+            "form": {
+              "format": {
+                "label": "Output format",
+                "placeholder": "Username:Password"
+              },
+              "quantity": {
+                "label": "Quantity",
+                "placeholder": "1"
+              },
+              "output": {
+                "label": "Output",
+                "placeholder": "Please order the Residential proxies first"
+              }
+            },
+            "actions": {
+              "generate": "Generate",
+              "download": "Download"
+            }
+          }
+        },
+        "statistics": {
+          "filters": {
+            "username": {
+              "placeholder": "Sub account"
+            }
+          },
+          "actions": {
+            "refresh": "Refresh",
+            "export": "Export"
+          },
+          "table": {
+            "columns": {
+              "date": "Date",
+              "target": "Target",
+              "traffic": "Traffic",
+              "request": "Request"
+            }
+          }
+        }
+      },
+      "mobile": {
+        "title": "Mobile Proxies",
+        "menus": {
+          "pricing": "Pricing",
+          "setup": "Setup",
+          "statistics": "Statistics",
+          "guide": "Guide"
+        },
+        "pricing": {
+          "subscription": {
+            "title": "Subscription",
+            "tips": "Save 60% on 500GB+ Plans? <link>Contact us</link>",
+            "filters": {
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              }
+            },
+            "plan": {
+              "title": "Plans",
+              "item": {
+                "total": "Total:"
+              }
+            }
+          },
+          "features": {
+            "title": "Features",
+            "items": [
+              "Real residential IP",
+              "Unlimited session duration",
+              "Http/https/socks5 protocol",
+              "Extremely fast response time",
+              "Pay by ip, no traffic limit",
+              "Applicable to ebay, paypal, amazon accounts, etc."
+            ]
+          },
+          "order": {
+            "title": "Order Summary",
+            "list": {
+              "empty": "Please select a plan first",
+              "features": [
+                "Real residential IP",
+                "Unlimited session duration",
+                "Http/https/socks5 protocol",
+                "Extremely fast response time",
+                "Pay by ip, no traffic limit",
+                "Applicable to ebay, paypal, amazon accounts, etc."
+              ]
+            },
+            "summary": {
+              "per": "Price per GB",
+              "duration": {
+                "label": "Duration",
+                "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
+              },
+              "subtotal": "Subtotal",
+              "total": "Total"
+            },
+            "actions": {
+              "submit": "Order Now"
+            }
+          }
+        },
+        "setup": {
+          "generator": {
+            "tabs": {
+              "pwd": "Username/Password",
+              "whitelist": "Whitelist"
+            },
+            "form": {
+              "account": {
+                "items": {
+                  "sub-account": {
+                    "label": "Select account",
+                    "placeholder": "Select",
+                    "extra": {
+                      "add": "Add sub-account"
+                    }
+                  }
+                }
+              },
+              "proxy": {
+                "title": "Proxy generator",
+                "items": {
+                  "region": {
+                    "label": "Country/Region",
+                    "placeholder": "Random",
+                    "extra": {
+                      "code": "View country code"
+                    }
+                  },
+                  "host": {
+                    "label": "Host",
+                    "placeholder": "Random"
+                  },
+                  "continent": {
+                    "label": "Continent",
+                    "placeholder": "Random"
+                  },
+                  "state": {
+                    "label": "State",
+                    "placeholder": "Random"
+                  },
+                  "city": {
+                    "label": "City",
+                    "placeholder": "Random"
+                  },
+                  "number": {
+                    "label": "Number",
+                    "placeholder": "0"
+                  },
+                  "endpoint-type": {
+                    "label": "Endpoint type",
+                    "options": {
+                      "country": "Country entry",
+                      "api": "API link"
+                    }
+                  },
+                  "username": {
+                    "label": "Username",
+                    "placeholder": "Random"
+                  },
+                  "password": {
+                    "label": "Password",
+                    "placeholder": "Random"
+                  }
+                }
+              },
+              "session": {
+                "title": "Session settings",
+                "items": {
+                  "type": {
+                    "label": "Session type",
+                    "placeholder": "Random"
+                  },
+                  "duration": {
+                    "label": "Duration",
+                    "placeholder": "Random",
+                    "suffix": "Mins"
+                  }
+                }
+              }
+            }
+          },
+          "result": {
+            "title": "Result",
+            "form": {
+              "format": {
+                "label": "Output format",
+                "placeholder": "Username:Password"
+              },
+              "quantity": {
+                "label": "Quantity",
+                "placeholder": "1"
+              },
+              "output": {
+                "label": "Output",
+                "placeholder": "Please order the Residential proxies first"
+              }
+            },
+            "actions": {
+              "generate": "Generate",
+              "download": "Download"
+            }
+          }
+        },
+        "statistics": {
+          "filters": {
+            "username": {
+              "placeholder": "Sub account"
+            }
+          },
+          "actions": {
+            "refresh": "Refresh",
+            "export": "Export"
+          },
+          "table": {
+            "columns": {
+              "date": "Date",
+              "target": "Target",
+              "traffic": "Traffic",
+              "request": "Request"
+            }
+          }
+        }
+      },
+      "proxy-setting": {
+        "title": "Proxy Settings",
+        "menus": {
+          "sub-account": "Sub Account",
+          "whitelist": "Whitelist"
+        },
+        "sub-account": {
+          "table": {
+            "filters": {
+              "username": {
+                "placeholder": "Search sub account"
+              }
+            },
+            "actions": {
+              "create": "Add sub-account"
+            },
+            "columns": {
+              "username": "Username",
+              "residential-used": "Residential Used",
+              "status": "Status",
+              "add-time": "Add Time",
+              "remark": "Remark",
+              "operate": "Operate"
+            }
+          }
+        },
+        "whitelist": {
+          "table": {
+            "filters": {
+              "ip": {
+                "placeholder": "Search IP"
+              }
+            },
+            "actions": {
+              "create": "Add whitelist"
+            },
+            "columns": {
+              "ip": "IP Address",
+              "status": "Status",
+              "add-time": "Add Time",
+              "remark": "Remark",
+              "operate": "Operate"
+            }
+          }
+        }
+      },
+      "wallet": {
+        "title": "Wallet",
+        "menus": {
+          "recharge": "Balance Recharge",
+          "transactions": "Transactions",
+          "billing": "Billing"
+        },
+        "recharge": {
+          "exchange": {
+            "current": {
+              "label": "Current Balance",
+              "extra": "Transaction Details"
+            },
+            "amount": {
+              "title": "Amount",
+              "tips": "Minimum mount is {number} USD"
+            }
+          },
+          "payment": {
+            "title": "Payment Method",
+            "methods": {
+              "credit": "Credit Card",
+              "crypto": "Crypto Currency",
+              "local": "Local payments"
+            },
+            "total": "Total:",
+            "submit": "Continue to Pay"
+          }
+        },
+        "transactions": {
+          "table": {
+            "filters": {
+              "order-number": {
+                "placeholder": "Order Number"
+              }
+            },
+            "columns": {
+              "order-number": "Order Number",
+              "payment-amount": "Payment Amount",
+              "payment-method": "Payment Method",
+              "status": "Status",
+              "denial-reason": "Denial Reason",
+              "payment-time": "Payment Time",
+              "account-balance": "Account Balance"
+            }
+          }
+        },
+        "billing": {
+          "table": {
+            "filters": {
+              "type": {
+                "placeholder": "Type"
+              },
+              "order-number": {
+                "placeholder": "Order Number"
+              }
+            },
+            "columns": {
+              "order-number": "Order Number",
+              "payment-amount": "Payment Amount",
+              "payment-method": "Payment Method",
+              "type": "Order Type",
+              "plan": "Plan",
+              "status": "Status",
+              "date": "Date",
+              "balance": "Balance"
+            }
+          }
+        }
+      },
+      "account": {
+        "title": "Account",
+        "menus": {
+          "profile": "Profile",
+          "subscription": "Subscription",
+          "notifications": "Notifications"
+        },
+        "profile": {
+          "detail": {
+            "title": "Account Detail",
+            "items": {
+              "username": {
+                "label": "Username"
+              },
+              "email": {
+                "label": "Email"
+              },
+              "registration-time": {
+                "label": "Registration Time"
+              },
+              "password": {
+                "label": "Password",
+                "change-password": "Change Password"
+              }
+            },
+            "modal": {
+              "title": "Change Password",
+              "actions": {
+                "yes": "Update",
+                "no": "Cancel"
+              },
+              "form": {
+                "old-password": {
+                  "label": "Old Password",
+                  "placeholder": "Old Password"
+                },
+                "new-password": {
+                  "label": "New Password",
+                  "placeholder": "New Password"
+                },
+                "confirm-password": {
+                  "label": "Confirm Password",
+                  "placeholder": "Confirm Password",
+                  "errors": {
+                    "match": "The confirmed password does not match the new password"
+                  }
+                }
+              },
+              "result": {
+                "success": "Success",
+                "error": "Change failed"
+              }
+            }
+          },
+          "login-record": {
+            "title": "Login activity history",
+            "columns": {
+              "device": "Device",
+              "location": "Location",
+              "ip": "Login IP",
+              "time": "Login Time"
+            }
+          }
+        },
+        "subscription": {
+          "plans": {
+            "residential": "Residential Proxies",
+            "serp-api": "SERP API"
+          },
+          "actions": {
+            "subscription": "Subscription plan"
+          },
+          "detail": {
+            "plan-name": "Plan name",
+            "unit-price": "Subscription unit price",
+            "amount": "Subscription amount",
+            "start-date": "Subscription start date",
+            "last-time": "Last subscription time",
+            "next-time": "Next subscription time"
+          }
+        },
+        "notifications": {
+          "tips": "When you turn on notifications, you will receive email notifications from the system under certain conditions.",
+          "items": {
+            "wallet": {
+              "title": "Wallet",
+              "desc": "Reminder when wallet balance is insufficient."
+            },
+            "subscription":  {
+              "title": "Subscription Plan",
+              "desc": "Subscription plans are about to expire, such as: IP, traffic, points, etc."
+            },
+            "discounts": {
+              "title": "Discounts",
+              "desc": "When a discount event is about to end or a coupon is about to expire."
+            }
+          }
+        }
+      },
+      "partners": {
+        "title": "partners",
+        "hero": {
+          "title": "Ecological Product Center",
+          "desc": "Gathering various tools and cooperation resources to build an expandable data ecosystem",
+          "contact": "Want to become a partner? Contact us"
+        },
+        "groups": {
+          "browser": "Anti-Detection Browsers",
+          "phone": "Anti-Detection Phones",
+          "automation": "Automation Platforms",
+          "other": "Other Tools"
+        },
+        "actions": {
+          "view": "View site",
+          "guide": "Use guide"
+        }
+      },
+      "referral": {
+        "title": "Referral Program",
+        "menus": {
+          "program": "Referral program",
+          "details": "Referral details",
+          "record": "Conversion record"
+        },
+        "program": {
+          "hero": {
+            "title": "Receive up to <percent></percent> referral commission",
+            "subtitle": "Invite friends to purchase Residential Proxy-Personal Plans",
+            "actions": {
+              "recommend": "Recommend now",
+              "description": "Referral program description"
+            },
+            "link": "Your referral link:"
+          },
+          "reward": {
+            "title": "Referral rewards",
+            "items": {
+              "accrued": "Accrued commission",
+              "total": "Total commission",
+              "invites": "Total number of invites",
+              "settlement": "Settlement commission",
+              "withdrawn": "Amount withdrawn",
+              "ratio": "Rebate ratio"
+            }
+          },
+          "material": {
+            "title": "Referral materials",
+            "form": {
+              "size": {
+                "label": "Banner size(px)"
+              },
+              "variant": {
+                "label": "Banner variant",
+                "options": {
+                  "brand": "Brand",
+                  "residential": "Residential proxies",
+                  "ips": "IPs"
+                }
+              },
+              "language": {
+                "label": "Banner code language",
+                "options": {
+                  "html": "HTML",
+                  "bbcode": "BBCode"
+                }
+              },
+              "code": {
+                "label": "Banner code"
+              },
+              "copy": {
+                "label": "Copy Code",
+                "success": "Success"
+              }
+            }
+          }
+        },
+        "details": {
+          "table": {
+            "filters": {
+              "email": {
+                "placeholder": "Search email"
+              }
+            },
+            "columns": {
+              "username": "Referral username",
+              "email": "Referral email",
+              "order-volume": "Total order volume",
+              "order-amount": "Order amount",
+              "commission": "Total commission",
+              "credit": "Waiting for credit",
+              "credited": "Already credited"
+            }
+          }
+        },
+        "record": {
+          "table": {
+            "columns": {
+              "traffic": "Conversion traffic (GB)",
+              "pay": "Pay commission",
+              "remaining": "Remaining commission",
+              "time": "payment time"
+            }
+          }
+        }
+      }
+    }
+  },
+  "auth": {
+    "global": {
+      "slogan": "Global \n Residential Proxy \n Network",
+      "features": [
+        "Continuously expanding IP pool",
+        "Country and city-level targeting",
+        "Average uptime of 99.9%",
+        "24/7 customer support"
+      ],
+      "footer": "Trusted by 1000+ business customers worldwide"
+    },
+    "login": {
+      "title": "Log in to your account",
+      "oauth2": {
+        "google": "Continue with Google"
+      },
+      "or": "OR",
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Email Address"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Password"
+        },
+        "submit": {
+          "label": "Log in"
+        }
+      },
+      "forgot-password": "Forgot your password?",
+      "signup": "Don't have an account yet? <link>Sign Up</link>"
+    },
+    "signup": {
+      "title": "Create an account",
+      "oauth2": {
+        "google": "Continue with Google"
+      },
+      "or": "OR",
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Email Address"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Password"
+        },
+        "referral": {
+          "label": "Referral Code",
+          "placeholder": "Optional"
+        },
+        "agree": {
+          "label": "I agree to the <term>Terms of Service</term> and <policy>Privacy Policy</policy>",
+          "errors": {
+            "required": "Please agree to the Terms of Service and Privacy Policy"
+          }
+        },
+        "submit": {
+          "label": "Create account"
+        }
+      },
+      "login": "Already have an account? <link>Log in</link>",
+      "result": {
+        "title": "Verify Your Email",
+        "subtitle": "We've sent a confirmation link to",
+        "desc": "Please check your email to complete the final step of registration. Your link will be active for 30 minutes.",
+        "actions": ["Back to login"]
+      }
+    },
+    "forgot": {
+      "title": "Forgot Password",
+      "subtitle": "Please enter your registered email address and we will send you a link to reset your password.",
+      "form": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Email Address"
+        },
+        "submit": {
+          "label": "Send email"
+        }
+      },
+      "login": "Remember your password? <link>Return to Log in</link>",
+      "result": {
+        "title": "Verify Your Email",
+        "subtitle": "We've sent a confirmation link to",
+        "desc": "Please check your email to complete the final step to reset your password. Your link will be valid for 30 minutes.",
+        "actions": ["Back to login"]
+      }
+    },
+    "reset": {
+      "title": "Reset Password",
+      "form": {
+        "new-password": {
+          "label": "New Password",
+          "placeholder": "New Password"
+        },
+        "confirm-password": {
+          "label": "Confirm Password",
+          "placeholder": "Confirm Password",
+          "errors": {
+            "match": "The confirmed password does not match the new password"
+          }
+        },
+        "submit": {
+          "label": "Reset"
+        }
+      },
+      "result": {
+        "title": "Reset successful",
+        "subtitle": "You can now log back into your account using your new password.",
+        "actions": ["Back to login"]
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@layer theme, base, antd, components, utilities;
+
+@import 'tailwindcss';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: oklch(255 0 0);
+
+  --color-primary-50: #e6ffee;
+  --color-primary-100: #a9f5c6;
+  --color-primary-200: #7be8a8;
+  --color-primary-300: #51db8f;
+  --color-primary-400: #2bcf7a;
+  --color-primary-500: #09c269;
+  --color-primary-600: #009c56;
+  --color-primary-700: #007544;
+  --color-primary-800: #004f31;
+  --color-primary-900: #00291b;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black dark:bg-black dark:text-white;
+  }
+}

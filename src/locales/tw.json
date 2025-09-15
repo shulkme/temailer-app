@@ -1,0 +1,1238 @@
+{
+  "global": {
+    "country": {
+      "usa": "美國",
+      "pol": "波蘭",
+      "nld": "荷蘭",
+      "bra": "巴西",
+      "lva": "拉脫維亞",
+      "fra": "法國",
+      "rou": "羅馬尼亞",
+      "can": "加拿大",
+      "nor": "挪威",
+      "aut": "奧地利",
+      "gbr": "英國",
+      "ukr": "烏克蘭",
+      "tur": "土耳其",
+      "jpn": "日本",
+      "isr": "以色列",
+      "twn": "台灣",
+      "kor": "韓國",
+      "esp": "西班牙",
+      "deu": "德國",
+      "sgp": "新加坡",
+      "hkn": "香港",
+      "tha": "泰國",
+      "ind": "印度",
+      "ita": "意大利"
+    },
+    "continent": {
+      "na": "北美洲",
+      "sa": "南美洲",
+      "eu": "歐洲",
+      "as": "亞洲",
+      "af": "非洲",
+      "oc": "大洋洲",
+      "an": "南極洲"
+    },
+    "ip": {
+      "status": {
+        "active": "活躍",
+        "inactive": "不活躍",
+        "expired": "已過期",
+        "deleted": "已刪除"
+      }
+    }
+  },
+  "app": {
+    "global": {
+      "sidebar": {
+        "menus": {
+          "dashboard": "儀表板",
+          "proxies": "代理",
+          "residential": "動態住宅代理",
+          "static-isp": "靜態住宅代理",
+          "datacenter": "資料中心代理",
+          "mobile": "行動代理",
+          "proxy-settings": "代理設定",
+          "scarping": "抓取",
+          "serp-api": "Serp Api",
+          "menu": "菜單",
+          "account": "我的帳戶",
+          "wallet": "錢包",
+          "referral": "推薦計劃",
+          "help": "幫助",
+          "partners": "合作夥伴",
+          "documentation": "文件",
+          "faq": "常見問題"
+        }
+      },
+      "header": {
+        "notification": "通知",
+        "account": {
+          "account": "帳戶",
+          "billing": "帳單",
+          "wallet": "錢包",
+          "logout": "登出"
+        }
+      }
+    },
+    "pages": {
+      "dashboard": {
+        "title": "儀表板",
+        "tabs": {
+          "isp": {
+            "title": "靜態住宅代理",
+            "desc": "起價 <strong></strong> / IP / 天"
+          },
+          "datacenter": {
+            "title": "資料中心代理",
+            "desc": "起價 <strong></strong> / IP / 天"
+          },
+          "residential": {
+            "title": "動態住宅代理",
+            "desc": "起價 <strong></strong> / IP / 天"
+          },
+          "mobile": {
+            "title": "行動代理",
+            "desc": "起價 <strong></strong> / IP / 天"
+          }
+        },
+        "wallet": {
+          "title": "我的錢包",
+          "balance": "當前餘額",
+          "recharge": "儲值"
+        },
+        "referral": {
+          "title": "推薦計劃",
+          "subtitle": "邀請好友並獲得 <percent></percent> 佣金",
+          "withdrawable": "可提現",
+          "extract": "提現",
+          "code": "邀請碼：",
+          "link": "邀請連結："
+        },
+        "help": {
+          "title": "獲取協助",
+          "desc": "對我們的產品有任何疑問或需要客製化套餐？",
+          "contact": "聯繫我們",
+          "links": {
+            "partners": "合作夥伴",
+            "documentation": "文件",
+            "faq": "常見問題"
+          }
+        },
+        "traffic": {
+          "title": "總流量",
+          "detail": "詳細統計",
+          "filters": {
+            "duration": {
+              "options": {
+                "7": "7天",
+                "30": "30天",
+                "90": "90天"
+              }
+            }
+          }
+        },
+        "statistic": {
+          "isp": {
+            "title": "靜態住宅代理",
+            "desc": "值得信賴的優質ISP代理，按IP付費，不間斷連線和無限住宅IP會話，助力您的業務。",
+            "statistics": {
+              "available": "可用",
+              "expiring": "即將到期",
+              "renewal": "自動續費",
+              "expired": "已過期"
+            },
+            "links": {
+              "renewal": "自動續費",
+              "documentation": "文件"
+            },
+            "actions": {
+              "using": "開始使用"
+            },
+            "cover": {
+              "title": "起價",
+              "price": "<price></price> / IP / 天",
+              "features": [
+                "獨享IP",
+                "無限時長會話",
+                "IP終身保留",
+                "無限流量"
+              ],
+              "buy": "立即購買"
+            }
+          },
+          "datacenter": {
+            "title": "資料中心代理",
+            "desc": "購買優質資料中心代理，無限流量和穩定IP位址，以超高性價比體驗增強的隱私和速度。",
+            "statistics": {
+              "available": "可用",
+              "expiring": "即將到期",
+              "renewal": "自動續費",
+              "expired": "已過期"
+            },
+            "links": {
+              "renewal": "自動續費",
+              "documentation": "文件"
+            },
+            "actions": {
+              "using": "開始使用"
+            },
+            "cover": {
+              "title": "起價",
+              "price": "<price></price> / IP / 天",
+              "features": [
+                "獨享資料中心代理",
+                "最優價格",
+                "市場領先的速度",
+                "按IP付費，不限流量"
+              ],
+              "buy": "立即購買"
+            }
+          },
+          "residential": {
+            "title": "動態住宅代理",
+            "desc": "探索超過2億個合法的住宅IP，實現無縫的模擬人類爬取。輕鬆無障礙地存取本地公共資料。",
+            "statistics": {
+              "remaining-traffic": "可用",
+              "expiration-time": "到期時間"
+            },
+            "links": {
+              "renewal": "自動續費",
+              "documentation": "文件"
+            },
+            "actions": {
+              "using": "開始使用"
+            },
+            "cover": {
+              "title": "起價",
+              "price": "<price></price> / GB",
+              "features": [
+                "HTTP/HTTPS/SOCKS5協議",
+                "2億個合法IP",
+                "99.9%快速回應時間",
+                "國家和城市級定位"
+              ],
+              "buy": "立即購買"
+            }
+          },
+          "mobile": {
+            "title": "行動代理",
+            "desc": "存取數百萬個真實行動裝置IP，提供原生4G/5G網路和超低延遲連線，完美支援廣告驗證和行動資料擷取服務。",
+            "statistics": {
+              "remaining-traffic": "可用",
+              "expiration-time": "到期時間"
+            },
+            "links": {
+              "renewal": "自動續費",
+              "documentation": "文件"
+            },
+            "actions": {
+              "using": "開始使用"
+            },
+            "cover": {
+              "title": "起價",
+              "price": "<price></price> / GB",
+              "features": [
+                "真實4G/5G行動IP",
+                "行動網路原生出口",
+                "99.9%快速回應時間",
+                "國家和城市級定位"
+              ],
+              "buy": "立即購買"
+            }
+          }
+        }
+      },
+      "static-isp": {
+        "title": "靜態住宅代理",
+        "menus": {
+          "pricing": "定價",
+          "ip-list": "IP列表",
+          "guide": "指南"
+        },
+        "pricing": {
+          "region": {
+            "title": "地區列表",
+            "tips": "沒有找到您需要的地區？<link>聯繫我們</link>",
+            "filters": {
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              },
+              "continent": {
+                "label": "大洲",
+                "default": "全部"
+              }
+            }
+          },
+          "features": {
+            "title": "功能",
+            "items": [
+              "真實住宅IP",
+              "無限會話時長",
+              "Http/https/socks5協議",
+              "極快回應時間",
+              "按IP付費，不限流量",
+              "適用於eBay、PayPal、亞馬遜帳戶等"
+            ]
+          },
+          "order": {
+            "title": "訂單摘要",
+            "list": {
+              "empty": "請先選擇地區"
+            },
+            "summary": {
+              "amount": "IP數量",
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              },
+              "subtotal": "小計",
+              "total": "總計"
+            },
+            "actions": {
+              "reset": "清空",
+              "submit": "立即下單"
+            }
+          }
+        },
+        "ip-list": {
+          "banner": "為不影響您的使用，請在IP到期前續費，到期後無法續費。您也可以通過錢包儲值進行自動續費。<link>了解更多</link>",
+          "statistics": {
+            "remaining": "剩餘IP",
+            "extractable": "可提取IP",
+            "expiring": "即將過期"
+          },
+          "table": {
+            "filters": {
+              "ip": {
+                "placeholder": "IP位址"
+              },
+              "status": {
+                "placeholder": "狀態"
+              }
+            },
+            "actions": {
+              "refresh": "重新整理",
+              "renewal": "續費"
+            },
+            "columns": {
+              "ip": "IP位址",
+              "port": "埠",
+              "username": "使用者名稱",
+              "password": "密碼",
+              "region": "地區",
+              "time-left": "剩餘時長",
+              "expire-time": "到期時間",
+              "status": "狀態",
+              "remark": "備註",
+              "operate": "操作"
+            }
+          }
+        }
+      },
+      "datacenter": {
+        "title": "資料中心代理",
+        "menus": {
+          "pricing": "定價",
+          "ip-list": "IP列表",
+          "guide": "指南"
+        },
+        "pricing": {
+          "region": {
+            "title": "地區列表",
+            "tips": "沒有找到您需要的地區？<link>聯繫我們</link>",
+            "filters": {
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              },
+              "continent": {
+                "label": "大洲",
+                "default": "全部"
+              }
+            }
+          },
+          "features": {
+            "title": "功能",
+            "items": [
+              "真實住宅IP",
+              "無限會話時長",
+              "Http/https/socks5協議",
+              "極快回應時間",
+              "按IP付費，不限流量",
+              "適用於eBay、PayPal、亞馬遜帳戶等"
+            ]
+          },
+          "order": {
+            "title": "訂單摘要",
+            "list": {
+              "empty": "請先選擇地區"
+            },
+            "summary": {
+              "amount": "IP數量",
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              },
+              "subtotal": "小計",
+              "total": "總計"
+            },
+            "actions": {
+              "reset": "清空",
+              "submit": "立即下單"
+            }
+          }
+        },
+        "ip-list": {
+          "banner": "為不影響您的使用，請在IP到期前續費，到期後無法續費。您也可以通過錢包儲值進行自動續費。<link>了解更多</link>",
+          "statistics": {
+            "remaining": "剩餘IP",
+            "extractable": "可提取IP",
+            "expiring": "即將過期"
+          },
+          "table": {
+            "filters": {
+              "ip": {
+                "placeholder": "IP位址"
+              },
+              "status": {
+                "placeholder": "狀態"
+              }
+            },
+            "actions": {
+              "refresh": "重新整理",
+              "renewal": "續費"
+            },
+            "columns": {
+              "ip": "IP位址",
+              "port": "埠",
+              "username": "使用者名稱",
+              "password": "密碼",
+              "region": "地區",
+              "time-left": "剩餘時長",
+              "expire-time": "到期時間",
+              "status": "狀態",
+              "remark": "備註",
+              "operate": "操作"
+            }
+          }
+        }
+      },
+      "residential": {
+        "title": "動態住宅代理",
+        "menus": {
+          "pricing": "定價",
+          "setup": "設定",
+          "statistics": "統計",
+          "guide": "指南"
+        },
+        "pricing": {
+          "subscription": {
+            "title": "訂閱",
+            "tips": "500GB以上套餐可節省60%？<link>聯繫我們</link>",
+            "filters": {
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              }
+            },
+            "plan": {
+              "title": "套餐",
+              "item": {
+                "total": "總計："
+              }
+            }
+          },
+          "features": {
+            "title": "功能",
+            "items": [
+              "真實住宅IP",
+              "無限會話時長",
+              "Http/https/socks5協議",
+              "極快回應時間",
+              "按IP付費，不限流量",
+              "適用於eBay、PayPal、亞馬遜帳戶等"
+            ]
+          },
+          "order": {
+            "title": "訂單摘要",
+            "list": {
+              "empty": "請先選擇一個套餐",
+              "features": [
+                "真實住宅IP",
+                "無限會話時長",
+                "Http/https/socks5協議",
+                "極快回應時間",
+                "按IP付費，不限流量",
+                "適用於eBay、PayPal、亞馬遜帳戶等"
+              ]
+            },
+            "summary": {
+              "per": "每GB價格",
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              },
+              "subtotal": "小計",
+              "total": "總計"
+            },
+            "actions": {
+              "submit": "立即下單"
+            }
+          }
+        },
+        "setup": {
+          "generator": {
+            "tabs": {
+              "pwd": "使用者名稱/密碼",
+              "whitelist": "白名單"
+            },
+            "form": {
+              "account": {
+                "items": {
+                  "sub-account": {
+                    "label": "選擇帳戶",
+                    "placeholder": "選擇",
+                    "extra": {
+                      "add": "新增子帳戶"
+                    }
+                  }
+                }
+              },
+              "proxy": {
+                "title": "代理產生器",
+                "items": {
+                  "region": {
+                    "label": "國家/地區",
+                    "placeholder": "隨機",
+                    "extra": {
+                      "code": "檢視國家代碼"
+                    }
+                  },
+                  "host": {
+                    "label": "主機",
+                    "placeholder": "隨機"
+                  },
+                  "continent": {
+                    "label": "大洲",
+                    "placeholder": "隨機"
+                  },
+                  "state": {
+                    "label": "州/省",
+                    "placeholder": "隨機"
+                  },
+                  "city": {
+                    "label": "城市",
+                    "placeholder": "隨機"
+                  },
+                  "number": {
+                    "label": "數量",
+                    "placeholder": "0"
+                  },
+                  "endpoint-type": {
+                    "label": "端點類型",
+                    "options": {
+                      "country": "國家入口",
+                      "api": "API連結"
+                    }
+                  },
+                  "username": {
+                    "label": "使用者名稱",
+                    "placeholder": "隨機"
+                  },
+                  "password": {
+                    "label": "密碼",
+                    "placeholder": "隨機"
+                  }
+                }
+              },
+              "session": {
+                "title": "會話設定",
+                "items": {
+                  "type": {
+                    "label": "會話類型",
+                    "placeholder": "隨機"
+                  },
+                  "duration": {
+                    "label": "時長",
+                    "placeholder": "隨機",
+                    "suffix": "分鐘"
+                  }
+                }
+              }
+            }
+          },
+          "result": {
+            "title": "結果",
+            "form": {
+              "format": {
+                "label": "輸出格式",
+                "placeholder": "使用者名稱:密碼"
+              },
+              "quantity": {
+                "label": "數量",
+                "placeholder": "1"
+              },
+              "output": {
+                "label": "輸出",
+                "placeholder": "請先訂購住宅代理"
+              }
+            },
+            "actions": {
+              "generate": "產生",
+              "download": "下載"
+            }
+          }
+        },
+        "statistics": {
+          "filters": {
+            "username": {
+              "placeholder": "子帳戶"
+            }
+          },
+          "actions": {
+            "refresh": "重新整理",
+            "export": "匯出"
+          },
+          "table": {
+            "columns": {
+              "date": "日期",
+              "target": "目標",
+              "traffic": "流量",
+              "request": "請求"
+            }
+          }
+        }
+      },
+      "mobile": {
+        "title": "行動代理",
+        "menus": {
+          "pricing": "定價",
+          "setup": "設定",
+          "statistics": "統計",
+          "guide": "指南"
+        },
+        "pricing": {
+          "subscription": {
+            "title": "訂閱",
+            "tips": "500GB以上套餐可節省60%？<link>聯繫我們</link>",
+            "filters": {
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              }
+            },
+            "plan": {
+              "title": "套餐",
+              "item": {
+                "total": "總計："
+              }
+            }
+          },
+          "features": {
+            "title": "功能",
+            "items": [
+              "真實住宅IP",
+              "無限會話時長",
+              "Http/https/socks5協議",
+              "極快回應時間",
+              "按IP付費，不限流量",
+              "適用於eBay、PayPal、亞馬遜帳戶等"
+            ]
+          },
+          "order": {
+            "title": "訂單摘要",
+            "list": {
+              "empty": "請先選擇一個套餐",
+              "features": [
+                "真實住宅IP",
+                "無限會話時長",
+                "Http/https/socks5協議",
+                "極快回應時間",
+                "按IP付費，不限流量",
+                "適用於eBay、PayPal、亞馬遜帳戶等"
+              ]
+            },
+            "summary": {
+              "per": "每GB價格",
+              "duration": {
+                "label": "時長",
+                "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
+              },
+              "subtotal": "小計",
+              "total": "總計"
+            },
+            "actions": {
+              "submit": "立即下單"
+            }
+          }
+        },
+        "setup": {
+          "generator": {
+            "tabs": {
+              "pwd": "使用者名稱/密碼",
+              "whitelist": "白名單"
+            },
+            "form": {
+              "account": {
+                "items": {
+                  "sub-account": {
+                    "label": "選擇帳戶",
+                    "placeholder": "選擇",
+                    "extra": {
+                      "add": "新增子帳戶"
+                    }
+                  }
+                }
+              },
+              "proxy": {
+                "title": "代理產生器",
+                "items": {
+                  "region": {
+                    "label": "國家/地區",
+                    "placeholder": "隨機",
+                    "extra": {
+                      "code": "檢視國家代碼"
+                    }
+                  },
+                  "host": {
+                    "label": "主機",
+                    "placeholder": "隨機"
+                  },
+                  "continent": {
+                    "label": "大洲",
+                    "placeholder": "隨機"
+                  },
+                  "state": {
+                    "label": "州/省",
+                    "placeholder": "隨機"
+                  },
+                  "city": {
+                    "label": "城市",
+                    "placeholder": "隨機"
+                  },
+                  "number": {
+                    "label": "數量",
+                    "placeholder": "0"
+                  },
+                  "endpoint-type": {
+                    "label": "端點類型",
+                    "options": {
+                      "country": "國家入口",
+                      "api": "API連結"
+                    }
+                  },
+                  "username": {
+                    "label": "使用者名稱",
+                    "placeholder": "隨機"
+                  },
+                  "password": {
+                    "label": "密碼",
+                    "placeholder": "隨機"
+                  }
+                }
+              },
+              "session": {
+                "title": "會話設定",
+                "items": {
+                  "type": {
+                    "label": "會話類型",
+                    "placeholder": "隨機"
+                  },
+                  "duration": {
+                    "label": "時長",
+                    "placeholder": "隨機",
+                    "suffix": "分鐘"
+                  }
+                }
+              }
+            }
+          },
+          "result": {
+            "title": "結果",
+            "form": {
+              "format": {
+                "label": "輸出格式",
+                "placeholder": "使用者名稱:密碼"
+              },
+              "quantity": {
+                "label": "數量",
+                "placeholder": "1"
+              },
+              "output": {
+                "label": "輸出",
+                "placeholder": "請先訂購住宅代理"
+              }
+            },
+            "actions": {
+              "generate": "產生",
+              "download": "下載"
+            }
+          }
+        },
+        "statistics": {
+          "filters": {
+            "username": {
+              "placeholder": "子帳戶"
+            }
+          },
+          "actions": {
+            "refresh": "重新整理",
+            "export": "匯出"
+          },
+          "table": {
+            "columns": {
+              "date": "日期",
+              "target": "目標",
+              "traffic": "流量",
+              "request": "請求"
+            }
+          }
+        }
+      },
+      "proxy-setting": {
+        "title": "代理設定",
+        "menus": {
+          "sub-account": "子帳戶",
+          "whitelist": "白名單"
+        },
+        "sub-account": {
+          "table": {
+            "filters": {
+              "username": {
+                "placeholder": "搜尋子帳戶"
+              }
+            },
+            "actions": {
+              "create": "新增子帳戶"
+            },
+            "columns": {
+              "username": "使用者名稱",
+              "residential-used": "住宅代理使用量",
+              "status": "狀態",
+              "add-time": "新增時間",
+              "remark": "備註",
+              "operate": "操作"
+            }
+          }
+        },
+        "whitelist": {
+          "table": {
+            "filters": {
+              "ip": {
+                "placeholder": "搜尋IP"
+              }
+            },
+            "actions": {
+              "create": "新增白名單"
+            },
+            "columns": {
+              "ip": "IP位址",
+              "status": "狀態",
+              "add-time": "新增時間",
+              "remark": "備註",
+              "operate": "操作"
+            }
+          }
+        }
+      },
+      "wallet": {
+        "title": "錢包",
+        "menus": {
+          "recharge": "餘額儲值",
+          "transactions": "儲值記錄",
+          "billing": "帳單明細"
+        },
+        "recharge": {
+          "exchange": {
+            "current": {
+              "label": "當前餘額",
+              "extra": "儲值記錄"
+            },
+            "amount": {
+              "title": "金額",
+              "tips": "最低儲值 {number} 美元"
+            }
+          },
+          "payment": {
+            "title": "支付方式",
+            "methods": {
+              "credit": "信用卡",
+              "crypto": "加密貨幣",
+              "local": "本地支付"
+            },
+            "total": "總計：",
+            "submit": "立即支付"
+          }
+        },
+        "transactions": {
+          "table": {
+            "filters": {
+              "order-number": {
+                "placeholder": "訂單號"
+              }
+            },
+            "columns": {
+              "order-number": "訂單號",
+              "payment-amount": "支付金額",
+              "payment-method": "支付方式",
+              "status": "狀態",
+              "denial-reason": "拒絕原因",
+              "payment-time": "支付時間",
+              "account-balance": "帳戶餘額"
+            }
+          }
+        },
+        "billing": {
+          "table": {
+            "filters": {
+              "type": {
+                "placeholder": "類型"
+              },
+              "order-number": {
+                "placeholder": "訂單號"
+              }
+            },
+            "columns": {
+              "order-number": "訂單號",
+              "payment-amount": "支付金額",
+              "payment-method": "支付方式",
+              "type": "訂單類型",
+              "plan": "套餐",
+              "status": "狀態",
+              "date": "日期",
+              "balance": "餘額"
+            }
+          }
+        }
+      },
+      "account": {
+        "title": "帳戶",
+        "menus": {
+          "profile": "個人資料",
+          "subscription": "訂閱",
+          "notifications": "通知"
+        },
+        "profile": {
+          "detail": {
+            "title": "帳戶詳情",
+            "items": {
+              "username": {
+                "label": "使用者名稱"
+              },
+              "email": {
+                "label": "電子郵件"
+              },
+              "registration-time": {
+                "label": "註冊時間"
+              },
+              "password": {
+                "label": "密碼",
+                "change-password": "修改密碼"
+              }
+            },
+            "modal": {
+              "title": "修改密碼",
+              "actions": {
+                "yes": "更新",
+                "no": "取消"
+              },
+              "form": {
+                "old-password": {
+                  "label": "舊密碼",
+                  "placeholder": "舊密碼"
+                },
+                "new-password": {
+                  "label": "新密碼",
+                  "placeholder": "新密碼"
+                },
+                "confirm-password": {
+                  "label": "確認密碼",
+                  "placeholder": "確認密碼",
+                  "errors": {
+                    "match": "確認密碼與新密碼不匹配"
+                  }
+                }
+              },
+              "result": {
+                "success": "修改成功",
+                "error": "修改失敗"
+              }
+            }
+          },
+          "login-record": {
+            "title": "登入活動記錄",
+            "columns": {
+              "device": "裝置",
+              "location": "位置",
+              "ip": "登入IP",
+              "time": "登入時間"
+            }
+          }
+        },
+        "subscription": {
+          "plans": {
+            "residential": "住宅代理",
+            "serp-api": "SERP API"
+          },
+          "actions": {
+            "subscription": "訂閱計畫"
+          },
+          "detail": {
+            "plan-name": "套餐名稱",
+            "unit-price": "訂閱單價",
+            "amount": "訂閱數量",
+            "start-date": "訂閱開始日期",
+            "last-time": "上次訂閱時間",
+            "next-time": "下次訂閱時間"
+          }
+        },
+        "notifications": {
+          "tips": "當您開啟通知時，在特定條件下，您會收到來自系統的電子郵件通知。",
+          "items": {
+            "wallet": {
+              "title": "錢包",
+              "desc": "錢包餘額不足時的提醒。"
+            },
+            "subscription": {
+              "title": "訂閱計劃",
+              "desc": "訂閱計劃即將到期，例如：IP、流量、積分等。"
+            },
+            "discounts": {
+              "title": "折扣",
+              "desc": "當折扣活動即將結束或優惠券即將到期時。"
+            }
+          }
+        }
+      },
+      "partners": {
+        "title": "合作夥伴",
+        "hero": {
+          "title": "生態產品中心",
+          "desc": "匯聚各類工具和合作資源，建構可拓展的資料生態系統",
+          "contact": "想成為合作夥伴？聯繫我們"
+        },
+        "groups": {
+          "browser": "反偵測瀏覽器",
+          "phone": "反偵測雲手機",
+          "automation": "自動化平台",
+          "other": "其他工具"
+        },
+        "actions": {
+          "view": "檢視網站",
+          "guide": "使用指南"
+        }
+      },
+      "referral": {
+        "title": "推薦計劃",
+        "menus": {
+          "program": "推薦計劃",
+          "details": "推薦詳情",
+          "record": "轉化記錄"
+        },
+        "program": {
+          "hero": {
+            "title": "獲得最高 <percent></percent> 推薦佣金",
+            "subtitle": "邀請好友購買住宅代理-個人版套餐",
+            "actions": {
+              "recommend": "立即推薦",
+              "description": "推薦計劃說明"
+            },
+            "link": "您的推薦連結："
+          },
+          "reward": {
+            "title": "推薦獎勵",
+            "items": {
+              "accrued": "累計佣金",
+              "total": "總佣金",
+              "invites": "總邀請人數",
+              "settlement": "結算佣金",
+              "withdrawn": "已提現金額",
+              "ratio": "回扣比例"
+            }
+          },
+          "material": {
+            "title": "推薦素材",
+            "form": {
+              "size": {
+                "label": "橫幅尺寸（像素）"
+              },
+              "variant": {
+                "label": "橫幅類型",
+                "options": {
+                  "brand": "品牌",
+                  "residential": "住宅代理",
+                  "ips": "IPs"
+                }
+              },
+              "language": {
+                "label": "橫幅代碼語言",
+                "options": {
+                  "html": "HTML",
+                  "bbcode": "BBCode"
+                }
+              },
+              "code": {
+                "label": "橫幅代碼"
+              },
+              "copy": {
+                "label": "複製代碼",
+                "success": "成功"
+              }
+            }
+          }
+        },
+        "details": {
+          "table": {
+            "filters": {
+              "email": {
+                "placeholder": "搜尋電子郵件"
+              }
+            },
+            "columns": {
+              "username": "推薦使用者名稱",
+              "email": "推薦電子郵件",
+              "order-volume": "總訂單量",
+              "order-amount": "訂單金額",
+              "commission": "總佣金",
+              "credit": "等待入帳",
+              "credited": "已入帳"
+            }
+          }
+        },
+        "record": {
+          "table": {
+            "columns": {
+              "traffic": "轉化流量（GB）",
+              "pay": "支付佣金",
+              "remaining": "剩餘佣金",
+              "time": "支付時間"
+            }
+          }
+        }
+      }
+    }
+  },
+  "auth": {
+    "global": {
+      "slogan": "全球住宅代理網路",
+      "features": [
+        "不斷擴展的IP池",
+        "國家及城市級定位",
+        "平均正常運作時間為99.9%",
+        "24/7客戶支援"
+      ],
+      "footer": "受到全球1000多家企業客戶的信賴"
+    },
+    "login": {
+      "title": "登入帳戶",
+      "oauth2": {
+        "google": "使用Google登入"
+      },
+      "or": "或",
+      "form": {
+        "email": {
+          "label": "電子郵件",
+          "placeholder": "電子郵件位址"
+        },
+        "password": {
+          "label": "密碼",
+          "placeholder": "密碼"
+        },
+        "submit": {
+          "label": "登入"
+        }
+      },
+      "forgot-password": "忘記密碼？",
+      "signup": "沒有帳戶？<link>立即註冊</link>"
+    },
+    "signup": {
+      "title": "建立帳戶",
+      "oauth2": {
+        "google": "使用Google註冊"
+      },
+      "or": "或",
+      "form": {
+        "email": {
+          "label": "電子郵件",
+          "placeholder": "電子郵件位址"
+        },
+        "password": {
+          "label": "密碼",
+          "placeholder": "密碼"
+        },
+        "referral": {
+          "label": "推薦碼",
+          "placeholder": "選填"
+        },
+        "agree": {
+          "label": "我同意 <term>服務條款</term>和 <policy>隱私權政策</policy>",
+          "errors": {
+            "required": "請同意服務條款和隱私權政策"
+          }
+        },
+        "submit": {
+          "label": "建立帳戶"
+        }
+      },
+      "login": "已有帳戶？<link>立即登入</link>",
+      "result": {
+        "title": "驗證您的電子郵件",
+        "subtitle": "我們已將確認連結發送至",
+        "desc": "請查收您的電子郵件以完成註冊的最後一步。此連結有效期為30分鐘。",
+        "actions": ["返回登入"]
+      }
+    },
+    "forgot": {
+      "title": "忘記密碼",
+      "subtitle": "請輸入您註冊的電子郵件位址，我們將向您發送重設密碼的連結。",
+      "form": {
+        "email": {
+          "label": "電子郵件",
+          "placeholder": "電子郵件位址"
+        },
+        "submit": {
+          "label": "發送電子郵件"
+        }
+      },
+      "login": "想起密碼了？<link>返回登入</link>",
+      "result": {
+        "title": "驗證您的電子郵件",
+        "subtitle": "我們已將確認連結發送至",
+        "desc": "請查收您的電子郵件，以完成重設密碼的最後一步。此連結有效期為30分鐘。",
+        "actions": [
+          "返回登入"
+        ]
+      }
+    },
+    "reset": {
+      "title": "重設密碼",
+      "form": {
+        "new-password": {
+          "label": "新密碼",
+          "placeholder": "新密碼"
+        },
+        "confirm-password": {
+          "label": "確認密碼",
+          "placeholder": "確認密碼",
+          "errors": {
+            "match": "確認密碼與新密碼不匹配"
+          }
+        },
+        "submit": {
+          "label": "重設"
+        }
+      },
+      "result": {
+        "title": "重設成功",
+        "subtitle": "您現在可以使用新密碼重新登入您的帳戶。",
+        "actions": [
+          "返回登入"
+        ]
+      }
+    }
+  }
+}

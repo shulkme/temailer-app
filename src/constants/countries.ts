@@ -1,0 +1,28 @@
+const countries = [
+  { iso: 'USA', locale: 'usa', iso2: 'US' },
+  { iso: 'POL', locale: 'pol', iso2: 'PL' },
+  { iso: 'NLD', locale: 'nld', iso2: 'NL' },
+  { iso: 'BRA', locale: 'bra', iso2: 'BR' },
+  { iso: 'LVA', locale: 'lva', iso2: 'LV' },
+  { iso: 'FRA', locale: 'fra', iso2: 'FR' },
+  { iso: 'ROU', locale: 'rou', iso2: 'RO' },
+  { iso: 'CAN', locale: 'can', iso2: 'CA' },
+  { iso: 'NOR', locale: 'nor', iso2: 'NO' },
+  { iso: 'AUT', locale: 'aut', iso2: 'AT' },
+  { iso: 'GBR', locale: 'gbr', iso2: 'GB' },
+  { iso: 'UKR', locale: 'ukr', iso2: 'UA' },
+  { iso: 'TUR', locale: 'tur', iso2: 'TR' },
+  { iso: 'JPN', locale: 'jpn', iso2: 'JP' },
+  { iso: 'ISR', locale: 'isr', iso2: 'IL' },
+  { iso: 'TWN', locale: 'twn', iso2: 'TW' },
+  { iso: 'KOR', locale: 'kor', iso2: 'KR' },
+  { iso: 'ESP', locale: 'esp', iso2: 'ES' },
+  { iso: 'DEU', locale: 'deu', iso2: 'DE' },
+  { iso: 'SGP', locale: 'sgp', iso2: 'SG' },
+  { iso: 'HKN', locale: 'hkn', iso2: 'HK' },
+  { iso: 'THA', locale: 'tha', iso2: 'TH' },
+  { iso: 'IND', locale: 'ind', iso2: 'IN' },
+  { iso: 'ITA', locale: 'ita', iso2: 'IT' },
+] as const;
+
+export default countries;
