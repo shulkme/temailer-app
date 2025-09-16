@@ -1,47 +1,123 @@
 {
   "global": {
+    "unit": {
+      "ip": "{number, plural, =0 {0 IP} =1 {1 IP} other {# IPs}}",
+      "day": "{number} 天",
+      "gb": "{number} GB"
+    },
     "country": {
-      "usa": "美国",
-      "pol": "波兰",
-      "nld": "荷兰",
-      "bra": "巴西",
-      "lva": "拉脱维亚",
-      "fra": "法国",
-      "rou": "罗马尼亚",
-      "can": "加拿大",
-      "nor": "挪威",
-      "aut": "奥地利",
-      "gbr": "英国",
-      "ukr": "乌克兰",
-      "tur": "土耳其",
-      "jpn": "日本",
-      "isr": "以色列",
-      "twn": "台湾",
-      "kor": "韩国",
-      "esp": "西班牙",
-      "deu": "德国",
-      "sgp": "新加坡",
-      "hkn": "香港",
-      "tha": "泰国",
-      "ind": "印度",
-      "ita": "意大利"
+      "AF": "阿富汗",
+      "AR": "阿根廷",
+      "AU": "澳大利亚",
+      "BD": "孟加拉国",
+      "BE": "比利时",
+      "BR": "巴西",
+      "KH": "柬埔寨",
+      "CA": "加拿大",
+      "CL": "智利",
+      "CN": "中国",
+      "CZ": "捷克",
+      "DK": "丹麦",
+      "EG": "埃及",
+      "FI": "芬兰",
+      "FR": "法国",
+      "DE": "德国",
+      "GR": "希腊",
+      "IN": "印度",
+      "IR": "伊朗",
+      "IL": "以色列",
+      "IT": "意大利",
+      "JP": "日本",
+      "KZ": "哈萨克斯坦",
+      "KP": "朝鲜",
+      "KR": "韩国",
+      "KG": "吉尔吉斯斯坦",
+      "LA": "老挝",
+      "MO": "中国澳门",
+      "MY": "马来西亚",
+      "MX": "墨西哥",
+      "MM": "缅甸",
+      "NL": "荷兰",
+      "NZ": "新西兰",
+      "PK": "巴基斯坦",
+      "PY": "巴拉圭",
+      "PH": "菲律宾",
+      "PL": "波兰",
+      "PT": "葡萄牙",
+      "QA": "卡塔尔",
+      "RO": "罗马尼亚",
+      "RU": "俄罗斯",
+      "RW": "卢旺达",
+      "SA": "沙特阿拉伯",
+      "SG": "新加坡",
+      "ZA": "南非",
+      "ES": "西班牙",
+      "SE": "瑞典",
+      "CH": "瑞士",
+      "TW": "中国台湾",
+      "TH": "泰国",
+      "TR": "土耳其",
+      "UA": "乌克兰",
+      "AE": "阿联酋",
+      "GB": "英国",
+      "VN": "越南",
+      "LV": "拉脱维亚",
+      "BG": "保加利亚",
+      "LT": "立陶宛",
+      "NO": "挪威",
+      "HU": "匈牙利",
+      "IE": "爱尔兰",
+      "US": "美国",
+      "GE": "格鲁吉亚",
+      "AM": "亚美尼亚",
+      "ID": "印度尼西亚",
+      "AT": "奥地利",
+      "HK": "中国香港"
     },
     "continent": {
-      "na": "北美洲",
-      "sa": "南美洲",
-      "eu": "欧洲",
-      "as": "亚洲",
-      "af": "非洲",
-      "oc": "大洋洲",
-      "an": "南极洲"
+      "NA": "北美洲",
+      "SA": "南美洲",
+      "EU": "欧洲",
+      "AS": "亚洲",
+      "AF": "非洲",
+      "OC": "大洋洲",
+      "AN": "南极洲"
     },
     "ip": {
       "status": {
-        "active": "活跃",
-        "inactive": "不活跃",
+        "available": "可用的",
+        "expiring": "即将过期",
         "expired": "已过期",
-        "deleted": "已删除"
+        "auto_renew": "自动续费"
       }
+    },
+    "proxy": {
+      "status": {
+        "isp": "静态住宅代理",
+        "idc": "数据中心代理",
+        "residential": "动态住宅代理",
+        "mobile": "移动代理"
+      }
+    },
+    "checkout": {
+      "payment": {
+        "credit": "信用卡",
+        "crypto": "加密货币",
+        "local": "本地支付",
+        "balance": "余额"
+      },
+      "status": {
+        "success": "成功",
+        "fail": "失败",
+        "pending": "待处理",
+        "cancelled": "已取消",
+        "expired": "已过期",
+        "refunded": "已退款"
+      }
+    },
+    "response": {
+      "success": "成功",
+      "error": "失败"
     }
   },
   "app": {
@@ -91,11 +167,11 @@
           },
           "residential": {
             "title": "动态住宅代理",
-            "desc": "起价 <strong></strong> / IP / 天"
+            "desc": "起价 <strong></strong> / GB"
           },
           "mobile": {
             "title": "移动代理",
-            "desc": "起价 <strong></strong> / IP / 天"
+            "desc": "起价 <strong></strong> / GB"
           }
         },
         "wallet": {
@@ -156,9 +232,9 @@
               "price": "<price></price> / IP / 天",
               "features": [
                 "独享IP",
-                "无限时长会话",
-                "IP终身保留",
-                "无限流量"
+                "无限会话时长",
+                "无限带宽和流量",
+                "按IP数量计费"
               ],
               "buy": "立即购买"
             }
@@ -184,9 +260,9 @@
               "price": "<price></price> / IP / 天",
               "features": [
                 "独享数据中心代理",
-                "最优价格",
-                "市场领先的速度",
-                "按IP付费，不限流量"
+                "无限会话时长",
+                "无限带宽和流量",
+                "按IP数量计费"
               ],
               "buy": "立即购买"
             }
@@ -209,10 +285,10 @@
               "title": "起价",
               "price": "<price></price> / GB",
               "features": [
-                "HTTP/HTTPS/SOCKS5协议",
-                "2亿个合法IP",
+                "覆盖200+国家/地区",
+                "全球海量IP池自动轮换",
                 "99.9%快速响应时间",
-                "国家和城市级定位"
+                "按流量GB计费"
               ],
               "buy": "立即购买"
             }
@@ -290,19 +366,38 @@
                 "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
               },
               "subtotal": "小计",
-              "total": "总计"
+              "total": "总计",
+              "coupon": {
+                "label": "优惠券",
+                "placeholder": "选择优惠券",
+                "extra": "使用"
+              },
+              "discount": "折扣"
             },
             "actions": {
               "reset": "清空",
               "submit": "立即下单"
+            },
+            "form": {
+              "result": {
+                "spin": "创建订单中",
+                "success": {
+                  "title": "成功",
+                  "subtitle": "订单创建成功，IP正在生成。请前往IP列表查看。",
+                  "action": "查看IP列表"
+                },
+                "error": "订单创建失败",
+                "warning": "请先选择国家/地区"
+              }
             }
           }
         },
         "ip-list": {
           "banner": "为不影响您的使用，请在IP到期前续费，到期后无法续费。您也可以通过钱包充值进行自动续费。<link>了解更多</link>",
           "statistics": {
-            "remaining": "剩余IP",
-            "extractable": "可提取IP",
+            "available": "可用的",
+            "renewal": "自动续费",
+            "expired": "已过期",
             "expiring": "即将过期"
           },
           "table": {
@@ -328,7 +423,17 @@
               "expire-time": "到期时间",
               "status": "状态",
               "remark": "备注",
-              "operate": "操作"
+              "operate": "操作",
+              "renewal": "自动续费"
+            }
+          },
+          "note": {
+            "title": "备注",
+            "form": {
+              "note": {
+                "label": "备注",
+                "placeholder": "输入您的备注"
+              }
             }
           }
         }
@@ -358,12 +463,12 @@
           "features": {
             "title": "功能",
             "items": [
-              "真实住宅IP",
+              "99.99%正常运行时间",
               "无限会话时长",
               "Http/https/socks5协议",
               "极快响应时间",
               "按IP付费，不限流量",
-              "适用于eBay、PayPal、亚马逊账户等"
+              "轻松集成与API支持"
             ]
           },
           "order": {
@@ -378,19 +483,38 @@
                 "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
               },
               "subtotal": "小计",
-              "total": "总计"
+              "total": "总计",
+              "coupon": {
+                "label": "优惠券",
+                "placeholder": "选择优惠券",
+                "extra": "使用"
+              },
+              "discount": "折扣"
             },
             "actions": {
               "reset": "清空",
               "submit": "立即下单"
+            },
+            "form": {
+              "result": {
+                "spin": "创建订单中",
+                "success": {
+                  "title": "成功",
+                  "subtitle": "订单创建成功，IP正在生成。请前往IP列表查看。",
+                  "action": "查看IP列表"
+                },
+                "error": "订单创建失败",
+                "warning": "请先选择国家/地区"
+              }
             }
           }
         },
         "ip-list": {
           "banner": "为不影响您的使用，请在IP到期前续费，到期后无法续费。您也可以通过钱包充值进行自动续费。<link>了解更多</link>",
           "statistics": {
-            "remaining": "剩余IP",
-            "extractable": "可提取IP",
+            "available": "可用的",
+            "renewal": "自动续费",
+            "expired": "已过期",
             "expiring": "即将过期"
           },
           "table": {
@@ -416,7 +540,17 @@
               "expire-time": "到期时间",
               "status": "状态",
               "remark": "备注",
-              "operate": "操作"
+              "operate": "操作",
+              "renewal": "自动续费"
+            }
+          },
+          "note": {
+            "title": "备注",
+            "form": {
+              "note": {
+                "label": "备注",
+                "placeholder": "输入您的备注"
+              }
             }
           }
         }
@@ -432,7 +566,7 @@
         "pricing": {
           "subscription": {
             "title": "订阅",
-            "tips": "500GB以上套餐可节省60%？<link>联系我们</link>",
+            "tips": "需要更优惠的套餐方案？<link>联系我们</link>",
             "filters": {
               "duration": {
                 "label": "时长",
@@ -449,12 +583,12 @@
           "features": {
             "title": "功能",
             "items": [
-              "真实住宅IP",
-              "无限会话时长",
+              "全球200+国家地区",
+              "自动轮换代理",
+              "99.9%快速响应时间",
+              "按流量GB计费",
               "Http/https/socks5协议",
-              "极快响应时间",
-              "按IP付费，不限流量",
-              "适用于eBay、PayPal、亚马逊账户等"
+              "适用于网络自由抓取"
             ]
           },
           "order": {
@@ -462,12 +596,12 @@
             "list": {
               "empty": "请先选择一个套餐",
               "features": [
-                "真实住宅IP",
-                "无限会话时长",
+                "全球200+国家地区",
+                "自动轮换代理",
+                "99.9%快速响应时间",
+                "按流量GB计费",
                 "Http/https/socks5协议",
-                "极快响应时间",
-                "按IP付费，不限流量",
-                "适用于eBay、PayPal、亚马逊账户等"
+                "适用于网络自由抓取"
               ]
             },
             "summary": {
@@ -477,10 +611,28 @@
                 "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
               },
               "subtotal": "小计",
-              "total": "总计"
+              "total": "总计",
+              "coupon": {
+                "label": "优惠券",
+                "placeholder": "选择优惠券",
+                "extra": "使用"
+              },
+              "discount": "折扣"
             },
             "actions": {
               "submit": "立即下单"
+            },
+            "form": {
+              "result": {
+                "spin": "创建订单中",
+                "success": {
+                  "title": "成功",
+                  "subtitle": "订单创建成功，流量套餐已生成。请前往设置提取IP。",
+                  "action": "提取IP列表"
+                },
+                "error": "订单创建失败",
+                "warning": "请先选择流量套餐"
+              }
             }
           }
         },
@@ -618,7 +770,7 @@
         "pricing": {
           "subscription": {
             "title": "订阅",
-            "tips": "500GB以上套餐可节省60%？<link>联系我们</link>",
+            "tips": "需要更优惠的套餐方案？<link>联系我们</link>",
             "filters": {
               "duration": {
                 "label": "时长",
@@ -635,12 +787,12 @@
           "features": {
             "title": "功能",
             "items": [
-              "真实住宅IP",
-              "无限会话时长",
-              "Http/https/socks5协议",
-              "极快响应时间",
-              "按IP付费，不限流量",
-              "适用于eBay、PayPal、亚马逊账户等"
+              "真实4G/5G移动IP",
+              "轮换&粘性会话支持",
+              "移动网络原生出口",
+              "99.9%快速响应时间",
+              "国家和城市级定位",
+              "完全安全合规"
             ]
           },
           "order": {
@@ -648,12 +800,12 @@
             "list": {
               "empty": "请先选择一个套餐",
               "features": [
-                "真实住宅IP",
-                "无限会话时长",
-                "Http/https/socks5协议",
-                "极快响应时间",
-                "按IP付费，不限流量",
-                "适用于eBay、PayPal、亚马逊账户等"
+                "真实4G/5G移动IP",
+                "轮换&粘性会话支持",
+                "移动网络原生出口",
+                "99.9%快速响应时间",
+                "国家和城市级定位",
+                "完全安全合规"
               ]
             },
             "summary": {
@@ -663,10 +815,28 @@
                 "unit": "{number, plural, =0 {} =1 {1天} other {#天}}"
               },
               "subtotal": "小计",
-              "total": "总计"
+              "total": "总计",
+              "coupon": {
+                "label": "优惠券",
+                "placeholder": "选择优惠券",
+                "extra": "使用"
+              },
+              "discount": "折扣"
             },
             "actions": {
               "submit": "立即下单"
+            },
+            "form": {
+              "result": {
+                "spin": "创建订单中",
+                "success": {
+                  "title": "成功",
+                  "subtitle": "订单创建成功，流量套餐已生成。请前往设置提取IP。",
+                  "action": "提取IP列表"
+                },
+                "error": "订单创建失败",
+                "warning": "请先选择流量套餐"
+              }
             }
           }
         },
@@ -859,11 +1029,6 @@
           },
           "payment": {
             "title": "支付方式",
-            "methods": {
-              "credit": "信用卡",
-              "crypto": "加密货币",
-              "local": "本地支付"
-            },
             "total": "总计：",
             "submit": "立即支付"
           }
@@ -913,6 +1078,7 @@
         "title": "账户",
         "menus": {
           "profile": "个人资料",
+          "coupons": "优惠券",
           "subscription": "订阅",
           "notifications": "通知"
         },
@@ -970,6 +1136,30 @@
               "location": "位置",
               "ip": "登录IP",
               "time": "登录时间"
+            }
+          }
+        },
+        "coupons": {
+          "table": {
+            "filters": {
+              "status": {
+                "options": {
+                  "unused": "未使用",
+                  "used": "已使用",
+                  "expired": "已过期"
+                }
+              },
+              "name": {
+                "placeholder": "搜索优惠券"
+              }
+            },
+            "columns": {
+              "name": "优惠券名称",
+              "code": "优惠券代码",
+              "type": "类型",
+              "value": "价值",
+              "usage-threshold": "使用门槛",
+              "expires": "有效期至"
             }
           }
         },

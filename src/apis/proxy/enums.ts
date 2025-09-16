@@ -1,6 +1,6 @@
 export enum PROXY_STATUS_ENUM {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
+  AVAILABLE = 'available',
+  EXPIRING = 'expiring_soon',
   EXPIRED = 'expired',
-  DELETED = 'deleted',
+  AUTO_RENEW = 'auto_renew',
 }

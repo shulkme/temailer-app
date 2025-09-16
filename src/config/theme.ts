@@ -28,6 +28,7 @@ const config: ThemeConfig = {
       footerBg: 'transparent',
       footerPadding: 0,
       bodyBg: 'transparent',
+      siderBg: 'transparent',
     },
     Table: {
       headerBorderRadius: 0,
@@ -35,6 +36,7 @@ const config: ThemeConfig = {
     Menu: {
       activeBarBorderWidth: 0,
       itemBg: 'transparent',
+      darkItemBg: 'transparent',
     },
     Button: {
       dangerShadow: 'none',
@@ -56,6 +58,9 @@ const config: ThemeConfig = {
     //   //borderRadius: 8,
     //   //borderRadiusLG: 12,
     // },
+    Segmented: {
+      trackPadding: 4,
+    },
   },
 };
 

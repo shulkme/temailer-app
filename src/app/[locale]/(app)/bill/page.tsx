@@ -1,6 +1,6 @@
 'use client';
-import { getCreditRecordList } from '@/apis/credit';
-import { CreditRecord } from '@/apis/credit/types';
+import { getProxyOrderList } from '@/apis/proxy';
+import { ProxyOrderRecord } from '@/apis/proxy/types';
 import {
   AntdDateRangePicker,
   AntdForm,
@@ -28,7 +28,7 @@ export default function Page() {
         ? dayjs(dataRange[1]).format('YYYY-MM-DD')
         : undefined;
 
-      return await getCreditRecordList({
+      return await getProxyOrderList({
         page: current,
         size: pageSize,
         start_at,
@@ -49,11 +49,11 @@ export default function Page() {
   const { submit } = search;
 
   const onFormValuesChange: FormProps['onValuesChange'] = (changedValues) => {
-    if (!Object.keys(changedValues).includes('order_id')) submit();
+    if (!Object.keys(changedValues).includes('external_order_id')) submit();
   };
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <Card>
         <div className="mb-6">
           <AntdForm
@@ -61,16 +61,17 @@ export default function Page() {
             layout="inline"
             onValuesChange={onFormValuesChange}
           >
-            <AntdFormItem name="type">
+            <AntdFormItem name="package_type">
               <Select
                 placeholder={t('table.filters.type.placeholder')}
                 style={{ width: 220 }}
+                allowClear
               />
             </AntdFormItem>
             <AntdFormItem name="dataRange">
               <AntdDateRangePicker />
             </AntdFormItem>
-            <AntdFormItem name="order_id">
+            <AntdFormItem name="external_order_id">
               <AntdInput
                 allowClear
                 placeholder={t('table.filters.order-number.placeholder')}
@@ -82,7 +83,7 @@ export default function Page() {
           </AntdForm>
         </div>
 
-        <Table<CreditRecord>
+        <Table<ProxyOrderRecord>
           rowKey="id"
           scroll={{
             x: 1200,
@@ -90,28 +91,42 @@ export default function Page() {
           columns={[
             {
               title: t('table.columns.order-number'),
+              dataIndex: 'id',
             },
             {
               title: t('table.columns.payment-amount'),
-              dataIndex: 'points',
+              dataIndex: 'payment_usd',
+              render: (value) => {
+                return '$' + value.toLocaleString();
+              },
             },
             {
               title: t('table.columns.payment-method'),
+              dataIndex: 'payment_method',
             },
             {
               title: t('table.columns.type'),
+              dataIndex: 'package_type',
             },
             {
               title: t('table.columns.plan'),
+              dataIndex: 'summary_meta',
             },
             {
               title: t('table.columns.status'),
+              dataIndex: 'status',
             },
             {
               title: t('table.columns.date'),
+              dataIndex: 'created_time',
+              render: (value) => dayjs(value).format('YYYY-MM-DD HH:mm:ss'),
             },
             {
               title: t('table.columns.balance'),
+              dataIndex: 'balance_after_payment',
+              render: (value) => {
+                return '$' + value.toLocaleString();
+              },
             },
           ]}
           {...tableProps}

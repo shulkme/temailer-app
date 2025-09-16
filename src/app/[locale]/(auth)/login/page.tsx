@@ -10,6 +10,7 @@ import {
 import { Link, useRouter } from '@/i18n/navigation';
 import Google from '@/icons/google';
 import { useIdentity } from '@/providers/identity';
+import { Title } from '@/providers/title';
 import { getToken, setToken } from '@/utils/token';
 import { useRequest } from 'ahooks';
 import { Alert, Button, Divider, FormProps } from 'antd';
@@ -70,6 +71,7 @@ export default function Page() {
 
   return (
     <>
+      <Title title={t('title')} />
       <AntdTitle level={2} className="mb-8 mt-0 text-center">
         {t('title')}
       </AntdTitle>
@@ -144,7 +146,7 @@ export default function Page() {
         <AntdFormItem>
           <div className="flex justify-end">
             <Link
-              className="text-black hover:text-primary-500"
+              className="text-black hover:text-(--ant-color-link)"
               href="/forgot-password"
             >
               {t('forgot-password')}

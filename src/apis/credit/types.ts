@@ -1,3 +1,5 @@
+import { PAYMENT_METHOD_ENUM } from '@/apis/checkout/enums';
+
 export interface CreditRecord {
   id: string;
   user_id: string;
@@ -22,4 +24,22 @@ export interface CreditParams {
   is_expired?: boolean;
   page?: number;
   size?: number;
+}
+
+export interface CreditRechargeParams {
+  order_id?: string;
+  payment_method?: PAYMENT_METHOD_ENUM;
+  start_time?: string;
+  end_time?: string;
+  page?: number;
+  size?: number;
+}
+
+export interface CreditRechargeRecord {
+  order_id: string;
+  amount: number;
+  payment_method: PAYMENT_METHOD_ENUM;
+  recharge_time: string;
+  balance_after: number;
+  status: string;
 }

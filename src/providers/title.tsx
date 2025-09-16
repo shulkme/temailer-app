@@ -1,4 +1,5 @@
 'use client';
+import { useTitle as useAhooksTitle } from 'ahooks';
 import React, {
   createContext,
   useContext,
@@ -37,6 +38,8 @@ const useTitle = () => {
 
 const Title: React.FC<{ title: string }> = ({ title }) => {
   const { setTitle } = useTitle();
+
+  useAhooksTitle([title, process.env.NEXT_PUBLIC_APP_NAME].join(' - '));
   useLayoutEffect(() => {
     setTitle(title);
   }, [title]);

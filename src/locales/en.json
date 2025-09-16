@@ -1,47 +1,123 @@
 {
   "global": {
+    "unit": {
+      "ip": "{number, plural, =0 {0 IP} =1 {1 IP} other {# IPs}}",
+      "day": "{number, plural, =0 {0 IP} =1 {1 Day} other {# Days}}",
+      "gb": "{number} GB"
+    },
     "country": {
-      "usa": "United States",
-      "pol": "Poland",
-      "nld": "Netherlands",
-      "bra": "Brazil",
-      "lva": "Latvia",
-      "fra": "France",
-      "rou": "Romania",
-      "can": "Canada",
-      "nor": "Norway",
-      "aut": "Austria",
-      "gbr": "United Kingdom",
-      "ukr": "Ukraine",
-      "tur": "Turkey",
-      "jpn": "Japan",
-      "isr": "Israel",
-      "twn": "Taiwan",
-      "kor": "South Korea",
-      "esp": "Spain",
-      "deu": "Germany",
-      "sgp": "Singapore",
-      "hkn": "Hong Kong",
-      "tha": "Thailand",
-      "ind": "India",
-      "ita": "Italy"
+      "AF": "Afghanistan",
+      "AR": "Argentina",
+      "AU": "Australia",
+      "BD": "Bangladesh",
+      "BE": "Belgium",
+      "BR": "Brazil",
+      "KH": "Cambodia",
+      "CA": "Canada",
+      "CL": "Chile",
+      "CN": "China",
+      "CZ": "Czech Republic",
+      "DK": "Denmark",
+      "EG": "Egypt",
+      "FI": "Finland",
+      "FR": "France",
+      "DE": "Germany",
+      "GR": "Greece",
+      "IN": "India",
+      "IR": "Iran",
+      "IL": "Israel",
+      "IT": "Italy",
+      "JP": "Japan",
+      "KZ": "Kazakhstan",
+      "KP": "North Korea",
+      "KR": "South Korea",
+      "KG": "Kyrgyzstan",
+      "LA": "Laos",
+      "MO": "Macau",
+      "MY": "Malaysia",
+      "MX": "Mexico",
+      "MM": "Myanmar",
+      "NL": "Netherlands",
+      "NZ": "New Zealand",
+      "PK": "Pakistan",
+      "PY": "Paraguay",
+      "PH": "Philippines",
+      "PL": "Poland",
+      "PT": "Portugal",
+      "QA": "Qatar",
+      "RO": "Romania",
+      "RU": "Russia",
+      "RW": "Rwanda",
+      "SA": "Saudi Arabia",
+      "SG": "Singapore",
+      "ZA": "South Africa",
+      "ES": "Spain",
+      "SE": "Sweden",
+      "CH": "Switzerland",
+      "TW": "Taiwan",
+      "TH": "Thailand",
+      "TR": "Turkey",
+      "UA": "Ukraine",
+      "AE": "United Arab Emirates",
+      "GB": "United Kingdom",
+      "VN": "Vietnam",
+      "LV": "Latvia",
+      "BG": "Bulgaria",
+      "LT": "Lithuania",
+      "NO": "Norway",
+      "HU": "Hungary",
+      "IE": "Ireland",
+      "US": "United States",
+      "GE": "Georgia",
+      "AM": "Armenia",
+      "ID": "Indonesia",
+      "AT": "Austria",
+      "HK": "Hong Kong"
     },
     "continent": {
-      "na": "North America",
-      "sa": "South America",
-      "eu": "Europe",
-      "as": "Asia",
-      "af": "Africa",
-      "oc": "Oceania",
-      "an": "Antarctica"
+      "NA": "North America",
+      "SA": "South America",
+      "EU": "Europe",
+      "AS": "Asia",
+      "AF": "Africa",
+      "OC": "Oceania",
+      "AN": "Antarctica"
     },
     "ip": {
       "status": {
-        "active": "Active",
-        "inactive": "Inactive",
+        "available": "Available",
+        "expiring": "Expiring soon",
         "expired": "Expired",
-        "deleted": "Deleted"
+        "auto_renew": "Auto renewal"
       }
+    },
+    "proxy": {
+      "status": {
+        "isp": "Static ISP Proxies",
+        "idc": "Datacenter Proxies",
+        "residential": "Residential Proxies",
+        "mobile": "Mobile Proxies"
+      }
+    },
+    "checkout": {
+      "payment": {
+        "credit": "Credit Card",
+        "crypto": "Crypto Currency",
+        "local": "Local payments",
+        "balance": "Balance"
+      },
+      "status": {
+        "success": "Success",
+        "fail": "Failed",
+        "pending": "Pending",
+        "cancelled": "Cancelled",
+        "expired": "Expired",
+        "refunded": "Refunded"
+      }
+    },
+    "response": {
+      "success": "Success",
+      "error": "Error"
     }
   },
   "app": {
@@ -91,11 +167,11 @@
           },
           "residential": {
             "title": "Residential Proxies",
-            "desc": "Form <strong></strong> / IP / Day"
+            "desc": "Form <strong></strong> / GB"
           },
           "mobile": {
             "title": "Mobile Proxies",
-            "desc": "Form <strong></strong> / IP / Day"
+            "desc": "Form <strong></strong> / GB"
           }
         },
         "wallet": {
@@ -156,9 +232,9 @@
               "price": "<price></price> / IP / Day",
               "features": [
                 "Dedicated IP",
-                "Unlimited duration sessions",
-                "Lifetime IP retention",
-                "Unlimited traffic"
+                "Unlimited session duration",
+                "Unlimited bandwidth and traffic",
+                "Billed by IP count"
               ],
               "buy": "Buy Now"
             }
@@ -183,10 +259,10 @@
               "title": "Starts from",
               "price": "<price></price> / IP / Day",
               "features": [
-                "Exclusive DC Proxies",
-                "Best price",
-                "Market-leading speed",
-                "Pay per IP, no GB limit"
+                "Dedicated datacenter proxies",
+                "Unlimited session duration",
+                "Unlimited bandwidth and traffic",
+                "Billed by IP count"
               ],
               "buy": "Buy Now"
             }
@@ -209,10 +285,10 @@
               "title": "Starts from",
               "price": "<price></price> / GB",
               "features": [
-                "HTTP/HTTPS/SOCKS5 protocols",
-                "200 million ethical IPs",
+                "Covers 200+ countries/regions",
+                "Globally massive IP pool with automatic rotation",
                 "99.9% fast response time",
-                "Country and city-level targeting"
+                "Billed by GB of traffic"
               ],
               "buy": "Buy Now"
             }
@@ -290,20 +366,39 @@
                 "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
               },
               "subtotal": "Subtotal",
-              "total": "Total"
+              "total": "Total",
+              "coupon": {
+                "label": "Coupon",
+                "placeholder": "Choose coupon",
+                "extra": "Apply"
+              },
+              "discount": "Discount"
             },
             "actions": {
               "reset": "Clear",
               "submit": "Order Now"
+            },
+            "form": {
+              "result": {
+                "spin": "Creating order",
+                "success": {
+                  "title": "Success",
+                  "subtitle": "The order was created successfully and the IP is being generated. Please go to the IP list to view it.",
+                  "action": "View IP List"
+                },
+                "error": "Order creation failed",
+                "warning": "Please select a country/region first"
+              }
             }
           }
         },
         "ip-list": {
           "banner": "In order not to affect your use, please renew before the IP expires, cannot renew after expiration. You can also top up your wallet for auto-renewal. <link>Learn more</link>",
           "statistics": {
-            "remaining": "Remaining IPs",
-            "extractable": "Extractable IPs",
-            "expiring": "Expiring Soon"
+            "available": "Available",
+            "renewal": "Auto renewal",
+            "expired": "Expired",
+            "expiring": "Expiring soon"
           },
           "table": {
             "filters": {
@@ -328,7 +423,17 @@
               "expire-time": "Expire Time",
               "status": "Status",
               "remark": "Remark",
-              "operate": "Operate"
+              "operate": "Operate",
+              "renewal": "Auto renewal"
+            }
+          },
+          "note": {
+            "title": "Note",
+            "form": {
+              "note": {
+                "label": "Note",
+                "placeholder": "Enter your note"
+              }
             }
           }
         }
@@ -358,12 +463,12 @@
           "features": {
             "title": "Features",
             "items": [
-              "Real residential IP",
+              "99.99% uptime",
               "Unlimited session duration",
-              "Http/https/socks5 protocol",
+              "Http/https/socks5 protocols",
               "Extremely fast response time",
-              "Pay by ip, no traffic limit",
-              "Applicable to ebay, paypal, amazon accounts, etc."
+              "Pay per IP, no traffic limit",
+              "Easy integration with API support"
             ]
           },
           "order": {
@@ -378,20 +483,39 @@
                 "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
               },
               "subtotal": "Subtotal",
-              "total": "Total"
+              "total": "Total",
+              "coupon": {
+                "label": "Coupon",
+                "placeholder": "Choose coupon",
+                "extra": "Apply"
+              },
+              "discount": "Discount"
             },
             "actions": {
               "reset": "Clear",
               "submit": "Order Now"
+            },
+            "form": {
+              "result": {
+                "spin": "Creating order",
+                "success": {
+                  "title": "Success",
+                  "subtitle": "The order was created successfully and the IP is being generated. Please go to the IP list to view it.",
+                  "action": "View IP List"
+                },
+                "error": "Order creation failed",
+                "warning": "Please select a country/region first"
+              }
             }
           }
         },
         "ip-list": {
           "banner": "In order not to affect your use, please renew before the IP expires, cannot renew after expiration. You can also top up your wallet for auto-renewal. <link>Learn more</link>",
           "statistics": {
-            "remaining": "Remaining IPs",
-            "extractable": "Extractable IPs",
-            "expiring": "Expiring Soon"
+            "available": "Available",
+            "renewal": "Auto renewal",
+            "expired": "Expired",
+            "expiring": "Expiring soon"
           },
           "table": {
             "filters": {
@@ -416,7 +540,17 @@
               "expire-time": "Expire Time",
               "status": "Status",
               "remark": "Remark",
-              "operate": "Operate"
+              "operate": "Operate",
+              "renewal": "Auto renewal"
+            }
+          },
+          "note": {
+            "title": "Note",
+            "form": {
+              "note": {
+                "label": "Note",
+                "placeholder": "Enter your note"
+              }
             }
           }
         }
@@ -432,7 +566,7 @@
         "pricing": {
           "subscription": {
             "title": "Subscription",
-            "tips": "Save 60% on 500GB+ Plans? <link>Contact us</link>",
+            "tips": "Need a more favorable package? <link>Contact us</link>",
             "filters": {
               "duration": {
                 "label": "Duration",
@@ -449,12 +583,12 @@
           "features": {
             "title": "Features",
             "items": [
-              "Real residential IP",
-              "Unlimited session duration",
-              "Http/https/socks5 protocol",
-              "Extremely fast response time",
-              "Pay by ip, no traffic limit",
-              "Applicable to ebay, paypal, amazon accounts, etc."
+              "200+ countries/regions worldwide",
+              "Automatic rotating proxies",
+              "99.9% fast response time",
+              "Billed by GB of traffic",
+              "HTTP/HTTPS/SOCKS5 protocols",
+              "Suitable for free web scraping"
             ]
           },
           "order": {
@@ -462,12 +596,12 @@
             "list": {
               "empty": "Please select a plan first",
               "features": [
-                "Real residential IP",
-                "Unlimited session duration",
-                "Http/https/socks5 protocol",
-                "Extremely fast response time",
-                "Pay by ip, no traffic limit",
-                "Applicable to ebay, paypal, amazon accounts, etc."
+                "200+ countries/regions worldwide",
+                "Automatic rotating proxies",
+                "99.9% fast response time",
+                "Billed by GB of traffic",
+                "HTTP/HTTPS/SOCKS5 protocols",
+                "Suitable for free web scraping"
               ]
             },
             "summary": {
@@ -477,10 +611,28 @@
                 "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
               },
               "subtotal": "Subtotal",
-              "total": "Total"
+              "total": "Total",
+              "coupon": {
+                "label": "Coupon",
+                "placeholder": "Choose coupon",
+                "extra": "Apply"
+              },
+              "discount": "Discount"
             },
             "actions": {
               "submit": "Order Now"
+            },
+            "form": {
+              "result": {
+                "spin": "Creating order",
+                "success": {
+                  "title": "Success",
+                  "subtitle": "The order was created successfully and the traffic plan has been generated. Please go to the settings to extract the IPs.",
+                  "action": "Extract IP List"
+                },
+                "error": "Order creation failed",
+                "warning": "Please select a traffic plan first"
+              }
             }
           }
         },
@@ -618,7 +770,7 @@
         "pricing": {
           "subscription": {
             "title": "Subscription",
-            "tips": "Save 60% on 500GB+ Plans? <link>Contact us</link>",
+            "tips": "Need a more favorable package? <link>Contact us</link>",
             "filters": {
               "duration": {
                 "label": "Duration",
@@ -635,12 +787,12 @@
           "features": {
             "title": "Features",
             "items": [
-              "Real residential IP",
-              "Unlimited session duration",
-              "Http/https/socks5 protocol",
-              "Extremely fast response time",
-              "Pay by ip, no traffic limit",
-              "Applicable to ebay, paypal, amazon accounts, etc."
+              "Real 4G/5G mobile IPs",
+              "Rotating & sticky sessions supported",
+              "Native mobile network egress",
+              "99.9% fast response time",
+              "Country and city-level targeting",
+              "Completely secure and compliant"
             ]
           },
           "order": {
@@ -648,12 +800,12 @@
             "list": {
               "empty": "Please select a plan first",
               "features": [
-                "Real residential IP",
-                "Unlimited session duration",
-                "Http/https/socks5 protocol",
-                "Extremely fast response time",
-                "Pay by ip, no traffic limit",
-                "Applicable to ebay, paypal, amazon accounts, etc."
+                "Real 4G/5G mobile IPs",
+                "Rotating & sticky sessions supported",
+                "Native mobile network egress",
+                "99.9% fast response time",
+                "Country and city-level targeting",
+                "Completely secure and compliant"
               ]
             },
             "summary": {
@@ -663,10 +815,28 @@
                 "unit": "{number, plural, =0 {} =1 {1 Day} other {# Days}}"
               },
               "subtotal": "Subtotal",
-              "total": "Total"
+              "total": "Total",
+              "coupon": {
+                "label": "Coupon",
+                "placeholder": "Choose coupon",
+                "extra": "Apply"
+              },
+              "discount": "Discount"
             },
             "actions": {
               "submit": "Order Now"
+            },
+            "form": {
+              "result": {
+                "spin": "Creating order",
+                "success": {
+                  "title": "Success",
+                  "subtitle": "The order was created successfully and the traffic plan has been generated. Please go to the settings to extract the IPs.",
+                  "action": "Extract IP List"
+                },
+                "error": "Order creation failed",
+                "warning": "Please select a traffic plan first"
+              }
             }
           }
         },
@@ -859,11 +1029,6 @@
           },
           "payment": {
             "title": "Payment Method",
-            "methods": {
-              "credit": "Credit Card",
-              "crypto": "Crypto Currency",
-              "local": "Local payments"
-            },
             "total": "Total:",
             "submit": "Continue to Pay"
           }
@@ -913,6 +1078,7 @@
         "title": "Account",
         "menus": {
           "profile": "Profile",
+          "coupons": "Coupons",
           "subscription": "Subscription",
           "notifications": "Notifications"
         },
@@ -970,6 +1136,30 @@
               "location": "Location",
               "ip": "Login IP",
               "time": "Login Time"
+            }
+          }
+        },
+        "coupons": {
+          "table": {
+            "filters": {
+              "status": {
+                "options": {
+                  "unused": "Unused",
+                  "used": "Used",
+                  "expired": "Expired"
+                }
+              },
+              "name": {
+                "placeholder": "Search coupon"
+              }
+            },
+            "columns": {
+              "name": "Coupon Name",
+              "code": "Coupon Code",
+              "type": "Type",
+              "value": "Value",
+              "usage-threshold": "Usage Threshold",
+              "expires": "Expires"
             }
           }
         },

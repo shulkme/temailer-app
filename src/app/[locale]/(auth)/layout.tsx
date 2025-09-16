@@ -31,7 +31,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
       >
         <Cover />
       </AntdSider>
-      <AntdLayout className='bg-white'>
+      <AntdLayout>
         <AntdHeader>
           <div className="flex justify-end p-8 pb-0">
             <Select

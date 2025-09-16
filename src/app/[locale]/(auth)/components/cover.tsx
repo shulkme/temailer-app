@@ -14,10 +14,10 @@ const Cover: React.FC = () => {
       <div className="relative flex flex-col z-10 p-10 h-full">
         <div className="flex-none">
           <Link
-            className="inline-flex items-center gap-2 text-xl font-bold text-black"
+            className="inline-flex items-center gap-2 text-xl font-bold text-black leading-none"
             href="/"
           >
-            <span className="text-primary-500">
+            <span className="text-(--ant-color-primary)">
               <Logo width={24} height={24} />
             </span>
             <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>

@@ -67,8 +67,8 @@ const UserInfo: React.FC = () => {
               },
               {
                 label: t('items.registration-time.label'),
-                children: user?.created_time
-                  ? dayjs(user.created_time).format('LLL')
+                children: user?.join_time
+                  ? dayjs(user.join_time).format('YYYY-MM-DD')
                   : '--',
               },
               {

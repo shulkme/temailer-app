@@ -12,6 +12,7 @@ import {
   RiBillLine,
   RiCopperDiamondFill,
   RiLogoutBoxRLine,
+  RiMenuLine,
   RiTranslate2,
   RiUser6Line,
   RiWalletLine,
@@ -132,13 +133,27 @@ const AccountDropdown = () => {
 const Header: React.FC = () => {
   const { title } = useTitle();
   const { available, loading } = useCredit();
+  const handleSider = () => {
+    window.dispatchEvent(new CustomEvent('global:sider:open'));
+  };
   return (
     <>
       <AntdHeader className="h-16 invisible" />
-      <AntdHeader className="fixed top-0 right-0 left-[240px] z-50 h-16 border-b border-slate-200 bg-white">
-        <div className="h-full flex items-center justify-between pl-8">
-          <div className="text-sm font-bold">
-            <span>{title}</span>
+      <AntdHeader className="fixed top-0 right-0 left-0 lg:left-[240px] z-50 h-16 border-b border-slate-200 bg-white">
+        <div className="h-full flex items-center justify-between pl-4 lg:pl-8">
+          <div className="flex items-center gap-2">
+            <div className="lg:hidden">
+              <Button
+                type="text"
+                className="leading-none"
+                size="small"
+                icon={<RiMenuLine size={24} />}
+                onClick={handleSider}
+              />
+            </div>
+            <div className="text-sm font-bold">
+              <span>{title}</span>
+            </div>
           </div>
           <div className="flex h-full items-center">
             <Button

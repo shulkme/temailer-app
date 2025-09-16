@@ -5,6 +5,7 @@
 
 @theme {
   --color-background: oklch(255 0 0);
+  --color-sidebar: oklch(0.191 0.05 247.271);
 
   --color-primary-50: #e6f3ff;
   --color-primary-100: #b3d7ff;
@@ -16,6 +17,13 @@
   --color-primary-700: #0033b3;
   --color-primary-800: #00238c;
   --color-primary-900: #001666;
+
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1600px;
 
   --radius-xs: 4px;
   --radius-sm: 4px;

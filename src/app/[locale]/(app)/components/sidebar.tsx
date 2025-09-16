@@ -1,7 +1,7 @@
 'use client';
 import NavMenu from '@/app/[locale]/components/nav-menu';
 import { AntdSider } from '@/components/antd';
-import { Link } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import Logo from '@/icons/logo';
 import {
   RiArchive2Line,
@@ -9,6 +9,7 @@ import {
   RiBillLine,
   RiExternalLinkLine,
   RiFileList3Line,
+  RiFlashlightLine,
   RiGlobalLine,
   RiMailOpenLine,
   RiMailSendLine,
@@ -17,39 +18,33 @@ import {
   RiUser6Line,
   RiVipCrown2Line,
 } from '@remixicon/react';
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, Drawer } from 'antd';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Sidebar: React.FC = () => {
+const Inner = () => {
   const t = useTranslations('app.global.sidebar');
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Menu: {
-            itemHeight: 40,
-            itemMarginInline: 16,
-            groupTitleFontSize: 12,
-            iconMarginInlineEnd: 12,
-            darkItemColor: '#fff',
-            darkItemHoverBg: 'rgba(255,255,255,0.1)',
+    <>
+      <ConfigProvider
+        theme={{
+          components: {
+            Menu: {
+              itemHeight: 40,
+              itemMarginInline: 16,
+              groupTitleFontSize: 12,
+              iconMarginInlineEnd: 12,
+              darkItemColor: '#fff',
+              darkItemHoverBg: 'rgba(255,255,255,0.1)',
+            },
           },
-        },
-      }}
-    >
-      <AntdSider width={240} trigger={null} className="invisible" />
-      <AntdSider
-        theme="dark"
-        width={240}
-        trigger={null}
-        className="fixed top-0 left-0 bottom-0 z-50"
+        }}
       >
         <div className="h-full flex flex-col">
           <div className="flex-none w-full h-16 flex items-center px-6">
             <Link className="flex gap-3 items-center" href="/dashboard">
               <Logo width={24} height={24} />
-              <h1 className="text-xl font-bold text-white">
+              <h1 className="text-xl font-bold text-white leading-none">
                 {process.env.NEXT_PUBLIC_APP_NAME}
               </h1>
             </Link>
@@ -110,6 +105,15 @@ const Sidebar: React.FC = () => {
                       meta: {
                         href: '/archive',
                         group: '/archive',
+                      },
+                    },
+                    {
+                      label: 'API',
+                      key: 'email:api',
+                      icon: <RiFlashlightLine size={18} />,
+                      meta: {
+                        href: '/api',
+                        group: '/api',
                       },
                     },
                   ],
@@ -189,8 +193,68 @@ const Sidebar: React.FC = () => {
             />
           </div>
         </div>
+      </ConfigProvider>
+    </>
+  );
+};
+
+const Sidebar: React.FC = () => {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const handler = () => {
+      setOpen(true);
+    };
+    window.addEventListener('global:sider:open', handler);
+
+    return () => {
+      window.removeEventListener('global:sider:open', handler);
+    };
+  }, []);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+  return (
+    <>
+      <AntdSider
+        collapsedWidth={0}
+        width={240}
+        collapsible
+        breakpoint="lg"
+        trigger={null}
+        className="invisible"
+      />
+      <AntdSider
+        //theme="dark"
+        collapsedWidth={0}
+        width={240}
+        collapsible
+        breakpoint="lg"
+        trigger={null}
+        className="fixed top-0 left-0 bottom-0 z-50 bg-sidebar"
+      >
+        <Inner />
       </AntdSider>
-    </ConfigProvider>
+
+      <Drawer
+        width="320px"
+        placement="left"
+        open={open}
+        onClose={() => setOpen(false)}
+        closeIcon={null}
+        styles={{
+          body: {
+            padding: 0,
+          },
+        }}
+        classNames={{
+          content: 'bg-sidebar',
+        }}
+      >
+        <Inner />
+      </Drawer>
+    </>
   );
 };
 

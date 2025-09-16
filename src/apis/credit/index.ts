@@ -1,4 +1,9 @@
-import { CreditParams, CreditRecord } from '@/apis/credit/types';
+import {
+  CreditParams,
+  CreditRechargeParams,
+  CreditRechargeRecord,
+  CreditRecord,
+} from '@/apis/credit/types';
 import request from '@/apis/request';
 import { HttpResponse, PageResult } from '@/apis/types';
 
@@ -19,4 +24,16 @@ export async function getCreditRecordList(
  */
 export async function getAvailableCredits(): Promise<HttpResponse<number>> {
   return await request.get('/credit/record/available_credits');
+}
+
+/**
+ * 获取充值记录
+ * @param params
+ */
+export async function getRechargeRecordList(
+  params?: CreditRechargeParams,
+): Promise<HttpResponse<PageResult<CreditRechargeRecord>>> {
+  return await request.get('/credit/record/recharge_records', {
+    params,
+  });
 }

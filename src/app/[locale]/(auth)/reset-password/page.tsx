@@ -8,6 +8,7 @@ import {
   AntdInputPassword,
   AntdTitle,
 } from '@/components/antd';
+import { Title } from '@/providers/title';
 import { useRequest } from 'ahooks';
 import { Alert, Button, FormProps, Result } from 'antd';
 import { useTranslations } from 'next-intl';
@@ -45,105 +46,116 @@ export default function Page() {
     });
   };
 
-  return showResult ? (
+  return (
     <>
-      <Result
-        status="success"
-        title={t('result.title')}
-        subTitle={<div>{t('result.subtitle')}</div>}
-        extra={[
-          <Button href="/login" block type="primary" key="back" size="large">
-            {t('result.actions.0')}
-          </Button>,
-        ]}
-      />
-    </>
-  ) : (
-    <>
-      <AntdTitle level={2} className="mb-8 mt-0 text-center">
-        {t('title')}
-      </AntdTitle>
-      <AntdForm
-        form={form}
-        disabled={submitting}
-        layout="vertical"
-        onFinish={onFinish}
-        requiredMark={false}
-        validateTrigger={['onBlur']}
-        initialValues={{
-          code,
-        }}
-      >
-        {errMsg && (
-          <AntdFormItem>
-            <Alert showIcon type="error" message={errMsg} />
-          </AntdFormItem>
-        )}
-        <AntdFormItem name="code" hidden>
-          <AntdInput />
-        </AntdFormItem>
-        <AntdFormItem
-          name="new_password"
-          messageVariables={{
-            label: t('form.new-password.label'),
-          }}
-          label={t('form.new-password.label')}
-          rules={[
-            {
-              required: true,
-            },
-            {
-              min: 6,
-            },
-            {
-              max: 16,
-            },
-          ]}
-        >
-          <AntdInputPassword
-            size="large"
-            placeholder={t('form.new-password.placeholder')}
+      <Title title={t('title')} />
+      {showResult ? (
+        <>
+          <Result
+            status="success"
+            title={t('result.title')}
+            subTitle={<div>{t('result.subtitle')}</div>}
+            extra={[
+              <Button
+                href="/login"
+                block
+                type="primary"
+                key="back"
+                size="large"
+              >
+                {t('result.actions.0')}
+              </Button>,
+            ]}
           />
-        </AntdFormItem>
-        <AntdFormItem
-          name="confirm_password"
-          messageVariables={{
-            label: t('form.confirm-password.label'),
-          }}
-          label={t('form.confirm-password.label')}
-          rules={[
-            {
-              required: true,
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('new_password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error(t('form.confirm-password.errors.match')),
-                );
-              },
-            }),
-          ]}
-        >
-          <AntdInputPassword
-            size="large"
-            placeholder={t('form.confirm-password.placeholder')}
-          />
-        </AntdFormItem>
-        <AntdFormItem>
-          <Button
-            loading={submitting}
-            size="large"
-            block
-            type="primary"
-            htmlType="submit"
+        </>
+      ) : (
+        <>
+          <AntdTitle level={2} className="mb-8 mt-0 text-center">
+            {t('title')}
+          </AntdTitle>
+          <AntdForm
+            form={form}
+            disabled={submitting}
+            layout="vertical"
+            onFinish={onFinish}
+            requiredMark={false}
+            validateTrigger={['onBlur']}
+            initialValues={{
+              code,
+            }}
           >
-            {t('form.submit.label')}
-          </Button>
-        </AntdFormItem>
-      </AntdForm>
+            {errMsg && (
+              <AntdFormItem>
+                <Alert showIcon type="error" message={errMsg} />
+              </AntdFormItem>
+            )}
+            <AntdFormItem name="code" hidden>
+              <AntdInput />
+            </AntdFormItem>
+            <AntdFormItem
+              name="new_password"
+              messageVariables={{
+                label: t('form.new-password.label'),
+              }}
+              label={t('form.new-password.label')}
+              rules={[
+                {
+                  required: true,
+                },
+                {
+                  min: 6,
+                },
+                {
+                  max: 16,
+                },
+              ]}
+            >
+              <AntdInputPassword
+                size="large"
+                placeholder={t('form.new-password.placeholder')}
+              />
+            </AntdFormItem>
+            <AntdFormItem
+              name="confirm_password"
+              messageVariables={{
+                label: t('form.confirm-password.label'),
+              }}
+              label={t('form.confirm-password.label')}
+              rules={[
+                {
+                  required: true,
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue('new_password') === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(t('form.confirm-password.errors.match')),
+                    );
+                  },
+                }),
+              ]}
+            >
+              <AntdInputPassword
+                size="large"
+                placeholder={t('form.confirm-password.placeholder')}
+              />
+            </AntdFormItem>
+            <AntdFormItem>
+              <Button
+                loading={submitting}
+                size="large"
+                block
+                type="primary"
+                htmlType="submit"
+              >
+                {t('form.submit.label')}
+              </Button>
+            </AntdFormItem>
+          </AntdForm>
+        </>
+      )}
     </>
   );
 }

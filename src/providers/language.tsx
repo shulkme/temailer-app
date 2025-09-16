@@ -10,11 +10,27 @@ import 'dayjs/locale/en';
 import 'dayjs/locale/zh';
 import 'dayjs/locale/zh-tw';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { useLocale } from 'next-intl';
 import { useParams, useSearchParams } from 'next/navigation';
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useEffect, useMemo } from 'react';
 
 dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
+
+const setDayjsLocale = (locale: string) => {
+  switch (locale) {
+    case 'en':
+      dayjs.locale('en');
+      break;
+    case 'zh':
+      dayjs.locale('zh');
+      break;
+    case 'tw':
+      dayjs.locale('zh-tw');
+      break;
+  }
+};
 
 const LanguageContext = createContext<{
   locale: Locale;
@@ -31,17 +47,7 @@ const LanguageProvider: React.FC<{
   const pathname = usePathname();
   const query = Object.fromEntries(useSearchParams().entries());
   const setLocale = (locale: string) => {
-    switch (locale) {
-      case 'en':
-        dayjs.locale('en');
-        break;
-      case 'zh':
-        dayjs.locale('zh');
-        break;
-      case 'tw':
-        dayjs.locale('zh-tw');
-        break;
-    }
+    setDayjsLocale(locale);
     router.replace(
       // @ts-expect-error -- TypeScript will validate that only known `params`
       { pathname, params, query },
@@ -64,6 +70,10 @@ const LanguageProvider: React.FC<{
   const language = useMemo(() => {
     return languages.find((f) => f.value === locale)?.label;
   }, [locale]);
+
+  useEffect(() => {
+    setDayjsLocale(locale);
+  }, []);
 
   return (
     <LanguageContext.Provider

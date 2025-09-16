@@ -4,9 +4,9 @@ export interface UserRecord {
   email: string;
   avatar: string;
   id: number;
-  uuid: string;
   status: number;
-  created_time: string;
+  join_time: string;
+  invitation_code: string;
 }
 
 export interface UserData {
