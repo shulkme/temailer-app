@@ -4,17 +4,18 @@ import { AntdSider } from '@/components/antd';
 import { Link } from '@/i18n/navigation';
 import Logo from '@/icons/logo';
 import {
+  RiArchive2Line,
   RiBarChart2Line,
+  RiBillLine,
   RiExternalLinkLine,
   RiFileList3Line,
-  RiGiftLine,
   RiGlobalLine,
   RiMailOpenLine,
   RiMailSendLine,
   RiQuestionLine,
-  RiServiceLine,
+  RiTelegram2Line,
   RiUser6Line,
-  RiWalletLine,
+  RiVipCrown2Line,
 } from '@remixicon/react';
 import { ConfigProvider } from 'antd';
 import { useTranslations } from 'next-intl';
@@ -72,68 +73,77 @@ const Sidebar: React.FC = () => {
                 },
                 {
                   label: '邮箱',
-                  key: 'proxies',
+                  key: 'email',
                   type: 'group',
                   children: [
                     {
                       label: '收信',
-                      key: 'proxies:static-isp',
+                      key: 'email:inbox',
                       icon: <RiMailOpenLine size={18} />,
                       meta: {
-                        href: '/proxies/static-isp/pricing',
-                        group: '/proxies/static-isp',
+                        href: '/inbox',
+                        group: '/inbox',
                       },
                     },
                     {
                       label: '发信',
-                      key: 'proxies:datacenter',
+                      key: 'email:outbox',
                       icon: <RiMailSendLine size={18} />,
                       meta: {
-                        href: '/proxies/datacenter/pricing',
-                        group: '/proxies/datacenter',
+                        href: '/outbox',
+                        group: '/outbox',
                       },
                     },
                     {
                       label: '域名',
-                      key: 'proxies:residential',
+                      key: 'email:domain',
                       icon: <RiGlobalLine size={18} />,
                       meta: {
-                        href: '/proxies/residential/pricing',
-                        group: '/proxies/residential',
+                        href: '/domain',
+                        group: '/domain',
+                      },
+                    },
+                    {
+                      label: '收藏',
+                      key: 'email:archive',
+                      icon: <RiArchive2Line size={18} />,
+                      meta: {
+                        href: '/archive',
+                        group: '/archive',
                       },
                     },
                   ],
                 },
                 {
-                  label: t('menus.menu'),
-                  key: 'menu',
+                  label: '我的',
+                  key: 'my',
                   type: 'group',
                   children: [
                     {
-                      label: t('menus.account'),
-                      key: 'menu:account',
+                      label: '账户',
+                      key: 'my:account',
                       icon: <RiUser6Line size={18} />,
                       meta: {
-                        href: '/account/profile',
+                        href: '/account',
                         group: '/account',
                       },
                     },
                     {
-                      label: t('menus.wallet'),
-                      key: 'menu:wallet',
-                      icon: <RiWalletLine size={18} />,
+                      label: '订阅',
+                      key: 'my:subscription',
+                      icon: <RiVipCrown2Line size={18} />,
                       meta: {
-                        href: '/wallet/recharge',
-                        group: '/wallet',
+                        href: '/subscription',
+                        group: '/subscription',
                       },
                     },
                     {
-                      label: t('menus.referral'),
-                      key: 'menu:referral',
-                      icon: <RiGiftLine size={18} />,
+                      label: '账单',
+                      key: 'my:bill',
+                      icon: <RiBillLine size={18} />,
                       meta: {
-                        href: '/referral/program',
-                        group: '/referral',
+                        href: '/bill',
+                        group: '/bill',
                       },
                     },
                   ],
@@ -143,15 +153,6 @@ const Sidebar: React.FC = () => {
                   key: 'help',
                   type: 'group',
                   children: [
-                    {
-                      label: t('menus.partners'),
-                      key: 'help:partners',
-                      icon: <RiServiceLine size={18} />,
-                      meta: {
-                        href: '/partners',
-                        group: '/partners',
-                      },
-                    },
                     {
                       label: t('menus.documentation'),
                       key: 'help:documentation',
@@ -169,6 +170,16 @@ const Sidebar: React.FC = () => {
                       extra: <RiExternalLinkLine size={14} />,
                       meta: {
                         href: 'https://xxxx',
+                        target: '_blank',
+                      },
+                    },
+                    {
+                      label: 'Telegram',
+                      key: 'help:telegram',
+                      icon: <RiTelegram2Line size={18} />,
+                      extra: <RiExternalLinkLine size={14} />,
+                      meta: {
+                        href: 'https://documentation',
                         target: '_blank',
                       },
                     },

@@ -1,10 +1,11 @@
-import { redirect } from '@/i18n/navigation';
-import { getLocale } from 'next-intl/server';
+import LoginLogs from '@/app/[locale]/(app)/account/components/login-logs';
+import UserInfo from '@/app/[locale]/(app)/account/components/user-info';
 
-export default async function Page() {
-  const locale = await getLocale();
-  redirect({
-    href: '/account/profile',
-    locale,
-  });
+export default function Page() {
+  return (
+    <div className="space-y-6 p-8">
+      <UserInfo />
+      <LoginLogs />
+    </div>
+  );
 }

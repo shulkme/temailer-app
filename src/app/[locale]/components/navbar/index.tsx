@@ -17,7 +17,7 @@ const Navbar: React.FC<{
       }}
     >
       <div className="h-12 w-full invisible" />
-      <nav className="fixed top-16 right-0 left-[240px] z-50 bg-white border-b border-slate-200 h-12 pl-4">
+      <nav className="fixed top-16 right-0 left-[240px] z-50 bg-white border-b border-slate-100 h-12 pl-4">
         <NavMenu
           selectable={false}
           className="border-0"

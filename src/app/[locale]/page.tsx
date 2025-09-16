@@ -1,10 +1,10 @@
 import { redirect } from '@/i18n/navigation';
 import { getLocale } from 'next-intl/server';
 
-export default async function Page() {
+export default async function Home() {
   const locale = await getLocale();
   redirect({
-    href: '/referral/program',
+    href: '/dashboard',
     locale,
   });
 }

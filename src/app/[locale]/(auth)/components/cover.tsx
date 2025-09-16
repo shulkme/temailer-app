@@ -17,7 +17,7 @@ const Cover: React.FC = () => {
             className="inline-flex items-center gap-2 text-xl font-bold text-black"
             href="/"
           >
-            <span className="text-(--ant-color-primary)">
+            <span className="text-primary-500">
               <Logo width={24} height={24} />
             </span>
             <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
