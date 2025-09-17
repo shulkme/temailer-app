@@ -10,10 +10,10 @@ const config: ThemeConfig = {
     controlHeightSM: 32,
     controlHeight: 40,
     controlHeightLG: 48,
-    borderRadiusXS: 4,
-    borderRadiusSM: 4,
-    borderRadius: 4,
-    borderRadiusLG: 4,
+    borderRadiusXS: 2,
+    borderRadiusSM: 2,
+    borderRadius: 2,
+    borderRadiusLG: 2,
     colorPrimary: '#1062ff',
     colorLink: '#1062ff',
     colorBorderSecondary: '#e2e8f0',
@@ -50,9 +50,9 @@ const config: ThemeConfig = {
       controlHeight: 32,
       controlHeightLG: 40,
     },
-    // Card: {
-    //   colorBorderSecondary: 'transparent',
-    // },
+    Card: {
+      colorBorderSecondary: 'transparent',
+    },
     // Dropdown: {
     //   //borderRadiusSM: 6,
     //   //borderRadius: 8,

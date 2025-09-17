@@ -139,7 +139,7 @@ const Header: React.FC = () => {
   return (
     <>
       <AntdHeader className="h-16 invisible" />
-      <AntdHeader className="fixed top-0 right-0 left-0 lg:left-[240px] z-50 h-16 border-b border-slate-200 bg-white">
+      <AntdHeader className="fixed top-0 right-0 left-0 lg:left-[240px] z-50 h-16 border-b border-slate-100 bg-white">
         <div className="h-full flex items-center justify-between pl-4 lg:pl-8">
           <div className="flex items-center gap-2">
             <div className="lg:hidden">

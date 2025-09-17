@@ -15,7 +15,7 @@ const StatisticItem: React.FC<{
   title: string;
 }> = ({ icon, title, value }) => {
   return (
-    <div className="h-auto border border-transparent rounded-sm leading-none p-4 before:hidden hover:bg-slate-50 [&.ant-radio-button-wrapper-checked]:border-slate-200 [&.ant-radio-button-wrapper-checked]:bg-slate-50">
+    <div className="h-auto border border-transparent rounded-sm leading-none p-4">
       <div className="flex items-center gap-6">
         <Avatar
           size={48}

@@ -9,7 +9,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
   return (
     <AuthorizedProvider>
       <CreditProvider>
-        <AntdLayout hasSider className="min-h-screen bg-slate-100">
+        <AntdLayout hasSider className="min-h-screen bg-background">
           <Sidebar />
           <AntdLayout>
             <Header />
