@@ -7,6 +7,7 @@ import {
   List as AntdList,
   Radio as AntdRadio,
   Skeleton as AntdSkeleton,
+  Tooltip as AntdTooltip,
   Typography,
 } from 'antd';
 
@@ -63,4 +64,5 @@ export {
   AntdText,
   AntdTextArea,
   AntdTitle,
+  AntdTooltip,
 };

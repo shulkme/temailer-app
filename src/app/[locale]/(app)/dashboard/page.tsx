@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <>
       <Title title={t('title')} />
-      <div className="max-w-[1600px] mx-auto p-4 lg:p-8">
+      <div className="max-w-[1600px] mx-auto p-4 lg:p-6">
         <Row gutter={[24, 24]}>
           <Col xs={24} sm={24} md={24} lg={24} xl={16} xxl={18}>
             <Row gutter={[24, 24]}>

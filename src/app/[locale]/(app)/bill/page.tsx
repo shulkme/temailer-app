@@ -53,9 +53,9 @@ export default function Page() {
   };
 
   return (
-    <div className="p-4 lg:p-8">
+    <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
       <Card>
-        <div className="mb-6">
+        <div className="mb-4 lg:mb-6">
           <AntdForm
             form={form}
             layout="inline"
