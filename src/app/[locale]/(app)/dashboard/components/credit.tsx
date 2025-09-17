@@ -7,7 +7,7 @@ import { Avatar, Button, Card } from 'antd';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
-const Wallet: React.FC = () => {
+const Credit: React.FC = () => {
   const { available } = useCredit();
   const t = useTranslations('app.pages.dashboard.wallet');
   return (
@@ -20,18 +20,18 @@ const Wallet: React.FC = () => {
           <RiWalletLine size={24} />
         </Avatar>
         <AntdTitle level={5} className="m-0">
-          {t('title')}
+          我的积分
         </AntdTitle>
       </div>
       <div className="w-full overflow-hidden bg-blue-500/5 rounded-(--ant-border-radius) p-6 relative">
         <div className="absolute bottom-0 right-0 h-full w-1/3 bg-linear-[190deg] from-blue-200/50 to-transparent to-90% -skew-x-45 translate-x-1/2"></div>
         <div className="relative z-10">
           <AntdParagraph className="mb-2" type="secondary">
-            {t('balance')}
+            剩余积分
           </AntdParagraph>
           <div className="flex justify-between items-center flex-wrap">
             <AntdTitle level={3} className="m-0">
-              ${available.toLocaleString() || 0}
+              {available.toLocaleString() || 0}
             </AntdTitle>
             <Link href="/wallet/recharge">
               <Button shape="round" size="small" type="primary">
@@ -45,4 +45,4 @@ const Wallet: React.FC = () => {
   );
 };
 
-export default Wallet;
+export default Credit;

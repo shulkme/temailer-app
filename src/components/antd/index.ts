@@ -1,5 +1,6 @@
 'use client';
 import {
+  Badge as AntdBadge,
   DatePicker as AntdDatePicker,
   Form as AntdForm,
   Input as AntdInput,
@@ -38,7 +39,11 @@ const { RangePicker: AntdDateRangePicker } = AntdDatePicker;
 
 const { Button: AntdSkeletonButton, Input: AntdSkeletonInput } = AntdSkeleton;
 
+const { Ribbon: AntdBadgeRibbon } = AntdBadge;
+
 export {
+  AntdBadge,
+  AntdBadgeRibbon,
   AntdContent,
   AntdDatePicker,
   AntdDateRangePicker,

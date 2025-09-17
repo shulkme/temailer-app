@@ -9,7 +9,7 @@ const StatisticCard: React.FC<{
   valueStyle?: React.CSSProperties;
 }> = ({ title, value, prefix, suffix, valueStyle }) => {
   return (
-    <>
+    <div className="w-64 relative shrink-0 snap-start">
       <Card>
         <Statistic
           title={title}
@@ -19,7 +19,7 @@ const StatisticCard: React.FC<{
           valueStyle={valueStyle}
         />
       </Card>
-    </>
+    </div>
   );
 };
 

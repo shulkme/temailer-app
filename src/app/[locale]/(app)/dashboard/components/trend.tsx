@@ -15,7 +15,7 @@ import {
   YAxis,
 } from 'recharts';
 
-const Traffic: React.FC = () => {
+const Trend: React.FC = () => {
   const t = useTranslations('app.pages.dashboard.traffic');
   const [duration, setDuration] = useState(7);
 
@@ -32,7 +32,7 @@ const Traffic: React.FC = () => {
     <Card>
       <div className="flex items-center justify-between gap-4 mb-4">
         <AntdTitle level={5} className="m-0">
-          {t('title')}
+          收信概况
         </AntdTitle>
         <div>
           <Link href={''}>{t('detail')}</Link>
@@ -128,4 +128,4 @@ const Traffic: React.FC = () => {
   );
 };
 
-export default Traffic;
+export default Trend;

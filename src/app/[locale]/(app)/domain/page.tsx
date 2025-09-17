@@ -31,90 +31,76 @@ export default function Page() {
             scroller: 'gap-4 lg:gap-6',
           }}
         >
-          <div className="w-64 relative shrink-0 snap-start">
-            <DomainCard
-              title={'.com'}
-              desc={'顶级通用域名，支持大部分产品服务'}
-              price={9.9}
-              origin_price={11.9}
-              tag={{
-                text: '热门',
-                color: 'red',
-              }}
-            />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <DomainCard
-              title={'.cn'}
-              desc={'顶级通用域名，支持大部分产品服务'}
-              price={9.9}
-              origin_price={11.9}
-              tag={{
-                text: '热门',
-                color: 'red',
-              }}
-            />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <DomainCard
-              title={'.edu.kg'}
-              desc={'顶级通用域名，支持大部分产品服务'}
-              price={9.9}
-              origin_price={11.9}
-              tag={{
-                text: '热门',
-                color: 'red',
-              }}
-            />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <DomainCard
-              title={'.net'}
-              desc={'顶级通用域名，支持大部分产品服务'}
-              price={9.9}
-              origin_price={11.9}
-              tag={{
-                text: '推荐',
-                color: 'blue',
-              }}
-            />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <DomainCard
-              title={'.top'}
-              desc={'顶级通用域名，支持大部分产品服务'}
-              price={9.9}
-              origin_price={11.9}
-              tag={{
-                text: '优惠',
-                color: 'orange',
-              }}
-            />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <DomainCard
-              title={'.xyz'}
-              desc={'顶级通用域名，支持大部分产品服务'}
-              price={9.9}
-              origin_price={11.9}
-              tag={{
-                text: '优惠',
-                color: 'orange',
-              }}
-            />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <DomainCard
-              title={'.org'}
-              desc={'顶级通用域名，支持大部分产品服务'}
-              price={9.9}
-              origin_price={11.9}
-              tag={{
-                text: '优惠',
-                color: 'orange',
-              }}
-            />
-          </div>
+          <DomainCard
+            title={'.com'}
+            desc={'顶级通用域名，支持大部分产品服务'}
+            price={9.9}
+            origin_price={11.9}
+            tag={{
+              text: '热门',
+              color: 'red',
+            }}
+          />
+          <DomainCard
+            title={'.cn'}
+            desc={'顶级通用域名，支持大部分产品服务'}
+            price={9.9}
+            origin_price={11.9}
+            tag={{
+              text: '热门',
+              color: 'red',
+            }}
+          />
+          <DomainCard
+            title={'.edu.kg'}
+            desc={'顶级通用域名，支持大部分产品服务'}
+            price={9.9}
+            origin_price={11.9}
+            tag={{
+              text: '热门',
+              color: 'red',
+            }}
+          />
+          <DomainCard
+            title={'.net'}
+            desc={'顶级通用域名，支持大部分产品服务'}
+            price={9.9}
+            origin_price={11.9}
+            tag={{
+              text: '推荐',
+              color: 'blue',
+            }}
+          />
+          <DomainCard
+            title={'.top'}
+            desc={'顶级通用域名，支持大部分产品服务'}
+            price={9.9}
+            origin_price={11.9}
+            tag={{
+              text: '优惠',
+              color: 'orange',
+            }}
+          />
+          <DomainCard
+            title={'.xyz'}
+            desc={'顶级通用域名，支持大部分产品服务'}
+            price={9.9}
+            origin_price={11.9}
+            tag={{
+              text: '优惠',
+              color: 'orange',
+            }}
+          />
+          <DomainCard
+            title={'.org'}
+            desc={'顶级通用域名，支持大部分产品服务'}
+            price={9.9}
+            origin_price={11.9}
+            tag={{
+              text: '优惠',
+              color: 'orange',
+            }}
+          />
         </SliderScroller>
         <Card>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4 lg:mb-6">

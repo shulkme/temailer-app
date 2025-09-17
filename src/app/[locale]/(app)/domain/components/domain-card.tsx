@@ -12,24 +12,26 @@ const DomainCard: React.FC<{
   origin_price: number;
 }> = ({ tag, price, origin_price, desc, title }) => {
   return (
-    <Card>
-      <div className="space-y-2">
-        <Tag color={tag.color}>{tag.text}</Tag>
-        <h3 className="font-bold text-xl">{title}</h3>
-        <p className="text-xs text-black/75">{desc}</p>
-        <div className="leading-none space-x-1">
-          <span className="inline-block align-baseline text-primary-500 font-bold text-lg">
-            ${price}
-          </span>
-          <span className="inline-block align-baseline text-black/50 line-through">
-            ${origin_price}
-          </span>
-          <span className="inline-block align-baseline text-black/50">
-            / 年
-          </span>
+    <div className="w-64 relative shrink-0 snap-start">
+      <Card>
+        <div className="space-y-2">
+          <Tag color={tag.color}>{tag.text}</Tag>
+          <h3 className="font-bold text-xl">{title}</h3>
+          <p className="text-xs text-black/75">{desc}</p>
+          <div className="leading-none space-x-1">
+            <span className="inline-block align-baseline text-primary-500 font-bold text-lg">
+              ${price}
+            </span>
+            <span className="inline-block align-baseline text-black/50 line-through">
+              ${origin_price}
+            </span>
+            <span className="inline-block align-baseline text-black/50">
+              / 年
+            </span>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 };
 

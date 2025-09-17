@@ -25,32 +25,19 @@ export default function Page() {
             scroller: 'gap-4 lg:gap-6',
           }}
         >
-          <div className="w-64 relative shrink-0 snap-start">
-            <StatisticCard title={'发送总量'} value={1234} />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <StatisticCard title={'发送成功'} value={1234} />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <StatisticCard title={'送达率'} value={100} suffix="%" />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <StatisticCard title={'发送失败'} value={0} />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <StatisticCard title={'失败率'} value={0} suffix="%" />
-          </div>
-          <div className="w-64 relative shrink-0 snap-start">
-            <StatisticCard
-              title={'账户状态'}
-              value={'正常'}
-              valueStyle={{
-                color: 'var(--color-green-600)',
-              }}
-            />
-          </div>
+          <StatisticCard title={'发送总量'} value={1234} />
+          <StatisticCard title={'发送成功'} value={1234} />
+          <StatisticCard title={'送达率'} value={100} suffix="%" />
+          <StatisticCard title={'发送失败'} value={0} />
+          <StatisticCard title={'失败率'} value={0} suffix="%" />
+          <StatisticCard
+            title={'账户状态'}
+            value={'正常'}
+            valueStyle={{
+              color: 'var(--color-green-600)',
+            }}
+          />
         </SliderScroller>
-
         <Card>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4 lg:mb-6">
             <div>
