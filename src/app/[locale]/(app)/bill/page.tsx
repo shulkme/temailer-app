@@ -121,13 +121,6 @@ export default function Page() {
               dataIndex: 'created_time',
               render: (value) => dayjs(value).format('YYYY-MM-DD HH:mm:ss'),
             },
-            {
-              title: t('table.columns.balance'),
-              dataIndex: 'balance_after_payment',
-              render: (value) => {
-                return '$' + value.toLocaleString();
-              },
-            },
           ]}
           {...tableProps}
         />

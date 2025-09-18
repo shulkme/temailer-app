@@ -1,5 +1,6 @@
 'use client';
 import { AntdParagraph, AntdTitle } from '@/components/antd';
+import PrimaryButton from '@/components/primary-button';
 import { Link } from '@/i18n/navigation';
 import { useCredit } from '@/providers/credit';
 import { RiVipCrown2Line } from '@remixicon/react';
@@ -14,11 +15,8 @@ const Credit: React.FC = () => {
     <Card>
       <div className="space-y-4">
         <div className="flex items-center gap-4">
-          <Avatar
-            shape="square"
-            className="bg-blue-50 text-blue-500 border border-blue-100"
-          >
-            <RiVipCrown2Line size={24} />
+          <Avatar shape="square" className="bg-transparent text-primary-500">
+            <RiVipCrown2Line size={32} />
           </Avatar>
           <AntdTitle level={5} className="m-0">
             免费版
@@ -43,14 +41,9 @@ const Credit: React.FC = () => {
           </div>
         </div>
         <div>
-          <Button
-            block
-            size="large"
-            type="primary"
-            className="overflow-hidden after:glint after:animate-glint"
-          >
+          <PrimaryButton block size="large">
             升级套餐
-          </Button>
+          </PrimaryButton>
         </div>
       </div>
     </Card>
