@@ -20,7 +20,7 @@ const StatisticItem: React.FC<{
         <Avatar
           size={48}
           shape="square"
-          className="bg-white border border-slate-200 text-(--ant-color-primary)"
+          className="bg-transparent text-primary-500 border border-primary-50"
         >
           {React.createElement(icon, {
             size: 32,

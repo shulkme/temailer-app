@@ -29,7 +29,7 @@ const DeviceIcon: React.FC<{
   }
   return (
     <Avatar
-      className="bg-(--ant-color-primary)"
+      className="bg-primary-500"
       shape="square"
       size={40}
       icon={React.createElement(icon, {

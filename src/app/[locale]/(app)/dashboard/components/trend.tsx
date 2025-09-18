@@ -1,10 +1,10 @@
 'use client';
-import { AntdRadioGroup, AntdTitle } from '@/components/antd';
+import { AntdTitle } from '@/components/antd';
 import { Link } from '@/i18n/navigation';
 import { Card } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import {
   Area,
   AreaChart,
@@ -17,47 +17,25 @@ import {
 
 const Trend: React.FC = () => {
   const t = useTranslations('app.pages.dashboard.traffic');
-  const [duration, setDuration] = useState(7);
 
   const data = useMemo(() => {
-    return Array.from({ length: duration })
+    return Array.from({ length: 30 })
       .map((_, i) => ({
-        label: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
+        label: dayjs().subtract(i, 'days').format('DD/MM'),
         value: 0,
       }))
       .reverse();
-  }, [duration]);
+  }, []);
 
   return (
     <Card>
-      <div className="flex items-center justify-between gap-4 mb-4">
+      <div className="flex items-center justify-between gap-4 mb-6">
         <AntdTitle level={5} className="m-0">
           收信概况
         </AntdTitle>
         <div>
           <Link href={''}>{t('detail')}</Link>
         </div>
-      </div>
-      <div className="mb-8">
-        <AntdRadioGroup
-          value={duration}
-          optionType="button"
-          options={[
-            {
-              label: t('filters.duration.options.7'),
-              value: 7,
-            },
-            {
-              label: t('filters.duration.options.30'),
-              value: 30,
-            },
-            {
-              label: t('filters.duration.options.90'),
-              value: 90,
-            },
-          ]}
-          onChange={(e) => setDuration(e.target.value)}
-        />
       </div>
       <div className="w-full h-80">
         <ResponsiveContainer>
@@ -96,6 +74,8 @@ const Trend: React.FC = () => {
               tick={{
                 strokeWidth: 1,
                 fontSize: 12,
+                textAnchor: 'start',
+                x: 0,
               }}
               tickMargin={20}
             />

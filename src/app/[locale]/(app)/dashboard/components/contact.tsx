@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
         body: 'bg-transparent',
       }}
     >
-      <div className="mb-2 text-(--ant-color-primary)">
+      <div className="mb-2 text-primary-500">
         <RiChatSmile2Line size={32} />
       </div>
       <AntdTitle level={5} className="mt-0 mb-4">
@@ -44,10 +44,7 @@ const Contact: React.FC = () => {
             className="flex items-center justify-between"
           >
             <div className="flex-auto flex items-center gap-2">
-              <Avatar
-                size={32}
-                className="bg-(--ant-color-primary-bg) text-(--ant-color-primary)"
-              >
+              <Avatar size={32} className="bg-primary-50 text-primary-500">
                 <RiMailLine size={18} />
               </Avatar>
               <span className="text-black font-bold">
@@ -80,10 +77,7 @@ const Contact: React.FC = () => {
             className="flex items-center justify-between"
           >
             <div className="flex-auto flex items-center gap-2">
-              <Avatar
-                size={32}
-                className="bg-(--ant-color-primary-bg) text-(--ant-color-primary)"
-              >
+              <Avatar size={32} className="bg-primary-50 text-primary-500">
                 <RiTelegram2Line size={18} />
               </Avatar>
               <span className="text-black font-bold">
@@ -116,10 +110,7 @@ const Contact: React.FC = () => {
             className="flex items-center justify-between"
           >
             <div className="flex-auto flex items-center gap-2">
-              <Avatar
-                size={32}
-                className="bg-(--ant-color-primary-bg) text-(--ant-color-primary)"
-              >
+              <Avatar size={32} className="bg-primary-50 text-primary-500">
                 <RiFileList3Line size={18} />
               </Avatar>
               <span className="text-black font-bold">
@@ -138,10 +129,7 @@ const Contact: React.FC = () => {
             className="flex items-center justify-between"
           >
             <div className="flex-auto flex items-center gap-2">
-              <Avatar
-                size={32}
-                className="bg-(--ant-color-primary-bg) text-(--ant-color-primary)"
-              >
+              <Avatar size={32} className="bg-primary-50 text-primary-500">
                 <RiQuestionLine size={18} />
               </Avatar>
               <span className="text-black font-bold">{t('links.faq')}</span>

@@ -146,7 +146,7 @@ export default function Page() {
         <AntdFormItem>
           <div className="flex justify-end">
             <Link
-              className="text-black hover:text-(--ant-color-link)"
+              className="text-black hover:text-primary-500"
               href="/forgot-password"
             >
               {t('forgot-password')}
