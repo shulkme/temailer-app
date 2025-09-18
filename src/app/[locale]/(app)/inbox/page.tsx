@@ -7,6 +7,7 @@ import {
   RiDiceLine,
   RiEditLine,
   RiFileCopyLine,
+  RiQuestionnaireLine,
   RiRefreshLine,
 } from '@remixicon/react';
 import { Button, Card, List, Space } from 'antd';
@@ -89,7 +90,7 @@ export default function Page() {
                 username@example.com
               </AntdTitle>
             </div>
-            <div className="-ml-2 mt-4">
+            <div className="-ml-2 mt-4 flex justify-between items-center gap-2 flex-wrap">
               <Space>
                 <Button
                   type="text"
@@ -122,6 +123,16 @@ export default function Page() {
                   size="small"
                 >
                   收藏
+                </Button>
+              </Space>
+              <Space>
+                <Button
+                  type="text"
+                  className="leading-none"
+                  icon={<RiQuestionnaireLine size={18} />}
+                  size="small"
+                >
+                  收不到邮件？报告问题
                 </Button>
               </Space>
             </div>

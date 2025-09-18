@@ -1,3 +1,4 @@
+'use client';
 import { AntdText, AntdTitle } from '@/components/antd';
 import {
   RemixiconComponentType,

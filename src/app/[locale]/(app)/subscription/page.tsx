@@ -1,4 +1,4 @@
-import { AntdTitle } from '@/components/antd';
+import { AntdParagraph, AntdTitle } from '@/components/antd';
 import PrimaryButton from '@/components/primary-button';
 import { Title } from '@/providers/title';
 import { RiCheckLine } from '@remixicon/react';
@@ -22,6 +22,7 @@ export default function Page() {
                     size="small"
                     color="primary"
                     variant="outlined"
+                    href="#package"
                   >
                     升级套餐
                   </Button>
@@ -47,6 +48,7 @@ export default function Page() {
                     size="small"
                     color="primary"
                     variant="outlined"
+                    href="#credit"
                   >
                     充值积分
                   </Button>
@@ -56,7 +58,7 @@ export default function Page() {
           </div>
 
           <div className="col-span-2">
-            <Card>
+            <Card id="package">
               <AntdTitle level={5} className="mb-6">
                 订阅
               </AntdTitle>
@@ -101,7 +103,7 @@ export default function Page() {
                     <div className="flex items-center gap-2">
                       <div className="font-medium text-lg">免费版</div>
                     </div>
-                    <div>
+                    <div className="space-x-1">
                       <span className="font-bold text-3xl">$0</span>
                       <span className="text-black/50">/mo</span>
                     </div>
@@ -397,9 +399,97 @@ export default function Page() {
                   </div>
                 </div>
               </div>
-
               <div className="text-center mt-6">
                 没有找到合适的套餐？<a href="">联系我们</a>
+              </div>
+            </Card>
+          </div>
+
+          <div className="col-span-2">
+            <Card id="credit">
+              <AntdTitle level={5} className="mb-6">
+                积分
+              </AntdTitle>
+              <AntdParagraph type="secondary">
+                所有充值积分永久有效
+              </AntdParagraph>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-6">
+                <div className="col-span-1">
+                  <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-3xl">10,000</span>
+                    </div>
+                    <div className="space-x-1">
+                      <span className="font-medium text-lg">$10</span>
+                      <span className="text-xs text-black/50">/一次性付费</span>
+                    </div>
+                    <div className="text-sm">
+                      每个积分 ≈ <strong>$0.001</strong>
+                    </div>
+                    <div>
+                      <Button block color="primary" variant="outlined">
+                        立即购买
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-span-1">
+                  <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-3xl">50,000</span>
+                    </div>
+                    <div className="space-x-1">
+                      <span className="font-medium text-lg">$20</span>
+                      <span className="text-xs text-black/50">/一次性付费</span>
+                    </div>
+                    <div className="text-sm">
+                      每个积分 ≈ <strong>$0.0004</strong>
+                    </div>
+                    <div>
+                      <Button block color="primary" variant="outlined">
+                        立即购买
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-span-1">
+                  <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-3xl">1,000,000</span>
+                    </div>
+                    <div className="space-x-1">
+                      <span className="font-medium text-lg">$50</span>
+                      <span className="text-xs text-black/50">/一次性付费</span>
+                    </div>
+                    <div className="text-sm">
+                      每个积分 ≈ <strong>$0.00005</strong>
+                    </div>
+                    <div>
+                      <Button block color="primary" variant="outlined">
+                        立即购买
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-span-1">
+                  <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-3xl">10,000,000</span>
+                    </div>
+                    <div className="space-x-1">
+                      <span className="font-medium text-lg">$100</span>
+                      <span className="text-xs text-black/50">/一次性付费</span>
+                    </div>
+                    <div className="text-sm">
+                      每个积分 ≈ <strong>$0.00001</strong>
+                    </div>
+                    <div>
+                      <Button block color="primary" variant="outlined">
+                        立即购买
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </Card>
           </div>

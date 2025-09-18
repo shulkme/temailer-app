@@ -13,7 +13,7 @@ const DomainCard: React.FC<{
 }> = ({ tag, price, origin_price, desc, title }) => {
   return (
     <div className="w-64 relative shrink-0 snap-start">
-      <Card>
+      <Card className="cursor-pointer hover:border-primary-500">
         <div className="space-y-2">
           <Tag color={tag.color}>{tag.text}</Tag>
           <h3 className="font-bold text-xl">{title}</h3>

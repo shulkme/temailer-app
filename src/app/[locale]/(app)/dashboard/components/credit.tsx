@@ -32,7 +32,7 @@ const Credit: React.FC = () => {
               <AntdTitle level={3} className="m-0">
                 {available.toLocaleString() || 0}
               </AntdTitle>
-              <Link href="/wallet/recharge">
+              <Link href="/subscription#credit">
                 <Button shape="round" size="small" type="primary">
                   {t('recharge')}
                 </Button>
@@ -41,9 +41,11 @@ const Credit: React.FC = () => {
           </div>
         </div>
         <div>
-          <PrimaryButton block size="large">
-            升级套餐
-          </PrimaryButton>
+          <Link href="/subscription#package">
+            <PrimaryButton block size="large">
+              升级套餐
+            </PrimaryButton>
+          </Link>
         </div>
       </div>
     </Card>

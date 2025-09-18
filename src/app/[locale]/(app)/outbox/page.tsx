@@ -1,4 +1,5 @@
 'use client';
+import CreateDrawer from '@/app/[locale]/(app)/outbox/components/create-drawer';
 import StatisticCard from '@/app/[locale]/(app)/outbox/components/statistic-card';
 import {
   AntdDateRangePicker,
@@ -10,9 +11,11 @@ import SliderScroller from '@/components/slider-scroller';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { Button, Card, Select, Space, Table } from 'antd';
+import { useState } from 'react';
 
 export default function Page() {
   const [form] = AntdForm.useForm();
+  const [createOpen, setCreateOpen] = useState(false);
   return (
     <>
       <Title title={'发信'} />
@@ -59,7 +62,9 @@ export default function Page() {
             </div>
             <div>
               <Space size="middle">
-                <Button type="primary">新建任务</Button>
+                <Button type="primary" onClick={() => setCreateOpen(true)}>
+                  新建任务
+                </Button>
               </Space>
             </div>
           </div>
@@ -87,6 +92,7 @@ export default function Page() {
           />
         </Card>
       </div>
+      <CreateDrawer open={createOpen} setOpen={setCreateOpen} />
     </>
   );
 }

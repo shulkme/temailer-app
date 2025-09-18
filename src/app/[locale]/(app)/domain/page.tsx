@@ -1,4 +1,5 @@
 'use client';
+import CreateDrawer from '@/app/[locale]/(app)/domain/components/create-drawer';
 import DomainCard from '@/app/[locale]/(app)/domain/components/domain-card';
 import {
   AntdDateRangePicker,
@@ -10,9 +11,11 @@ import SliderScroller from '@/components/slider-scroller';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { Alert, Button, Card, Select, Space, Table } from 'antd';
+import { useState } from 'react';
 
 export default function Page() {
   const [form] = AntdForm.useForm();
+  const [open, setOpen] = useState(false);
   return (
     <>
       <Title title={'域名'} />
@@ -123,7 +126,9 @@ export default function Page() {
             </div>
             <div>
               <Space size="middle">
-                <Button type="primary">购买域名</Button>
+                <Button type="primary" onClick={() => setOpen(true)}>
+                  购买域名
+                </Button>
               </Space>
             </div>
           </div>
@@ -154,6 +159,7 @@ export default function Page() {
           />
         </Card>
       </div>
+      <CreateDrawer open={open} setOpen={setOpen} />
     </>
   );
 }

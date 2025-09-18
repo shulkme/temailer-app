@@ -1,3 +1,4 @@
+'use client';
 import { AntdTitle } from '@/components/antd';
 import { Link } from '@/i18n/navigation';
 import { Card, List } from 'antd';
