@@ -4,6 +4,7 @@ import { Title } from '@/providers/title';
 import { RiResetRightLine } from '@remixicon/react';
 import { Alert, Card, Descriptions } from 'antd';
 import dayjs from 'dayjs';
+import { useTranslations } from 'next-intl';
 import { random } from 'radash';
 import { useMemo } from 'react';
 import {
@@ -17,6 +18,7 @@ import {
 } from 'recharts';
 
 export default function Page() {
+  const t = useTranslations('app.pages.interface');
   const data = useMemo(() => {
     return Array.from({ length: 30 })
       .map((_, i) => ({
@@ -27,31 +29,30 @@ export default function Page() {
   }, []);
   return (
     <>
-      <Title title={'API'} />
+      <Title title={t('title')} />
       <div className="max-w-[1600px] mx-auto p-4 lg:p-6 space-y-4 lg:space-y-6">
         <Alert
           showIcon
           type="info"
-          message={
-            '通过API在您的应用程序中集成收发信功能，请妥善保管您的密钥。'
-          }
+          message={t('alert.message')}
+          action={<AntdLink>{t('alert.extra')}</AntdLink>}
         />
         <Card>
           <Descriptions
             column={1}
             items={[
               {
-                label: 'API ID',
+                label: t('info.apiId'),
                 children: '12345678',
               },
               {
-                label: 'API KEY',
+                label: t('info.apiKey'),
                 children: (
                   <div className="flex flex-wrap gap-2 items-center">
                     <AntdText copyable>
                       Em10ZWFtMjAxNkBnbWFpbC5jb20xNzU2Mjk2MDc3NzY0OTY1
                     </AntdText>
-                    <AntdTooltip title={'刷新API KEY'}>
+                    <AntdTooltip title={t('info.refresh')}>
                       <AntdLink>
                         <RiResetRightLine size={16} />
                       </AntdLink>
@@ -60,7 +61,7 @@ export default function Page() {
                 ),
               },
               {
-                label: '更新时间',
+                label: t('info.updatedTime'),
                 children: dayjs().format('LLL'),
               },
             ]}
@@ -69,7 +70,7 @@ export default function Page() {
 
         <Card>
           <AntdTitle level={5} className="mb-6">
-            API请求概况
+            {t('overview.title')}
           </AntdTitle>
           <div className="w-full h-80">
             <ResponsiveContainer>

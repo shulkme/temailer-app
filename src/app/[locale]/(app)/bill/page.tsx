@@ -14,7 +14,7 @@ import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 
 export default function Page() {
-  const t = useTranslations('app.pages.wallet.billing');
+  const t = useTranslations('app.pages.bill');
   const [form] = AntdForm.useForm();
 
   const { tableProps, search } = useAntdTable(
@@ -74,7 +74,7 @@ export default function Page() {
             <AntdFormItem name="external_order_id">
               <AntdInput
                 allowClear
-                placeholder={t('table.filters.order-number.placeholder')}
+                placeholder={t('table.filters.search.placeholder')}
                 suffix={<RiSearchLine size={16} />}
                 onPressEnter={submit}
                 onClear={submit}
@@ -90,18 +90,18 @@ export default function Page() {
           }}
           columns={[
             {
-              title: t('table.columns.order-number'),
+              title: t('table.columns.no'),
               dataIndex: 'id',
             },
             {
-              title: t('table.columns.payment-amount'),
+              title: t('table.columns.amount'),
               dataIndex: 'payment_usd',
               render: (value) => {
                 return '$' + value.toLocaleString();
               },
             },
             {
-              title: t('table.columns.payment-method'),
+              title: t('table.columns.paymentMethod'),
               dataIndex: 'payment_method',
             },
             {

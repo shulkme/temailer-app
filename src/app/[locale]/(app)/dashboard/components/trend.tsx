@@ -1,6 +1,5 @@
 'use client';
 import { AntdTitle } from '@/components/antd';
-import { Link } from '@/i18n/navigation';
 import { Card } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
@@ -16,7 +15,7 @@ import {
 } from 'recharts';
 
 const Trend: React.FC = () => {
-  const t = useTranslations('app.pages.dashboard.traffic');
+  const t = useTranslations('app.pages.dashboard.trend');
 
   const data = useMemo(() => {
     return Array.from({ length: 30 })
@@ -31,11 +30,8 @@ const Trend: React.FC = () => {
     <Card>
       <div className="flex items-center justify-between gap-4 mb-6">
         <AntdTitle level={5} className="m-0">
-          收信概况
+          {t('title')}
         </AntdTitle>
-        <div>
-          <Link href={''}>{t('detail')}</Link>
-        </div>
       </div>
       <div className="w-full h-80">
         <ResponsiveContainer>

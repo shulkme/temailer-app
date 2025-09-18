@@ -10,7 +10,7 @@ import React from 'react';
 
 const Credit: React.FC = () => {
   const { available } = useCredit();
-  const t = useTranslations('app.pages.dashboard.wallet');
+  const t = useTranslations('app.pages.dashboard.credit');
   return (
     <Card>
       <div className="space-y-4">
@@ -34,7 +34,7 @@ const Credit: React.FC = () => {
               </AntdTitle>
               <Link href="/subscription#credit">
                 <Button shape="round" size="small" type="primary">
-                  {t('recharge')}
+                  {t('actions.recharge')}
                 </Button>
               </Link>
             </div>
@@ -43,7 +43,7 @@ const Credit: React.FC = () => {
         <div>
           <Link href="/subscription#package">
             <PrimaryButton block size="large">
-              升级套餐
+              {t('actions.subscription')}
             </PrimaryButton>
           </Link>
         </div>

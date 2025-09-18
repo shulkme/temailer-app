@@ -15,7 +15,7 @@ import {
   RiMenuLine,
   RiTranslate2,
   RiUser6Line,
-  RiWalletLine,
+  RiVipCrown2Line,
 } from '@remixicon/react';
 import { Avatar, Button, Divider, Dropdown, MenuProps } from 'antd';
 import { useTranslations } from 'next-intl';
@@ -86,9 +86,9 @@ const AccountDropdown = () => {
             icon: <RiBillLine size={16} />,
           },
           {
-            label: t('wallet'),
-            key: 'wallet',
-            icon: <RiWalletLine size={16} />,
+            label: t('subscription'),
+            key: 'subscription',
+            icon: <RiVipCrown2Line size={16} />,
           },
           {
             type: 'divider',

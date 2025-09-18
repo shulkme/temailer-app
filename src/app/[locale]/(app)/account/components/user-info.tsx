@@ -14,7 +14,7 @@ import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 const UserInfo: React.FC = () => {
-  const t = useTranslations('app.pages.account.profile.detail');
+  const t = useTranslations('app.pages.account.detail');
   const { user, logout } = useIdentity();
   const [form] = AntdForm.useForm();
   const [open, setOpen] = useState(false);

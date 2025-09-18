@@ -40,7 +40,7 @@ const DeviceIcon: React.FC<{
 };
 
 const LoginLogs: React.FC = () => {
-  const t = useTranslations('app.pages.account.profile.login-record');
+  const t = useTranslations('app.pages.account.login-record');
   const { tableProps } = useAntdTable(async ({ current, pageSize }, params) => {
     return await getLoginLogList({
       page: current,

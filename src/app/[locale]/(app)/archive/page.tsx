@@ -8,12 +8,14 @@ import {
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { Button, Card, Space, Table } from 'antd';
+import { useTranslations } from 'next-intl';
 
 export default function Page() {
+  const t = useTranslations('app.pages.archive');
   const [form] = AntdForm.useForm();
   return (
     <>
-      <Title title={'收藏'} />
+      <Title title={t('title')} />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <Card>
           <div className="flex items-center justify-between gap-2 mb-4 lg:mb-6">
@@ -23,7 +25,7 @@ export default function Page() {
                   <AntdInput
                     allowClear
                     suffix={<RiSearchLine size={16} />}
-                    placeholder={'搜索邮箱'}
+                    placeholder={t('table.filters.search.placeholder')}
                   />
                 </AntdFormItem>
                 <AntdFormItem name="dataRange">
@@ -33,7 +35,7 @@ export default function Page() {
             </div>
             <div>
               <Space size="middle">
-                <Button type="primary">导出</Button>
+                <Button type="primary">{t('table.actions.export')}</Button>
               </Space>
             </div>
           </div>
@@ -43,16 +45,16 @@ export default function Page() {
             }}
             columns={[
               {
-                title: '邮箱',
+                title: t('table.columns.email'),
               },
               {
-                title: '备注',
+                title: t('table.columns.remark'),
               },
               {
-                title: '存档时间',
+                title: t('table.columns.createdTime'),
               },
               {
-                title: '操作',
+                title: t('table.columns.operate'),
               },
             ]}
           />

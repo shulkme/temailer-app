@@ -21,6 +21,7 @@ import {
   Tag,
   TagProps,
 } from 'antd';
+import { useMessages, useTranslations } from 'next-intl';
 import React from 'react';
 
 const DomainRadio: React.FC<
@@ -35,6 +36,7 @@ const DomainRadio: React.FC<
     origin_price: number;
   }
 > = ({ tag, price, origin_price, desc, title, disabled, ...props }) => {
+  const g = useTranslations('global');
   return (
     <>
       <div className="w-80 relative shrink-0 snap-start">
@@ -55,7 +57,7 @@ const DomainRadio: React.FC<
                 ${origin_price}
               </span>
               <span className="inline-block align-baseline text-black/50">
-                / 年
+                / {g('units.year', { num: 0 })}
               </span>
             </div>
           </div>
@@ -69,11 +71,16 @@ const CreateDrawer: React.FC<{
   open: boolean;
   setOpen: (open: boolean) => void;
 }> = ({ open, setOpen }) => {
+  const t = useTranslations('app.pages.domain.create');
+  const g = useTranslations('global');
+
+  const messages = useMessages();
+  const faqs = Object.keys(messages.app.pages.domain.create.faq.items);
   return (
     <Drawer
       open={open}
       onClose={() => setOpen(false)}
-      title={'购买域名'}
+      title={t('title')}
       width={640}
       classNames={{
         header: 'border-0',
@@ -83,25 +90,34 @@ const CreateDrawer: React.FC<{
           <div className="py-4">
             <ul className="space-y-2">
               <li className="flex justify-between items-center">
-                <span className="text-black/50">域名数量</span>
+                <span className="text-black/50">
+                  {t('footer.summary.domains')}
+                </span>
                 <span className="font-medium">x1</span>
               </li>
               <li className="flex justify-between items-center">
-                <span className="text-black/50">合计</span>
+                <span className="text-black/50">
+                  {t('footer.summary.price')}
+                </span>
                 <span className="font-medium text-lg">$9.9</span>
               </li>
             </ul>
           </div>
           <div>
             <Button block type="primary" size="large">
-              立即购买
+              {t('footer.actions.checkout')}
             </Button>
           </div>
         </div>
       }
     >
       <AntdForm layout="vertical">
-        <AntdFormItem label="域名后缀">
+        <AntdFormItem
+          messageVariables={{
+            label: t('form.suffix.label'),
+          }}
+          label={t('form.suffix.label')}
+        >
           <AntdRadioGroup block className="block -my-2" defaultValue={'1'}>
             <SliderScroller
               navs={{
@@ -118,18 +134,7 @@ const CreateDrawer: React.FC<{
                 price={9.9}
                 origin_price={11.9}
                 tag={{
-                  text: '热门',
-                  color: 'red',
-                }}
-              />
-              <DomainRadio
-                value={'2'}
-                title={'.cn'}
-                desc={'顶级通用域名，支持大部分产品服务'}
-                price={9.9}
-                origin_price={11.9}
-                tag={{
-                  text: '热门',
+                  text: g('tags.hot'),
                   color: 'red',
                 }}
               />
@@ -140,8 +145,19 @@ const CreateDrawer: React.FC<{
                 price={9.9}
                 origin_price={11.9}
                 tag={{
-                  text: '热门',
+                  text: g('tags.hot'),
                   color: 'red',
+                }}
+              />
+              <DomainRadio
+                value={'2'}
+                title={'.cn'}
+                desc={'顶级通用域名，支持大部分产品服务'}
+                price={9.9}
+                origin_price={11.9}
+                tag={{
+                  text: g('tags.rec'),
+                  color: 'blue',
                 }}
               />
               <DomainRadio
@@ -151,7 +167,7 @@ const CreateDrawer: React.FC<{
                 price={9.9}
                 origin_price={11.9}
                 tag={{
-                  text: '推荐',
+                  text: g('tags.rec'),
                   color: 'blue',
                 }}
               />
@@ -162,7 +178,7 @@ const CreateDrawer: React.FC<{
                 price={9.9}
                 origin_price={11.9}
                 tag={{
-                  text: '优惠',
+                  text: g('tags.sale'),
                   color: 'orange',
                 }}
               />
@@ -173,7 +189,7 @@ const CreateDrawer: React.FC<{
                 price={9.9}
                 origin_price={11.9}
                 tag={{
-                  text: '优惠',
+                  text: g('tags.sale'),
                   color: 'orange',
                 }}
               />
@@ -184,25 +200,43 @@ const CreateDrawer: React.FC<{
                 price={9.9}
                 origin_price={11.9}
                 tag={{
-                  text: '优惠',
+                  text: g('tags.sale'),
                   color: 'orange',
                 }}
               />
             </SliderScroller>
           </AntdRadioGroup>
         </AntdFormItem>
-        <AntdFormItem label={'购买数量'}>
-          <InputNumber placeholder={'0'} suffix={'个'} />
+        <AntdFormItem
+          messageVariables={{
+            label: t('form.quantity.label'),
+          }}
+          label={t('form.quantity.label')}
+        >
+          <InputNumber placeholder={'0'} />
         </AntdFormItem>
-        <AntdFormItem label={'期望域名'}>
-          <AntdInput placeholder={'可选，不填默认随机注册'} suffix={'.com'} />
+        <AntdFormItem
+          messageVariables={{
+            label: t('form.desired.label'),
+          }}
+          label={t('form.desired.label')}
+        >
+          <AntdInput
+            placeholder={t('form.desired.placeholder')}
+            suffix={'.com'}
+          />
         </AntdFormItem>
-        <AntdFormItem label={'备选方案'}>
-          <Checkbox>允许期望域名落空时随机注册</Checkbox>
+        <AntdFormItem
+          messageVariables={{
+            label: t('form.alternatives.label'),
+          }}
+          label={t('form.alternatives.label')}
+        >
+          <Checkbox>{t('form.alternatives.placeholder')}</Checkbox>
         </AntdFormItem>
       </AntdForm>
       <Divider type="horizontal" />
-      <AntdTitle level={5}>常见问题</AntdTitle>
+      <AntdTitle level={5}>{t('faq.title')}</AntdTitle>
       <ConfigProvider
         theme={{
           components: {
@@ -222,35 +256,13 @@ const CreateDrawer: React.FC<{
               className={cn('transition', isActive && 'rotate-45')}
             />
           )}
-          items={[
-            {
-              key: '1',
-              label: '1. 域名购买后多久可以使用？',
-              children: (
-                <div className="text-black/50 text-xs">
-                  通常域名下单成功后1小时内即可生效，不同域名后缀可能受服务商DNS解析生效时间影响。
-                </div>
-              ),
-            },
-            {
-              key: '2',
-              label: '2. 为什么期望域名没有注册成功？',
-              children: (
-                <div className="text-black/50 text-xs">
-                  域名是否可以注册依托于注册局信息更新，且部分域名属于白金词，价格远超当前售价。
-                </div>
-              ),
-            },
-            {
-              key: '3',
-              label: '3. 域名下单之后可以申请退款吗？',
-              children: (
-                <div className="text-black/50 text-xs">
-                  不支持，由于商品特殊性质，下单成功后系统会进入注册流程，一旦通过域名注册局申请，无法撤销。
-                </div>
-              ),
-            },
-          ]}
+          items={faqs.map((k, i) => ({
+            key: i.toString(),
+            label: t(`${k}.q`),
+            children: (
+              <div className="text-black/50 text-xs">{t(`${k}.a`)}</div>
+            ),
+          }))}
         />
       </ConfigProvider>
     </Drawer>

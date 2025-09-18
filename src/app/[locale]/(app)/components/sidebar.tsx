@@ -67,12 +67,12 @@ const Inner = () => {
                   },
                 },
                 {
-                  label: '邮箱',
+                  label: t('menus.email'),
                   key: 'email',
                   type: 'group',
                   children: [
                     {
-                      label: '收信',
+                      label: t('menus.inbox'),
                       key: 'email:inbox',
                       icon: <RiMailOpenLine size={18} />,
                       meta: {
@@ -81,7 +81,7 @@ const Inner = () => {
                       },
                     },
                     {
-                      label: '发信',
+                      label: t('menus.outbox'),
                       key: 'email:outbox',
                       icon: <RiMailSendLine size={18} />,
                       meta: {
@@ -90,7 +90,7 @@ const Inner = () => {
                       },
                     },
                     {
-                      label: '域名',
+                      label: t('menus.domain'),
                       key: 'email:domain',
                       icon: <RiGlobalLine size={18} />,
                       meta: {
@@ -99,7 +99,7 @@ const Inner = () => {
                       },
                     },
                     {
-                      label: '收藏',
+                      label: t('menus.archive'),
                       key: 'email:archive',
                       icon: <RiArchive2Line size={18} />,
                       meta: {
@@ -108,23 +108,23 @@ const Inner = () => {
                       },
                     },
                     {
-                      label: 'API',
+                      label: t('menus.api'),
                       key: 'email:api',
                       icon: <RiFlashlightLine size={18} />,
                       meta: {
-                        href: '/api',
-                        group: '/api',
+                        href: '/interface',
+                        group: '/interface',
                       },
                     },
                   ],
                 },
                 {
-                  label: '我的',
+                  label: t('menus.my'),
                   key: 'my',
                   type: 'group',
                   children: [
                     {
-                      label: '账户',
+                      label: t('menus.account'),
                       key: 'my:account',
                       icon: <RiUser6Line size={18} />,
                       meta: {
@@ -133,7 +133,7 @@ const Inner = () => {
                       },
                     },
                     {
-                      label: '订阅',
+                      label: t('menus.subscription'),
                       key: 'my:subscription',
                       icon: <RiVipCrown2Line size={18} />,
                       meta: {
@@ -142,7 +142,7 @@ const Inner = () => {
                       },
                     },
                     {
-                      label: '账单',
+                      label: t('menus.bill'),
                       key: 'my:bill',
                       icon: <RiBillLine size={18} />,
                       meta: {

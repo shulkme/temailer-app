@@ -8,6 +8,7 @@ import {
   RiMailSendLine,
 } from '@remixicon/react';
 import { Avatar, Card } from 'antd';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const StatisticItem: React.FC<{
@@ -41,13 +42,14 @@ const StatisticItem: React.FC<{
 };
 
 const Statistic: React.FC = () => {
+  const t = useTranslations('app.pages.dashboard.statistic');
   return (
     <Card>
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4 gap-4">
-        <StatisticItem icon={RiMailOpenLine} title={'收信数'} value={1234} />
-        <StatisticItem icon={RiMailSendLine} title={'发信数'} value={1234} />
-        <StatisticItem icon={RiGlobalLine} title={'域名数'} value={0} />
-        <StatisticItem icon={RiArchive2Line} title={'收藏数'} value={0} />
+        <StatisticItem icon={RiMailOpenLine} title={t('inbox')} value={1234} />
+        <StatisticItem icon={RiMailSendLine} title={t('outbox')} value={1234} />
+        <StatisticItem icon={RiGlobalLine} title={t('domain')} value={0} />
+        <StatisticItem icon={RiArchive2Line} title={t('archive')} value={0} />
       </div>
     </Card>
   );
