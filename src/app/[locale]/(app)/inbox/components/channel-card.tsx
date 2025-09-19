@@ -27,7 +27,7 @@ const ChannelCard: React.FC<
   return (
     <div className="w-80 relative shrink-0 snap-start" title={desc}>
       {stock < 1 && available && (
-        <div className="absolute w-16 h-16 right-0 top-0 pointer-events-none z-40 overflow-hidden">
+        <div className="absolute w-16 h-16 right-0 top-0 pointer-events-none z-10 overflow-hidden">
           <div className="w-[200%] text-red-600 text-sm bg-red-50 rotate-45 absolute top-2 -right-9 px-10 py-0.5">
             {t('soldOut')}
           </div>
@@ -59,7 +59,7 @@ const ChannelCard: React.FC<
         </div>
       </AntdRadioButton>
       {!available && (
-        <div className="absolute z-50 inset-[2px] bg-linear-to-l from-primary-50 to-white/30 flex items-center justify-end p-4">
+        <div className="absolute z-20 inset-[2px] bg-linear-to-l from-primary-50 to-white/30 flex items-center justify-end p-4">
           <Button type="primary" size="small" shape="round">
             {t('subscriptionOnly')}
           </Button>
