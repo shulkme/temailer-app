@@ -127,7 +127,7 @@ const SliderScroller: React.FC<{
       {!isStart && (
         <div
           className={cn(
-            'absolute z-10',
+            'absolute z-[1000]',
             vertical
               ? 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2'
               : 'top-1/2 left-0 -translate-x-1/2 -translate-y-1/2',
@@ -152,7 +152,7 @@ const SliderScroller: React.FC<{
       {!isEnd && (
         <div
           className={cn(
-            'absolute z-10',
+            'absolute z-[1000]',
             vertical
               ? 'bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2'
               : 'top-1/2 right-0 translate-x-1/2 -translate-y-1/2',
