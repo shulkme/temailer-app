@@ -7,15 +7,17 @@ import {
   AntdTextArea,
 } from '@/components/antd';
 import { Button, Drawer } from 'antd';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const CreateDrawer: React.FC<{
   open: boolean;
   setOpen: (open: boolean) => void;
 }> = ({ open, setOpen }) => {
+  const t = useTranslations('app.pages.outbox.create');
   return (
     <Drawer
-      title={'发信任务'}
+      title={t('title')}
       open={open}
       onClose={() => setOpen(false)}
       width={640}
@@ -27,63 +29,108 @@ const CreateDrawer: React.FC<{
           <div className="py-4">
             <ul className="space-y-2">
               <li className="flex justify-between items-center">
-                <span className="text-black/50">收信数量</span>
+                <span className="text-black/50">
+                  {t('footer.summary.quantity.label')}
+                </span>
                 <span className="font-medium">x1,000</span>
               </li>
               <li className="flex justify-between items-center">
-                <span className="text-black/50">预计消耗</span>
-                <span className="font-medium text-lg">1,000积分</span>
+                <span className="text-black/50">
+                  {t('footer.summary.total.label')}
+                </span>
+                <span className="font-medium text-lg">
+                  {t('footer.summary.total.format', {
+                    num: 1000,
+                  })}
+                </span>
               </li>
             </ul>
           </div>
           <div>
             <Button block type="primary" size="large">
-              提交任务
+              {t('footer.actions.submit')}
             </Button>
           </div>
         </div>
       }
     >
       <AntdForm layout="vertical">
-        <AntdFormItem label={'任务名称'}>
+        <AntdFormItem
+          name="name"
+          messageVariables={{
+            label: t('form.name.label'),
+          }}
+          label={t('form.name.label')}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
           <AntdInput />
         </AntdFormItem>
-        <AntdFormItem label={'发信地址'}>
+        <AntdFormItem
+          name="from_address"
+          messageVariables={{
+            label: t('form.fromAddress.label'),
+          }}
+          label={t('form.fromAddress.label')}
+        >
           <AntdRadioGroup
             options={[
               {
-                label: '随机邮箱',
+                label: t('form.fromAddress.options.random'),
                 value: '1',
               },
               {
-                label: '自定义',
+                label: t('form.fromAddress.options.custom'),
                 value: '2',
               },
             ]}
           />
         </AntdFormItem>
         <AntdFormItem
-          label={'收信地址'}
-          extra={
-            <span className="text-xs">
-              支持txt,xlx,xlsx,csv格式，每行一个地址
-            </span>
-          }
+          messageVariables={{
+            label: t('form.toAddress.label'),
+          }}
+          label={t('form.toAddress.label')}
+          extra={<span className="text-xs">{t('form.toAddress.tips')}</span>}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
-          <Button block>上传收信地址</Button>
+          <Button block>{t('form.toAddress.action')}</Button>
         </AntdFormItem>
-        <AntdFormItem label={'邮件内容'}>
-          <AntdTextArea rows={5} />
+        <AntdFormItem
+          messageVariables={{
+            label: t('form.message.label'),
+          }}
+          label={t('form.message.label')}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <AntdTextArea rows={5} placeholder={t('form.message.placeholder')} />
         </AntdFormItem>
-        <AntdFormItem label={'定时发送'}>
+        <AntdFormItem
+          name="send_time"
+          messageVariables={{
+            label: t('form.sendTime.label'),
+          }}
+          label={t('form.sendTime.label')}
+        >
           <AntdRadioGroup
             options={[
               {
-                label: '立即发送',
+                label: t('form.sendTime.options.now'),
                 value: '1',
               },
               {
-                label: '自定义',
+                label: t('form.sendTime.options.custom'),
                 value: '2',
               },
             ]}

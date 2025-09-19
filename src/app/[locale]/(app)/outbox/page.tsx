@@ -11,14 +11,16 @@ import SliderScroller from '@/components/slider-scroller';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { Button, Card, Select, Space, Table } from 'antd';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export default function Page() {
+  const t = useTranslations('app.pages.outbox');
   const [form] = AntdForm.useForm();
   const [createOpen, setCreateOpen] = useState(false);
   return (
     <>
-      <Title title={'发信'} />
+      <Title title={t('title')} />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <SliderScroller
           navs={{
@@ -28,14 +30,28 @@ export default function Page() {
             scroller: 'gap-4 lg:gap-6',
           }}
         >
-          <StatisticCard title={'发送总量'} value={1234} />
-          <StatisticCard title={'发送成功'} value={1234} />
-          <StatisticCard title={'送达率'} value={100} suffix="%" />
-          <StatisticCard title={'发送失败'} value={0} />
-          <StatisticCard title={'失败率'} value={0} suffix="%" />
           <StatisticCard
-            title={'账户状态'}
-            value={'正常'}
+            title={t('statistics.totalRequest.label')}
+            value={1234}
+          />
+          <StatisticCard
+            title={t('statistics.sendSuccess.label')}
+            value={1234}
+          />
+          <StatisticCard
+            title={t('statistics.successRate.label')}
+            value={100}
+            suffix="%"
+          />
+          <StatisticCard title={t('statistics.sendFail.label')} value={0} />
+          <StatisticCard
+            title={t('statistics.failureRate.label')}
+            value={0}
+            suffix="%"
+          />
+          <StatisticCard
+            title={t('statistics.accountStatus.label')}
+            value={t('statistics.accountStatus.options.active')}
             valueStyle={{
               color: 'var(--color-green-600)',
             }}
@@ -46,7 +62,10 @@ export default function Page() {
             <div>
               <AntdForm form={form} layout="inline">
                 <AntdFormItem name="type">
-                  <Select style={{ width: 220 }} placeholder={'任务状态'} />
+                  <Select
+                    style={{ width: 220 }}
+                    placeholder={t('table.filters.status.placeholder')}
+                  />
                 </AntdFormItem>
                 <AntdFormItem name="dataRange">
                   <AntdDateRangePicker />
@@ -55,7 +74,7 @@ export default function Page() {
                   <AntdInput
                     allowClear
                     suffix={<RiSearchLine size={16} />}
-                    placeholder={'搜索任务'}
+                    placeholder={t('table.filters.search.placeholder')}
                   />
                 </AntdFormItem>
               </AntdForm>
@@ -63,7 +82,7 @@ export default function Page() {
             <div>
               <Space size="middle">
                 <Button type="primary" onClick={() => setCreateOpen(true)}>
-                  新建任务
+                  {t('table.actions.create')}
                 </Button>
               </Space>
             </div>
@@ -74,19 +93,19 @@ export default function Page() {
             }}
             columns={[
               {
-                title: '任务名称',
+                title: t('table.columns.name'),
               },
               {
-                title: '进度',
+                title: t('table.columns.progress'),
               },
               {
-                title: '统计',
+                title: t('table.columns.statistic'),
               },
               {
-                title: '创建时间',
+                title: t('table.columns.createdTime'),
               },
               {
-                title: '操作',
+                title: t('table.columns.operate'),
               },
             ]}
           />

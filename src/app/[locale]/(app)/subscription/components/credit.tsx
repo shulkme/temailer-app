@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const Credit: React.FC = () => {
-  const t = useTranslations('app.pages.subscription.currentCredit');
+  const t = useTranslations('app.pages.subscription.credit');
   return (
     <Card>
       <div className="space-y-4">

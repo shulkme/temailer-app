@@ -1,1 +1,654 @@
-{}
+{
+  "global": {
+    "units": {
+      "day": "{num, plural, =0 {天} =1 {1天} other {#天}}",
+      "year": "{num, plural, =0 {年} =1 {1年} other {#年}}"
+    },
+    "checkout": {
+      "payment": {
+        "credit": "信用卡",
+        "crypto": "加密货币",
+        "local": "本地支付",
+        "balance": "余额",
+        "bank": "银行"
+      },
+      "status": {
+        "success": "成功",
+        "fail": "失败",
+        "pending": "待处理",
+        "cancelled": "已取消",
+        "expired": "已过期",
+        "refunded": "已退款"
+      }
+    },
+    "response": {
+      "success": "成功",
+      "error": "错误"
+    },
+    "plans": {
+      "free": {
+        "title": "免费",
+        "desc": "适用于个人用户注册使用",
+        "features": {
+          "credits": "每月 <strong></strong> 积分",
+          "emailSupport": "临时/教育邮箱支持",
+          "sentLimit": "最多发送 <strong></strong> 封邮件",
+          "customerSupport": "客户支持"
+        }
+      },
+      "basic": {
+        "title": "基础版",
+        "desc": "适用于个人/开发者批量注册使用",
+        "features": {
+          "credits": "每月 <strong></strong> 积分",
+          "price": "每封邮件 <strong></strong>",
+          "emailSupport": "临时/教育/<strong>主流</strong>邮箱支持",
+          "sentLimit": "无限邮件发送",
+          "customerSupport": "24/7 客户支持",
+          "apiSupport": "API邮件发送/接收",
+          "customDomain": "自定义邮箱域名支持"
+        }
+      },
+      "premium": {
+        "title": "专业版",
+        "desc": "适用于工作室/公司批量注册使用",
+        "features": {
+          "credits": "每月 <strong></strong> 积分",
+          "price": "每封邮件 <strong></strong>",
+          "emailSupport": "临时/教育/<strong>主流</strong>邮箱支持",
+          "sentLimit": "无限邮件发送",
+          "customerSupport": "24/7 客户支持",
+          "apiSupport": "API邮件发送/接收",
+          "customDomain": "自定义邮箱域名支持"
+        }
+      },
+      "ultimate": {
+        "title": "旗舰版",
+        "desc": "适用于企业/分销商批量注册使用",
+        "features": {
+          "credits": "每月 <strong></strong> 积分",
+          "price": "每封邮件 <strong></strong>",
+          "emailSupport": "临时/教育/<strong>主流</strong>邮箱支持",
+          "sentLimit": "无限邮件发送",
+          "customerSupport": "24/7 客户支持",
+          "apiSupport": "API邮件发送/接收",
+          "customDomain": "自定义邮箱域名支持",
+          "freeDomain": "{num, plural, =0 {} =1 {<strong>1</strong>个免费域名} other {<strong>#</strong>个免费域名}}"
+        }
+      }
+    },
+    "tags": {
+      "hot": "热门",
+      "rec": "推荐",
+      "sale": "优惠",
+      "subscriptionOnly": "仅订阅",
+      "soldOut": "缺货"
+    },
+    "emails": {
+      "temp": {
+        "name": "临时邮箱",
+        "desc": "安全&匿名，强烈推荐"
+      },
+      "edu": {
+        "name": "教育邮箱",
+        "desc": "推荐用于教育优惠"
+      },
+      "gmail": {
+        "name": "Gmail",
+        "desc": "谷歌邮箱，全球最受欢迎"
+      },
+      "outlook": {
+        "name": "Outlook",
+        "desc": "微软邮箱，专业可靠"
+      },
+      "icloud": {
+        "name": "iCloud",
+        "desc": "苹果邮箱，跨设备无缝同步"
+      },
+      "gmx": {
+        "name": "GMX",
+        "desc": "GMX邮箱，免费且灵活的邮件服务"
+      },
+      "yahoo": {
+        "name": "Yahoo",
+        "desc": "雅虎邮箱，经典且广泛使用"
+      },
+      "mail": {
+        "name": "Mail.com",
+        "desc": "Mail.com，自定义域名与全球访问"
+      }
+    }
+  },
+  "app": {
+    "global": {
+      "sidebar": {
+        "menus": {
+          "dashboard": "仪表盘",
+          "email": "邮箱",
+          "inbox": "收件箱",
+          "outbox": "发件箱",
+          "domain": "域名",
+          "archive": "收藏",
+          "api": "API",
+          "my": "我的",
+          "account": "账户",
+          "subscription": "订阅",
+          "bill": "账单",
+          "help": "帮助",
+          "documentation": "文档",
+          "faq": "常见问题"
+        }
+      },
+      "header": {
+        "account": {
+          "account": "账户",
+          "subscription": "订阅",
+          "billing": "账单",
+          "logout": "登出"
+        }
+      }
+    },
+    "pages": {
+      "dashboard": {
+        "title": "仪表盘",
+        "help": {
+          "title": "获取帮助",
+          "desc": "对我们的产品有任何疑问或需要定制套餐？",
+          "contact": "联系我们",
+          "links": {
+            "documentation": "文档",
+            "faq": "常见问题"
+          }
+        },
+        "statistic": {
+          "inbox": "收信总数",
+          "outbox": "发信总数",
+          "domain": "域名数",
+          "archive": "收藏数"
+        },
+        "trend": {
+          "title": "收信概览",
+          "empty": "当前数据量不足，请明天再查看。"
+        },
+        "task": {
+          "title": "发送任务",
+          "detail": "查看全部"
+        },
+        "credit": {
+          "available": "可用积分",
+          "actions": {
+            "recharge": "充值",
+            "upgrade": "升级",
+            "subscription": "订阅"
+          }
+        }
+      },
+      "inbox": {
+        "title": "收信",
+        "email": {
+          "current": "当前邮箱",
+          "actions": {
+            "copy": "复制",
+            "random": "随机",
+            "custom": "自定义",
+            "archive": "收藏",
+            "help": "无法接收邮件？报告问题"
+          }
+        },
+        "messages": {
+          "title": "最新邮件",
+          "countdown": "{num, plural, =0 {正在刷新…} =1 {1秒后自动刷新} other {#秒后自动刷新}}",
+          "actions": {
+            "refresh": "刷新"
+          },
+          "tips": "仅显示最近10分钟内的邮件，过期自动删除"
+        }
+      },
+      "outbox": {
+        "title": "发信",
+        "statistics": {
+          "totalRequest": {
+            "label": "请求总数"
+          },
+          "sendSuccess": {
+            "label": "发送成功"
+          },
+          "successRate": {
+            "label": "送达率"
+          },
+          "sendFail": {
+            "label": "发送失败"
+          },
+          "failureRate": {
+            "label": "失败率"
+          },
+          "accountStatus": {
+            "label": "账户状态",
+            "options": {
+              "active": "正常",
+              "disabled": "禁用"
+            }
+          }
+        },
+        "table": {
+          "filters": {
+            "status": {
+              "placeholder": "状态"
+            },
+            "search": {
+              "placeholder": "搜索"
+            }
+          },
+          "actions": {
+            "create": "创建任务"
+          },
+          "columns": {
+            "name": "任务名称",
+            "progress": "进度",
+            "statistic": "统计",
+            "createdTime": "创建时间",
+            "operate": "操作"
+          }
+        },
+        "create": {
+          "title": "创建任务",
+          "form": {
+            "name": {
+              "label": "任务名称",
+              "placeholder": "输入任务名称"
+            },
+            "fromAddress": {
+              "label": "发件地址",
+              "options": {
+                "random": "随机",
+                "custom": "自定义"
+              }
+            },
+            "toAddress": {
+              "label": "收件地址",
+              "action": "上传",
+              "tips": "支持txt, xlx, xlsx, csv格式，每行一个地址。"
+            },
+            "message": {
+              "label": "邮件内容",
+              "placeholder": "输入邮件内容，支持邮件标签。"
+            },
+            "sendTime": {
+              "label": "定时发送",
+              "options": {
+                "now": "立即发送",
+                "custom": "自定义"
+              }
+            }
+          },
+          "footer": {
+            "summary": {
+              "quantity": {
+                "label": "发件地址数"
+              },
+              "total": {
+                "label": "预估消耗",
+                "format": "{num, plural, =0 {} =1 {1个积分} other {#个积分}}"
+              }
+            },
+            "actions": {
+              "submit": "提交任务"
+            }
+          }
+        }
+      },
+      "account": {
+        "title": "账户",
+        "detail": {
+          "title": "账户详情",
+          "items": {
+            "username": {
+              "label": "用户名"
+            },
+            "email": {
+              "label": "电子邮件"
+            },
+            "registration-time": {
+              "label": "注册时间"
+            },
+            "password": {
+              "label": "密码",
+              "change-password": "修改密码"
+            }
+          },
+          "modal": {
+            "title": "修改密码",
+            "actions": {
+              "yes": "更新",
+              "no": "取消"
+            },
+            "form": {
+              "old-password": {
+                "label": "旧密码",
+                "placeholder": "旧密码"
+              },
+              "new-password": {
+                "label": "新密码",
+                "placeholder": "新密码"
+              },
+              "confirm-password": {
+                "label": "确认密码",
+                "placeholder": "确认密码",
+                "errors": {
+                  "match": "确认密码与新密码不匹配"
+                }
+              }
+            },
+            "result": {
+              "success": "成功",
+              "error": "修改失败"
+            }
+          }
+        },
+        "login-record": {
+          "title": "登录活动记录",
+          "columns": {
+            "device": "设备",
+            "location": "位置",
+            "ip": "登录IP",
+            "time": "登录时间"
+          }
+        }
+      },
+      "interface": {
+        "title": "API",
+        "alert": {
+          "message": "通过API将收发功能集成到您的应用程序时，请妥善保管您的密钥。",
+          "extra": "查看文档"
+        },
+        "info": {
+          "apiId": "API ID",
+          "apiKey": "API Key",
+          "refresh": "刷新API Key",
+          "updatedTime": "更新时间"
+        },
+        "overview": {
+          "title": "API请求概览"
+        }
+      },
+      "archive": {
+        "title": "收藏",
+        "table": {
+          "filters": {
+            "search": {
+              "placeholder": "搜索"
+            }
+          },
+          "actions": {
+            "export": "导出"
+          },
+          "columns": {
+            "email": "邮箱",
+            "remark": "备注",
+            "createdTime": "创建时间",
+            "operate": "操作"
+          }
+        }
+      },
+      "domain": {
+        "title": "域名",
+        "alert": {
+          "message": "使用专属域名，可避免收件地址因发件方风控限制而无法收到邮件，也可用于自定义发件地址，提升品牌信任度，提高邮件送达率。"
+        },
+        "table": {
+          "filters": {
+            "status": {
+              "placeholder": "状态"
+            },
+            "search": {
+              "placeholder": "搜索"
+            }
+          },
+          "actions": {
+            "buy": "购买域名"
+          },
+          "columns": {
+            "domain": "域名",
+            "status": "状态",
+            "remark": "备注",
+            "registerTime": "注册时间",
+            "expiredTime": "到期时间",
+            "operate": "操作"
+          }
+        },
+        "create": {
+          "title": "购买域名",
+          "form": {
+            "suffix": {
+              "label": "个"
+            },
+            "quantity": {
+              "label": "数量"
+            },
+            "desired": {
+              "label": "期望域名",
+              "placeholder": "可选，默认随机生成"
+            },
+            "alternatives": {
+              "label": "期望补偿",
+              "placeholder": "当期望域名注册失败时允许随机注册。"
+            }
+          },
+          "faq": {
+            "title": "常见问题",
+            "items": [
+              {
+                "q": "1. 购买域名后需要多长时间才能使用？",
+                "a": "通常情况下，下单成功后域名将在1小时内生效，但不同的域名后缀可能会受到服务商DNS解析生效时间的影响。"
+              },
+              {
+                "q": "2. 为什么期望域名注册不成功？",
+                "a": "域名是否可以注册，取决于注册局信息的更新，且部分域名属于白金词，其价格远高于当前售价。"
+              },
+              {
+                "q": "3. 域名订单下单后可以申请退款吗？",
+                "a": "不可以，由于产品的特殊性，订单成功后系统将进入注册流程，一旦通过域名注册局审核通过后无法撤销。"
+              }
+            ]
+          },
+          "footer": {
+            "summary": {
+              "domains": "域名",
+              "price": "总价"
+            },
+            "actions": {
+              "checkout": "立即购买"
+            }
+          }
+        }
+      },
+      "bill": {
+        "title": "账单",
+        "table": {
+          "filters": {
+            "type": {
+              "placeholder": "类型"
+            },
+            "search": {
+              "placeholder": "搜索"
+            }
+          },
+          "columns": {
+            "no": "订单号",
+            "amount": "金额",
+            "paymentMethod": "支付方式",
+            "type": "类型",
+            "plan": "套餐",
+            "status": "状态",
+            "date": "日期"
+          }
+        }
+      },
+      "subscription": {
+        "title": "订阅",
+        "plan": {
+          "title": "当前套餐",
+          "expiredTime": "到期时间",
+          "actions": {
+            "upgrade": "升级"
+          }
+        },
+        "credit": {
+          "title": "剩余积分",
+          "actions": {
+            "recharge": "充值积分"
+          }
+        },
+        "plans": {
+          "title": "套餐",
+          "period": {
+            "monthly": "月付",
+            "yearly": "年付"
+          },
+          "tips": "需要定制套餐？<link>联系我们</link>",
+          "template": {
+            "price": {
+              "suffix": {
+                "monthly": "月",
+                "yearly": "年"
+              },
+              "best": "最划算",
+              "discount": "{num}折扣"
+            },
+            "actions": {
+              "current": "当前套餐",
+              "upgrade": "立即升级"
+            }
+          }
+        },
+        "credits": {
+          "title": "积分",
+          "subtitle": "所有购买的积分永不过期。",
+          "template": {
+            "price": {
+              "suffix": "一次性支付"
+            },
+            "tips": "1 积分 ≈ ",
+            "action": "立即购买"
+          }
+        }
+      }
+    }
+  },
+  "auth": {
+    "global": {
+      "slogan": "次时代\n临时邮箱解决方案",
+      "features": [
+        "无限随机邮箱地址",
+        "隐匿、安全、高可用",
+        "邮件送达率90.9%",
+        "多服务商支持",
+        "24/7客户支持"
+      ],
+      "footer": "累计接收超过1000万多封邮件"
+    },
+    "login": {
+      "title": "登录账户",
+      "oauth2": {
+        "google": "使用Google登录"
+      },
+      "or": "或",
+      "form": {
+        "email": {
+          "label": "邮箱",
+          "placeholder": "邮箱地址"
+        },
+        "password": {
+          "label": "密码",
+          "placeholder": "密码"
+        },
+        "submit": {
+          "label": "登录"
+        }
+      },
+      "forgot-password": "忘记密码？",
+      "signup": "没有账户？<link>立即注册</link>"
+    },
+    "signup": {
+      "title": "创建账户",
+      "oauth2": {
+        "google": "使用Google注册"
+      },
+      "or": "或",
+      "form": {
+        "email": {
+          "label": "邮箱",
+          "placeholder": "邮箱地址"
+        },
+        "password": {
+          "label": "密码",
+          "placeholder": "密码"
+        },
+        "referral": {
+          "label": "推荐码",
+          "placeholder": "可选"
+        },
+        "agree": {
+          "label": "我同意<term>服务条款</term>和<policy>隐私政策</policy>",
+          "errors": {
+            "required": "请同意服务条款和隐私政策"
+          }
+        },
+        "submit": {
+          "label": "创建账户"
+        }
+      },
+      "login": "已有账户？<link>立即登录</link>",
+      "result": {
+        "title": "验证您的电子邮件",
+        "subtitle": "我们已将确认链接发送至",
+        "desc": "请查收您的电子邮件以完成注册的最后一步。此链接有效期为30分钟。",
+        "actions": ["返回登录"]
+      }
+    },
+    "forgot": {
+      "title": "忘记密码",
+      "subtitle": "请输入您注册的电子邮件地址，我们将向您发送重置密码的链接。",
+      "form": {
+        "email": {
+          "label": "邮箱",
+          "placeholder": "邮箱地址"
+        },
+        "submit": {
+          "label": "发送邮件"
+        }
+      },
+      "login": "想起密码了？<link>返回登录</link>",
+      "result": {
+        "title": "验证您的电子邮件",
+        "subtitle": "我们已将确认链接发送至",
+        "desc": "请查收您的电子邮件，以完成重置密码的最后一步。此链接有效期为30分钟。",
+        "actions": ["返回登录"]
+      }
+    },
+    "reset": {
+      "title": "重置密码",
+      "form": {
+        "new-password": {
+          "label": "新密码",
+          "placeholder": "新密码"
+        },
+        "confirm-password": {
+          "label": "确认密码",
+          "placeholder": "确认密码",
+          "errors": {
+            "match": "确认密码与新密码不匹配"
+          }
+        },
+        "submit": {
+          "label": "重置"
+        }
+      },
+      "result": {
+        "title": "重置成功",
+        "subtitle": "您现在可以使用新密码重新登录您的账户。",
+        "actions": ["返回登录"]
+      }
+    }
+  }
+}

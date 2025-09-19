@@ -2,12 +2,14 @@
 import { Link } from '@/i18n/navigation';
 import Logo from '@/icons/logo';
 import { RiCheckLine } from '@remixicon/react';
-import { useTranslations } from 'next-intl';
+import { useMessages, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import React from 'react';
 
 const Cover: React.FC = () => {
   const t = useTranslations('auth.global');
+  const messages = useMessages();
+  const keys = Object.keys(messages.auth.global.features);
   return (
     <>
       <Image
@@ -33,7 +35,7 @@ const Cover: React.FC = () => {
             {t('slogan')}
           </h1>
           <ul className="space-y-3 text-lg">
-            {Array.from({ length: 5 }).map((_, i) => (
+            {keys.map((_, i) => (
               <li key={i} className="flex items-center gap-2">
                 <span className="text-green-500">
                   <RiCheckLine size={16} />

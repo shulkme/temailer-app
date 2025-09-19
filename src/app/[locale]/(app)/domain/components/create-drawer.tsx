@@ -1,3 +1,4 @@
+'use client';
 import {
   AntdForm,
   AntdFormItem,
@@ -75,7 +76,8 @@ const CreateDrawer: React.FC<{
   const g = useTranslations('global');
 
   const messages = useMessages();
-  const faqs = Object.keys(messages.app.pages.domain.create.faq.items);
+  const keys = Object.keys(messages.app.pages.domain.create.faq.items);
+
   return (
     <Drawer
       open={open}
@@ -256,11 +258,13 @@ const CreateDrawer: React.FC<{
               className={cn('transition', isActive && 'rotate-45')}
             />
           )}
-          items={faqs.map((k, i) => ({
+          items={keys.map((_, i) => ({
             key: i.toString(),
-            label: t(`${k}.q`),
+            label: t(`faq.items.${i}.q`),
             children: (
-              <div className="text-black/50 text-xs">{t(`${k}.a`)}</div>
+              <div className="text-black/50 text-xs">
+                {t(`faq.items.${i}.a`)}
+              </div>
             ),
           }))}
         />

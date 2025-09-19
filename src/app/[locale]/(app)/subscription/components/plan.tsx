@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const Plan: React.FC = () => {
-  const t = useTranslations('app.pages.subscription.currentPackage');
+  const t = useTranslations('app.pages.subscription.plan');
   return (
     <Card>
       <div className="space-y-4">

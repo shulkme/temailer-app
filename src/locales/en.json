@@ -25,7 +25,7 @@
       "success": "Success",
       "error": "Error"
     },
-    "packages": {
+    "plans": {
       "free": {
         "title": "Free",
         "desc": "Suitable for individual users to register and use",
@@ -42,7 +42,7 @@
         "features": {
           "credits": "<strong></strong> credits/month",
           "price": "<strong></strong>/email",
-          "emailSupport": "Temp/Edu/Mainstream email support",
+          "emailSupport": "Temp/Edu/<strong>Mainstream</strong> email support",
           "sentLimit": "Unlimited email sending",
           "customerSupport": "24/7 customer support",
           "apiSupport": "API email send/receive",
@@ -55,7 +55,7 @@
         "features": {
           "credits": "<strong></strong> credits/month",
           "price": "<strong></strong>/email",
-          "emailSupport": "Temp/Edu/Mainstream email support",
+          "emailSupport": "Temp/Edu/<strong>Mainstream</strong> email support",
           "sentLimit": "Unlimited email sending",
           "customerSupport": "24/7 customer support",
           "apiSupport": "API email send/receive",
@@ -68,19 +68,55 @@
         "features": {
           "credits": "<strong></strong> credits/month",
           "price": "<strong></strong>/email",
-          "emailSupport": "Temp/Edu/Mainstream email support",
+          "emailSupport": "Temp/Edu/<strong>Mainstream</strong> email support",
           "sentLimit": "Unlimited email sending",
           "customerSupport": "24/7 customer support",
           "apiSupport": "API email send/receive",
           "customDomain": "Custom email domain support",
-          "freeDomain": "{num, plural, =0 {free domain} =1 {1 free domain} other {# free domains}}"
+          "freeDomain": "{num, plural, =0 {} =1 {<strong>1</strong> free domain} other {<strong>#</strong> free domains}}"
         }
       }
     },
     "tags": {
       "hot": "HOT",
       "rec": "REC",
-      "sale": "SALE"
+      "sale": "SALE",
+      "subscriptionOnly": "Subscription Only",
+      "soldOut": "Sold Out"
+    },
+    "emails": {
+      "temp": {
+        "name": "Temp Mail",
+        "desc": "Secure & Anonymous"
+      },
+      "edu": {
+        "name": "EDU Mail",
+        "desc": "Education Discount Recommended"
+      },
+      "gmail": {
+        "name": "Gmail",
+        "desc": "Google’s Email, Most Popular Worldwide"
+      },
+      "outlook": {
+        "name": "Outlook",
+        "desc": "Microsoft’s Email, Professional & Reliable"
+      },
+      "icloud": {
+        "name": "iCloud",
+        "desc": "Apple’s Email, Seamless Across Devices"
+      },
+      "gmx": {
+        "name": "GMX",
+        "desc": "GMX Mail, Free & Flexible Email Service"
+      },
+      "yahoo": {
+        "name": "Yahoo",
+        "desc": "Yahoo Mail, Classic & Widely Used"
+      },
+      "mail": {
+        "name": "Mail.com",
+        "desc": "Mail.com, Custom Domains & Global Access"
+      }
     }
   },
   "app": {
@@ -144,6 +180,120 @@
             "recharge": "Recharge",
             "upgrade": "Upgrade",
             "subscription": "Subscription"
+          }
+        }
+      },
+      "inbox": {
+        "title": "Inbox",
+        "email": {
+          "current": "Current Email",
+          "actions": {
+            "copy": "Copy",
+            "random": "Random",
+            "custom": "Custom",
+            "archive": "Archive",
+            "help": "Can’t receive emails? Report an issue"
+          }
+        },
+        "messages": {
+          "title": "Latest Emails",
+          "countdown": "{num, plural, =0 {Refreshing…} =1 {Auto-refresh in 1 second} other {Auto-refresh in # seconds}}",
+          "actions": {
+            "refresh": "Refresh"
+          },
+          "tips": "Show only emails from the last 10 minutes; expire automatically"
+        }
+      },
+      "outbox": {
+        "title": "Outbox",
+        "statistics": {
+          "totalRequest": {
+            "label": "Total Requests"
+          },
+          "sendSuccess": {
+            "label": "Successful Sends"
+          },
+          "successRate": {
+            "label": "Delivery Rate"
+          },
+          "sendFail": {
+            "label": "Failed Sends"
+          },
+          "failureRate": {
+            "label": "Failure Rate"
+          },
+          "accountStatus": {
+            "label": "Account Status",
+            "options": {
+              "active": "Active",
+              "disabled": "Disabled"
+            }
+          }
+        },
+        "table": {
+          "filters": {
+            "status": {
+              "placeholder": "Status"
+            },
+            "search": {
+              "placeholder": "Search"
+            }
+          },
+          "actions": {
+            "create": "Create Task"
+          },
+          "columns": {
+            "name": "Task Name",
+            "progress": "Progress",
+            "statistic": "Statistic",
+            "createdTime": "Created Time",
+            "operate": "Operate"
+          }
+        },
+        "create": {
+          "title": "Create Task",
+          "form": {
+            "name": {
+              "label": "Task Name",
+              "placeholder": "Enter a task name"
+            },
+            "fromAddress": {
+              "label": "From Address",
+              "options": {
+                "random": "Random",
+                "custom": "Custom"
+              }
+            },
+            "toAddress": {
+              "label": "To Address",
+              "action": "Upload",
+              "tips": "Support txt, xlx, xlsx, csv formats, one address per line."
+            },
+            "message": {
+              "label": "Message",
+              "placeholder": "Enter email content, support email tags."
+            },
+            "sendTime": {
+              "label": "Scheduled Send",
+              "options": {
+                "now": "Send Now",
+                "custom": "Custom"
+              }
+            }
+          },
+          "footer": {
+            "summary": {
+              "quantity": {
+                "label": "From Addresses"
+              },
+              "total": {
+                "label": "Estimated Usage",
+                "format": "{num, plural, =0 {} =1 {1 credit} other {# credits}}"
+              }
+            },
+            "actions": {
+              "submit": "Submit Task"
+            }
           }
         }
       },
@@ -255,7 +405,7 @@
             }
           },
           "actions": {
-            "buy": "Buy a domain"
+            "buy": "Buy Domain"
           },
           "columns": {
             "domain": "Domain",
@@ -267,7 +417,7 @@
           }
         },
         "create": {
-          "title": "Get a domain",
+          "title": "Buy Domain",
           "form": {
             "suffix": {
               "label": ""
@@ -286,20 +436,20 @@
           },
           "faq": {
             "title": "FAQ",
-            "items": {
-              "1": {
+            "items": [
+              {
                 "q": "1. How long does it take to use a domain name after purchasing it?",
                 "a": "Usually, the domain name will take effect within 1 hour after the order is successfully placed, but different domain name suffixes may be affected by the service provider's DNS resolution effectiveness time."
               },
-              "2": {
+              {
                 "q": "2. Why was the desired domain name not successfully registered?",
                 "a": "Whether a domain name can be registered depends on the update of the registry information, and some domain names are platinum words, and their prices are far higher than the current selling price."
               },
-              "3": {
+              {
                 "q": "3. Can I apply for a refund after placing a domain name order?",
                 "a": "No, due to the special nature of the product, the system will enter the registration process after the order is successfully placed. Once the application is approved by the domain name registry, it cannot be revoked."
               }
-            }
+            ]
           },
           "footer": {
             "summary": {
@@ -336,21 +486,21 @@
       },
       "subscription": {
         "title": "Subscription",
-        "currentPackage": {
+        "plan": {
           "title": "Current Plan",
           "expiredTime": "Expiration Date",
           "actions": {
             "upgrade": "Upgrade"
           }
         },
-        "currentCredit": {
+        "credit": {
           "title": "Credits Left",
           "actions": {
             "recharge": "Top Up Credits"
           }
         },
-        "packages": {
-          "title": "subscription",
+        "plans": {
+          "title": "Plans",
           "period": {
             "monthly": "Monthly",
             "yearly": "Yearly"
@@ -362,7 +512,8 @@
                 "monthly": "mo",
                 "yearly": "year"
               },
-              "best": "Best Value"
+              "best": "Best Value",
+              "discount": "{num} OFF"
             },
             "actions": {
               "current": "Current Plan",
