@@ -43,3 +43,23 @@ export interface CreditRechargeRecord {
   balance_after: number;
   status: string;
 }
+
+export interface CreditUsageStatisticRecord {
+  daily_records: {
+    date: string;
+    points: number;
+  }[];
+}
+
+export interface CreditSubscriptionPlanRecord {
+  has_subscription: boolean;
+  subscription_info: {
+    rule_name: string;
+    points: number;
+    start_at: string;
+    expire_at: string;
+    description: string;
+    price: string;
+    discount_info: string;
+  };
+}

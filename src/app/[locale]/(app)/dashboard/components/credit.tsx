@@ -1,8 +1,13 @@
 'use client';
-import { AntdParagraph, AntdTitle } from '@/components/antd';
+import {
+  AntdParagraph,
+  AntdSkeletonButton,
+  AntdTitle,
+} from '@/components/antd';
 import PrimaryButton from '@/components/primary-button';
 import { Link } from '@/i18n/navigation';
 import { useCredit } from '@/providers/credit';
+import { useSubscription } from '@/providers/subscription';
 import { RiVipCrown2Line } from '@remixicon/react';
 import { Avatar, Button, Card } from 'antd';
 import { useTranslations } from 'next-intl';
@@ -10,6 +15,7 @@ import React from 'react';
 
 const Credit: React.FC = () => {
   const { available } = useCredit();
+  const { plan_locale, loading } = useSubscription();
   const t = useTranslations('app.pages.dashboard.credit');
   return (
     <Card>
@@ -18,9 +24,13 @@ const Credit: React.FC = () => {
           <Avatar shape="square" className="bg-transparent text-primary-500">
             <RiVipCrown2Line size={32} />
           </Avatar>
-          <AntdTitle level={5} className="m-0">
-            免费版
-          </AntdTitle>
+          {loading ? (
+            <AntdSkeletonButton size="small" />
+          ) : (
+            <AntdTitle level={5} className="m-0">
+              {plan_locale}
+            </AntdTitle>
+          )}
         </div>
         <div className="w-full overflow-hidden bg-blue-500/5 rounded-(--ant-border-radius) p-6 relative">
           <div className="absolute bottom-0 right-0 h-full w-1/3 bg-linear-[190deg] from-blue-200/50 to-transparent to-90% -skew-x-45 translate-x-1/2"></div>

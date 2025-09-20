@@ -172,7 +172,9 @@
         },
         "task": {
           "title": "Sending task",
-          "detail": "View all"
+          "detail": "View all",
+          "empty": "You haven't created a sending task yet",
+          "action": "Create Task"
         },
         "credit": {
           "available": "Available Credits",
@@ -356,7 +358,8 @@
             "operate": "Operate"
           },
           "actions": {
-            "logout": "Sign Out"
+            "logout": "Sign Out",
+            "current": "Current"
           }
         }
       },

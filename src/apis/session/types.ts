@@ -10,4 +10,5 @@ export interface SessionRecord {
   status: number;
   last_login_time: string;
   expire_time: string;
+  current?: boolean;
 }

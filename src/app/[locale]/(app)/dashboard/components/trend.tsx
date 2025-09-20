@@ -1,9 +1,11 @@
 'use client';
+import { getCreditUsageStatistics } from '@/apis/credit';
 import { AntdTitle } from '@/components/antd';
-import { Card } from 'antd';
+import { useRequest } from 'ahooks';
+import { Card, Spin } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import React, { useMemo } from 'react';
+import React from 'react';
 import {
   Area,
   AreaChart,
@@ -17,14 +19,19 @@ import {
 const Trend: React.FC = () => {
   const t = useTranslations('app.pages.dashboard.trend');
 
-  const data = useMemo(() => {
-    return Array.from({ length: 30 })
-      .map((_, i) => ({
-        label: dayjs().subtract(i, 'days').format('DD/MM'),
-        value: 0,
-      }))
-      .reverse();
-  }, []);
+  const { data, loading } = useRequest(async () => {
+    return await getCreditUsageStatistics(30).then((res) => {
+      const items = res.data.daily_records;
+      if (items.length > 0) {
+        return items;
+      } else {
+        return Array.from({ length: 30 }).map((_, i) => ({
+          date: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
+          points: 0,
+        }));
+      }
+    });
+  });
 
   return (
     <Card>
@@ -33,7 +40,7 @@ const Trend: React.FC = () => {
           {t('title')}
         </AntdTitle>
       </div>
-      <div className="w-full h-80">
+      <div className="w-full h-80 relative">
         <ResponsiveContainer>
           <AreaChart
             accessibilityLayer={false}
@@ -55,7 +62,7 @@ const Trend: React.FC = () => {
               </linearGradient>
             </defs>
             <XAxis
-              dataKey="label"
+              dataKey="date"
               tick={{
                 strokeWidth: 1,
                 fontSize: 12,
@@ -91,7 +98,7 @@ const Trend: React.FC = () => {
               }}
             />
             <Area
-              dataKey="value"
+              dataKey="points"
               stroke="var(--ant-color-primary)"
               strokeWidth={2}
               fillOpacity={1}
@@ -99,6 +106,11 @@ const Trend: React.FC = () => {
             />
           </AreaChart>
         </ResponsiveContainer>
+        {loading && (
+          <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-white/50">
+            <Spin />
+          </div>
+        )}
       </div>
     </Card>
   );

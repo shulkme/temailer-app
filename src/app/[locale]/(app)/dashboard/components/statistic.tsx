@@ -1,5 +1,6 @@
 'use client';
-import { AntdText, AntdTitle } from '@/components/antd';
+import { getUserStatistics } from '@/apis/statistic';
+import { AntdSkeletonButton, AntdText, AntdTitle } from '@/components/antd';
 import {
   RemixiconComponentType,
   RiArchive2Line,
@@ -7,15 +8,17 @@ import {
   RiMailOpenLine,
   RiMailSendLine,
 } from '@remixicon/react';
+import { useRequest } from 'ahooks';
 import { Avatar, Card } from 'antd';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 
 const StatisticItem: React.FC<{
   icon: RemixiconComponentType;
-  value: number;
+  value?: number;
   title: string;
-}> = ({ icon, title, value }) => {
+  loading?: boolean;
+}> = ({ icon, title, value, loading }) => {
   return (
     <div className="h-auto border border-transparent rounded-sm leading-none p-4">
       <div className="flex items-center gap-6">
@@ -29,12 +32,20 @@ const StatisticItem: React.FC<{
           })}
         </Avatar>
         <div>
-          <AntdText type="secondary" className="text-xs mb-2">
-            {title}
-          </AntdText>
-          <AntdTitle level={3} className="m-0">
-            {value.toLocaleString()}
-          </AntdTitle>
+          <div className="mb-2">
+            <AntdText type="secondary" className="text-xs">
+              {title}
+            </AntdText>
+          </div>
+          <div>
+            {loading ? (
+              <AntdSkeletonButton size="small" />
+            ) : (
+              <AntdTitle level={3} className="m-0">
+                {(value || 0).toLocaleString()}
+              </AntdTitle>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -43,13 +54,31 @@ const StatisticItem: React.FC<{
 
 const Statistic: React.FC = () => {
   const t = useTranslations('app.pages.dashboard.statistic');
+  const { data, loading } = useRequest(async () => {
+    return await getUserStatistics().then((res) => res.data);
+  });
   return (
     <Card>
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-4 gap-4">
-        <StatisticItem icon={RiMailOpenLine} title={t('inbox')} value={1234} />
-        <StatisticItem icon={RiMailSendLine} title={t('outbox')} value={1234} />
-        <StatisticItem icon={RiGlobalLine} title={t('domain')} value={0} />
-        <StatisticItem icon={RiArchive2Line} title={t('archive')} value={0} />
+        <StatisticItem
+          icon={RiMailOpenLine}
+          title={t('inbox')}
+          loading={loading}
+          value={data?.email_claim_count}
+        />
+        <StatisticItem icon={RiMailSendLine} title={t('outbox')} value={0} />
+        <StatisticItem
+          icon={RiGlobalLine}
+          title={t('domain')}
+          loading={loading}
+          value={data?.domain_count}
+        />
+        <StatisticItem
+          icon={RiArchive2Line}
+          title={t('archive')}
+          loading={loading}
+          value={data?.mailbox_count}
+        />
       </div>
     </Card>
   );

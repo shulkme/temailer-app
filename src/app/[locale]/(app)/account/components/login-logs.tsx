@@ -80,7 +80,7 @@ const LoginLogs: React.FC = () => {
         });
       }
     },
-    [g, message, mutate],
+    [g, message, mutate, refresh],
   );
 
   return (
@@ -117,9 +117,7 @@ const LoginLogs: React.FC = () => {
           },
           {
             title: t('columns.location'),
-            render: () => {
-              return <></>;
-            },
+            dataIndex: 'country_code',
           },
           {
             title: t('columns.ip'),
@@ -135,16 +133,18 @@ const LoginLogs: React.FC = () => {
             width: 140,
             align: 'center',
             render: (value, record) => {
-              return (
-                <>
-                  <Button
-                    loading={record?.loading}
-                    type="link"
-                    onClick={() => handleLogout(value)}
-                  >
-                    {t('actions.logout')}
-                  </Button>
-                </>
+              return record?.current ? (
+                <Button type="link" disabled>
+                  {t('actions.current')}
+                </Button>
+              ) : (
+                <Button
+                  loading={record?.loading}
+                  type="link"
+                  onClick={() => handleLogout(value)}
+                >
+                  {t('actions.logout')}
+                </Button>
               );
             },
           },

@@ -3,6 +3,8 @@ import {
   CreditRechargeParams,
   CreditRechargeRecord,
   CreditRecord,
+  CreditSubscriptionPlanRecord,
+  CreditUsageStatisticRecord,
 } from '@/apis/credit/types';
 import request from '@/apis/request';
 import { HttpResponse, PageResult } from '@/apis/types';
@@ -36,4 +38,24 @@ export async function getRechargeRecordList(
   return await request.get('/credit/record/recharge_records', {
     params,
   });
+}
+
+/**
+ * 获取用户积分使用统计
+ * @param days
+ */
+export async function getCreditUsageStatistics(
+  days: number,
+): Promise<HttpResponse<CreditUsageStatisticRecord>> {
+  return await request.get('/credit/record/usage_statistics', {
+    params: {
+      days,
+    },
+  });
+}
+
+export async function getCurrentSubscription(): Promise<
+  HttpResponse<CreditSubscriptionPlanRecord>
+> {
+  return await request.get('/credit/record/current_subscription');
 }
