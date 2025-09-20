@@ -525,7 +525,8 @@
             },
             "actions": {
               "current": "Current Plan",
-              "upgrade": "Upgrade Now"
+              "upgrade": "Upgrade Now",
+              "free": "Free Trial"
             }
           }
         },

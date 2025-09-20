@@ -4,10 +4,23 @@ import Credits from '@/app/[locale]/(app)/subscription/components/credits';
 import Plan from '@/app/[locale]/(app)/subscription/components/plan';
 import Plans from '@/app/[locale]/(app)/subscription/components/plans';
 import { Title } from '@/providers/title';
+import { App } from 'antd';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
 
 export default function Page() {
   const t = useTranslations('app.pages.subscription');
+  const g = useTranslations('global');
+  const { message } = App.useApp();
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'PAYMENT_SUCCESS') {
+        message.success(g('response.success'));
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
   return (
     <>
       <Title title={t('title')} />

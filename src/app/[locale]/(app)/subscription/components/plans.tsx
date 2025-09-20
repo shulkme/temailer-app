@@ -1,14 +1,124 @@
 'use client';
+import { checkoutByStripe } from '@/apis/checkout';
+import { CHECKOUT_MODE_ENUM, PRICE_TYPE_ENUM } from '@/apis/checkout/enums';
+import { CheckoutByStripeData } from '@/apis/checkout/types';
 import { AntdTitle } from '@/components/antd';
 import PrimaryButton from '@/components/primary-button';
+import { useSubscription } from '@/providers/subscription';
 import { RiCheckLine } from '@remixicon/react';
-import { Button, Card, ConfigProvider, Segmented } from 'antd';
+import { useRequest } from 'ahooks';
+import { App, Button, Card, ConfigProvider, Segmented } from 'antd';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
+
+type PeriodType = 'monthly' | 'yearly';
+
+type PlanType = 'free' | 'basic' | 'premium' | 'ultimate';
+
+const prices: Record<PlanType, Record<PeriodType, number>> = {
+  free: {
+    monthly: 0,
+    yearly: 0,
+  },
+  basic: {
+    monthly: 9.9,
+    yearly: 8.2,
+  },
+  premium: {
+    monthly: 29.9,
+    yearly: 24.1,
+  },
+  ultimate: {
+    monthly: 79.9,
+    yearly: 65.8,
+  },
+};
 
 const Plans: React.FC = () => {
   const t = useTranslations('app.pages.subscription.plans');
   const p = useTranslations('global.plans');
+  const { plan, subscription } = useSubscription();
+  const [period, setPeriod] = useState<PeriodType>('yearly');
+  const [loading, setLoading] = useState<PlanType>();
+  const { message } = App.useApp();
+
+  const { run: checkout } = useRequest(checkoutByStripe, {
+    manual: true,
+    onSuccess: (res) => {
+      window.open(res.data.url);
+    },
+    onError: (e) => {
+      message.error(e.message);
+    },
+    onFinally: () => {
+      setLoading(undefined);
+    },
+  });
+
+  const handleCheckout = useCallback(
+    (plan_type: PlanType) => {
+      setLoading(plan_type);
+      let amount = 0;
+      let price_type: PRICE_TYPE_ENUM = PRICE_TYPE_ENUM.FREE_MONTHLY;
+      switch (plan_type) {
+        case 'free':
+          if (period === 'yearly') {
+            amount = prices.free.monthly * 10 * 1000;
+            price_type = PRICE_TYPE_ENUM.FREE_YEARLY;
+          } else {
+            amount = prices.free.monthly * 1000;
+            price_type = PRICE_TYPE_ENUM.FREE_MONTHLY;
+          }
+          break;
+        case 'basic':
+          if (period === 'yearly') {
+            amount = prices.basic.monthly * 10 * 1000;
+            price_type = PRICE_TYPE_ENUM.BASIC_YEARLY;
+          } else {
+            amount = prices.basic.monthly * 1000;
+            price_type = PRICE_TYPE_ENUM.BASIC_MONTHLY;
+          }
+          break;
+        case 'premium':
+          if (period === 'yearly') {
+            amount = prices.premium.monthly * 10 * 1000;
+            price_type = PRICE_TYPE_ENUM.PREMIUM_YEARLY;
+          } else {
+            amount = prices.premium.monthly * 1000;
+            price_type = PRICE_TYPE_ENUM.PREMIUM_MONTHLY;
+          }
+          break;
+        case 'ultimate':
+          if (period === 'yearly') {
+            amount = prices.ultimate.monthly * 10 * 1000;
+            price_type = PRICE_TYPE_ENUM.ULTIMATE_YEARLY;
+          } else {
+            amount = prices.ultimate.monthly * 1000;
+            price_type = PRICE_TYPE_ENUM.ULTIMATE_MONTHLY;
+          }
+          break;
+      }
+
+      const data: CheckoutByStripeData = {
+        mode: CHECKOUT_MODE_ENUM.SUBSCRIPTION,
+        price_type,
+        product_data: {
+          name: subscription?.subscription_info.rule_name || 'subscription',
+          description: subscription?.subscription_info.description || '',
+        },
+        amount,
+      };
+
+      checkout(data);
+    },
+    [
+      checkout,
+      period,
+      subscription?.subscription_info.description,
+      subscription?.subscription_info.rule_name,
+    ],
+  );
+
   return (
     <Card id="package">
       <AntdTitle level={5} className="mb-6">
@@ -27,7 +137,7 @@ const Plans: React.FC = () => {
           }}
         >
           <Segmented
-            defaultValue="yearly"
+            value={period}
             size="large"
             options={[
               {
@@ -50,6 +160,7 @@ const Plans: React.FC = () => {
                 value: 'yearly',
               },
             ]}
+            onChange={setPeriod}
           />
         </ConfigProvider>
       </div>
@@ -60,7 +171,9 @@ const Plans: React.FC = () => {
               <div className="font-medium text-lg">{p('free.title')}</div>
             </div>
             <div className="space-x-1">
-              <span className="font-bold text-3xl">$0</span>
+              <span className="font-bold text-3xl">
+                ${prices.free[period].toLocaleString()}
+              </span>
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
@@ -71,11 +184,14 @@ const Plans: React.FC = () => {
             <div>
               <Button
                 block
+                disabled={plan !== 'free'}
                 color="primary"
                 variant="filled"
                 className="pointer-events-none"
               >
-                {t('template.actions.current')}
+                {plan === 'free'
+                  ? t('template.actions.current')
+                  : t('template.actions.free')}
               </Button>
             </div>
             <div className="border-t border-slate-100 my-6"></div>
@@ -121,28 +237,50 @@ const Plans: React.FC = () => {
           <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
             <div className="flex items-center gap-2">
               <div className="font-medium text-lg">{p('basic.title')}</div>
-              <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
-                {t('template.price.discount', {
-                  num: '16%',
-                })}
-              </div>
+              {period === 'yearly' && (
+                <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
+                  {t('template.price.discount', {
+                    num: '16%',
+                  })}
+                </div>
+              )}
             </div>
             <div className="space-x-1">
-              <span className="font-bold text-3xl">$8.2</span>
+              <span className="font-bold text-3xl">
+                ${prices.basic[period].toLocaleString()}
+              </span>
               <span className="text-black/50">
-                {t('template.price.suffix.monthly')}
+                /{t('template.price.suffix.monthly')}
               </span>
-              <span className="text-black/30 line-through font-medium">
-                $9.9
-              </span>
+              {period === 'yearly' && (
+                <span className="text-black/30 line-through font-medium">
+                  ${prices.basic.monthly.toLocaleString()}
+                </span>
+              )}
             </div>
             <div className="text-sm text-black/50 line-clamp-2 leading-5 h-10">
               {p('basic.desc')}
             </div>
             <div>
-              <PrimaryButton block>
-                {t('template.actions.upgrade')}
-              </PrimaryButton>
+              {plan === 'basic' ? (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              ) : (
+                <PrimaryButton
+                  block
+                  loading={loading === 'basic'}
+                  disabled={plan !== 'free'}
+                  onClick={() => handleCheckout('basic')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              )}
             </div>
             <div className="border-t border-slate-100 my-6"></div>
             <div>
@@ -216,28 +354,50 @@ const Plans: React.FC = () => {
             </div>
             <div className="flex items-center gap-2">
               <div className="font-medium text-lg">{p('premium.title')}</div>
-              <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
-                {t('template.price.discount', {
-                  num: '16%',
-                })}
-              </div>
+              {period === 'yearly' && (
+                <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
+                  {t('template.price.discount', {
+                    num: '16%',
+                  })}
+                </div>
+              )}
             </div>
             <div className="space-x-1">
-              <span className="font-bold text-3xl">$24.1</span>
+              <span className="font-bold text-3xl">
+                ${prices.premium[period].toLocaleString()}
+              </span>
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
-              <span className="text-black/30 line-through font-medium">
-                $29.9
-              </span>
+              {period === 'yearly' && (
+                <span className="text-black/30 line-through font-medium">
+                  ${prices.premium.monthly.toLocaleString()}
+                </span>
+              )}
             </div>
             <div className="text-sm text-black/50 line-clamp-2 leading-5 h-10">
               {p('premium.desc')}
             </div>
             <div>
-              <PrimaryButton block>
-                {t('template.actions.upgrade')}
-              </PrimaryButton>
+              {plan === 'premium' ? (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              ) : (
+                <PrimaryButton
+                  block
+                  loading={loading === 'premium'}
+                  disabled={plan === 'ultimate'}
+                  onClick={() => handleCheckout('premium')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              )}
             </div>
             <div className="border-t border-slate-100 my-6"></div>
             <div>
@@ -306,28 +466,49 @@ const Plans: React.FC = () => {
           <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
             <div className="flex items-center gap-2">
               <div className="font-medium text-lg">{p('ultimate.title')}</div>
-              <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
-                {t('template.price.discount', {
-                  num: '16%',
-                })}
-              </div>
+              {period === 'yearly' && (
+                <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
+                  {t('template.price.discount', {
+                    num: '16%',
+                  })}
+                </div>
+              )}
             </div>
             <div className="space-x-1">
-              <span className="font-bold text-3xl">$65.8</span>
+              <span className="font-bold text-3xl">
+                ${prices.ultimate[period].toLocaleString()}
+              </span>
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
-              <span className="text-black/30 line-through font-medium">
-                $79.9
-              </span>
+              {period === 'yearly' && (
+                <span className="text-black/30 line-through font-medium">
+                  ${prices.ultimate.monthly.toLocaleString()}
+                </span>
+              )}
             </div>
             <div className="text-sm text-black/50 line-clamp-2 leading-5 h-10">
               {p('ultimate.desc')}
             </div>
             <div>
-              <PrimaryButton block>
-                {t('template.actions.upgrade')}
-              </PrimaryButton>
+              {plan === 'ultimate' ? (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              ) : (
+                <PrimaryButton
+                  block
+                  loading={loading === 'ultimate'}
+                  onClick={() => handleCheckout('ultimate')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              )}
             </div>
             <div className="border-t border-slate-100 my-6"></div>
             <div>
@@ -408,7 +589,11 @@ const Plans: React.FC = () => {
       </div>
       <div className="text-center mt-6">
         {t.rich('tips', {
-          link: (chunks) => <a href="">{chunks}</a>,
+          link: (chunks) => (
+            <a target="_blank" href={process.env.NEXT_PUBLIC_SUPPORT_TELEGRAM}>
+              {chunks}
+            </a>
+          ),
         })}
       </div>
     </Card>

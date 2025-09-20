@@ -31,7 +31,7 @@
         "desc": "适用于个人用户注册使用",
         "features": {
           "credits": "每月 <strong></strong> 积分",
-          "emailSupport": "临时/教育邮箱支持",
+          "emailSupport": "支持临时/教育邮箱",
           "sentLimit": "最多发送 <strong></strong> 封邮件",
           "customerSupport": "客户支持"
         }
@@ -42,11 +42,11 @@
         "features": {
           "credits": "每月 <strong></strong> 积分",
           "price": "每封邮件 <strong></strong>",
-          "emailSupport": "临时/教育/<strong>主流</strong>邮箱支持",
+          "emailSupport": "支持临时/教育/<strong>主流</strong>邮箱",
           "sentLimit": "无限邮件发送",
           "customerSupport": "24/7 客户支持",
-          "apiSupport": "API邮件发送/接收",
-          "customDomain": "自定义邮箱域名支持"
+          "apiSupport": "支持API邮件收信/发信",
+          "customDomain": "支持自定义邮箱域名"
         }
       },
       "premium": {
@@ -55,11 +55,11 @@
         "features": {
           "credits": "每月 <strong></strong> 积分",
           "price": "每封邮件 <strong></strong>",
-          "emailSupport": "临时/教育/<strong>主流</strong>邮箱支持",
+          "emailSupport": "支持临时/教育/<strong>主流</strong>邮箱",
           "sentLimit": "无限邮件发送",
           "customerSupport": "24/7 客户支持",
-          "apiSupport": "API邮件发送/接收",
-          "customDomain": "自定义邮箱域名支持"
+          "apiSupport": "支持API邮件收信/发信",
+          "customDomain": "支持自定义邮箱域名"
         }
       },
       "ultimate": {
@@ -68,11 +68,11 @@
         "features": {
           "credits": "每月 <strong></strong> 积分",
           "price": "每封邮件 <strong></strong>",
-          "emailSupport": "临时/教育/<strong>主流</strong>邮箱支持",
+          "emailSupport": "支持临时/教育/<strong>主流</strong>邮箱",
           "sentLimit": "无限邮件发送",
           "customerSupport": "24/7 客户支持",
-          "apiSupport": "API邮件发送/接收",
-          "customDomain": "自定义邮箱域名支持",
+          "apiSupport": "支持API邮件收信/发信",
+          "customDomain": "支持自定义邮箱域名",
           "freeDomain": "{num, plural, =0 {} =1 {<strong>1</strong>个免费域名} other {<strong>#</strong>个免费域名}}"
         }
       }
@@ -520,12 +520,13 @@
                 "monthly": "月",
                 "yearly": "年"
               },
-              "best": "最划算",
+              "best": "最受欢迎",
               "discount": "{num}折扣"
             },
             "actions": {
               "current": "当前套餐",
-              "upgrade": "立即升级"
+              "upgrade": "立即升级",
+              "free": "永久免费"
             }
           }
         },

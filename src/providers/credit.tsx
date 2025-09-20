@@ -2,7 +2,7 @@
 import { getAvailableCredits } from '@/apis/credit';
 import { getToken } from '@/utils/token';
 import { useRequest } from 'ahooks';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const CreditContext = createContext<{
   available: number;
@@ -28,6 +28,16 @@ const CreditProvider: React.FC<{
       },
     },
   );
+
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'PAYMENT_SUCCESS') {
+        refresh();
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
 
   return (
     <CreditContext.Provider
