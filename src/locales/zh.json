@@ -345,13 +345,18 @@
             }
           }
         },
-        "login-record": {
-          "title": "登录活动记录",
+        "session": {
+          "title": "活动会话",
+          "subtitle": "管理您以下的活动会话。如需要，您可以从任何设备上登出。",
           "columns": {
             "device": "设备",
             "location": "位置",
             "ip": "登录IP",
-            "time": "登录时间"
+            "time": "登录时间",
+            "operate": "操作"
+          },
+          "actions": {
+            "logout": "登出"
           }
         }
       },
@@ -420,10 +425,10 @@
           "title": "购买域名",
           "form": {
             "suffix": {
-              "label": "个"
+              "label": "域名后缀"
             },
             "quantity": {
-              "label": "数量"
+              "label": "购买数量"
             },
             "desired": {
               "label": "期望域名",

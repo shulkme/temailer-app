@@ -1,6 +1,6 @@
 'use client';
-import { getProxyOrderList } from '@/apis/proxy';
-import { ProxyOrderRecord } from '@/apis/proxy/types';
+import { getOrderList } from '@/apis/order';
+import { OrderRecord } from '@/apis/order/types';
 import {
   AntdDateRangePicker,
   AntdForm,
@@ -21,18 +21,18 @@ export default function Page() {
     async ({ current, pageSize }, params) => {
       const { dataRange, ...rest } = params;
 
-      const start_at = dataRange?.[0]
+      const start_time = dataRange?.[0]
         ? dayjs(dataRange[0]).format('YYYY-MM-DD')
         : undefined;
-      const end_at = dataRange?.[1]
+      const end_time = dataRange?.[1]
         ? dayjs(dataRange[1]).format('YYYY-MM-DD')
         : undefined;
 
-      return await getProxyOrderList({
+      return await getOrderList({
         page: current,
         size: pageSize,
-        start_at,
-        end_at,
+        start_time,
+        end_time,
         ...rest,
       }).then((res) => {
         return {
@@ -83,7 +83,7 @@ export default function Page() {
           </AntdForm>
         </div>
 
-        <Table<ProxyOrderRecord>
+        <Table<OrderRecord>
           rowKey="id"
           scroll={{
             x: 1200,
@@ -95,7 +95,7 @@ export default function Page() {
             },
             {
               title: t('table.columns.amount'),
-              dataIndex: 'payment_usd',
+              dataIndex: 'amount',
               render: (value) => {
                 return '$' + value.toLocaleString();
               },
@@ -106,11 +106,11 @@ export default function Page() {
             },
             {
               title: t('table.columns.type'),
-              dataIndex: 'package_type',
+              dataIndex: 'order_type',
             },
             {
               title: t('table.columns.plan'),
-              dataIndex: 'summary_meta',
+              dataIndex: 'extra_info',
             },
             {
               title: t('table.columns.status'),

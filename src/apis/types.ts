@@ -18,3 +18,8 @@ export interface PageInfinite<T> {
   has_more: boolean;
   next_cursor: number;
 }
+
+export interface PageParams {
+  page: number;
+  size: number;
+}

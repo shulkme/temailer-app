@@ -1,4 +1,6 @@
 'use client';
+import { getMyDomainList } from '@/apis/domain';
+import { DomainRecord } from '@/apis/domain/types';
 import CreateDrawer from '@/app/[locale]/(app)/domain/components/create-drawer';
 import DomainCard from '@/app/[locale]/(app)/domain/components/domain-card';
 import {
@@ -10,6 +12,7 @@ import {
 import SliderScroller from '@/components/slider-scroller';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
+import { useAntdTable } from 'ahooks';
 import { Alert, Button, Card, Select, Space, Table } from 'antd';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
@@ -19,6 +22,16 @@ export default function Page() {
   const g = useTranslations('global');
   const [form] = AntdForm.useForm();
   const [open, setOpen] = useState(false);
+  const { tableProps } = useAntdTable(async ({ current, pageSize }, params) => {
+    return await getMyDomainList({
+      page: current,
+      size: pageSize,
+      ...params,
+    }).then((res) => ({
+      list: res.data.items,
+      total: res.data.total,
+    }));
+  });
   return (
     <>
       <Title title={t('title')} />
@@ -133,30 +146,36 @@ export default function Page() {
               </Space>
             </div>
           </div>
-          <Table
+          <Table<DomainRecord>
             scroll={{
               x: 1200,
             }}
             columns={[
               {
                 title: t('table.columns.domain'),
+                dataIndex: 'name',
               },
               {
                 title: t('table.columns.status'),
+                dataIndex: 'status',
               },
               {
                 title: t('table.columns.remark'),
+                dataIndex: 'remark',
               },
               {
                 title: t('table.columns.registerTime'),
+                dataIndex: 'register_time',
               },
               {
                 title: t('table.columns.expiredTime'),
+                dataIndex: 'expired_time',
               },
               {
                 title: t('table.columns.operate'),
               },
             ]}
+            {...tableProps}
           />
         </Card>
       </div>

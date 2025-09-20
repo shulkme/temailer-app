@@ -345,13 +345,18 @@
             }
           }
         },
-        "login-record": {
-          "title": "Login activity history",
+        "session": {
+          "title": "Active Sessions",
+          "subtitle": "Manage your active sessions below. You can sign out from any device if needed.",
           "columns": {
             "device": "Device",
             "location": "Location",
             "ip": "Login IP",
-            "time": "Login Time"
+            "time": "Login Time",
+            "operate": "Operate"
+          },
+          "actions": {
+            "logout": "Sign Out"
           }
         }
       },
@@ -420,10 +425,10 @@
           "title": "Buy Domain",
           "form": {
             "suffix": {
-              "label": ""
+              "label": "Domain suffix"
             },
             "quantity": {
-              "label": "quantity"
+              "label": "Quantity"
             },
             "desired": {
               "label": "Desired domain",

@@ -1,17 +1,17 @@
 'use client';
-import { getLoginLogList } from '@/apis/logs';
-import { LoginLogRecord } from '@/apis/logs/types';
-import { AntdTitle } from '@/components/antd';
+import { delSession, getSessionList } from '@/apis/session';
+import { SessionRecord } from '@/apis/session/types';
+import { AntdParagraph, AntdTitle } from '@/components/antd';
 import {
   RemixiconComponentType,
   RiComputerLine,
   RiQuestionMark,
   RiSmartphoneLine,
 } from '@remixicon/react';
-import { useAntdTable } from 'ahooks';
-import { Avatar, Card, Col, Row, Table } from 'antd';
+import { useRequest } from 'ahooks';
+import { App, Avatar, Button, Card, Col, Row, Table } from 'antd';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { useCallback } from 'react';
 
 const DeviceIcon: React.FC<{
   type: string;
@@ -40,24 +40,60 @@ const DeviceIcon: React.FC<{
 };
 
 const LoginLogs: React.FC = () => {
-  const t = useTranslations('app.pages.account.login-record');
-  const { tableProps } = useAntdTable(async ({ current, pageSize }, params) => {
-    return await getLoginLogList({
-      page: current,
-      size: pageSize,
-      ...params,
-    }).then((res) => ({
-      list: res.data.items,
-      total: res.data.total,
-    }));
+  const { message } = App.useApp();
+  const t = useTranslations('app.pages.account.session');
+  const g = useTranslations('global');
+  const { data, loading, mutate, refresh } = useRequest(async () => {
+    return await getSessionList().then((res) => res.data);
   });
+
+  const handleLogout = useCallback(
+    async (session_uuid: string) => {
+      mutate((origin) => {
+        return (origin || []).map((f) => {
+          if (f.session_uuid === session_uuid) {
+            return {
+              ...f,
+              loading: true,
+            };
+          }
+          return f;
+        });
+      });
+      try {
+        await delSession(session_uuid);
+        message.success(g('response.success'));
+        refresh();
+      } catch (e) {
+        message.error((e as unknown as Error).message || g('response.error'));
+      } finally {
+        mutate((origin) => {
+          return (origin || []).map((f) => {
+            if (f.session_uuid === session_uuid) {
+              return {
+                ...f,
+                loading: false,
+              };
+            }
+            return f;
+          });
+        });
+      }
+    },
+    [g, message, mutate],
+  );
 
   return (
     <Card>
-      <AntdTitle level={5} className="mb-6">
+      <AntdTitle level={5} className="m-0 mb-2">
         {t('title')}
       </AntdTitle>
-      <Table<LoginLogRecord>
+      <AntdParagraph type="secondary" className="mb-6">
+        {t('subtitle')}
+      </AntdParagraph>
+      <Table<SessionRecord & { loading?: boolean }>
+        loading={loading}
+        dataSource={data}
         rowKey="id"
         scroll={{
           x: 1200,
@@ -81,14 +117,8 @@ const LoginLogs: React.FC = () => {
           },
           {
             title: t('columns.location'),
-            render: (_, record) => {
-              return (
-                <>
-                  {[record.country, record.region, record.city]
-                    .filter(Boolean)
-                    .join('/')}
-                </>
-              );
+            render: () => {
+              return <></>;
             },
           },
           {
@@ -97,14 +127,29 @@ const LoginLogs: React.FC = () => {
           },
           {
             title: t('columns.time'),
-            dataIndex: 'login_time',
+            dataIndex: 'last_login_time',
+          },
+          {
+            title: t('columns.operate'),
+            dataIndex: 'session_uuid',
+            width: 140,
+            align: 'center',
+            render: (value, record) => {
+              return (
+                <>
+                  <Button
+                    loading={record?.loading}
+                    type="link"
+                    onClick={() => handleLogout(value)}
+                  >
+                    {t('actions.logout')}
+                  </Button>
+                </>
+              );
+            },
           },
         ]}
-        {...tableProps}
-        pagination={{
-          hideOnSinglePage: true,
-          ...tableProps.pagination,
-        }}
+        pagination={false}
       />
     </Card>
   );
