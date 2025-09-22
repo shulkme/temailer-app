@@ -15,12 +15,10 @@ import { RiSearchLine } from '@remixicon/react';
 import { useAntdTable } from 'ahooks';
 import { Alert, Button, Card, Select, Space, Table } from 'antd';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
 
 export default function Page() {
   const t = useTranslations('app.pages.domain');
   const [form] = AntdForm.useForm();
-  const [open, setOpen] = useState(false);
   const { tableProps } = useAntdTable(async ({ current, pageSize }, params) => {
     return await getMyDomainList({
       page: current,
@@ -31,6 +29,11 @@ export default function Page() {
       total: res.data.total,
     }));
   });
+
+  const handleCreate = () => {
+    window.dispatchEvent(new CustomEvent('domain:create'));
+  };
+
   return (
     <DomainProvider>
       <Title title={t('title')} />
@@ -61,7 +64,7 @@ export default function Page() {
             </div>
             <div>
               <Space size="middle">
-                <Button type="primary" onClick={() => setOpen(true)}>
+                <Button type="primary" onClick={() => handleCreate()}>
                   {t('table.actions.buy')}
                 </Button>
               </Space>
@@ -100,7 +103,7 @@ export default function Page() {
           />
         </Card>
       </div>
-      <CreateDrawer open={open} setOpen={setOpen} />
+      <CreateDrawer />
     </DomainProvider>
   );
 }

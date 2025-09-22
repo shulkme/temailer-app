@@ -107,10 +107,13 @@ const CreateDrawer: React.FC = () => {
       }>,
     ) => {
       setOpen(true);
-      console.log(e.detail.data);
     };
 
     window.addEventListener('domain:create', handler as EventListener);
+
+    return () => {
+      window.removeEventListener('domain:create', handler as EventListener);
+    };
   }, []);
 
   return (
