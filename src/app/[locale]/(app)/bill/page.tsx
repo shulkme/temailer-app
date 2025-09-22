@@ -1,5 +1,7 @@
 'use client';
+import { PAYMENT_METHOD_ENUM } from '@/apis/checkout/enums';
 import { getOrderList } from '@/apis/order';
+import { ORDER_STATUS_ENUM, ORDER_TYPE_ENUM } from '@/apis/order/enums';
 import { OrderRecord } from '@/apis/order/types';
 import {
   AntdDateRangePicker,
@@ -12,10 +14,96 @@ import { useAntdTable } from 'ahooks';
 import { Card, FormProps, Select, Table } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
+import { useCallback, useMemo } from 'react';
 
 export default function Page() {
   const t = useTranslations('app.pages.bill');
+  const g = useTranslations('global');
   const [form] = AntdForm.useForm();
+
+  const statusOptions = useMemo(() => {
+    return [
+      {
+        label: g('checkout.status.paid'),
+        value: ORDER_STATUS_ENUM.PAID,
+      },
+      {
+        label: g('checkout.status.fail'),
+        value: ORDER_STATUS_ENUM.FAILED,
+      },
+      {
+        label: g('checkout.status.pending'),
+        value: ORDER_STATUS_ENUM.PENDING,
+      },
+      {
+        label: g('checkout.status.expired'),
+        value: ORDER_STATUS_ENUM.EXPIRED,
+      },
+    ];
+  }, [g]);
+
+  const statusLabelFilter = useCallback(
+    (status: ORDER_STATUS_ENUM) => {
+      return statusOptions.find((f) => f.value === status)?.label || '--';
+    },
+    [statusOptions],
+  );
+
+  const typeOptions = useMemo(() => {
+    return [
+      {
+        label: g('checkout.type.subscription'),
+        value: ORDER_TYPE_ENUM.SUBSCRIPTION,
+      },
+      {
+        label: g('checkout.type.credit'),
+        value: ORDER_TYPE_ENUM.CREDIT,
+      },
+      {
+        label: g('checkout.type.domain'),
+        value: ORDER_TYPE_ENUM.DOMAIN,
+      },
+    ];
+  }, [g]);
+
+  const typeLabelFilter = useCallback(
+    (type: ORDER_TYPE_ENUM) => {
+      return typeOptions.find((f) => f.value === type)?.label || '--';
+    },
+    [typeOptions],
+  );
+
+  const methodOptions = useMemo(() => {
+    return [
+      {
+        label: g('checkout.payment.balance'),
+        value: PAYMENT_METHOD_ENUM.BALANCE,
+      },
+      {
+        label: g('checkout.payment.credit'),
+        value: PAYMENT_METHOD_ENUM.CREDIT,
+      },
+      {
+        label: g('checkout.payment.crypto'),
+        value: PAYMENT_METHOD_ENUM.CRYPTO,
+      },
+      {
+        label: g('checkout.payment.local'),
+        value: PAYMENT_METHOD_ENUM.LOCAL,
+      },
+      {
+        label: g('checkout.payment.bank'),
+        value: PAYMENT_METHOD_ENUM.BANK,
+      },
+    ];
+  }, [g]);
+
+  const methodLabelFilter = useCallback(
+    (method: PAYMENT_METHOD_ENUM) => {
+      return methodOptions.find((f) => f.value === method)?.label || '--';
+    },
+    [methodOptions],
+  );
 
   const { tableProps, search } = useAntdTable(
     async ({ current, pageSize }, params) => {
@@ -66,6 +154,7 @@ export default function Page() {
                 placeholder={t('table.filters.type.placeholder')}
                 style={{ width: 220 }}
                 allowClear
+                options={statusOptions}
               />
             </AntdFormItem>
             <AntdFormItem name="dataRange">
@@ -103,10 +192,16 @@ export default function Page() {
             {
               title: t('table.columns.paymentMethod'),
               dataIndex: 'payment_method',
+              render: (value) => {
+                return methodLabelFilter(value);
+              },
             },
             {
               title: t('table.columns.type'),
               dataIndex: 'order_type',
+              render: (value) => {
+                return typeLabelFilter(value);
+              },
             },
             {
               title: t('table.columns.plan'),
@@ -115,6 +210,9 @@ export default function Page() {
             {
               title: t('table.columns.status'),
               dataIndex: 'status',
+              render: (value) => {
+                return statusLabelFilter(value);
+              },
             },
             {
               title: t('table.columns.date'),

@@ -10,15 +10,18 @@
         "crypto": "加密货币",
         "local": "本地支付",
         "balance": "余额",
-        "bank": "银行"
+        "bank": "银行转账"
       },
       "status": {
-        "success": "成功",
-        "fail": "失败",
+        "paid": "支付成功",
+        "fail": "支付失败",
         "pending": "待处理",
-        "cancelled": "已取消",
-        "expired": "已过期",
-        "refunded": "已退款"
+        "expired": "已过期"
+      },
+      "type": {
+        "subscription": "套餐订阅",
+        "credit": "积分充值",
+        "domain": "域名购买"
       }
     },
     "response": {
@@ -27,7 +30,7 @@
     },
     "plans": {
       "free": {
-        "title": "免费",
+        "title": "免费版",
         "desc": "适用于个人用户注册使用",
         "features": {
           "credits": "每月 <strong></strong> 积分",
@@ -125,8 +128,8 @@
         "menus": {
           "dashboard": "仪表盘",
           "email": "邮箱",
-          "inbox": "收件箱",
-          "outbox": "发件箱",
+          "inbox": "收信",
+          "outbox": "发信",
           "domain": "域名",
           "archive": "收藏",
           "api": "API",

@@ -1,18 +1,8 @@
-export enum PAYMENT_METHOD_ENUM {
-  CREDIT = 'credit_card',
-  CRYPTO = 'crypto_currency',
-  LOCAL = 'local',
-  BALANCE = 'balance',
-  BANK = 'bank',
-}
-
 export enum ORDER_STATUS_ENUM {
-  SUCCESS = 'success',
-  FAILED = 'fail',
-  PENDING = 'pending',
-  CANCELLED = 'cancelled',
-  EXPIRED = 'expired',
-  REFUNDED = 'refunded',
+  PENDING = 0,
+  PAID = 1,
+  FAILED = 2,
+  EXPIRED = 3,
 }
 
 export enum ORDER_TYPE_ENUM {

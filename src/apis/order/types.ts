@@ -1,8 +1,5 @@
-import {
-  ORDER_STATUS_ENUM,
-  ORDER_TYPE_ENUM,
-  PAYMENT_METHOD_ENUM,
-} from '@/apis/order/enums';
+import { PAYMENT_METHOD_ENUM } from '@/apis/checkout/enums';
+import { ORDER_STATUS_ENUM, ORDER_TYPE_ENUM } from '@/apis/order/enums';
 import { PageParams } from '@/apis/types';
 
 export interface OrderRecord {

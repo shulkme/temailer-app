@@ -13,12 +13,15 @@
         "bank": "Bank"
       },
       "status": {
-        "success": "Success",
+        "paid": "Paid",
         "fail": "Failed",
         "pending": "Pending",
-        "cancelled": "Cancelled",
-        "expired": "Expired",
-        "refunded": "Refunded"
+        "expired": "Expired"
+      },
+      "type": {
+        "subscription": "Subscription",
+        "credit": "Credit",
+        "domain": "Domain"
       }
     },
     "response": {

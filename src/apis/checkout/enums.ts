@@ -3,6 +3,7 @@ export enum PAYMENT_METHOD_ENUM {
   CRYPTO = 'crypto_currency',
   LOCAL = 'local',
   BALANCE = 'balance',
+  BANK = 'bank',
 }
 
 export enum CHECKOUT_MODE_ENUM {
@@ -15,8 +16,6 @@ export enum PRICE_TYPE_ENUM {
   FREE_YEARLY = 'free_yearly',
   BASIC_MONTHLY = 'basic_monthly',
   BASIC_YEARLY = 'basic_yearly',
-  STANDARD_MONTHLY = 'standard_monthly',
-  STANDARD_YEARLY = 'standard_yearly',
   PREMIUM_MONTHLY = 'premium_monthly',
   PREMIUM_YEARLY = 'premium_yearly',
   ULTIMATE_MONTHLY = 'ultimate_monthly',
