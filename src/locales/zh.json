@@ -83,7 +83,7 @@
     "tags": {
       "hot": "热门",
       "rec": "推荐",
-      "sale": "优惠",
+      "discount": "优惠",
       "subscriptionOnly": "仅订阅",
       "soldOut": "缺货"
     },

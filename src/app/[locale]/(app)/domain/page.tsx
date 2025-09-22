@@ -2,14 +2,14 @@
 import { getMyDomainList } from '@/apis/domain';
 import { DomainRecord } from '@/apis/domain/types';
 import CreateDrawer from '@/app/[locale]/(app)/domain/components/create-drawer';
-import DomainCard from '@/app/[locale]/(app)/domain/components/domain-card';
+import DomainList from '@/app/[locale]/(app)/domain/components/domian-list';
+import { DomainProvider } from '@/app/[locale]/(app)/domain/context';
 import {
   AntdDateRangePicker,
   AntdForm,
   AntdFormItem,
   AntdInput,
 } from '@/components/antd';
-import SliderScroller from '@/components/slider-scroller';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { useAntdTable } from 'ahooks';
@@ -19,7 +19,6 @@ import { useState } from 'react';
 
 export default function Page() {
   const t = useTranslations('app.pages.domain');
-  const g = useTranslations('global');
   const [form] = AntdForm.useForm();
   const [open, setOpen] = useState(false);
   const { tableProps } = useAntdTable(async ({ current, pageSize }, params) => {
@@ -33,89 +32,11 @@ export default function Page() {
     }));
   });
   return (
-    <>
+    <DomainProvider>
       <Title title={t('title')} />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <Alert showIcon message={t('alert.message')} />
-        <SliderScroller
-          navs={{
-            size: 'small',
-          }}
-          classNames={{
-            scroller: 'gap-4 lg:gap-6',
-          }}
-        >
-          <DomainCard
-            title={'.com'}
-            desc={'顶级通用域名，支持大部分产品服务'}
-            price={9.9}
-            origin_price={11.9}
-            tag={{
-              text: g('tags.hot'),
-              color: 'red',
-            }}
-          />
-          <DomainCard
-            title={'.edu.kg'}
-            desc={'顶级通用域名，支持大部分产品服务'}
-            price={9.9}
-            origin_price={11.9}
-            tag={{
-              text: g('tags.hot'),
-              color: 'red',
-            }}
-          />
-          <DomainCard
-            title={'.cn'}
-            desc={'顶级通用域名，支持大部分产品服务'}
-            price={9.9}
-            origin_price={11.9}
-            tag={{
-              text: g('tags.rec'),
-              color: 'blue',
-            }}
-          />
-          <DomainCard
-            title={'.net'}
-            desc={'顶级通用域名，支持大部分产品服务'}
-            price={9.9}
-            origin_price={11.9}
-            tag={{
-              text: g('tags.rec'),
-              color: 'blue',
-            }}
-          />
-          <DomainCard
-            title={'.top'}
-            desc={'顶级通用域名，支持大部分产品服务'}
-            price={9.9}
-            origin_price={11.9}
-            tag={{
-              text: g('tags.sale'),
-              color: 'orange',
-            }}
-          />
-          <DomainCard
-            title={'.xyz'}
-            desc={'顶级通用域名，支持大部分产品服务'}
-            price={9.9}
-            origin_price={11.9}
-            tag={{
-              text: g('tags.sale'),
-              color: 'orange',
-            }}
-          />
-          <DomainCard
-            title={'.org'}
-            desc={'顶级通用域名，支持大部分产品服务'}
-            price={9.9}
-            origin_price={11.9}
-            tag={{
-              text: g('tags.sale'),
-              color: 'orange',
-            }}
-          />
-        </SliderScroller>
+        <DomainList />
         <Card>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4 lg:mb-6">
             <div>
@@ -180,6 +101,6 @@ export default function Page() {
         </Card>
       </div>
       <CreateDrawer open={open} setOpen={setOpen} />
-    </>
+    </DomainProvider>
   );
 }

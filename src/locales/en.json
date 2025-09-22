@@ -83,7 +83,7 @@
     "tags": {
       "hot": "HOT",
       "rec": "REC",
-      "sale": "SALE",
+      "discount": "DISCOUNT",
       "subscriptionOnly": "Subscription Only",
       "soldOut": "Sold Out"
     },

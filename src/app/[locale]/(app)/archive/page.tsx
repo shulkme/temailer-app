@@ -85,6 +85,7 @@ export default function Page() {
                 title: t('table.columns.operate'),
               },
             ]}
+            {...tableProps}
           />
         </Card>
       </div>

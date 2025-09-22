@@ -11,26 +11,32 @@ import { App, Button, Card, ConfigProvider, Segmented } from 'antd';
 import { useTranslations } from 'next-intl';
 import React, { useCallback, useState } from 'react';
 
-type PeriodType = 'monthly' | 'yearly';
-
 type PlanType = 'free' | 'basic' | 'premium' | 'ultimate';
 
-const prices: Record<PlanType, Record<PeriodType, number>> = {
+const discount = 0.2 as const;
+
+const plans: Record<
+  PlanType,
+  {
+    price: number;
+    credits: number;
+  }
+> = {
   free: {
-    monthly: 0,
-    yearly: 0,
+    price: 0,
+    credits: 100,
   },
   basic: {
-    monthly: 9.9,
-    yearly: 8.2,
+    price: 9.9,
+    credits: 5000,
   },
   premium: {
-    monthly: 29.9,
-    yearly: 24.1,
+    price: 29.9,
+    credits: 50000,
   },
   ultimate: {
-    monthly: 79.9,
-    yearly: 65.8,
+    price: 79.9,
+    credits: 500000,
   },
 };
 
@@ -38,7 +44,7 @@ const Plans: React.FC = () => {
   const t = useTranslations('app.pages.subscription.plans');
   const p = useTranslations('global.plans');
   const { plan, subscription } = useSubscription();
-  const [period, setPeriod] = useState<PeriodType>('yearly');
+  const [period, setPeriod] = useState('yearly');
   const [loading, setLoading] = useState<PlanType>();
   const { message } = App.useApp();
 
@@ -55,6 +61,60 @@ const Plans: React.FC = () => {
     },
   });
 
+  const renderPrice = useCallback(
+    (plan: PlanType) => {
+      let price = 0;
+      switch (plan) {
+        case 'free':
+          price = plans.free.price;
+          break;
+        case 'basic':
+          price = plans.basic.price;
+          break;
+        case 'premium':
+          price = plans.premium.price;
+          break;
+        case 'ultimate':
+          price = plans.ultimate.price;
+          break;
+      }
+      if (period === 'yearly') {
+        price *= 1 - discount;
+      }
+      return price.toLocaleString('en-US', {
+        maximumFractionDigits: 1,
+      });
+    },
+    [period],
+  );
+
+  const renderPerPrice = useCallback(
+    (plan: PlanType) => {
+      let price = 0;
+      switch (plan) {
+        case 'free':
+          price = plans.free.price / plans.free.credits;
+          break;
+        case 'basic':
+          price = plans.basic.price / plans.basic.credits;
+          break;
+        case 'premium':
+          price = plans.premium.price / plans.premium.credits;
+          break;
+        case 'ultimate':
+          price = plans.ultimate.price / plans.ultimate.credits;
+          break;
+      }
+      if (period === 'yearly') {
+        price *= 1 - discount;
+      }
+      return price.toLocaleString('en-US', {
+        maximumFractionDigits: 4,
+      });
+    },
+    [period],
+  );
+
   const handleCheckout = useCallback(
     (plan_type: PlanType) => {
       setLoading(plan_type);
@@ -62,41 +122,39 @@ const Plans: React.FC = () => {
       let price_type: PRICE_TYPE_ENUM = PRICE_TYPE_ENUM.FREE_MONTHLY;
       switch (plan_type) {
         case 'free':
-          if (period === 'yearly') {
-            amount = prices.free.monthly * 10 * 1000;
-            price_type = PRICE_TYPE_ENUM.FREE_YEARLY;
-          } else {
-            amount = prices.free.monthly * 1000;
-            price_type = PRICE_TYPE_ENUM.FREE_MONTHLY;
-          }
+          amount = plans.free.price;
+          price_type =
+            period === 'yearly'
+              ? PRICE_TYPE_ENUM.FREE_YEARLY
+              : PRICE_TYPE_ENUM.FREE_MONTHLY;
           break;
         case 'basic':
-          if (period === 'yearly') {
-            amount = prices.basic.monthly * 10 * 1000;
-            price_type = PRICE_TYPE_ENUM.BASIC_YEARLY;
-          } else {
-            amount = prices.basic.monthly * 1000;
-            price_type = PRICE_TYPE_ENUM.BASIC_MONTHLY;
-          }
+          amount = plans.basic.price;
+          price_type =
+            period === 'yearly'
+              ? PRICE_TYPE_ENUM.BASIC_YEARLY
+              : PRICE_TYPE_ENUM.BASIC_MONTHLY;
           break;
         case 'premium':
-          if (period === 'yearly') {
-            amount = prices.premium.monthly * 10 * 1000;
-            price_type = PRICE_TYPE_ENUM.PREMIUM_YEARLY;
-          } else {
-            amount = prices.premium.monthly * 1000;
-            price_type = PRICE_TYPE_ENUM.PREMIUM_MONTHLY;
-          }
+          amount = plans.premium.price;
+          price_type =
+            period === 'yearly'
+              ? PRICE_TYPE_ENUM.PREMIUM_YEARLY
+              : PRICE_TYPE_ENUM.PREMIUM_MONTHLY;
           break;
         case 'ultimate':
-          if (period === 'yearly') {
-            amount = prices.ultimate.monthly * 10 * 1000;
-            price_type = PRICE_TYPE_ENUM.ULTIMATE_YEARLY;
-          } else {
-            amount = prices.ultimate.monthly * 1000;
-            price_type = PRICE_TYPE_ENUM.ULTIMATE_MONTHLY;
-          }
+          amount = plans.ultimate.price;
+          price_type =
+            period === 'yearly'
+              ? PRICE_TYPE_ENUM.ULTIMATE_YEARLY
+              : PRICE_TYPE_ENUM.ULTIMATE_MONTHLY;
           break;
+      }
+
+      if (period === 'yearly') {
+        amount = amount * 12 * (1 - discount) * 1000;
+      } else {
+        amount = amount * 1000;
       }
 
       const data: CheckoutByStripeData = {
@@ -106,7 +164,7 @@ const Plans: React.FC = () => {
           name: subscription?.subscription_info.rule_name || 'subscription',
           description: subscription?.subscription_info.description || '',
         },
-        amount,
+        amount: Math.round(amount),
       };
 
       checkout(data);
@@ -151,7 +209,7 @@ const Plans: React.FC = () => {
                     <span className="text-primary-500 font-medium">
                       (
                       {t('template.price.discount', {
-                        num: '16%',
+                        num: discount * 100 + '%',
                       })}
                       )
                     </span>
@@ -171,9 +229,7 @@ const Plans: React.FC = () => {
               <div className="font-medium text-lg">{p('free.title')}</div>
             </div>
             <div className="space-x-1">
-              <span className="font-bold text-3xl">
-                ${prices.free[period].toLocaleString()}
-              </span>
+              <span className="font-bold text-3xl">${renderPrice('free')}</span>
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
@@ -203,7 +259,9 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('free.features.credits', {
-                      strong: () => <strong>100</strong>,
+                      strong: () => (
+                        <strong>{plans.free.credits.toLocaleString()}</strong>
+                      ),
                     })}
                   </span>
                 </li>
@@ -240,21 +298,21 @@ const Plans: React.FC = () => {
               {period === 'yearly' && (
                 <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
                   {t('template.price.discount', {
-                    num: '16%',
+                    num: discount * 100 + '%',
                   })}
                 </div>
               )}
             </div>
             <div className="space-x-1">
               <span className="font-bold text-3xl">
-                ${prices.basic[period].toLocaleString()}
+                ${renderPrice('basic')}
               </span>
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
               {period === 'yearly' && (
                 <span className="text-black/30 line-through font-medium">
-                  ${prices.basic.monthly.toLocaleString()}
+                  ${plans.basic.price.toLocaleString()}
                 </span>
               )}
             </div>
@@ -291,7 +349,9 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('basic.features.credits', {
-                      strong: () => <strong>12,000</strong>,
+                      strong: () => (
+                        <strong>{plans.basic.credits.toLocaleString()}</strong>
+                      ),
                     })}
                   </span>
                 </li>
@@ -301,7 +361,7 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('basic.features.price', {
-                      strong: () => <strong>$0.0007</strong>,
+                      strong: () => <strong>{renderPerPrice('basic')}</strong>,
                     })}
                   </span>
                 </li>
@@ -357,21 +417,21 @@ const Plans: React.FC = () => {
               {period === 'yearly' && (
                 <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
                   {t('template.price.discount', {
-                    num: '16%',
+                    num: discount * 100 + '%',
                   })}
                 </div>
               )}
             </div>
             <div className="space-x-1">
               <span className="font-bold text-3xl">
-                ${prices.premium[period].toLocaleString()}
+                ${renderPrice('premium')}
               </span>
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
               {period === 'yearly' && (
                 <span className="text-black/30 line-through font-medium">
-                  ${prices.premium.monthly.toLocaleString()}
+                  ${plans.premium.price.toLocaleString()}
                 </span>
               )}
             </div>
@@ -408,7 +468,11 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('premium.features.credits', {
-                      strong: () => <strong>120,000</strong>,
+                      strong: () => (
+                        <strong>
+                          {plans.premium.credits.toLocaleString()}
+                        </strong>
+                      ),
                     })}
                   </span>
                 </li>
@@ -418,7 +482,9 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('premium.features.price', {
-                      strong: () => <strong>$0.0002</strong>,
+                      strong: () => (
+                        <strong>{renderPerPrice('premium')}</strong>
+                      ),
                     })}
                   </span>
                 </li>
@@ -469,21 +535,21 @@ const Plans: React.FC = () => {
               {period === 'yearly' && (
                 <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
                   {t('template.price.discount', {
-                    num: '16%',
+                    num: discount * 100 + '%',
                   })}
                 </div>
               )}
             </div>
             <div className="space-x-1">
               <span className="font-bold text-3xl">
-                ${prices.ultimate[period].toLocaleString()}
+                ${renderPrice('ultimate')}
               </span>
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
               {period === 'yearly' && (
                 <span className="text-black/30 line-through font-medium">
-                  ${prices.ultimate.monthly.toLocaleString()}
+                  ${plans.ultimate.price.toLocaleString()}
                 </span>
               )}
             </div>
@@ -519,7 +585,11 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('ultimate.features.credits', {
-                      strong: () => <strong>1,200,000</strong>,
+                      strong: () => (
+                        <strong>
+                          {plans.ultimate.credits.toLocaleString()}
+                        </strong>
+                      ),
                     })}
                   </span>
                 </li>
@@ -529,7 +599,9 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('ultimate.features.price', {
-                      strong: () => <strong>$0.00006</strong>,
+                      strong: () => (
+                        <strong>{renderPerPrice('ultimate')}</strong>
+                      ),
                     })}
                   </span>
                 </li>

@@ -2,6 +2,7 @@
 import ChannelCard from '@/app/[locale]/(app)/inbox/components/channel-card';
 import { AntdRadioGroup, AntdTitle } from '@/components/antd';
 import SliderScroller from '@/components/slider-scroller';
+import { useSubscription } from '@/providers/subscription';
 import { Title } from '@/providers/title';
 import {
   RiBookmarkLine,
@@ -17,6 +18,7 @@ import { useTranslations } from 'next-intl';
 export default function Page() {
   const t = useTranslations('app.pages.inbox');
   const g = useTranslations('global');
+  const { is_free } = useSubscription();
   return (
     <>
       <Title title={t('title')} />
@@ -48,14 +50,14 @@ export default function Page() {
                 label={g('emails.gmail.name')}
                 desc={g('emails.gmail.desc')}
                 icon={'/images/mail/gmail.png'}
-                available={false}
+                available={!is_free}
               />
               <ChannelCard
                 value={'3'}
                 label={g('emails.outlook.name')}
                 desc={g('emails.outlook.desc')}
                 icon={'/images/mail/outlook.png'}
-                available={false}
+                available={!is_free}
               />
               <ChannelCard
                 value={'4'}
@@ -63,7 +65,7 @@ export default function Page() {
                 desc={g('emails.icloud.desc')}
                 icon={'/images/mail/icloud.png'}
                 stock={0}
-                available={false}
+                available={!is_free}
               />
               <ChannelCard
                 value={'5'}
@@ -71,7 +73,7 @@ export default function Page() {
                 desc={g('emails.gmx.desc')}
                 icon={'/images/mail/gmx.png'}
                 stock={0}
-                available={false}
+                available={!is_free}
               />
               <ChannelCard
                 value={'8'}
@@ -79,7 +81,7 @@ export default function Page() {
                 desc={g('emails.yahoo.desc')}
                 icon={'/images/mail/yahoo.png'}
                 stock={0}
-                available={false}
+                available={!is_free}
               />
               <ChannelCard
                 value={'9'}
@@ -87,7 +89,7 @@ export default function Page() {
                 desc={g('emails.mail.desc')}
                 icon={'/images/mail/mail_com.png'}
                 stock={0}
-                available={false}
+                available={!is_free}
               />
             </SliderScroller>
           </AntdRadioGroup>

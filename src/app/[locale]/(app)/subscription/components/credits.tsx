@@ -22,19 +22,19 @@ const prices: Record<
   }
 > = {
   [PRICE_TYPE_ENUM.CREDIT_10]: {
-    credits: 10000,
+    credits: 2500,
     price: 10,
   },
   [PRICE_TYPE_ENUM.CREDIT_20]: {
-    credits: 50000,
+    credits: 10000,
     price: 20,
   },
   [PRICE_TYPE_ENUM.CREDIT_50]: {
-    credits: 1000000,
+    credits: 50000,
     price: 50,
   },
   [PRICE_TYPE_ENUM.CREDIT_100]: {
-    credits: 10000000,
+    credits: 200000,
     price: 100,
   },
 } as const;
@@ -99,7 +99,10 @@ const Credits: React.FC = () => {
               </span>
             </div>
             <div className="text-sm">
-              {t('template.tips')} <strong>$0.001</strong>
+              {t('template.tips')}{' '}
+              <strong>
+                ${prices.credit_10.price / prices.credit_10.credits}
+              </strong>
             </div>
             <div>
               <Button
@@ -130,7 +133,10 @@ const Credits: React.FC = () => {
               </span>
             </div>
             <div className="text-sm">
-              {t('template.tips')} <strong>$0.0004</strong>
+              {t('template.tips')}{' '}
+              <strong>
+                ${prices.credit_20.price / prices.credit_20.credits}
+              </strong>
             </div>
             <div>
               <Button
@@ -161,7 +167,10 @@ const Credits: React.FC = () => {
               </span>
             </div>
             <div className="text-sm">
-              {t('template.tips')} <strong>$0.00005</strong>
+              {t('template.tips')}{' '}
+              <strong>
+                ${prices.credit_50.price / prices.credit_50.credits}
+              </strong>
             </div>
             <div>
               <Button
@@ -192,7 +201,10 @@ const Credits: React.FC = () => {
               </span>
             </div>
             <div className="text-sm">
-              {t('template.tips')} <strong>$0.00001</strong>
+              {t('template.tips')}{' '}
+              <strong>
+                ${prices.credit_100.price / prices.credit_100.credits}
+              </strong>
             </div>
             <div>
               <Button

@@ -14,3 +14,17 @@ export interface DomainParams extends PageParams {
   name: string;
   status: number;
 }
+
+export interface DomainSuffixRecord {
+  id: number;
+  name: string;
+  price: number;
+  original_price: number;
+  tag: string;
+  description: {
+    zh_CN: string;
+    en_US: string;
+  };
+  sort: number;
+  is_active: boolean;
+}
