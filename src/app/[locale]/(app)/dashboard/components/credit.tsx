@@ -15,7 +15,7 @@ import React from 'react';
 
 const Credit: React.FC = () => {
   const { available } = useCredit();
-  const { plan_locale, loading } = useSubscription();
+  const { plan_locale, loading, is_free, plan } = useSubscription();
   const t = useTranslations('app.pages.dashboard.credit');
   return (
     <Card>
@@ -50,13 +50,16 @@ const Credit: React.FC = () => {
             </div>
           </div>
         </div>
-        <div>
-          <Link href="/subscription#package">
-            <PrimaryButton block size="large">
-              {t('actions.subscription')}
-            </PrimaryButton>
-          </Link>
-        </div>
+
+        {plan !== 'ultimate' && (
+          <div>
+            <Link href="/subscription#package">
+              <PrimaryButton block size="large">
+                {is_free ? t('actions.subscription') : t('actions.upgrade')}
+              </PrimaryButton>
+            </Link>
+          </div>
+        )}
       </div>
     </Card>
   );

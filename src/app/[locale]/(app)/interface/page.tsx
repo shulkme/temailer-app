@@ -1,12 +1,14 @@
 'use client';
+import { getApiKeyList, refreshApiKey } from '@/apis/api_key';
+import { getApiUsageStatistics } from '@/apis/statistic';
 import { AntdLink, AntdText, AntdTitle, AntdTooltip } from '@/components/antd';
+import { useIdentity } from '@/providers/identity';
 import { Title } from '@/providers/title';
 import { RiResetRightLine } from '@remixicon/react';
-import { Alert, Card, Descriptions } from 'antd';
+import { useRequest } from 'ahooks';
+import { Alert, App, Button, Card, Descriptions, Spin } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import { random } from 'radash';
-import { useMemo } from 'react';
 import {
   Area,
   AreaChart,
@@ -19,14 +21,47 @@ import {
 
 export default function Page() {
   const t = useTranslations('app.pages.interface');
-  const data = useMemo(() => {
-    return Array.from({ length: 30 })
-      .map((_, i) => ({
-        label: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
-        value: random(0, 100),
-      }))
-      .reverse();
-  }, []);
+  const g = useTranslations('global');
+  const { user } = useIdentity();
+  const { message } = App.useApp();
+
+  const { data, loading } = useRequest(async () => {
+    return await getApiUsageStatistics(30).then((res) => {
+      const items = res.data.daily_records;
+      if (items.length > 0) {
+        return items;
+      } else {
+        return Array.from({ length: 30 }).map((_, i) => ({
+          date: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
+          points: 0,
+        }));
+      }
+    });
+  });
+
+  const { data: API, refresh } = useRequest(async () => {
+    return await getApiKeyList().then((res) => res.data.items?.[0]);
+  });
+
+  const { run: doRefresh, loading: refreshing } = useRequest(
+    async () => {
+      if (API) {
+        return await refreshApiKey(API.api_key);
+      }
+      return null;
+    },
+    {
+      manual: true,
+      onSuccess: () => {
+        refresh();
+        message.success(g('response.success'));
+      },
+      onError: (e) => {
+        message.error(e.message);
+      },
+    },
+  );
+
   return (
     <>
       <Title title={t('title')} />
@@ -43,26 +78,31 @@ export default function Page() {
             items={[
               {
                 label: t('info.apiId'),
-                children: '12345678',
+                children: user?.id,
               },
               {
                 label: t('info.apiKey'),
                 children: (
                   <div className="flex flex-wrap gap-2 items-center">
-                    <AntdText copyable>
-                      Em10ZWFtMjAxNkBnbWFpbC5jb20xNzU2Mjk2MDc3NzY0OTY1
-                    </AntdText>
+                    <AntdText copyable>{API?.api_key || '--'}</AntdText>
                     <AntdTooltip title={t('info.refresh')}>
-                      <AntdLink>
-                        <RiResetRightLine size={16} />
-                      </AntdLink>
+                      <Button
+                        className="leading-none h-auto"
+                        size="small"
+                        type="link"
+                        loading={refreshing}
+                        onClick={doRefresh}
+                        icon={<RiResetRightLine size={16} />}
+                      />
                     </AntdTooltip>
                   </div>
                 ),
               },
               {
                 label: t('info.updatedTime'),
-                children: dayjs().format('LLL'),
+                children: dayjs(API?.updated_time || API?.created_time).format(
+                  'LLL',
+                ),
               },
             ]}
           />
@@ -72,7 +112,7 @@ export default function Page() {
           <AntdTitle level={5} className="mb-6">
             {t('overview.title')}
           </AntdTitle>
-          <div className="w-full h-80">
+          <div className="w-full h-80 relative">
             <ResponsiveContainer>
               <AreaChart
                 accessibilityLayer={false}
@@ -100,7 +140,7 @@ export default function Page() {
                   </linearGradient>
                 </defs>
                 <XAxis
-                  dataKey="label"
+                  dataKey="date"
                   tick={{
                     strokeWidth: 1,
                     fontSize: 12,
@@ -115,6 +155,8 @@ export default function Page() {
                   tick={{
                     strokeWidth: 1,
                     fontSize: 12,
+                    textAnchor: 'start',
+                    x: 0,
                   }}
                   tickMargin={20}
                 />
@@ -134,7 +176,7 @@ export default function Page() {
                   }}
                 />
                 <Area
-                  dataKey="value"
+                  dataKey="points"
                   stroke="var(--ant-color-primary)"
                   strokeWidth={2}
                   fillOpacity={1}
@@ -142,6 +184,11 @@ export default function Page() {
                 />
               </AreaChart>
             </ResponsiveContainer>
+            {loading && (
+              <div className="absolute inset-0 z-10 flex flex-col justify-center items-center bg-white/50">
+                <Spin />
+              </div>
+            )}
           </div>
         </Card>
       </div>

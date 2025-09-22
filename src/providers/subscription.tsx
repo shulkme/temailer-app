@@ -28,12 +28,10 @@ const SubscriptionProvider: React.FC<{
     onSuccess: (res) => {
       setSubscription(res.data);
       const { rule_name } = res.data.subscription_info;
-      if (
+      setIsFree(
         rule_name === PRICE_TYPE_ENUM.FREE_MONTHLY ||
-        rule_name === PRICE_TYPE_ENUM.FREE_YEARLY
-      ) {
-        setIsFree(true);
-      }
+          rule_name === PRICE_TYPE_ENUM.FREE_YEARLY,
+      );
       if (rule_name.startsWith('free')) {
         setPlanLocale(g('plans.free.title'));
         setPlan('free');

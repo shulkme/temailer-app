@@ -1,5 +1,5 @@
 'use client';
-import { getCreditUsageStatistics } from '@/apis/credit';
+import { getEmailUsageStatistics } from '@/apis/statistic';
 import { AntdTitle } from '@/components/antd';
 import { useRequest } from 'ahooks';
 import { Card, Spin } from 'antd';
@@ -20,7 +20,7 @@ const Trend: React.FC = () => {
   const t = useTranslations('app.pages.dashboard.trend');
 
   const { data, loading } = useRequest(async () => {
-    return await getCreditUsageStatistics(30).then((res) => {
+    return await getEmailUsageStatistics(30).then((res) => {
       const items = res.data.daily_records;
       if (items.length > 0) {
         return items;

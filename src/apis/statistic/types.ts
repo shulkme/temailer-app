@@ -3,3 +3,10 @@ export interface UserStatisticRecord {
   mailbox_count: number;
   email_claim_count: number;
 }
+
+export interface UsageStatisticRecord {
+  daily_records: {
+    date: string;
+    points: number;
+  }[];
+}
