@@ -33,6 +33,7 @@ const CustomModal: React.FC<{
   open: boolean;
   setOpen: (open: boolean) => void;
 }> = ({ open, setOpen }) => {
+  const t = useTranslations('app.pages.inbox.custom');
   const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
 
   const handleSearch = (value: string) => {
@@ -54,7 +55,7 @@ const CustomModal: React.FC<{
       }}
       open={open}
       onCancel={() => setOpen(false)}
-      title={'Custom Email'}
+      title={t('title')}
     >
       <AntdForm layout="vertical">
         <AntdFormItem noStyle>
@@ -66,11 +67,11 @@ const CustomModal: React.FC<{
               size="large"
               options={options}
               className="w-full"
-              placeholder="Enter Email Address"
+              placeholder={t('form.email.placeholder')}
               onSearch={handleSearch}
             />
             <div className="absolute top-0 bottom-0 right-2 flex items-center justify-center">
-              <AntdTooltip title={'Random'}>
+              <AntdTooltip title={t('actions.random')}>
                 <Button
                   color="default"
                   variant="filled"
@@ -91,30 +92,68 @@ const IssueModal: React.FC<{
   open: boolean;
   setOpen: (open: boolean) => void;
 }> = ({ open, setOpen }) => {
+  const t = useTranslations('app.pages.inbox.issue');
   return (
     <Modal
       classNames={{
         header: 'mb-4',
       }}
       open={open}
-      title={'Issue'}
+      title={t('title')}
       onCancel={() => setOpen(false)}
+      okText={t('actions.submit')}
     >
       <div className="mb-4">
-        <Alert
-          showIcon
-          type="warning"
-          message={
-            'If an email address cannot receive emails, please report it to us.'
-          }
-        />
+        <Alert showIcon type="warning" message={t('tips')} />
       </div>
       <AntdForm layout="vertical">
-        <AntdFormItem label={'Email Address'}>
-          <AntdInput />
+        <AntdFormItem
+          label={t('form.email.label')}
+          messageVariables={{
+            label: t('form.email.label'),
+          }}
+        >
+          <AntdInput placeholder={t('form.email.placeholder')} />
         </AntdFormItem>
-        <AntdFormItem label={'Email Address'}>
-          <AntdTextArea />
+        <AntdFormItem
+          label={t('form.content.label')}
+          messageVariables={{
+            label: t('form.content.label'),
+          }}
+        >
+          <AntdTextArea placeholder={t('form.content.placeholder')} />
+        </AntdFormItem>
+      </AntdForm>
+    </Modal>
+  );
+};
+
+const ArchiveModal: React.FC<{
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}> = ({ open, setOpen }) => {
+  const t = useTranslations('app.pages.inbox.archive');
+  return (
+    <Modal
+      classNames={{
+        header: 'mb-4',
+      }}
+      title={t('title')}
+      open={open}
+      onCancel={() => setOpen(false)}
+      okText={t('actions.save')}
+    >
+      <AntdForm layout="vertical">
+        <AntdFormItem
+          label={t('form.email.label')}
+          messageVariables={{
+            label: t('form.email.label'),
+          }}
+        >
+          <AntdInput placeholder={t('form.email.placeholder')} />
+        </AntdFormItem>
+        <AntdFormItem label={t('form.remark.label')}>
+          <AntdTextArea placeholder={t('form.remark.placeholder')} />
         </AntdFormItem>
       </AntdForm>
     </Modal>
@@ -127,9 +166,11 @@ const EmailController: React.FC = () => {
   const [open, setOpen] = useSetState<{
     custom: boolean;
     issue: boolean;
+    archive: boolean;
   }>({
     custom: false,
     issue: false,
+    archive: false,
   });
   return (
     <>
@@ -155,6 +196,7 @@ const EmailController: React.FC = () => {
               className="leading-none"
               icon={<RiBookmarkLine size={18} />}
               size="small"
+              onClick={() => setOpen({ archive: true })}
             >
               {t('email.actions.archive')}
             </Button>
@@ -194,6 +236,10 @@ const EmailController: React.FC = () => {
       </Card>
       <CustomModal open={open.custom} setOpen={(o) => setOpen({ custom: o })} />
       <IssueModal open={open.issue} setOpen={(o) => setOpen({ issue: o })} />
+      <ArchiveModal
+        open={open.archive}
+        setOpen={(o) => setOpen({ archive: o })}
+      />
     </>
   );
 };

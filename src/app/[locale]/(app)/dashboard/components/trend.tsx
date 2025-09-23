@@ -1,11 +1,12 @@
 'use client';
 import { getEmailUsageStatistics } from '@/apis/statistic';
+import { UsageStatisticRecord } from '@/apis/statistic/types';
 import { AntdTitle } from '@/components/antd';
 import { useRequest } from 'ahooks';
 import { Card, Spin } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Area,
   AreaChart,
@@ -18,20 +19,23 @@ import {
 
 const Trend: React.FC = () => {
   const t = useTranslations('app.pages.dashboard.trend');
+  const [data, setData] = useState<UsageStatisticRecord['daily_records']>(
+    Array.from({ length: 30 }).map((_, i) => ({
+      date: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
+      points: 0,
+    })),
+  );
 
-  const { data, loading } = useRequest(async () => {
-    return await getEmailUsageStatistics(30).then((res) => {
-      const items = res.data.daily_records;
-      if (items.length > 0) {
-        return items;
-      } else {
-        return Array.from({ length: 30 }).map((_, i) => ({
-          date: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
-          points: 0,
-        }));
-      }
-    });
-  });
+  const { loading } = useRequest(
+    async () => {
+      return await getEmailUsageStatistics(30);
+    },
+    {
+      onSuccess: (res) => {
+        setData(res.data.daily_records);
+      },
+    },
+  );
 
   return (
     <Card>

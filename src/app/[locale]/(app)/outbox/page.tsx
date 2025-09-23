@@ -10,7 +10,7 @@ import {
 import SliderScroller from '@/components/slider-scroller';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
-import { Button, Card, Select, Space, Table } from 'antd';
+import { Alert, Button, Card, Select, Space, Table } from 'antd';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -21,6 +21,12 @@ export default function Page() {
   return (
     <>
       <Title title={t('title')} />
+      <Alert
+        showIcon
+        banner
+        type="info"
+        message={'发信系统维护中，开放时间将在频道同步。'}
+      />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <SliderScroller
           navs={{
@@ -30,17 +36,11 @@ export default function Page() {
             scroller: 'gap-4 lg:gap-6',
           }}
         >
-          <StatisticCard
-            title={t('statistics.totalRequest.label')}
-            value={1234}
-          />
-          <StatisticCard
-            title={t('statistics.sendSuccess.label')}
-            value={1234}
-          />
+          <StatisticCard title={t('statistics.totalRequest.label')} value={0} />
+          <StatisticCard title={t('statistics.sendSuccess.label')} value={0} />
           <StatisticCard
             title={t('statistics.successRate.label')}
-            value={100}
+            value={0}
             suffix="%"
           />
           <StatisticCard title={t('statistics.sendFail.label')} value={0} />
@@ -81,7 +81,11 @@ export default function Page() {
             </div>
             <div>
               <Space size="middle">
-                <Button type="primary" onClick={() => setCreateOpen(true)}>
+                <Button
+                  type="primary"
+                  onClick={() => setCreateOpen(true)}
+                  disabled
+                >
                   {t('table.actions.create')}
                 </Button>
               </Space>

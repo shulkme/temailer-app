@@ -1,6 +1,7 @@
 'use client';
 import { getApiKeyList, refreshApiKey } from '@/apis/api_key';
 import { getApiUsageStatistics } from '@/apis/statistic';
+import { UsageStatisticRecord } from '@/apis/statistic/types';
 import { AntdLink, AntdText, AntdTitle, AntdTooltip } from '@/components/antd';
 import { useIdentity } from '@/providers/identity';
 import { Title } from '@/providers/title';
@@ -9,6 +10,7 @@ import { useRequest } from 'ahooks';
 import { Alert, App, Button, Card, Descriptions, Spin } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
+import { useState } from 'react';
 import {
   Area,
   AreaChart,
@@ -24,20 +26,23 @@ export default function Page() {
   const g = useTranslations('global');
   const { user } = useIdentity();
   const { message } = App.useApp();
+  const [data, setData] = useState<UsageStatisticRecord['daily_records']>(
+    Array.from({ length: 30 }).map((_, i) => ({
+      date: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
+      points: 0,
+    })),
+  );
 
-  const { data, loading } = useRequest(async () => {
-    return await getApiUsageStatistics(30).then((res) => {
-      const items = res.data.daily_records;
-      if (items.length > 0) {
-        return items;
-      } else {
-        return Array.from({ length: 30 }).map((_, i) => ({
-          date: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
-          points: 0,
-        }));
-      }
-    });
-  });
+  const { loading } = useRequest(
+    async () => {
+      return await getApiUsageStatistics(30);
+    },
+    {
+      onSuccess: (res) => {
+        setData(res.data.daily_records);
+      },
+    },
+  );
 
   const { data: API, refresh } = useRequest(async () => {
     return await getApiKeyList().then((res) => res.data.items?.[0]);

@@ -7,7 +7,9 @@ import React from 'react';
 
 const MessageList: React.FC = () => {
   const t = useTranslations('app.pages.inbox');
-
+  const handlePreview = () => {
+    window.dispatchEvent(new CustomEvent('email:preview'));
+  };
   return (
     <Card>
       <div className="flex flex-wrap items-center justify-between gap-2 mb-4 lg:mb-6">
@@ -23,7 +25,11 @@ const MessageList: React.FC = () => {
                 num: 10,
               })}
             </span>
-            <Button className="leading-none" icon={<RiRefreshLine size={16} />}>
+            <Button
+              className="leading-none"
+              icon={<RiRefreshLine size={16} />}
+              onClick={handlePreview}
+            >
               {t('messages.actions.refresh')}
             </Button>
           </Space>

@@ -207,6 +207,50 @@
             "refresh": "刷新"
           },
           "tips": "仅显示最近10分钟内的邮件，过期自动删除"
+        },
+        "custom": {
+          "title": "自定义邮箱",
+          "form": {
+            "email": {
+              "placeholder": "输入邮箱地址"
+            }
+          },
+          "actions": {
+            "random": "随机生成"
+          }
+        },
+        "issue": {
+          "title": "反馈",
+          "tips": "如果某个邮箱收不到邮件，请反馈给我们。",
+          "form": {
+            "email": {
+              "label": "邮箱地址",
+              "placeholder": "邮箱地址"
+            },
+            "content": {
+              "label": "说明 (可选)",
+              "placeholder": "描述您的问题"
+            }
+          },
+          "actions": {
+            "submit": "提交"
+          }
+        },
+        "archive": {
+          "title": "收藏",
+          "form": {
+            "email": {
+              "label": "邮箱地址",
+              "placeholder": "邮箱地址"
+            },
+            "remark": {
+              "label": "备注 (可选)",
+              "placeholder": "输入备注"
+            }
+          },
+          "actions": {
+            "save": "保存"
+          }
         }
       },
       "outbox": {

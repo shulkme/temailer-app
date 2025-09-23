@@ -207,6 +207,50 @@
             "refresh": "Refresh"
           },
           "tips": "Show only emails from the last 10 minutes; expire automatically"
+        },
+        "custom": {
+          "title": "Custom Email",
+          "form": {
+            "email": {
+              "placeholder": "Enter Email Address"
+            }
+          },
+          "actions": {
+            "random": "Random"
+          }
+        },
+        "issue": {
+          "title": "Feedback",
+          "tips": "If an email address is not receiving emails, please report it to us.",
+          "form": {
+            "email": {
+              "label": "Email Address",
+              "placeholder": "Email Address"
+            },
+            "content": {
+              "label": "Content (Optional)",
+              "placeholder": "Describe your problem"
+            }
+          },
+          "actions": {
+            "submit": "Submit"
+          }
+        },
+        "archive": {
+          "title": "Archive",
+          "form": {
+            "email": {
+              "label": "Email Address",
+              "placeholder": "Email Address"
+            },
+            "remark": {
+              "label": "Notes (Optional)",
+              "placeholder": "Input notes"
+            }
+          },
+          "actions": {
+            "save": "Save"
+          }
         }
       },
       "outbox": {

@@ -1,5 +1,6 @@
 'use client';
 import ChannelList from '@/app/[locale]/(app)/inbox/components/channel-list';
+import DetailDrawer from '@/app/[locale]/(app)/inbox/components/detail-drawer';
 import EmailController from '@/app/[locale]/(app)/inbox/components/email-controller';
 import MessageList from '@/app/[locale]/(app)/inbox/components/message-list';
 import { InboxProvider } from '@/app/[locale]/(app)/inbox/context';
@@ -20,6 +21,7 @@ export default function Page() {
           {t('messages.tips')}
         </div>
       </div>
+      <DetailDrawer />
     </InboxProvider>
   );
 }
