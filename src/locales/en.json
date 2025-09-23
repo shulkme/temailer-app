@@ -421,7 +421,8 @@
             }
           },
           "actions": {
-            "buy": "Buy Domain"
+            "buy": "Buy Domain",
+            "release": "Release"
           },
           "columns": {
             "domain": "Domain",

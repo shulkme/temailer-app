@@ -139,6 +139,12 @@ export default function Page() {
               {
                 title: t('table.columns.domain'),
                 dataIndex: 'name',
+                render: (value, record) => {
+                  if (record.status === DOMAIN_STATUS_ENUM.PENDING) {
+                    return '??';
+                  }
+                  return value;
+                },
               },
               {
                 title: t('table.columns.status'),
@@ -174,6 +180,19 @@ export default function Page() {
               },
               {
                 title: t('table.columns.operate'),
+                width: 140,
+                align: 'right',
+                render: (_, record) => {
+                  return (
+                    <Button
+                      disabled={record.status !== DOMAIN_STATUS_ENUM.ACTIVE}
+                      size="small"
+                      type="link"
+                    >
+                      {t('table.actions.release')}
+                    </Button>
+                  );
+                },
               },
             ]}
             {...tableProps}

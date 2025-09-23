@@ -409,14 +409,20 @@
         "table": {
           "filters": {
             "status": {
-              "placeholder": "状态"
+              "placeholder": "状态",
+              "options": {
+                "pending": "处理中",
+                "active": "使用中",
+                "expired": "已过期"
+              }
             },
             "search": {
               "placeholder": "搜索"
             }
           },
           "actions": {
-            "buy": "购买域名"
+            "buy": "购买域名",
+            "release": "释放域名"
           },
           "columns": {
             "domain": "域名",

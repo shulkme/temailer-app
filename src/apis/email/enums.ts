@@ -1,0 +1,10 @@
+export enum EMAIL_CHANNEL_TYPE_ENUM {
+  TEMP = 'TEMP',
+  EDU = 'EDU',
+  GMAIL = 'GMAIL',
+  OUTLOOK = 'OUTLOOK',
+  ICLOUD = 'ICLOUD',
+  GMX = 'GMX',
+  YAHOO = 'YAHOO',
+  MAIL = 'MAIL',
+}
