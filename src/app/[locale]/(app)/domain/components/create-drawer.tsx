@@ -1,4 +1,5 @@
 'use client';
+import { createDomainOrder } from '@/apis/domain';
 import { DomainSuffixRecord } from '@/apis/domain/types';
 import { useDomain } from '@/app/[locale]/(app)/domain/context';
 import {
@@ -11,20 +12,23 @@ import {
 import SliderScroller from '@/components/slider-scroller';
 import { cn } from '@/utils/classname';
 import { RiAddLargeLine } from '@remixicon/react';
+import { useRequest } from 'ahooks';
 import {
+  App,
   Button,
   Checkbox,
   Collapse,
   ConfigProvider,
   Divider,
   Drawer,
+  FormProps,
   InputNumber,
   RadioProps,
   Select,
   Tag,
 } from 'antd';
 import { useLocale, useMessages, useTranslations } from 'next-intl';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 const DomainRadio: React.FC<
   RadioProps & {
@@ -73,7 +77,9 @@ const DomainRadio: React.FC<
           <div className="space-y-2 p-4">
             {renderTag(record)}
             <h3 className="font-bold text-xl">{record.name}</h3>
-            <p className="text-xs text-black/75">{renderDesc(record)}</p>
+            <p className="text-xs text-black/75 line-clamp-1">
+              {renderDesc(record)}
+            </p>
             <div className="leading-none space-x-1">
               <span className="inline-block align-baseline text-primary-500 font-bold text-lg">
                 ${record.price}
@@ -93,20 +99,63 @@ const DomainRadio: React.FC<
 };
 
 const CreateDrawer: React.FC = () => {
+  const g = useTranslations('global');
   const t = useTranslations('app.pages.domain.create');
   const { suffix_list } = useDomain();
   const [open, setOpen] = useState(false);
+  const [form] = AntdForm.useForm();
+  const { message } = App.useApp();
+  const [submitting, setSubmitting] = useState(false);
+
+  const suffix = AntdForm.useWatch('domain_suffix', form);
+  const quantity = AntdForm.useWatch('quantity', form);
+
+  const totalPrice = useMemo(() => {
+    if (!suffix) return 0;
+    const current = suffix_list.find((f) => f.name === suffix);
+    if (!current) return 0;
+    return (current.price * quantity).toLocaleString('en-US', {
+      maximumFractionDigits: 3,
+    });
+  }, [suffix, suffix_list, quantity]);
 
   const messages = useMessages();
   const keys = Object.keys(messages.app.pages.domain.create.faq.items);
 
+  const afterOpenChange = (open: boolean) => {
+    if (!open) {
+      form.resetFields();
+      setSubmitting(false);
+    }
+  };
+
+  const { run: doSubmit } = useRequest(createDomainOrder, {
+    manual: true,
+    onBefore: () => {
+      setSubmitting(true);
+    },
+    onSuccess: (res) => {
+      window.open(res.data.url);
+    },
+    onError: (e) => {
+      message.error(e.message);
+      setSubmitting(false);
+    },
+  });
+
+  const onFinish: FormProps['onFinish'] = (values) => {
+    doSubmit(values);
+  };
+
   useEffect(() => {
     const handler = (
       e: CustomEvent<{
-        data: string;
+        name: string;
       }>,
     ) => {
       setOpen(true);
+      const { name } = e.detail;
+      if (name) form.setFieldValue('domain_suffix', name);
     };
 
     window.addEventListener('domain:create', handler as EventListener);
@@ -116,8 +165,20 @@ const CreateDrawer: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'PAYMENT_SUCCESS') {
+        setOpen(false);
+        message.success(g('response.success'));
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
   return (
     <Drawer
+      closable={!submitting}
       open={open}
       onClose={() => setOpen(false)}
       title={t('title')}
@@ -125,6 +186,7 @@ const CreateDrawer: React.FC = () => {
       classNames={{
         header: 'border-0',
       }}
+      afterOpenChange={afterOpenChange}
       footer={
         <div>
           <div className="py-4">
@@ -133,32 +195,54 @@ const CreateDrawer: React.FC = () => {
                 <span className="text-black/50">
                   {t('footer.summary.domains')}
                 </span>
-                <span className="font-medium">x1</span>
+                <span className="font-medium">
+                  x{quantity?.toLocaleString()}
+                </span>
               </li>
               <li className="flex justify-between items-center">
                 <span className="text-black/50">
                   {t('footer.summary.price')}
                 </span>
-                <span className="font-medium text-lg">$9.9</span>
+                <span className="font-medium text-lg">${totalPrice}</span>
               </li>
             </ul>
           </div>
           <div>
-            <Button block type="primary" size="large">
+            <Button
+              loading={submitting}
+              block
+              type="primary"
+              size="large"
+              onClick={form.submit}
+            >
               {t('footer.actions.checkout')}
             </Button>
           </div>
         </div>
       }
     >
-      <AntdForm layout="vertical">
+      <AntdForm
+        form={form}
+        layout="vertical"
+        initialValues={{
+          domain_suffix: suffix_list?.[0]?.name,
+          quantity: 1,
+        }}
+        onFinish={onFinish}
+      >
         <AntdFormItem
+          name="domain_suffix"
           messageVariables={{
             label: t('form.suffix.label'),
           }}
           label={t('form.suffix.label')}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
-          <AntdRadioGroup block className="block -my-2" defaultValue={'1'}>
+          <AntdRadioGroup block className="block -my-2">
             <SliderScroller
               navs={{
                 size: 'small',
@@ -174,14 +258,26 @@ const CreateDrawer: React.FC = () => {
           </AntdRadioGroup>
         </AntdFormItem>
         <AntdFormItem
+          name="quantity"
           messageVariables={{
             label: t('form.quantity.label'),
           }}
           label={t('form.quantity.label')}
+          rules={[
+            {
+              required: true,
+            },
+            {
+              type: 'number',
+              min: 1,
+              max: 100,
+            },
+          ]}
         >
-          <InputNumber placeholder={'0'} />
+          <InputNumber placeholder={'0'} min={1} max={100} />
         </AntdFormItem>
         <AntdFormItem
+          name="expected_domains"
           messageVariables={{
             label: t('form.desired.label'),
           }}
@@ -194,10 +290,12 @@ const CreateDrawer: React.FC = () => {
           />
         </AntdFormItem>
         <AntdFormItem
+          name="expected_compensation"
           messageVariables={{
             label: t('form.alternatives.label'),
           }}
           label={t('form.alternatives.label')}
+          valuePropName="checked"
         >
           <Checkbox>{t('form.alternatives.placeholder')}</Checkbox>
         </AntdFormItem>

@@ -53,7 +53,7 @@ const Credit: React.FC = () => {
 
         {plan !== 'ultimate' && (
           <div>
-            <Link href="/subscription#package">
+            <Link href="/subscription#plan">
               <PrimaryButton block size="large">
                 {is_free ? t('actions.subscription') : t('actions.upgrade')}
               </PrimaryButton>

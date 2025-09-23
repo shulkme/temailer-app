@@ -60,7 +60,7 @@ const Credits: React.FC = () => {
   const handleCheckout = useCallback(
     (price_type: PRICE_TYPE) => {
       setLoading(price_type);
-      const amount = prices[price_type].price * 1000;
+      const amount = prices[price_type].price;
 
       const data: CheckoutByStripeData = {
         mode: CHECKOUT_MODE_ENUM.PAYMENT,

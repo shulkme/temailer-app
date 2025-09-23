@@ -4,15 +4,14 @@ import { useEffect } from 'react';
 
 export default function Page() {
   useEffect(() => {
-    if (window !== undefined) {
+    if (window.opener && !window.opener.closed) {
       window.opener?.postMessage(
         {
           type: 'PAYMENT_SUCCESS',
         },
         '*',
       );
-
-      window.close();
+      setTimeout(() => window.close(), 100);
     }
   }, []);
 

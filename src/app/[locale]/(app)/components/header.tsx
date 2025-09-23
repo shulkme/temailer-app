@@ -1,7 +1,7 @@
 'use client';
 import { AntdHeader } from '@/components/antd';
 import { languages, Locale } from '@/i18n/config';
-import { useRouter } from '@/i18n/navigation';
+import { Link, useRouter } from '@/i18n/navigation';
 import { useCredit } from '@/providers/credit';
 import { useIdentity } from '@/providers/identity';
 import { useLanguage } from '@/providers/language';
@@ -60,13 +60,16 @@ const AccountDropdown = () => {
   const handleClick: MenuProps['onClick'] = ({ key }) => {
     switch (key) {
       case 'account':
-        router.push('/account/profile');
+        router.push('/account');
         break;
       case 'logout':
         router.push('/login');
         break;
-      case 'wallet':
-        router.push('/wallet/recharge');
+      case 'bill':
+        router.push('/bill');
+        break;
+      case 'subscription':
+        router.push('/subscription');
         break;
     }
   };
@@ -82,7 +85,7 @@ const AccountDropdown = () => {
           },
           {
             label: t('billing'),
-            key: 'billing',
+            key: 'bill',
             icon: <RiBillLine size={16} />,
           },
           {
@@ -156,17 +159,18 @@ const Header: React.FC = () => {
             </div>
           </div>
           <div className="flex h-full items-center">
-            <Button
-              href={'/wallet/recharge'}
-              loading={loading}
-              type="text"
-              className="leading-none font-bold rounded-none h-full px-4"
-              icon={
-                <RiCopperDiamondFill size={20} className="text-yellow-500" />
-              }
-            >
-              {available.toLocaleString()}
-            </Button>
+            <Link className="block h-full" href="/subscription#credit">
+              <Button
+                loading={loading}
+                type="text"
+                className="leading-none font-bold rounded-none h-full px-4"
+                icon={
+                  <RiCopperDiamondFill size={20} className="text-yellow-500" />
+                }
+              >
+                {available.toLocaleString()}
+              </Button>
+            </Link>
             <div className="border-r w-0 h-full border-slate-100" />
             <LanguageSelector />
             <div className="border-r border-slate-100 h-full" />

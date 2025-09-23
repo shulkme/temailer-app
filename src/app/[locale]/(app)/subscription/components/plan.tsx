@@ -29,7 +29,7 @@ const Plan: React.FC = () => {
             size="small"
             color="primary"
             variant="outlined"
-            href="#package"
+            href="#plan"
           >
             {t('actions.upgrade')}
           </Button>

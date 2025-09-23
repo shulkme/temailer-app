@@ -1,10 +1,10 @@
-import { DomainStatusEnum } from '@/apis/domain/enums';
+import { DOMAIN_STATUS_ENUM } from '@/apis/domain/enums';
 import { PageParams } from '@/apis/types';
 
 export interface DomainRecord {
   id: number;
   name: string;
-  status: DomainStatusEnum;
+  status: DOMAIN_STATUS_ENUM;
   register_time: string;
   expired_time: string;
   remark: string;
@@ -27,4 +27,11 @@ export interface DomainSuffixRecord {
   };
   sort: number;
   is_active: boolean;
+}
+
+export interface DomainOrderData {
+  domain_suffix: string;
+  quantity: number;
+  expected_domains?: string[];
+  expected_compensation?: boolean;
 }

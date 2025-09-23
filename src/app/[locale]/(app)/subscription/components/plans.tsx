@@ -152,9 +152,7 @@ const Plans: React.FC = () => {
       }
 
       if (period === 'yearly') {
-        amount = amount * 12 * (1 - discount) * 1000;
-      } else {
-        amount = amount * 1000;
+        amount = amount * 12 * (1 - discount);
       }
 
       const data: CheckoutByStripeData = {
@@ -178,7 +176,7 @@ const Plans: React.FC = () => {
   );
 
   return (
-    <Card id="package">
+    <Card id="plan">
       <AntdTitle level={5} className="mb-6">
         {t('title')}
       </AntdTitle>

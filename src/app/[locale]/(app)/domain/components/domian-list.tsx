@@ -41,7 +41,13 @@ const DomainItem: React.FC<{
   );
 
   const onClick = useCallback(() => {
-    console.log(record);
+    window.dispatchEvent(
+      new CustomEvent('domain:create', {
+        detail: {
+          name: record.name,
+        },
+      }),
+    );
   }, [record]);
 
   return (
@@ -50,7 +56,9 @@ const DomainItem: React.FC<{
         <div className="space-y-2">
           {renderTag(record)}
           <h3 className="font-bold text-xl">{record.name}</h3>
-          <p className="text-xs text-black/75">{renderDesc(record)}</p>
+          <p className="text-xs text-black/75 line-clamp-1">
+            {renderDesc(record)}
+          </p>
           <div className="leading-none space-x-1">
             <span className="inline-block align-baseline text-primary-500 font-bold text-lg">
               ${record.price}

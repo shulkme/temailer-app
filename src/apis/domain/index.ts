@@ -1,4 +1,6 @@
+import { CheckoutResponse } from '@/apis/checkout/types';
 import {
+  DomainOrderData,
   DomainParams,
   DomainRecord,
   DomainSuffixRecord,
@@ -22,4 +24,10 @@ export async function getAllDomainSuffix(): Promise<
   HttpResponse<DomainSuffixRecord[]>
 > {
   return await request.get('/sys/domain-suffix/all');
+}
+
+export async function createDomainOrder(
+  data: DomainOrderData,
+): Promise<HttpResponse<CheckoutResponse>> {
+  return await request.post('/sys/domain/order', data);
 }

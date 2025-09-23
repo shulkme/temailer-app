@@ -409,7 +409,12 @@
         "table": {
           "filters": {
             "status": {
-              "placeholder": "Status"
+              "placeholder": "Status",
+              "options": {
+                "pending": "Processing",
+                "active": "Active",
+                "expired": "Expired"
+              }
             },
             "search": {
               "placeholder": "Search"
