@@ -26,6 +26,7 @@ const MessageList: React.FC = () => {
               })}
             </span>
             <Button
+              size="small"
               className="leading-none"
               icon={<RiRefreshLine size={16} />}
               onClick={handlePreview}

@@ -32,7 +32,7 @@ const StatisticItem: React.FC<{
           })}
         </Avatar>
         <div>
-          <div className="mb-2">
+          <div>
             <AntdText type="secondary" className="text-xs">
               {title}
             </AntdText>

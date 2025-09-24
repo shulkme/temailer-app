@@ -39,7 +39,9 @@ export default function Page() {
     },
     {
       onSuccess: (res) => {
-        setData(res.data.daily_records);
+        if (res.data.daily_records.length > 0) {
+          setData(res.data.daily_records);
+        }
       },
     },
   );

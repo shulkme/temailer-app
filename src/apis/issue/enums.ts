@@ -1,0 +1,8 @@
+export enum ISSUE_TYPE_ENUM {
+  EMAIL = 'EMAIL',
+  DOMAIN = 'DOMAIN',
+  PRODUCT_USE = 'PRODUCT_USE',
+  ORDER = 'ORDER',
+  CONSUME = 'CONSUME',
+  OTHER = 'OTHER',
+}

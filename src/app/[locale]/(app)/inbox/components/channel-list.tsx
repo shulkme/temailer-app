@@ -44,7 +44,7 @@ const ChannelCard: React.FC<
       <AntdRadioButton
         disabled={disabled || stock < 1 || !available}
         className={cn(
-          'block text-left border-[2px] h-auto leading-none p-0 m-0 before:hidden',
+          'block relative text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5',
           (disabled || stock < 1 || !available) && 'border-white bg-white',
         )}
         {...props}
@@ -62,7 +62,7 @@ const ChannelCard: React.FC<
             </div>
             <div>
               <h3 className="font-bold text-base mb-1">{label}</h3>
-              <div className="text-xs text-black/50 line-clamp-1">{desc}</div>
+              <div className="text-xs opacity-80 line-clamp-1">{desc}</div>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@ const ChannelList: React.FC = () => {
       <AntdRadioGroup
         value={currentChannel}
         block
-        className="block -my-2"
+        className="block"
         onChange={(e) => setCurrentChannel(e.target.value)}
       >
         <SliderScroller
@@ -97,7 +97,7 @@ const ChannelList: React.FC = () => {
             size: 'small',
           }}
           classNames={{
-            scroller: 'gap-4 lg:gap-6 py-2',
+            scroller: 'gap-4 lg:gap-6',
           }}
         >
           <ChannelCard

@@ -196,6 +196,7 @@
         },
         "email": {
           "current": "当前邮箱",
+          "empty": "暂无可用邮箱",
           "alert": "为避免邮箱地址被滥用，请勿频繁切换邮箱地址，下次允许时间为：",
           "actions": {
             "copy": "复制",
@@ -477,6 +478,7 @@
             "domain": "域名",
             "status": "状态",
             "remark": "备注",
+            "createTime": "下单时间",
             "registerTime": "注册时间",
             "expiredTime": "到期时间",
             "operate": "操作"

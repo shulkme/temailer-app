@@ -1,5 +1,4 @@
 import { CheckoutResponse } from '@/apis/checkout/types';
-import { DOMAIN_STATUS_ENUM } from '@/apis/domain/enums';
 import {
   DomainOrderData,
   DomainParams,
@@ -20,7 +19,7 @@ export async function getMyDomainList(
 export async function getAllDomains(): Promise<HttpResponse<DomainRecord[]>> {
   return await request.get('/sys/domain/all', {
     params: {
-      status: DOMAIN_STATUS_ENUM.ACTIVE,
+      //status: DOMAIN_STATUS_ENUM.ACTIVE,
     },
   });
 }

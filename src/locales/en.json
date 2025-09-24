@@ -196,6 +196,7 @@
         },
         "email": {
           "current": "Current Email",
+          "empty": "No available email",
           "alert": "To prevent abuse, please do not switch email addresses too frequently. Next allowed time:",
           "actions": {
             "copy": "Copy",
@@ -479,6 +480,7 @@
             "remark": "Remark",
             "registerTime": "Register Time",
             "expiredTime": "Expired Time",
+            "createTime": "Created Time",
             "operate": "Operate"
           }
         },

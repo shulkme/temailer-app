@@ -21,6 +21,7 @@ import {
   ConfigProvider,
   Divider,
   Drawer,
+  Empty,
   FormProps,
   InputNumber,
   RadioProps,
@@ -71,7 +72,7 @@ const DomainRadio: React.FC<
       <div className="w-80 relative shrink-0 snap-start">
         <AntdRadioButton
           disabled={disabled}
-          className="block text-left border-[2px] h-auto leading-none p-0 m-0"
+          className="block text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5"
           {...props}
         >
           <div className="space-y-2 p-4">
@@ -243,18 +244,24 @@ const CreateDrawer: React.FC = () => {
           ]}
         >
           <AntdRadioGroup block className="block -my-2">
-            <SliderScroller
-              navs={{
-                size: 'small',
-              }}
-              classNames={{
-                scroller: 'gap-4 lg:gap-6 py-2',
-              }}
-            >
-              {suffix_list.map((item, index) => (
-                <DomainRadio key={index} value={item.name} record={item} />
-              ))}
-            </SliderScroller>
+            {suffix_list && suffix_list.length > 0 ? (
+              <SliderScroller
+                navs={{
+                  size: 'small',
+                }}
+                classNames={{
+                  scroller: 'gap-4 lg:gap-6 py-2',
+                }}
+              >
+                {suffix_list.map((item, index) => (
+                  <DomainRadio key={index} value={item.name} record={item} />
+                ))}
+              </SliderScroller>
+            ) : (
+              <div className="border border-slate-200">
+                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+              </div>
+            )}
           </AntdRadioGroup>
         </AntdFormItem>
         <AntdFormItem

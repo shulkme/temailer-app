@@ -80,18 +80,21 @@ const DomainList: React.FC = () => {
   const { suffix_list } = useDomain();
 
   return (
-    <SliderScroller
-      navs={{
-        size: 'small',
-      }}
-      classNames={{
-        scroller: 'gap-4 lg:gap-6',
-      }}
-    >
-      {suffix_list.map((item, index) => (
-        <DomainItem key={index} record={item} />
-      ))}
-    </SliderScroller>
+    suffix_list &&
+    suffix_list.length > 0 && (
+      <SliderScroller
+        navs={{
+          size: 'small',
+        }}
+        classNames={{
+          scroller: 'gap-4 lg:gap-6',
+        }}
+      >
+        {suffix_list.map((item, index) => (
+          <DomainItem key={index} record={item} />
+        ))}
+      </SliderScroller>
+    )
   );
 };
 

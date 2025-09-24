@@ -73,6 +73,14 @@ export default function Page() {
     },
   );
 
+  const domainLabelFilter = useCallback((record: DomainRecord) => {
+    if (record.status === DOMAIN_STATUS_ENUM.PENDING) {
+      const match = record.name.match(/[^.]+\.(.+)$/);
+      return match ? '?.' + match[1] : null;
+    }
+    return record.name;
+  }, []);
+
   const { submit } = search;
 
   const handleCreate = () => {
@@ -132,6 +140,7 @@ export default function Page() {
             </div>
           </div>
           <Table<DomainRecord>
+            rowKey="id"
             scroll={{
               x: 1200,
             }}
@@ -139,11 +148,8 @@ export default function Page() {
               {
                 title: t('table.columns.domain'),
                 dataIndex: 'name',
-                render: (value, record) => {
-                  if (record.status === DOMAIN_STATUS_ENUM.PENDING) {
-                    return '??';
-                  }
-                  return value;
+                render: (_, record) => {
+                  return domainLabelFilter(record);
                 },
               },
               {
@@ -156,8 +162,17 @@ export default function Page() {
               {
                 title: t('table.columns.remark'),
                 dataIndex: 'remark',
-                render: () => {
-                  return <>--</>;
+                render: (value) => {
+                  return value || '--';
+                },
+              },
+              {
+                title: t('table.columns.createTime'),
+                dataIndex: 'created_time',
+                render: (value) => {
+                  return value
+                    ? dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+                    : '--';
                 },
               },
               {

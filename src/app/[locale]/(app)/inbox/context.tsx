@@ -4,36 +4,36 @@ import { DomainRecord } from '@/apis/domain/types';
 import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
 import { useRequest, useSetState } from 'ahooks';
 import { SetState } from 'ahooks/es/useSetState';
-import React, { createContext, useContext, useState } from 'react';
-
-export interface EmailAddressRecord {
-  name: string;
-  domain: string;
-  channel: EMAIL_CHANNEL_TYPE_ENUM;
-}
+import { draw, uid } from 'radash';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 const InboxContext = createContext<{
   loading?: boolean;
   currentChannel: EMAIL_CHANNEL_TYPE_ENUM;
   setCurrentChannel: (channel: EMAIL_CHANNEL_TYPE_ENUM) => void;
-  tempDomains: DomainRecord[];
-  eduDomains: DomainRecord[];
-  currentEmails: Record<EMAIL_CHANNEL_TYPE_ENUM, EmailAddressRecord | null>;
-  setCurrentEmails: SetState<
-    Record<EMAIL_CHANNEL_TYPE_ENUM, EmailAddressRecord | null>
-  >;
+  domains: DomainRecord[];
+  currentEmails: Record<string, string | null>;
+  setCurrentEmails: SetState<Record<string, string | null>>;
+  randomEmail: (type: EMAIL_CHANNEL_TYPE_ENUM) => string | null;
+  currentEmail: string | null;
 } | null>(null);
 
 const InboxProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [tempDomains, setTempDomains] = useState<DomainRecord[]>([]);
-  const [eduDomains, setEduDomains] = useState<DomainRecord[]>([]);
+  const [domains, setDomains] = useState<DomainRecord[]>([]);
   const [currentChannel, setCurrentChannel] = useState(
     EMAIL_CHANNEL_TYPE_ENUM.TEMP,
   );
   const [currentEmails, setCurrentEmails] = useSetState<
-    Record<EMAIL_CHANNEL_TYPE_ENUM, EmailAddressRecord | null>
+    Record<string, string | null>
   >({
     [EMAIL_CHANNEL_TYPE_ENUM.TEMP]: null,
     [EMAIL_CHANNEL_TYPE_ENUM.EDU]: null,
@@ -45,23 +45,52 @@ const InboxProvider: React.FC<{
     [EMAIL_CHANNEL_TYPE_ENUM.MAIL]: null,
   });
 
+  const currentEmail = useMemo(() => {
+    return currentEmails?.[currentChannel];
+  }, [currentChannel, currentEmails]);
+
+  const randomEmail = useCallback(
+    (type: EMAIL_CHANNEL_TYPE_ENUM) => {
+      const list = domains
+        .filter((f) => f.provider_type === type)
+        .map((f) => f.name);
+      const domain = draw(list);
+      const name = uid(5).toLowerCase();
+      if (domain) return [name, domain].join('@');
+      return null;
+    },
+    [domains],
+  );
+
   const { loading } = useRequest(getAllDomains, {
     onSuccess: (res) => {
-      console.log(res.data);
-      setTempDomains(res.data);
+      setDomains(res.data);
     },
   });
+
+  useEffect(() => {
+    // init
+    if (domains.length > 0) {
+      setCurrentEmails({
+        [EMAIL_CHANNEL_TYPE_ENUM.TEMP]: randomEmail(
+          EMAIL_CHANNEL_TYPE_ENUM.TEMP,
+        ),
+        [EMAIL_CHANNEL_TYPE_ENUM.EDU]: randomEmail(EMAIL_CHANNEL_TYPE_ENUM.EDU),
+      });
+    }
+  }, [domains]);
 
   return (
     <InboxContext.Provider
       value={{
         loading,
-        tempDomains,
-        eduDomains,
+        domains,
         currentEmails,
         setCurrentEmails,
         currentChannel,
         setCurrentChannel,
+        randomEmail,
+        currentEmail,
       }}
     >
       {children}
