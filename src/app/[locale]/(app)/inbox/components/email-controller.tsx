@@ -174,64 +174,73 @@ const EmailController: React.FC = () => {
   });
   return (
     <>
-      <Card>
-        <div className="text-xs text-black/50 mb-4">{t('email.current')}</div>
-        <div>
-          <AntdTitle level={2} className="m-0">
-            username@example.com
-          </AntdTitle>
-        </div>
-        <div className="-ml-2 mt-6 flex justify-between items-center gap-2 flex-wrap">
-          <Space>
-            <Button
-              type="text"
-              className="leading-none"
-              icon={<RiFileCopyLine size={18} />}
-              size="small"
-            >
-              {t('email.actions.copy')}
-            </Button>
-            <Button
-              type="text"
-              className="leading-none"
-              icon={<RiBookmarkLine size={18} />}
-              size="small"
-              onClick={() => setOpen({ archive: true })}
-            >
-              {t('email.actions.archive')}
-            </Button>
-            <Button
-              type="text"
-              className="leading-none"
-              icon={<RiDiceLine size={18} />}
-              size="small"
-            >
-              {t('email.actions.random')}
-            </Button>
-            {(currentChannel === EMAIL_CHANNEL_TYPE_ENUM.TEMP ||
-              currentChannel === EMAIL_CHANNEL_TYPE_ENUM.EDU) && (
+      <Card
+        classNames={{
+          body: 'p-0',
+        }}
+      >
+        <div className="p-6">
+          <div className="text-xs text-black/50 mb-4">{t('email.current')}</div>
+          <div>
+            <AntdTitle level={2} className="m-0">
+              username@example.com
+            </AntdTitle>
+          </div>
+          <div className="-ml-2 mt-6 flex justify-between items-center gap-2 flex-wrap">
+            <Space>
               <Button
                 type="text"
                 className="leading-none"
-                icon={<RiEditLine size={18} />}
+                icon={<RiFileCopyLine size={18} />}
                 size="small"
-                onClick={() => setOpen({ custom: true })}
               >
-                {t('email.actions.custom')}
+                {t('email.actions.copy')}
               </Button>
-            )}
-          </Space>
-          <Space>
-            <Button
-              type="text"
-              className="leading-none"
-              icon={<RiQuestionnaireLine size={18} />}
-              size="small"
-              onClick={() => setOpen({ issue: true })}
-            >
-              {t('email.actions.help')}
-            </Button>
-          </Space>
+              <Button
+                type="text"
+                className="leading-none"
+                icon={<RiBookmarkLine size={18} />}
+                size="small"
+                onClick={() => setOpen({ archive: true })}
+              >
+                {t('email.actions.archive')}
+              </Button>
+              <Button
+                type="text"
+                className="leading-none"
+                icon={<RiDiceLine size={18} />}
+                size="small"
+              >
+                {t('email.actions.random')}
+              </Button>
+              {(currentChannel === EMAIL_CHANNEL_TYPE_ENUM.TEMP ||
+                currentChannel === EMAIL_CHANNEL_TYPE_ENUM.EDU) && (
+                <Button
+                  type="text"
+                  className="leading-none"
+                  icon={<RiEditLine size={18} />}
+                  size="small"
+                  onClick={() => setOpen({ custom: true })}
+                >
+                  {t('email.actions.custom')}
+                </Button>
+              )}
+            </Space>
+            <Space>
+              <Button
+                type="text"
+                className="leading-none"
+                icon={<RiQuestionnaireLine size={18} />}
+                size="small"
+                onClick={() => setOpen({ issue: true })}
+              >
+                {t('email.actions.help')}
+              </Button>
+            </Space>
+          </div>
+        </div>
+        <div className="bg-gray-50 px-6 py-2 text-black/50 text-xs">
+          {t('email.alert')} 2025-09-24 16:40
         </div>
       </Card>
       <CustomModal open={open.custom} setOpen={(o) => setOpen({ custom: o })} />

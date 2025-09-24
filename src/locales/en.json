@@ -117,8 +117,8 @@
         "desc": "Yahoo Mail, Classic & Widely Used"
       },
       "mail": {
-        "name": "Mail.com",
-        "desc": "Mail.com, Custom Domains & Global Access"
+        "name": "Mail",
+        "desc": "Mail, Custom Domains & Global Access"
       }
     }
   },
@@ -190,8 +190,13 @@
       },
       "inbox": {
         "title": "Inbox",
+        "alert": {
+          "message": "Temporary emails are for testing only. For your privacy and security, do not use them for main accounts.",
+          "close": "Don't show again"
+        },
         "email": {
           "current": "Current Email",
+          "alert": "To prevent abuse, please do not switch email addresses too frequently. Next allowed time:",
           "actions": {
             "copy": "Copy",
             "random": "Random",
@@ -599,12 +604,12 @@
   },
   "auth": {
     "global": {
-      "slogan": "Next-Gen\nTemporary Email Solution",
+      "slogan": "Next-Gen Temporary Email\nRedefining Your Mail Experience",
       "features": [
-        "Unlimited random email addresses",
-        "Anonymous, secure, and highly available",
-        "90.9% email delivery rate",
-        "Multiple service provider support",
+        "Unlimited Random Email Addresses",
+        "Privacy Protection & No Spam",
+        "Support for Multiple Domain Extensions",
+        "90.9% Email Delivery Rate",
         "24/7 customer support"
       ],
       "footer": "Received over 10 million emails"

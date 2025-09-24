@@ -18,7 +18,7 @@ const Cover: React.FC = () => {
         alt=""
         className="object-cover object-right"
       />
-      <div className="relative flex flex-col z-10 p-10 h-full bg-primary-900/70">
+      <div className="relative flex flex-col z-10 p-10 h-full">
         <div className="flex-none">
           <Link
             className="inline-flex items-center gap-2 text-xl font-bold text-white leading-none"
@@ -30,11 +30,11 @@ const Cover: React.FC = () => {
             <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
           </Link>
         </div>
-        <div className="pt-[30%] flex-auto text-white/80">
-          <h1 className="text-4xl font-medium mb-8 whitespace-pre-line">
+        <div className="pt-[30%] flex-auto">
+          <h1 className="text-white text-4xl leading-14 font-medium mb-12 whitespace-pre-line">
             {t('slogan')}
           </h1>
-          <ul className="space-y-3 text-lg">
+          <ul className="space-y-5 text-lg text-white/80">
             {keys.map((_, i) => (
               <li key={i} className="flex items-center gap-2">
                 <span className="text-green-500">

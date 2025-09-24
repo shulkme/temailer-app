@@ -1,4 +1,5 @@
 'use client';
+import AlertBar from '@/app/[locale]/(app)/inbox/components/alert-bar';
 import ChannelList from '@/app/[locale]/(app)/inbox/components/channel-list';
 import DetailDrawer from '@/app/[locale]/(app)/inbox/components/detail-drawer';
 import EmailController from '@/app/[locale]/(app)/inbox/components/email-controller';
@@ -13,6 +14,9 @@ export default function Page() {
   return (
     <InboxProvider>
       <Title title={t('title')} />
+      <div>
+        <AlertBar />
+      </div>
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <ChannelList />
         <EmailController />

@@ -127,6 +127,21 @@ const ChannelList: React.FC = () => {
             available={!is_free}
           />
           <ChannelCard
+            value={EMAIL_CHANNEL_TYPE_ENUM.GMX}
+            label={g('emails.gmx.name')}
+            desc={g('emails.gmx.desc')}
+            icon={'/images/mail/gmx.png'}
+            available={!is_free}
+          />
+          <ChannelCard
+            value={EMAIL_CHANNEL_TYPE_ENUM.MAIL}
+            label={g('emails.mail.name')}
+            desc={g('emails.mail.desc')}
+            icon={'/images/mail/mail_com.png'}
+            stock={0}
+            available={!is_free}
+          />
+          <ChannelCard
             value={EMAIL_CHANNEL_TYPE_ENUM.ICLOUD}
             label={g('emails.icloud.name')}
             desc={g('emails.icloud.desc')}
@@ -135,26 +150,10 @@ const ChannelList: React.FC = () => {
             available={!is_free}
           />
           <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.GMX}
-            label={g('emails.gmx.name')}
-            desc={g('emails.gmx.desc')}
-            icon={'/images/mail/gmx.png'}
-            stock={0}
-            available={!is_free}
-          />
-          <ChannelCard
             value={EMAIL_CHANNEL_TYPE_ENUM.YAHOO}
             label={g('emails.yahoo.name')}
             desc={g('emails.yahoo.desc')}
             icon={'/images/mail/yahoo.png'}
-            stock={0}
-            available={!is_free}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.MAIL}
-            label={g('emails.mail.name')}
-            desc={g('emails.mail.desc')}
-            icon={'/images/mail/mail_com.png'}
             stock={0}
             available={!is_free}
           />
