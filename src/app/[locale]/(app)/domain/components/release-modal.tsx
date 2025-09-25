@@ -1,4 +1,5 @@
 'use client';
+import { releaseDomain } from '@/apis/domain';
 import { useRequest } from 'ahooks';
 import { App, Button, Modal, Result } from 'antd';
 import Confetti from 'canvas-confetti';
@@ -27,8 +28,7 @@ const ReleaseModal: React.FC<{
 
   const { loading: submitting, run: doSubmit } = useRequest(
     async () => {
-      //return await releaseDomain(id!);
-      return { data: 100 };
+      return await releaseDomain(id!);
     },
     {
       manual: true,
