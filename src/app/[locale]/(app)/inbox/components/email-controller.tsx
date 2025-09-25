@@ -81,7 +81,7 @@ const CustomModal: React.FC<{
                 value: `${value}@${domain.name}`,
               })),
           },
-        ];
+        ].filter((f) => f.options.length > 0);
       });
     },
     [currentDomains, t],

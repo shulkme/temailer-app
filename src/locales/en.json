@@ -473,6 +473,7 @@
         "alert": {
           "message": "Using a dedicated domain name can prevent the recipient address from being unable to receive emails due to risk control restrictions on the sender. It can also be used to customize the sending address, enhance brand trust, and improve email delivery rates."
         },
+        "tips": "Tips: Release idle domains for free <strong>credits</strong>. Domains will no longer be private but remain usable.",
         "table": {
           "filters": {
             "status": {
@@ -544,6 +545,18 @@
             "actions": {
               "checkout": "Buy Now"
             }
+          }
+        },
+        "release": {
+          "ready": {
+            "title": "Earn Credit Rewards",
+            "subtitle": "Release idle domains to earn credits",
+            "submit": "Release Now"
+          },
+          "success": {
+            "title": "Release Successful",
+            "subtitle": "{num, plural, =0 {} =1 {1 credit} other {# credits}} have been added to your account",
+            "submit": "Got it"
           }
         }
       },

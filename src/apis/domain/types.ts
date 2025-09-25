@@ -39,3 +39,11 @@ export interface DomainOrderData {
   expected_domains?: string[];
   expected_compensation?: boolean;
 }
+
+export interface DomainSalvageResponse {
+  refunded_points: number;
+  remaining_ratio: number;
+  remaining_days: number;
+  total_price: number;
+  message: string;
+}

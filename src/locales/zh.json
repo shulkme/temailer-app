@@ -473,6 +473,7 @@
         "alert": {
           "message": "使用专属域名，可避免收件地址因发件方风控限制而无法收到邮件，也可用于自定义发件地址，提升品牌信任度，提高邮件送达率。"
         },
+        "tips": "Tips：释放闲置域名可免费获得相应的<strong>积分奖励</strong>，释放后不再专属但仍可使用。",
         "table": {
           "filters": {
             "status": {
@@ -544,6 +545,18 @@
             "actions": {
               "checkout": "立即购买"
             }
+          }
+        },
+        "release": {
+          "ready": {
+            "title": "获取积分奖励",
+            "subtitle": "释放闲置域名获取积分奖励",
+            "submit": "立即释放"
+          },
+          "success": {
+            "title": "释放成功",
+            "subtitle": "{num, plural, =0 {} =1 {1 积分} other {# 积分}} 已存入您的账户",
+            "submit": "知道了"
           }
         }
       },

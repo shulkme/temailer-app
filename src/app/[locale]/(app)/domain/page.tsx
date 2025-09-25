@@ -4,6 +4,7 @@ import { DOMAIN_STATUS_ENUM } from '@/apis/domain/enums';
 import { DomainRecord } from '@/apis/domain/types';
 import CreateDrawer from '@/app/[locale]/(app)/domain/components/create-drawer';
 import DomainList from '@/app/[locale]/(app)/domain/components/domian-list';
+import ReleaseModal from '@/app/[locale]/(app)/domain/components/release-modal';
 import { DomainProvider } from '@/app/[locale]/(app)/domain/context';
 import {
   AntdDateRangePicker,
@@ -11,17 +12,25 @@ import {
   AntdFormItem,
   AntdInput,
 } from '@/components/antd';
+import { useCredit } from '@/providers/credit';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
-import { useAntdTable } from 'ahooks';
+import { useAntdTable, useSetState } from 'ahooks';
 import { Alert, Button, Card, FormProps, Select, Space, Table } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export default function Page() {
   const t = useTranslations('app.pages.domain');
   const [form] = AntdForm.useForm();
+  const [open, setOpen] = useSetState<{
+    release: boolean;
+  }>({
+    release: false,
+  });
+  const [currentRecord, setCurrentRecord] = useState<DomainRecord>();
+  const { refresh: refreshCredits } = useCredit();
 
   const statusOptions = useMemo(() => {
     return [
@@ -47,7 +56,7 @@ export default function Page() {
     [statusOptions],
   );
 
-  const { tableProps, search } = useAntdTable(
+  const { tableProps, search, refresh } = useAntdTable(
     async ({ current, pageSize }, params) => {
       const { dataRange, ...rest } = params;
 
@@ -93,6 +102,16 @@ export default function Page() {
     if (!Object.keys(changedValues).includes('name')) {
       submit();
     }
+  };
+
+  const handleAfterRelease = () => {
+    refresh();
+    refreshCredits();
+  };
+
+  const handleRelease = (record: DomainRecord) => {
+    setCurrentRecord(record);
+    setOpen({ release: true });
   };
 
   return (
@@ -203,6 +222,7 @@ export default function Page() {
                       disabled={record.status !== DOMAIN_STATUS_ENUM.ACTIVE}
                       size="small"
                       type="link"
+                      onClick={() => handleRelease(record)}
                     >
                       {t('table.actions.release')}
                     </Button>
@@ -213,8 +233,20 @@ export default function Page() {
             {...tableProps}
           />
         </Card>
+        <div className="text-xs text-black/50 text-center py-1">
+          {t.rich('tips', {
+            strong: (chunks) => <a>{chunks}</a>,
+          })}
+        </div>
       </div>
       <CreateDrawer />
+      <ReleaseModal
+        id={currentRecord?.id}
+        open={open.release}
+        setOpen={(o) => setOpen({ release: o })}
+        afterSubmit={handleAfterRelease}
+        afterClose={() => setCurrentRecord(undefined)}
+      />
     </DomainProvider>
   );
 }
