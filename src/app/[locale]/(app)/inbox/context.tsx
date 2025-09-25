@@ -1,6 +1,7 @@
 'use client';
 import { getAllDomains } from '@/apis/domain';
 import { DomainRecord } from '@/apis/domain/types';
+import { getEmailAddress } from '@/apis/email';
 import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
 import { useRequest, useSetState } from 'ahooks';
 import { SetState } from 'ahooks/es/useSetState';
@@ -62,11 +63,29 @@ const InboxProvider: React.FC<{
     [domains],
   );
 
-  const { loading } = useRequest(getAllDomains, {
+  const { loading: addressLoading, run: genAddress } = useRequest(
+    getEmailAddress,
+    {
+      manual: true,
+      onSuccess: (res, params) => {
+        const email = res.data;
+        const [provider] = params;
+        setCurrentEmails({
+          [provider]: email,
+        });
+      },
+    },
+  );
+
+  const { loading: domainLoading } = useRequest(getAllDomains, {
     onSuccess: (res) => {
       setDomains(res.data);
     },
   });
+
+  const loading = useMemo(() => {
+    return domainLoading || addressLoading;
+  }, [addressLoading, domainLoading]);
 
   useEffect(() => {
     // init
@@ -78,7 +97,19 @@ const InboxProvider: React.FC<{
         [EMAIL_CHANNEL_TYPE_ENUM.EDU]: randomEmail(EMAIL_CHANNEL_TYPE_ENUM.EDU),
       });
     }
-  }, [domains]);
+  }, [domains, randomEmail, setCurrentEmails]);
+
+  useEffect(() => {
+    const current = currentEmails?.[currentChannel];
+    if (
+      !current &&
+      ![EMAIL_CHANNEL_TYPE_ENUM.TEMP, EMAIL_CHANNEL_TYPE_ENUM.EDU].includes(
+        currentChannel,
+      )
+    ) {
+      genAddress(currentChannel);
+    }
+  }, [currentChannel, currentEmails, genAddress]);
 
   return (
     <InboxContext.Provider

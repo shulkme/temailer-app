@@ -1,6 +1,6 @@
 'use client';
-import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
 import { useInbox } from '@/app/[locale]/(app)/inbox/context';
+import { INBOX_MAILBOX_CONFIG } from '@/app/[locale]/(app)/inbox/mixins';
 import { AntdRadioButton, AntdRadioGroup } from '@/components/antd';
 import SliderScroller from '@/components/slider-scroller';
 import { Link } from '@/i18n/navigation';
@@ -100,63 +100,19 @@ const ChannelList: React.FC = () => {
             scroller: 'gap-4 lg:gap-6',
           }}
         >
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.TEMP}
-            label={g('emails.temp.name')}
-            desc={g('emails.temp.desc')}
-            icon={'/images/mail/at.png'}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.EDU}
-            label={g('emails.edu.name')}
-            desc={g('emails.edu.desc')}
-            icon={'/images/mail/edu.png'}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.GMAIL}
-            label={g('emails.gmail.name')}
-            desc={g('emails.gmail.desc')}
-            icon={'/images/mail/gmail.png'}
-            available={!is_free}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.OUTLOOK}
-            label={g('emails.outlook.name')}
-            desc={g('emails.outlook.desc')}
-            icon={'/images/mail/outlook.png'}
-            available={!is_free}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.GMX}
-            label={g('emails.gmx.name')}
-            desc={g('emails.gmx.desc')}
-            icon={'/images/mail/gmx.png'}
-            available={!is_free}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.MAIL}
-            label={g('emails.mail.name')}
-            desc={g('emails.mail.desc')}
-            icon={'/images/mail/mail_com.png'}
-            stock={0}
-            available={!is_free}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.ICLOUD}
-            label={g('emails.icloud.name')}
-            desc={g('emails.icloud.desc')}
-            icon={'/images/mail/icloud.png'}
-            stock={0}
-            available={!is_free}
-          />
-          <ChannelCard
-            value={EMAIL_CHANNEL_TYPE_ENUM.YAHOO}
-            label={g('emails.yahoo.name')}
-            desc={g('emails.yahoo.desc')}
-            icon={'/images/mail/yahoo.png'}
-            stock={0}
-            available={!is_free}
-          />
+          {Object.entries(INBOX_MAILBOX_CONFIG).map(
+            ([value, config], index) => (
+              <ChannelCard
+                key={index}
+                value={value}
+                label={g(config.title)}
+                desc={g(config.desc)}
+                icon={config.icon}
+                stock={config.stock}
+                available={!config.subscription || !is_free}
+              />
+            ),
+          )}
         </SliderScroller>
       </AntdRadioGroup>
     </div>

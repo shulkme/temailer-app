@@ -1,0 +1,68 @@
+import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
+
+export const INBOX_MAILBOX_CONFIG = {
+  [EMAIL_CHANNEL_TYPE_ENUM.TEMP]: {
+    credit: 1,
+    title: 'emails.temp.name',
+    desc: 'emails.temp.desc',
+    icon: '/images/mail/temp.png',
+    subscription: false,
+    stock: Infinity,
+  },
+  [EMAIL_CHANNEL_TYPE_ENUM.EDU]: {
+    credit: 1,
+    title: 'emails.edu.name',
+    desc: 'emails.edu.desc',
+    icon: '/images/mail/edu.png',
+    subscription: false,
+    stock: Infinity,
+  },
+  [EMAIL_CHANNEL_TYPE_ENUM.GMAIL]: {
+    credit: 20,
+    title: 'emails.gmail.name',
+    desc: 'emails.gmail.desc',
+    icon: '/images/mail/gmail.png',
+    subscription: true,
+    stock: Infinity,
+  },
+  [EMAIL_CHANNEL_TYPE_ENUM.OUTLOOK]: {
+    credit: 5,
+    title: 'emails.outlook.name',
+    desc: 'emails.outlook.desc',
+    icon: '/images/mail/outlook.png',
+    subscription: true,
+    stock: Infinity,
+  },
+  [EMAIL_CHANNEL_TYPE_ENUM.GMX]: {
+    credit: 5,
+    title: 'emails.gmx.name',
+    desc: 'emails.gmx.desc',
+    icon: '/images/mail/gmx.png',
+    subscription: true,
+    stock: Infinity,
+  },
+  [EMAIL_CHANNEL_TYPE_ENUM.MAIL]: {
+    credit: 5,
+    title: 'emails.mail.name',
+    desc: 'emails.mail.desc',
+    icon: '/images/mail/mail.png',
+    subscription: true,
+    stock: 0,
+  },
+  [EMAIL_CHANNEL_TYPE_ENUM.YAHOO]: {
+    credit: 10,
+    title: 'emails.yahoo.name',
+    desc: 'emails.yahoo.desc',
+    icon: '/images/mail/yahoo.png',
+    subscription: true,
+    stock: 0,
+  },
+  [EMAIL_CHANNEL_TYPE_ENUM.ICLOUD]: {
+    credit: 50,
+    title: 'emails.icloud.name',
+    desc: 'emails.icloud.desc',
+    icon: '/images/mail/icloud.png',
+    subscription: true,
+    stock: 0,
+  },
+} as const;

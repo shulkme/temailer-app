@@ -11,6 +11,7 @@ export interface DomainRecord {
   created_time: string;
   remark: string;
   provider_type: EMAIL_CHANNEL_TYPE_ENUM;
+  is_private: boolean;
 }
 
 export interface DomainParams extends PageParams {

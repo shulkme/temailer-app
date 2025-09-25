@@ -196,6 +196,7 @@
         },
         "email": {
           "current": "Current Email",
+          "credit": "{num, plural, =0 {} =1 {1 credit/email} other {# credits/email}}",
           "empty": "No available email",
           "alert": "To prevent abuse, please do not switch email addresses too frequently. Next allowed time:",
           "actions": {
@@ -208,7 +209,7 @@
         },
         "messages": {
           "title": "Latest Emails",
-          "countdown": "{num, plural, =0 {Refreshing…} =1 {Auto-refresh in 1 second} other {Auto-refresh in # seconds}}",
+          "countdown": "{num, plural, =0 {} =1 {Auto-refresh in 1 second} other {Auto-refresh in # seconds}}",
           "actions": {
             "refresh": "Refresh"
           },
@@ -218,7 +219,11 @@
           "title": "Custom Email",
           "form": {
             "email": {
-              "placeholder": "Enter Email Address"
+              "placeholder": "Enter Email Address",
+              "options": {
+                "public": "Public",
+                "private": "Private"
+              }
             }
           },
           "actions": {

@@ -1,5 +1,5 @@
 'use client';
-import { getEmailList } from '@/apis/email';
+import { getEmailMessages } from '@/apis/email';
 import { EmailRecord } from '@/apis/email/types';
 import { useInbox } from '@/app/[locale]/(app)/inbox/context';
 import { AntdListItem, AntdTitle } from '@/components/antd';
@@ -14,7 +14,7 @@ import React, { useEffect, useState } from 'react';
 const MessageList: React.FC = () => {
   const t = useTranslations('app.pages.inbox');
   const [nextRefreshTime, setNextRefreshTime] = useState<number>();
-  const { currentEmail } = useInbox();
+  const { currentEmail, currentChannel } = useInbox();
   const { refresh: refreshCredit, available } = useCredit();
   const [emails, setEmails] = useState<Omit<EmailRecord, 'content'>[]>([]);
   // 刷新倒计时
@@ -23,7 +23,7 @@ const MessageList: React.FC = () => {
   });
 
   // 轮询消息
-  const { loading, run, cancel, refresh } = useRequest(getEmailList, {
+  const { loading, run, cancel, refresh } = useRequest(getEmailMessages, {
     manual: true,
     pollingInterval: 10000,
     pollingErrorRetryCount: 2,
@@ -48,10 +48,12 @@ const MessageList: React.FC = () => {
 
   useEffect(() => {
     cancel();
+    setNextRefreshTime(undefined);
+    setEmails([]);
     if (currentEmail && available > 0) {
-      run(currentEmail);
+      run(currentEmail, currentChannel);
     }
-  }, [available, currentEmail]);
+  }, [available, cancel, currentChannel, currentEmail, run]);
 
   return (
     <Card>
@@ -69,6 +71,7 @@ const MessageList: React.FC = () => {
               })}
             </span>
             <Button
+              disabled={!countDown && !loading}
               loading={loading}
               size="small"
               className="leading-none"
@@ -83,14 +86,10 @@ const MessageList: React.FC = () => {
       <List
         dataSource={emails}
         renderItem={(email) => (
-          <AntdListItem
-            key={email.id}
-            className="hover:bg-gray-100 cursor-pointer"
-            onClick={() => handlePreview(email.id)}
-          >
-            <div className="flex-auto space-y-2">
+          <AntdListItem key={email.id} onClick={() => handlePreview(email.id)}>
+            <div className="flex-auto space-y-2 p-4 border-l-[4px] border-transparent transition hover:bg-primary-50 hover:border-primary-500 cursor-pointer">
               <div className="flex items-center justify-between">
-                <h4 className="font-medium">{email.from_name}</h4>
+                <h4 className="font-bold">{email.from_name}</h4>
                 <span className="text-xs text-black/50">
                   {formatTimeWithTimezone(email.created_time, 'HH:mm')}
                 </span>

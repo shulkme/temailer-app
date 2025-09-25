@@ -197,6 +197,7 @@
         "email": {
           "current": "当前邮箱",
           "empty": "暂无可用邮箱",
+          "credit": "{num, plural, =0 {} =1 {1 积分/封} other {# 积分/封}}",
           "alert": "为避免邮箱地址被滥用，请勿频繁切换邮箱地址，下次允许时间为：",
           "actions": {
             "copy": "复制",
@@ -208,7 +209,7 @@
         },
         "messages": {
           "title": "最新邮件",
-          "countdown": "{num, plural, =0 {正在刷新…} =1 {1秒后自动刷新} other {#秒后自动刷新}}",
+          "countdown": "{num, plural, =0 {} =1 {1秒后自动刷新} other {#秒后自动刷新}}",
           "actions": {
             "refresh": "刷新"
           },
@@ -218,7 +219,11 @@
           "title": "自定义邮箱",
           "form": {
             "email": {
-              "placeholder": "输入邮箱地址"
+              "placeholder": "输入邮箱地址",
+              "options": {
+                "public": "公共",
+                "private": "专属"
+              }
             }
           },
           "actions": {

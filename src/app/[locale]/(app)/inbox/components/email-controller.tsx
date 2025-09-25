@@ -4,6 +4,7 @@ import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
 import { createIssue } from '@/apis/issue';
 import { ISSUE_TYPE_ENUM } from '@/apis/issue/enums';
 import { useInbox } from '@/app/[locale]/(app)/inbox/context';
+import { INBOX_MAILBOX_CONFIG } from '@/app/[locale]/(app)/inbox/mixins';
 import {
   AntdForm,
   AntdFormItem,
@@ -35,6 +36,7 @@ import {
 import { useTranslations } from 'next-intl';
 import { debounce } from 'radash';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useClipboard } from 'use-clipboard-copy';
 
 const CustomModal: React.FC<{
   open: boolean;
@@ -47,12 +49,11 @@ const CustomModal: React.FC<{
 
   const afterClose = () => {
     form.resetFields();
+    setOptions([]);
   };
 
   const currentDomains = useMemo(() => {
-    return domains
-      .filter((f) => f.provider_type === currentChannel)
-      .map((f) => f.name);
+    return domains.filter((f) => f.provider_type === currentChannel);
   }, [domains, currentChannel]);
 
   const handleSearch = useCallback(
@@ -63,16 +64,27 @@ const CustomModal: React.FC<{
         }
         return [
           {
-            label: 'Public',
-            options: currentDomains.map((domain) => ({
-              label: `${value}@${domain}`,
-              value: `${value}@${domain}`,
-            })),
+            label: t('form.email.options.private'),
+            options: currentDomains
+              .filter((f) => f.is_private)
+              .map((domain) => ({
+                label: `${value}@${domain.name}`,
+                value: `${value}@${domain.name}`,
+              })),
+          },
+          {
+            label: t('form.email.options.public'),
+            options: currentDomains
+              .filter((f) => !f.is_private)
+              .map((domain) => ({
+                label: `${value}@${domain.name}`,
+                value: `${value}@${domain.name}`,
+              })),
           },
         ];
       });
     },
-    [currentDomains],
+    [currentDomains, t],
   );
 
   const handleRandom = debounce({ delay: 100 }, () => {
@@ -316,6 +328,7 @@ const ArchiveModal: React.FC<{
 
 const EmailController: React.FC = () => {
   const t = useTranslations('app.pages.inbox');
+  const g = useTranslations('global');
   const {
     currentChannel,
     currentEmail,
@@ -323,6 +336,7 @@ const EmailController: React.FC = () => {
     randomEmail,
     loading,
   } = useInbox();
+  const { message } = App.useApp();
   const [open, setOpen] = useSetState<{
     custom: boolean;
     issue: boolean;
@@ -333,11 +347,30 @@ const EmailController: React.FC = () => {
     archive: false,
   });
 
+  const clipboard = useClipboard({
+    onSuccess: () => {
+      message.success(g('response.success'));
+    },
+    onError: () => {
+      message.error(g('response.error'));
+    },
+  });
+
+  const creditCost = useMemo(() => {
+    return t('email.credit', {
+      num: INBOX_MAILBOX_CONFIG?.[currentChannel].credit || 0,
+    });
+  }, [currentChannel, t]);
+
   const handleRandom = debounce({ delay: 100 }, () => {
     const email = randomEmail(currentChannel);
     setCurrentEmails({
       [currentChannel]: email,
     });
+  });
+
+  const handleCopy = debounce({ delay: 100 }, () => {
+    clipboard.copy(currentEmail);
   });
 
   return (
@@ -353,9 +386,22 @@ const EmailController: React.FC = () => {
             {loading ? (
               <AntdSkeletonInput active />
             ) : (
-              <AntdTitle level={2} className="m-0">
-                {currentEmail || t('email.empty')}
-              </AntdTitle>
+              <div className="inline-block relative">
+                {currentEmail ? (
+                  <>
+                    <AntdTitle level={2} className="m-0">
+                      {currentEmail}
+                    </AntdTitle>
+                    <div className="absolute top-0 -right-2 translate-x-full -translate-y-1/3 leading-6 px-2.5 bg-primary-50 text-xs text-primary-500 rounded-full rounded-bl-none">
+                      {creditCost}
+                    </div>
+                  </>
+                ) : (
+                  <AntdTitle level={2} className="m-0">
+                    {t('email.empty')}
+                  </AntdTitle>
+                )}
+              </div>
             )}
           </div>
           <div className="-ml-2 mt-6 flex justify-between items-center gap-2 flex-wrap">
@@ -365,6 +411,7 @@ const EmailController: React.FC = () => {
                 className="leading-none"
                 icon={<RiFileCopyLine size={18} />}
                 size="small"
+                onClick={handleCopy}
               >
                 {t('email.actions.copy')}
               </Button>
