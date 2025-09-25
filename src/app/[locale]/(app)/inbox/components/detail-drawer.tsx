@@ -14,12 +14,7 @@ const DetailDrawer: React.FC = () => {
 
   const afterOpenChange: DrawerProps['afterOpenChange'] = (open) => {
     if (!open) {
-      const doc = iframeRef.current?.contentDocument;
-      if (doc) {
-        doc.open();
-        doc.writeln('');
-        doc.close();
-      }
+      setRecord(undefined);
     }
   };
 
@@ -27,10 +22,6 @@ const DetailDrawer: React.FC = () => {
     manual: true,
     onSuccess: (res) => {
       setRecord(res.data);
-      const doc = iframeRef.current?.contentDocument;
-      if (doc) {
-        doc.body.innerHTML = res.data.content;
-      }
     },
   });
 
@@ -46,10 +37,16 @@ const DetailDrawer: React.FC = () => {
       window.removeEventListener('email:preview', handler as EventListener);
     };
   }, []);
+
   return (
     <Drawer
       loading={loading}
       afterOpenChange={afterOpenChange}
+      styles={{
+        body: {
+          padding: 0,
+        },
+      }}
       title={
         <div className="flex gap-4">
           <div>
@@ -78,12 +75,13 @@ const DetailDrawer: React.FC = () => {
       closeIcon={<RiArrowLeftSLine size={24} />}
     >
       <iframe
-        ref={iframeRef}
         style={{
           width: '100%',
           height: '100%',
           border: '0',
         }}
+        srcDoc={record?.content}
+        sandbox="allow-popups allow-popups-to-escape-sandbox" // 仅允许新标签页打开链接
       />
     </Drawer>
   );
