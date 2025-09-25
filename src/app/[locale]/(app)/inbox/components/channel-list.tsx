@@ -44,7 +44,7 @@ const ChannelCard: React.FC<
       <AntdRadioButton
         disabled={disabled || stock < 1 || !available}
         className={cn(
-          'block relative text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5',
+          'block relative rounded-lg text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5',
           (disabled || stock < 1 || !available) && 'border-white bg-white',
         )}
         {...props}

@@ -261,6 +261,9 @@
       },
       "outbox": {
         "title": "Outbox",
+        "alert": {
+          "message": "Mail service is under maintenance. Updates on the reopening time will be posted in the <link>channel</link>."
+        },
         "statistics": {
           "totalRequest": {
             "label": "Total Requests"

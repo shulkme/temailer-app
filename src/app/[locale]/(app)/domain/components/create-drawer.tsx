@@ -72,7 +72,7 @@ const DomainRadio: React.FC<
       <div className="w-80 relative shrink-0 snap-start">
         <AntdRadioButton
           disabled={disabled}
-          className="block text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5"
+          className="block rounded-lg text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5"
           {...props}
         >
           <div className="space-y-2 p-4">

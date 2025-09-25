@@ -45,7 +45,7 @@ const Task: React.FC = () => {
             </AntdListItem>
           )}
         />
-        <div className="absolute inset-0 bg-white/20 backdrop-blur-xs flex flex-col items-center justify-center">
+        <div className="absolute inset-0 bg-white/50 backdrop-blur-xs flex flex-col items-center justify-center">
           <div>
             <h3 className="font-medium text-lg mb-4">{t('empty')}</h3>
           </div>

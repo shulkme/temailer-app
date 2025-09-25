@@ -25,10 +25,10 @@
   --breakpoint-xl: 1200px;
   --breakpoint-2xl: 1600px;
 
-  --radius-xs: 0px;
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
   --radius-xl: 10px;
   --radius-2xl: 12px;
   --radius-3xl: 14px;

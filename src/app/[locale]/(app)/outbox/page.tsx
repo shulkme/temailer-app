@@ -25,7 +25,13 @@ export default function Page() {
         showIcon
         banner
         type="info"
-        message={'发信系统维护中，开放时间将在频道同步。'}
+        message={t.rich('alert.message', {
+          link: (chunks) => (
+            <a target="_blank" href={process.env.NEXT_PUBLIC_SUPPORT_TELEGRAM}>
+              {chunks}
+            </a>
+          ),
+        })}
       />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <SliderScroller

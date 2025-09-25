@@ -10,10 +10,10 @@ const config: ThemeConfig = {
     controlHeightSM: 32,
     controlHeight: 40,
     controlHeightLG: 48,
-    borderRadiusXS: 0,
-    borderRadiusSM: 0,
-    borderRadius: 0,
-    borderRadiusLG: 0,
+    borderRadiusXS: 2,
+    borderRadiusSM: 4,
+    borderRadius: 6,
+    borderRadiusLG: 8,
     colorPrimary: '#1062ff',
     colorLink: '#1062ff',
     colorBorderSecondary: '#e2e8f0',
@@ -61,6 +61,9 @@ const config: ThemeConfig = {
     Segmented: {
       trackPadding: 4,
     },
+    // Modal: {
+    //   borderRadiusLG: 16,
+    // },
   },
 };
 

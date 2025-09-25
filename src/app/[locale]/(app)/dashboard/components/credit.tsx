@@ -32,7 +32,7 @@ const Credit: React.FC = () => {
             </AntdTitle>
           )}
         </div>
-        <div className="w-full overflow-hidden bg-blue-500/5 rounded-(--ant-border-radius) p-6 relative">
+        <div className="w-full overflow-hidden bg-blue-500/5 rounded-lg p-6 relative">
           <div className="absolute bottom-0 right-0 h-full w-1/3 bg-linear-[190deg] from-blue-200/50 to-transparent to-90% -skew-x-45 translate-x-1/2"></div>
           <div className="relative z-10">
             <AntdParagraph className="mb-2" type="secondary">

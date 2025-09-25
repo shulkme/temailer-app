@@ -261,6 +261,9 @@
       },
       "outbox": {
         "title": "发信",
+        "alert": {
+          "message": "发信系统维护中，具体开放时间将在<link>频道</link>同步。"
+        },
         "statistics": {
           "totalRequest": {
             "label": "请求总数"

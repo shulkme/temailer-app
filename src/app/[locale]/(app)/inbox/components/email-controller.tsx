@@ -412,7 +412,7 @@ const EmailController: React.FC = () => {
             </Space>
           </div>
         </div>
-        <div className="bg-gray-50 px-6 py-2 text-black/50 text-xs">
+        <div className="bg-gray-50 px-6 py-2 text-black/50 text-xs rounded-b-lg">
           {t('email.alert')} 2025-09-24 16:40
         </div>
       </Card>
