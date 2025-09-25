@@ -26,7 +26,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
         collapsedWidth={0}
         theme="light"
         width={'35%'}
-        className="bg-gray-50 relative"
+        className="bg-gray-50 relative hidden lg:block"
         trigger={null}
       >
         <Cover />

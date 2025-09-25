@@ -4,13 +4,11 @@ import { formatTimeWithTimezone } from '@/utils/time';
 import { RiArrowLeftSLine } from '@remixicon/react';
 import { useRequest } from 'ahooks';
 import { Avatar, Drawer, DrawerProps } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const DetailDrawer: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [record, setRecord] = useState<EmailRecord>();
-  const [error] = useState<string>();
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const afterOpenChange: DrawerProps['afterOpenChange'] = (open) => {
     if (!open) {

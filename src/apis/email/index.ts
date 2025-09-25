@@ -3,16 +3,6 @@ import { EmailRecord } from '@/apis/email/types';
 import request from '@/apis/request';
 import { HttpResponse, PageResult } from '@/apis/types';
 
-export async function getEmailList(
-  to_email: string,
-): Promise<HttpResponse<PageResult<Omit<EmailRecord, 'content'>>>> {
-  return await request.get('/sys/email', {
-    params: {
-      to_email,
-    },
-  });
-}
-
 export async function getEmailDetail(
   id: string,
 ): Promise<HttpResponse<EmailRecord>> {
@@ -31,27 +21,12 @@ export async function getEmailAddress(
 
 export async function getEmailMessages(
   to_email: string,
-  channel: EMAIL_CHANNEL_TYPE_ENUM,
+  provider_type: EMAIL_CHANNEL_TYPE_ENUM,
 ): Promise<HttpResponse<PageResult<Omit<EmailRecord, 'content'>>>> {
-  return await request({
-    url: [EMAIL_CHANNEL_TYPE_ENUM.TEMP, EMAIL_CHANNEL_TYPE_ENUM.EDU].includes(
-      channel,
-    )
-      ? '/sys/email'
-      : '/sys/imap_email/messages',
-    method: 'GET',
-    params: [
-      EMAIL_CHANNEL_TYPE_ENUM.TEMP,
-      EMAIL_CHANNEL_TYPE_ENUM.EDU,
-    ].includes(channel)
-      ? {
-          to_email,
-          page: 1,
-          size: 10,
-        }
-      : {
-          email: to_email,
-          limit: 10,
-        },
+  return await request.get('/sys/email', {
+    params: {
+      to_email,
+      provider_type,
+    },
   });
 }

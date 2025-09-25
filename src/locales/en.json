@@ -147,7 +147,8 @@
           "account": "Account",
           "subscription": "Subscription",
           "billing": "Billing",
-          "logout": "Logout"
+          "logout": "Logout",
+          "language": "Language"
         }
       }
     },

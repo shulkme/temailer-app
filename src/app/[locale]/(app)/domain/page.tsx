@@ -98,8 +98,8 @@ export default function Page() {
   return (
     <DomainProvider>
       <Title title={t('title')} />
+      <Alert banner showIcon type="info" message={t('alert.message')} />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
-        <Alert showIcon message={t('alert.message')} />
         <DomainList />
         <Card>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4 lg:mb-6">

@@ -20,7 +20,7 @@ const StatisticItem: React.FC<{
   loading?: boolean;
 }> = ({ icon, title, value, loading }) => {
   return (
-    <div className="h-auto border border-transparent rounded-sm leading-none p-4">
+    <div className="h-auto border border-transparent rounded-sm leading-none lg:p-4">
       <div className="flex items-center gap-6">
         <Avatar
           size={48}

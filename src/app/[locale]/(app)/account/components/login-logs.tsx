@@ -94,7 +94,7 @@ const LoginLogs: React.FC = () => {
       <Table<SessionRecord & { loading?: boolean }>
         loading={loading}
         dataSource={data}
-        rowKey="id"
+        rowKey="session_uuid"
         scroll={{
           x: 1200,
         }}

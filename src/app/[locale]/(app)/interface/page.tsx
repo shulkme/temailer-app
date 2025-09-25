@@ -72,13 +72,14 @@ export default function Page() {
   return (
     <>
       <Title title={t('title')} />
+      <Alert
+        banner
+        showIcon
+        type="info"
+        message={t('alert.message')}
+        action={<AntdLink>{t('alert.extra')}</AntdLink>}
+      />
       <div className="max-w-[1600px] mx-auto p-4 lg:p-6 space-y-4 lg:space-y-6">
-        <Alert
-          showIcon
-          type="info"
-          message={t('alert.message')}
-          action={<AntdLink>{t('alert.extra')}</AntdLink>}
-        />
         <Card>
           <Descriptions
             column={1}

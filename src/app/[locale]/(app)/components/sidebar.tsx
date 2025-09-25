@@ -223,7 +223,7 @@ const Sidebar: React.FC = () => {
         collapsible
         breakpoint="lg"
         trigger={null}
-        className="invisible"
+        className="invisible hidden lg:block"
       />
       <AntdSider
         //theme="dark"
@@ -232,7 +232,7 @@ const Sidebar: React.FC = () => {
         collapsible
         breakpoint="lg"
         trigger={null}
-        className="fixed top-0 left-0 bottom-0 z-50 bg-sidebar"
+        className="fixed top-0 left-0 bottom-0 z-50 bg-sidebar hidden lg:block"
       >
         <Inner />
       </AntdSider>
