@@ -461,7 +461,7 @@
         }
       },
       "domain": {
-        "title": "Domain",
+        "title": "Domains",
         "alert": {
           "message": "Using a dedicated domain name can prevent the recipient address from being unable to receive emails due to risk control restrictions on the sender. It can also be used to customize the sending address, enhance brand trust, and improve email delivery rates."
         },

@@ -9,6 +9,7 @@ import {
   AntdFormItem,
   AntdInput,
 } from '@/components/antd';
+import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { useAntdTable } from 'ahooks';
 import { Card, FormProps, Select, Table } from 'antd';
@@ -141,88 +142,91 @@ export default function Page() {
   };
 
   return (
-    <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
-      <Card>
-        <div className="mb-4 lg:mb-6">
-          <AntdForm
-            form={form}
-            layout="inline"
-            onValuesChange={onFormValuesChange}
-          >
-            <AntdFormItem name="package_type">
-              <Select
-                placeholder={t('table.filters.type.placeholder')}
-                style={{ width: 220 }}
-                allowClear
-                options={statusOptions}
-              />
-            </AntdFormItem>
-            <AntdFormItem name="dataRange">
-              <AntdDateRangePicker />
-            </AntdFormItem>
-            <AntdFormItem name="external_order_id">
-              <AntdInput
-                allowClear
-                placeholder={t('table.filters.search.placeholder')}
-                suffix={<RiSearchLine size={16} />}
-                onPressEnter={submit}
-                onClear={submit}
-              />
-            </AntdFormItem>
-          </AntdForm>
-        </div>
+    <>
+      <Title title={t('title')} />
+      <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
+        <Card>
+          <div className="mb-4 lg:mb-6">
+            <AntdForm
+              form={form}
+              layout="inline"
+              onValuesChange={onFormValuesChange}
+            >
+              <AntdFormItem name="package_type">
+                <Select
+                  placeholder={t('table.filters.type.placeholder')}
+                  style={{ width: 220 }}
+                  allowClear
+                  options={statusOptions}
+                />
+              </AntdFormItem>
+              <AntdFormItem name="dataRange">
+                <AntdDateRangePicker />
+              </AntdFormItem>
+              <AntdFormItem name="external_order_id">
+                <AntdInput
+                  allowClear
+                  placeholder={t('table.filters.search.placeholder')}
+                  suffix={<RiSearchLine size={16} />}
+                  onPressEnter={submit}
+                  onClear={submit}
+                />
+              </AntdFormItem>
+            </AntdForm>
+          </div>
 
-        <Table<OrderRecord>
-          rowKey="id"
-          scroll={{
-            x: 1200,
-          }}
-          columns={[
-            {
-              title: t('table.columns.no'),
-              dataIndex: 'id',
-            },
-            {
-              title: t('table.columns.amount'),
-              dataIndex: 'amount',
-              render: (value) => {
-                return '$' + value.toLocaleString();
+          <Table<OrderRecord>
+            rowKey="id"
+            scroll={{
+              x: 1200,
+            }}
+            columns={[
+              {
+                title: t('table.columns.no'),
+                dataIndex: 'id',
               },
-            },
-            {
-              title: t('table.columns.paymentMethod'),
-              dataIndex: 'payment_method',
-              render: (value) => {
-                return methodLabelFilter(value);
+              {
+                title: t('table.columns.amount'),
+                dataIndex: 'amount',
+                render: (value) => {
+                  return '$' + value.toLocaleString();
+                },
               },
-            },
-            {
-              title: t('table.columns.type'),
-              dataIndex: 'order_type',
-              render: (value) => {
-                return typeLabelFilter(value);
+              {
+                title: t('table.columns.paymentMethod'),
+                dataIndex: 'payment_method',
+                render: (value) => {
+                  return methodLabelFilter(value);
+                },
               },
-            },
-            {
-              title: t('table.columns.plan'),
-              dataIndex: 'extra_info',
-            },
-            {
-              title: t('table.columns.status'),
-              dataIndex: 'status',
-              render: (value) => {
-                return statusLabelFilter(value);
+              {
+                title: t('table.columns.type'),
+                dataIndex: 'order_type',
+                render: (value) => {
+                  return typeLabelFilter(value);
+                },
               },
-            },
-            {
-              title: t('table.columns.date'),
-              dataIndex: 'created_time',
-              render: (value) => dayjs(value).format('YYYY-MM-DD HH:mm:ss'),
-            },
-          ]}
-          {...tableProps}
-        />
-      </Card>
-    </div>
+              {
+                title: t('table.columns.plan'),
+                dataIndex: 'extra_info',
+              },
+              {
+                title: t('table.columns.status'),
+                dataIndex: 'status',
+                render: (value) => {
+                  return statusLabelFilter(value);
+                },
+              },
+              {
+                title: t('table.columns.date'),
+                dataIndex: 'created_time',
+                render: (value) => dayjs(value).format('YYYY-MM-DD HH:mm:ss'),
+              },
+            ]}
+            {...tableProps}
+          />
+        </Card>
+      </div>
+    </>
   );
 }

@@ -134,7 +134,6 @@ const AccountDropdown = () => {
   };
   return (
     <Dropdown
-      trigger={['click']}
       menu={{
         onClick: handleClick,
         items: menus,
