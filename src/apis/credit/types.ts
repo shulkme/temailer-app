@@ -61,5 +61,7 @@ export interface CreditSubscriptionPlanRecord {
     description: string;
     price: string;
     discount_info: string;
+    original_points: number;
+    balance_after: number;
   };
 }
