@@ -555,7 +555,7 @@
           },
           "success": {
             "title": "释放成功",
-            "subtitle": "{num, plural, =0 {} =1 {1 积分} other {# 积分}} 已存入您的账户",
+            "subtitle": "{num, plural, =0 {} =1 {1 积分} other {# 积分}}已存入您的账户",
             "submit": "知道了"
           }
         }

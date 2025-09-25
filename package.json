@@ -15,6 +15,7 @@
     "ahooks": "^3.8.5",
     "antd": "^5.27.1",
     "axios": "^1.11.0",
+    "canvas-confetti": "^1.9.3",
     "clsx": "^2.1.1",
     "cookies-next": "4.3.0",
     "dayjs": "^1.11.13",
@@ -32,6 +33,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.11",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/nprogress": "^0.2.3",
     "@types/qs": "^6.14.0",
