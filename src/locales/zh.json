@@ -450,13 +450,21 @@
             }
           },
           "actions": {
-            "export": "导出"
+            "export": "导出",
+            "delete": "删除"
           },
           "columns": {
             "email": "邮箱",
             "remark": "备注",
             "createdTime": "创建时间",
             "operate": "操作"
+          }
+        },
+        "delete": {
+          "title": "删除邮箱",
+          "content": "确定要删除所选邮箱吗？此操作不可撤销。",
+          "actions": {
+            "ok": "删除"
           }
         }
       },
