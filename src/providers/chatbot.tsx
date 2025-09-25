@@ -3,9 +3,7 @@ import React from 'react';
 
 declare global {
   interface Window {
-    Tawk_API: {
-      maximize: () => void;
-    };
+    $crisp: unknown[];
   }
 }
 
@@ -16,18 +14,7 @@ const ChatbotProvider: React.FC<{
     <>
       {children}
       <Script id="chatbot" strategy="lazyOnload">
-        {` var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/61b8601280b2296cfdd19bfa/1fms3eiq3';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-
-window.Tawk_API = window.Tawk_API || {};
-})();
-          `}
+        {` window.$crisp=[];window.CRISP_WEBSITE_ID="6af4a4cf-5c2e-4b46-9f8c-377103164632";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`}
       </Script>
     </>
   );
@@ -35,8 +22,9 @@ window.Tawk_API = window.Tawk_API || {};
 
 const useChatbot = () => {
   const openChatbot = () => {
-    if (window !== undefined && window.Tawk_API) {
-      window.Tawk_API.maximize();
+    if (window !== undefined && window.$crisp) {
+      // 显示聊天窗口
+      window.$crisp.push(['do', 'chat:open']);
     }
   };
 

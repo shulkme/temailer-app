@@ -4,6 +4,7 @@ import { CHECKOUT_MODE_ENUM, PRICE_TYPE_ENUM } from '@/apis/checkout/enums';
 import { CheckoutByStripeData } from '@/apis/checkout/types';
 import { AntdTitle } from '@/components/antd';
 import PrimaryButton from '@/components/primary-button';
+import { useChatbot } from '@/providers/chatbot';
 import { useSubscription } from '@/providers/subscription';
 import { RiCheckLine } from '@remixicon/react';
 import { useRequest } from 'ahooks';
@@ -44,6 +45,7 @@ const Plans: React.FC = () => {
   const t = useTranslations('app.pages.subscription.plans');
   const p = useTranslations('global.plans');
   const { plan, subscription } = useSubscription();
+  const { openChatbot } = useChatbot();
   const [period, setPeriod] = useState('yearly');
   const [loading, setLoading] = useState<PlanType>();
   const { message } = App.useApp();
@@ -659,11 +661,7 @@ const Plans: React.FC = () => {
       </div>
       <div className="text-center mt-6">
         {t.rich('tips', {
-          link: (chunks) => (
-            <a target="_blank" href={process.env.NEXT_PUBLIC_SUPPORT_TELEGRAM}>
-              {chunks}
-            </a>
-          ),
+          link: (chunks) => <a onClick={openChatbot}>{chunks}</a>,
         })}
       </div>
     </Card>

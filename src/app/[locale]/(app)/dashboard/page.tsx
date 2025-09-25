@@ -1,5 +1,4 @@
 'use client';
-import Banner from '@/app/[locale]/(app)/dashboard/components/banner';
 import Contact from '@/app/[locale]/(app)/dashboard/components/contact';
 import Credit from '@/app/[locale]/(app)/dashboard/components/credit';
 import Statistic from '@/app/[locale]/(app)/dashboard/components/statistic';
@@ -37,9 +36,9 @@ export default function Page() {
               <Col span={24}>
                 <Contact />
               </Col>
-              <Col span={24}>
-                <Banner />
-              </Col>
+              {/*<Col span={24}>*/}
+              {/*  <Banner />*/}
+              {/*</Col>*/}
             </Row>
           </Col>
         </Row>

@@ -189,26 +189,26 @@ export default function Page() {
               validateTrigger={['onChange', 'onBlur']}
             >
               <Checkbox>
-                <div className="space-x-2">
+                <div>
                   {t.rich('form.agree.label', {
                     term: (chunks) => {
                       return (
-                        <Link
+                        <a
                           target="_blank"
-                          href="https://doc.v2proxy.com/policy/service-agreement"
+                          href={process.env.NEXT_PUBLIC_SERVICE_AGREEMENT}
                         >
                           {chunks}
-                        </Link>
+                        </a>
                       );
                     },
                     policy: (chunks) => {
                       return (
-                        <Link
+                        <a
                           target="_blank"
-                          href="https://doc.v2proxy.com/policy/privacy-policy"
+                          href={process.env.NEXT_PUBLIC_PRIVACY_POLICY}
                         >
                           {chunks}
-                        </Link>
+                        </a>
                       );
                     },
                   })}

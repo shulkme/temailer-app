@@ -2,7 +2,7 @@
 import { getApiKeyList, refreshApiKey } from '@/apis/api_key';
 import { getApiUsageStatistics } from '@/apis/statistic';
 import { UsageStatisticRecord } from '@/apis/statistic/types';
-import { AntdLink, AntdText, AntdTitle, AntdTooltip } from '@/components/antd';
+import { AntdText, AntdTitle, AntdTooltip } from '@/components/antd';
 import { useIdentity } from '@/providers/identity';
 import { Title } from '@/providers/title';
 import { RiResetRightLine } from '@remixicon/react';
@@ -77,7 +77,11 @@ export default function Page() {
         showIcon
         type="info"
         message={t('alert.message')}
-        action={<AntdLink>{t('alert.extra')}</AntdLink>}
+        action={
+          <a href={process.env.NEXT_PUBLIC_API_DOC_URL} target="_blank">
+            {t('alert.extra')}
+          </a>
+        }
       />
       <div className="max-w-[1600px] mx-auto p-4 lg:p-6 space-y-4 lg:space-y-6">
         <Card>

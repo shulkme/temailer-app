@@ -155,7 +155,7 @@ const CreateDrawer: React.FC = () => {
       }>,
     ) => {
       setOpen(true);
-      const { name } = e.detail;
+      const { name } = e.detail || {};
       if (name) form.setFieldValue('domain_suffix', name);
     };
 

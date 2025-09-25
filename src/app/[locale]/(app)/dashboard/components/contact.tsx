@@ -5,7 +5,6 @@ import { useChatbot } from '@/providers/chatbot';
 import {
   RiChatSmile2Line,
   RiExternalLinkLine,
-  RiFileList3Line,
   RiMailLine,
   RiQuestionLine,
   RiTelegram2Line,
@@ -105,26 +104,7 @@ const Contact: React.FC = () => {
         </li>
         <li>
           <Link
-            href={process.env.NEXT_PUBLIC_DOC_URL!}
-            target="_blank"
-            className="flex items-center justify-between"
-          >
-            <div className="flex-auto flex items-center gap-2">
-              <Avatar size={32} className="bg-primary-50 text-primary-500">
-                <RiFileList3Line size={18} />
-              </Avatar>
-              <span className="text-black font-bold">
-                {t('links.documentation')}
-              </span>
-            </div>
-            <div className="flex-none text-black/50">
-              <RiExternalLinkLine size={16} />
-            </div>
-          </Link>
-        </li>
-        <li>
-          <Link
-            href={`${process.env.NEXT_PUBLIC_DOC_URL}/faq`}
+            href={`${process.env.NEXT_PUBLIC_DOC_URL}`}
             target="_blank"
             className="flex items-center justify-between"
           >

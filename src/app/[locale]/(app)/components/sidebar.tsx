@@ -8,7 +8,6 @@ import {
   RiBarChart2Line,
   RiBillLine,
   RiExternalLinkLine,
-  RiFileList3Line,
   RiFlashlightLine,
   RiGlobalLine,
   RiMailOpenLine,
@@ -158,22 +157,12 @@ const Inner = () => {
                   type: 'group',
                   children: [
                     {
-                      label: t('menus.documentation'),
-                      key: 'help:documentation',
-                      icon: <RiFileList3Line size={18} />,
-                      extra: <RiExternalLinkLine size={14} />,
-                      meta: {
-                        href: 'https://documentation',
-                        target: '_blank',
-                      },
-                    },
-                    {
                       label: t('menus.faq'),
                       key: 'help:faq',
                       icon: <RiQuestionLine size={18} />,
                       extra: <RiExternalLinkLine size={14} />,
                       meta: {
-                        href: 'https://xxxx',
+                        href: process.env.NEXT_PUBLIC_DOC_URL!,
                         target: '_blank',
                       },
                     },
@@ -183,7 +172,7 @@ const Inner = () => {
                       icon: <RiTelegram2Line size={18} />,
                       extra: <RiExternalLinkLine size={14} />,
                       meta: {
-                        href: 'https://documentation',
+                        href: process.env.NEXT_PUBLIC_SUPPORT_TELEGRAM!,
                         target: '_blank',
                       },
                     },
