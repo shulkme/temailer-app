@@ -120,42 +120,42 @@ const Plans: React.FC = () => {
   const handleCheckout = useCallback(
     (plan_type: PlanType) => {
       setLoading(plan_type);
-      let amount = 0;
+      // let amount = 0;
       let price_type: PRICE_TYPE_ENUM = PRICE_TYPE_ENUM.FREE_MONTHLY;
       switch (plan_type) {
         case 'free':
-          amount = plans.free.price;
+          // amount = plans.free.price;
           price_type =
             period === 'yearly'
               ? PRICE_TYPE_ENUM.FREE_YEARLY
               : PRICE_TYPE_ENUM.FREE_MONTHLY;
           break;
         case 'basic':
-          amount = plans.basic.price;
+          // amount = plans.basic.price;
           price_type =
             period === 'yearly'
               ? PRICE_TYPE_ENUM.BASIC_YEARLY
               : PRICE_TYPE_ENUM.BASIC_MONTHLY;
           break;
         case 'premium':
-          amount = plans.premium.price;
+          // amount = plans.premium.price;
           price_type =
             period === 'yearly'
               ? PRICE_TYPE_ENUM.PREMIUM_YEARLY
               : PRICE_TYPE_ENUM.PREMIUM_MONTHLY;
           break;
         case 'ultimate':
-          amount = plans.ultimate.price;
+          // amount = plans.ultimate.price;
           price_type =
             period === 'yearly'
               ? PRICE_TYPE_ENUM.ULTIMATE_YEARLY
               : PRICE_TYPE_ENUM.ULTIMATE_MONTHLY;
           break;
       }
-
-      if (period === 'yearly') {
-        amount = amount * 12 * (1 - discount);
-      }
+      //
+      // if (period === 'yearly') {
+      //   amount = amount * 12 * (1 - discount);
+      // }
 
       const data: CheckoutByStripeData = {
         mode: CHECKOUT_MODE_ENUM.SUBSCRIPTION,
@@ -164,7 +164,7 @@ const Plans: React.FC = () => {
           name: subscription?.subscription_info.rule_name || 'subscription',
           description: subscription?.subscription_info.description || '',
         },
-        amount: Math.round(amount),
+        // amount: Math.round(amount),
       };
 
       checkout(data);
