@@ -5,6 +5,7 @@ import { getEmailAddress } from '@/apis/email';
 import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
 import { useRequest, useSetState } from 'ahooks';
 import { SetState } from 'ahooks/es/useSetState';
+import { AxiosResponse } from 'axios';
 import { draw, uid } from 'radash';
 import React, {
   createContext,
@@ -73,6 +74,11 @@ const InboxProvider: React.FC<{
         setCurrentEmails({
           [provider]: email,
         });
+      },
+      onError: (e) => {
+        const headers = (e as unknown as AxiosResponse).headers;
+        const r = headers['Retry-After'];
+        console.log(headers, r);
       },
     },
   );

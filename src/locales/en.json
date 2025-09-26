@@ -457,7 +457,7 @@
           },
           "columns": {
             "email": "Email",
-            "remark": "Remark",
+            "remark": "Note",
             "createdTime": "Created Time",
             "operate": "Operate"
           }
@@ -467,6 +467,15 @@
           "content": "Are you sure you want to delete this email address? This action cannot be undone.",
           "actions": {
             "ok": "Delete"
+          }
+        },
+        "remark": {
+          "title": "Note",
+          "form": {
+            "notes": {
+              "label": "Note",
+              "placeholder": "Input Note"
+            }
           }
         }
       },
@@ -497,7 +506,7 @@
           "columns": {
             "domain": "Domain",
             "status": "Status",
-            "remark": "Remark",
+            "remark": "Note",
             "registerTime": "Register Time",
             "expiredTime": "Expired Time",
             "createTime": "Created Time",
@@ -559,6 +568,15 @@
             "title": "Release Successful",
             "subtitle": "{num, plural, =0 {} =1 {1 credit} other {# credits}} have been added to your account",
             "submit": "Got it"
+          }
+        },
+        "remark": {
+          "title": "Note",
+          "form": {
+            "notes": {
+              "label": "Note",
+              "placeholder": "Input Note"
+            }
           }
         }
       },

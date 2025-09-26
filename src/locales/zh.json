@@ -468,6 +468,15 @@
           "actions": {
             "ok": "删除"
           }
+        },
+        "remark": {
+          "title": "添加备注",
+          "form": {
+            "notes": {
+              "label": "备注",
+              "placeholder": "请输入备注"
+            }
+          }
         }
       },
       "domain": {
@@ -559,6 +568,15 @@
             "title": "释放成功",
             "subtitle": "{num, plural, =0 {} =1 {1 积分} other {# 积分}}已存入您的账户",
             "submit": "知道了"
+          }
+        },
+        "remark": {
+          "title": "添加备注",
+          "form": {
+            "notes": {
+              "label": "备注",
+              "placeholder": "请输入备注"
+            }
           }
         }
       },

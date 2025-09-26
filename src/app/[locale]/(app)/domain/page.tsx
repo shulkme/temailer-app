@@ -5,6 +5,7 @@ import { DomainRecord } from '@/apis/domain/types';
 import CreateDrawer from '@/app/[locale]/(app)/domain/components/create-drawer';
 import DomainList from '@/app/[locale]/(app)/domain/components/domian-list';
 import ReleaseModal from '@/app/[locale]/(app)/domain/components/release-modal';
+import RemarkModal from '@/app/[locale]/(app)/domain/components/remark-modal';
 import { DomainProvider } from '@/app/[locale]/(app)/domain/context';
 import {
   AntdDateRangePicker,
@@ -14,7 +15,7 @@ import {
 } from '@/components/antd';
 import { useCredit } from '@/providers/credit';
 import { Title } from '@/providers/title';
-import { RiSearchLine } from '@remixicon/react';
+import { RiEditBoxLine, RiSearchLine } from '@remixicon/react';
 import { useAntdTable, useSetState } from 'ahooks';
 import { Alert, Button, Card, FormProps, Select, Space, Table } from 'antd';
 import dayjs from 'dayjs';
@@ -26,8 +27,10 @@ export default function Page() {
   const [form] = AntdForm.useForm();
   const [open, setOpen] = useSetState<{
     release: boolean;
+    remark: boolean;
   }>({
     release: false,
+    remark: false,
   });
   const [currentRecord, setCurrentRecord] = useState<DomainRecord>();
   const { refresh: refreshCredits } = useCredit();
@@ -114,6 +117,11 @@ export default function Page() {
     setOpen({ release: true });
   };
 
+  const handleRemark = (record: DomainRecord) => {
+    setCurrentRecord(record);
+    setOpen({ remark: true });
+  };
+
   return (
     <DomainProvider>
       <Title title={t('title')} />
@@ -181,8 +189,18 @@ export default function Page() {
               {
                 title: t('table.columns.remark'),
                 dataIndex: 'remark',
-                render: (value) => {
-                  return value || '--';
+                render: (value, record) => {
+                  return (
+                    <>
+                      <span className="inline">{value}</span>
+                      <span
+                        className="inline cursor-pointer text-black/50 hover:text-primary-500"
+                        onClick={() => handleRemark(record)}
+                      >
+                        <RiEditBoxLine className="inline" size={14} />
+                      </span>
+                    </>
+                  );
                 },
               },
               {
@@ -245,6 +263,13 @@ export default function Page() {
         open={open.release}
         setOpen={(o) => setOpen({ release: o })}
         afterSubmit={handleAfterRelease}
+        afterClose={() => setCurrentRecord(undefined)}
+      />
+      <RemarkModal
+        record={currentRecord}
+        open={open.remark}
+        setOpen={(o) => setOpen({ remark: o })}
+        afterSubmit={refresh}
         afterClose={() => setCurrentRecord(undefined)}
       />
     </DomainProvider>

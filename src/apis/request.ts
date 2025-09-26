@@ -51,6 +51,10 @@ request.interceptors.response.use(
         delToken();
         window.location.replace('/login');
       }
+      if (error.response.status === 429) {
+        console.error(error);
+        return Promise.reject(error.response);
+      }
       // Server error
       const { code, msg } = error.response.data;
       return Promise.reject({

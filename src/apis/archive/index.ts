@@ -27,3 +27,12 @@ export async function delArchive(ids: number[]) {
     data: ids,
   });
 }
+
+export async function setArchiveRemark(
+  id: number,
+  data: {
+    remark: string;
+  },
+) {
+  return await request.put(`/sys/mailbox/${id}/remark`, data);
+}

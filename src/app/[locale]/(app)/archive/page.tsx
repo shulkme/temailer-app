@@ -1,10 +1,11 @@
 'use client';
 import { delArchive, getArchiveList } from '@/apis/archive';
 import { ArchiveRecord } from '@/apis/archive/types';
+import RemarkModal from '@/app/[locale]/(app)/archive/components/remark-modal';
 import { AntdForm, AntdFormItem, AntdInput } from '@/components/antd';
 import { Title } from '@/providers/title';
-import { RiSearchLine } from '@remixicon/react';
-import { useAntdTable, useRequest } from 'ahooks';
+import { RiEditBoxLine, RiSearchLine } from '@remixicon/react';
+import { useAntdTable, useRequest, useSetState } from 'ahooks';
 import { App, Button, Card, FormProps, Space, Table } from 'antd';
 import { useTranslations } from 'next-intl';
 import React, { useCallback, useState } from 'react';
@@ -15,6 +16,12 @@ export default function Page() {
   const [form] = AntdForm.useForm();
   const { message, modal } = App.useApp();
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
+  const [open, setOpen] = useSetState<{
+    remark: boolean;
+  }>({
+    remark: false,
+  });
+  const [currentRecord, setCurrentRecord] = useState<ArchiveRecord>();
 
   const { tableProps, search, refresh } = useAntdTable(
     async ({ current, pageSize }, params) => {
@@ -67,6 +74,11 @@ export default function Page() {
     [doDelete, modal, t],
   );
 
+  const handleRemark = (record: ArchiveRecord) => {
+    setCurrentRecord(record);
+    setOpen({ remark: true });
+  };
+
   return (
     <>
       <Title title={t('title')} />
@@ -116,6 +128,19 @@ export default function Page() {
               {
                 title: t('table.columns.remark'),
                 dataIndex: 'remark',
+                render: (value, record) => {
+                  return (
+                    <>
+                      <span className="inline">{value}</span>
+                      <span
+                        className="inline cursor-pointer text-black/50 hover:text-primary-500"
+                        onClick={() => handleRemark(record)}
+                      >
+                        <RiEditBoxLine className="inline" size={14} />
+                      </span>
+                    </>
+                  );
+                },
               },
               {
                 title: t('table.columns.createdTime'),
@@ -148,6 +173,13 @@ export default function Page() {
           />
         </Card>
       </div>
+      <RemarkModal
+        record={currentRecord}
+        open={open.remark}
+        setOpen={(o) => setOpen({ remark: o })}
+        afterSubmit={refresh}
+        afterClose={() => setCurrentRecord(undefined)}
+      />
     </>
   );
 }

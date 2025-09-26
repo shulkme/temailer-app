@@ -425,6 +425,7 @@ const EmailController: React.FC = () => {
                 {t('email.actions.archive')}
               </Button>
               <Button
+                loading={loading}
                 type="text"
                 className="leading-none"
                 icon={<RiDiceLine size={18} />}

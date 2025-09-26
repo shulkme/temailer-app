@@ -47,3 +47,12 @@ export async function getDomainSalvage(
 ): Promise<HttpResponse<DomainSalvageResponse>> {
   return await request.get(`/sys/domain/${id}/refund-calculation`);
 }
+
+export async function setDomainRemark(
+  id: number,
+  data: {
+    remark: string;
+  },
+) {
+  return await request.put(`/sys/domain/${id}/remark`, data);
+}
