@@ -1,4 +1,4 @@
-import { PAYMENT_METHOD_ENUM } from '@/apis/checkout/enums';
+import { PAYMENT_METHOD_ENUM, PRICE_TYPE_ENUM } from '@/apis/checkout/enums';
 
 export interface CreditRecord {
   id: string;
@@ -54,7 +54,7 @@ export interface CreditUsageStatisticRecord {
 export interface CreditSubscriptionPlanRecord {
   has_subscription: boolean;
   subscription_info: {
-    rule_name: string;
+    rule_name: PRICE_TYPE_ENUM;
     points: number;
     start_at: string;
     expire_at: string;

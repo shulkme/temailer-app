@@ -99,7 +99,7 @@ export default function Page() {
                 >
                   {t('table.actions.delete')}
                 </Button>
-                <Button type="primary">{t('table.actions.export')}</Button>
+                {/*<Button type="primary">{t('table.actions.export')}</Button>*/}
               </Space>
             </div>
           </div>

@@ -9,6 +9,7 @@ import {
   AntdFormItem,
   AntdInput,
 } from '@/components/antd';
+import { useSubscription } from '@/providers/subscription';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { useAntdTable } from 'ahooks';
@@ -21,6 +22,7 @@ export default function Page() {
   const t = useTranslations('app.pages.bill');
   const g = useTranslations('global');
   const [form] = AntdForm.useForm();
+  const { getPlanLocaleConfig } = useSubscription();
 
   const statusOptions = useMemo(() => {
     return [
@@ -106,6 +108,29 @@ export default function Page() {
     [methodOptions],
   );
 
+  const planLabelFilter = useCallback(
+    (record: OrderRecord) => {
+      switch (record.order_type) {
+        case ORDER_TYPE_ENUM.DOMAIN:
+          // const config = getPlanLocaleConfig(record.extra_info);
+          return [
+            record.extra_info?.session_metadata?.name,
+            record.extra_info?.session_metadata?.quantity,
+          ]
+            .filter(Boolean)
+            .join(' / ');
+        case ORDER_TYPE_ENUM.CREDIT:
+          return record.extra_info?.credit_result?.credits_added;
+        case ORDER_TYPE_ENUM.SUBSCRIPTION:
+          const config = getPlanLocaleConfig(
+            record.extra_info?.credit_result?.name,
+          );
+          return config?.fullName;
+      }
+    },
+    [getPlanLocaleConfig],
+  );
+
   const { tableProps, search } = useAntdTable(
     async ({ current, pageSize }, params) => {
       const { dataRange, ...rest } = params;
@@ -138,7 +163,7 @@ export default function Page() {
   const { submit } = search;
 
   const onFormValuesChange: FormProps['onValuesChange'] = (changedValues) => {
-    if (!Object.keys(changedValues).includes('external_order_id')) submit();
+    if (!Object.keys(changedValues).includes('name')) submit();
   };
 
   return (
@@ -152,9 +177,9 @@ export default function Page() {
               layout="inline"
               onValuesChange={onFormValuesChange}
             >
-              <AntdFormItem name="package_type">
+              <AntdFormItem name="status">
                 <Select
-                  placeholder={t('table.filters.type.placeholder')}
+                  placeholder={t('table.filters.status.placeholder')}
                   style={{ width: 220 }}
                   allowClear
                   options={statusOptions}
@@ -163,7 +188,7 @@ export default function Page() {
               <AntdFormItem name="dataRange">
                 <AntdDateRangePicker />
               </AntdFormItem>
-              <AntdFormItem name="external_order_id">
+              <AntdFormItem name="name">
                 <AntdInput
                   allowClear
                   placeholder={t('table.filters.search.placeholder')}
@@ -208,7 +233,9 @@ export default function Page() {
               },
               {
                 title: t('table.columns.plan'),
-                dataIndex: 'extra_info',
+                render: (_, record) => {
+                  return planLabelFilter(record);
+                },
               },
               {
                 title: t('table.columns.status'),

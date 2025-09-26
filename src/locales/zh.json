@@ -2,7 +2,9 @@
   "global": {
     "units": {
       "day": "{num, plural, =0 {天} =1 {1天} other {#天}}",
-      "year": "{num, plural, =0 {年} =1 {1年} other {#年}}"
+      "year": "{num, plural, =0 {年} =1 {1年} other {#年}}",
+      "monthly": "月付",
+      "yearly": "年付"
     },
     "checkout": {
       "payment": {
@@ -428,7 +430,7 @@
       "interface": {
         "title": "API",
         "alert": {
-          "message": "通过API将收发功能集成到您的应用程序时，请妥善保管您的密钥。",
+          "message": "通过API将收发信功能集成到您的应用程序中，请妥善保管您的密钥。",
           "extra": "查看文档"
         },
         "info": {
@@ -564,8 +566,8 @@
         "title": "账单",
         "table": {
           "filters": {
-            "type": {
-              "placeholder": "类型"
+            "status": {
+              "placeholder": "状态"
             },
             "search": {
               "placeholder": "搜索"
@@ -653,9 +655,9 @@
       },
       "or": "或",
       "form": {
-        "email": {
-          "label": "邮箱",
-          "placeholder": "邮箱地址"
+        "username": {
+          "label": "用户名",
+          "placeholder": "用户名/邮箱地址"
         },
         "password": {
           "label": "密码",

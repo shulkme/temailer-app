@@ -105,20 +105,20 @@ export default function Page() {
         )}
         <AntdFormItem
           messageVariables={{
-            label: t('form.email.label'),
+            label: t('form.username.label'),
           }}
           name="username"
-          label={t('form.email.label')}
+          label={t('form.username.label')}
           rules={[
             {
               required: true,
             },
-            {
-              type: 'email',
-            },
           ]}
         >
-          <AntdInput size="large" placeholder={t('form.email.placeholder')} />
+          <AntdInput
+            size="large"
+            placeholder={t('form.username.placeholder')}
+          />
         </AntdFormItem>
         <AntdFormItem
           messageVariables={{

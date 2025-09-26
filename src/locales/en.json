@@ -2,7 +2,9 @@
   "global": {
     "units": {
       "day": "{num, plural, =0 {Day} =1 {1 Day} other {# Days}}",
-      "year": "{num, plural, =0 {Year} =1 {1 Year} other {# Years}}"
+      "year": "{num, plural, =0 {Year} =1 {1 Year} other {# Years}}",
+      "monthly": "Monthly",
+      "yearly": "Yearly"
     },
     "checkout": {
       "payment": {
@@ -428,7 +430,7 @@
       "interface": {
         "title": "API",
         "alert": {
-          "message": "When integrating the sending and receiving functions into your application through the API, please keep your key safe.",
+          "message": "Use the API to send and receive emails in your app. Make sure to safeguard your key.",
           "extra": "Documentation"
         },
         "info": {
@@ -564,8 +566,8 @@
         "title": "Bill",
         "table": {
           "filters": {
-            "type": {
-              "placeholder": "Type"
+            "status": {
+              "placeholder": "Status"
             },
             "search": {
               "placeholder": "Search"
@@ -653,9 +655,9 @@
       },
       "or": "OR",
       "form": {
-        "email": {
-          "label": "Email",
-          "placeholder": "Email Address"
+        "username": {
+          "label": "Username",
+          "placeholder": "Username/Email"
         },
         "password": {
           "label": "Password",

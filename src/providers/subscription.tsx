@@ -4,7 +4,13 @@ import { getCurrentSubscription } from '@/apis/credit';
 import { CreditSubscriptionPlanRecord } from '@/apis/credit/types';
 import { useRequest } from 'ahooks';
 import { useTranslations } from 'next-intl';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 const SubscriptionContext = createContext<{
   subscription?: CreditSubscriptionPlanRecord;
@@ -12,6 +18,13 @@ const SubscriptionContext = createContext<{
   is_free?: boolean;
   plan?: string;
   plan_locale?: string;
+  getPlanLocaleConfig: (price?: PRICE_TYPE_ENUM) =>
+    | {
+        key: string;
+        name: string;
+        fullName: string;
+      }
+    | undefined;
 } | null>(null);
 
 const SubscriptionProvider: React.FC<{
@@ -23,6 +36,62 @@ const SubscriptionProvider: React.FC<{
   const [isFree, setIsFree] = useState(true);
   const [planLocale, setPlanLocale] = useState<string>();
   const [plan, setPlan] = useState<string>('free');
+  const getPlanLocaleConfig = useCallback(
+    (price?: PRICE_TYPE_ENUM) => {
+      switch (price) {
+        case PRICE_TYPE_ENUM.FREE_MONTHLY:
+        case PRICE_TYPE_ENUM.FREE_YEARLY:
+          return {
+            key: 'free',
+            name: g('plans.free.title'),
+            fullName: g('plans.free.title'),
+          };
+        case PRICE_TYPE_ENUM.BASIC_MONTHLY:
+          return {
+            key: 'basic',
+            name: g('plans.basic.title'),
+            fullName: [g('plans.basic.title'), g('units.monthly')].join(' / '),
+          };
+        case PRICE_TYPE_ENUM.BASIC_YEARLY:
+          return {
+            key: 'basic',
+            name: g('plans.basic.title'),
+            fullName: [g('plans.basic.title'), g('units.yearly')].join(' / '),
+          };
+        case PRICE_TYPE_ENUM.PREMIUM_MONTHLY:
+          return {
+            key: 'premium',
+            name: g('plans.premium.title'),
+            fullName: [g('plans.premium.title'), g('units.monthly')].join(
+              ' / ',
+            ),
+          };
+        case PRICE_TYPE_ENUM.PREMIUM_YEARLY:
+          return {
+            key: 'premium',
+            name: g('plans.premium.title'),
+            fullName: [g('plans.premium.title'), g('units.yearly')].join(' / '),
+          };
+        case PRICE_TYPE_ENUM.ULTIMATE_MONTHLY:
+          return {
+            key: 'ultimate',
+            name: g('plans.ultimate.title'),
+            fullName: [g('plans.ultimate.title'), g('units.monthly')].join(
+              ' / ',
+            ),
+          };
+        case PRICE_TYPE_ENUM.ULTIMATE_YEARLY:
+          return {
+            key: 'ultimate',
+            name: g('plans.ultimate.title'),
+            fullName: [g('plans.ultimate.title'), g('units.yearly')].join(
+              ' / ',
+            ),
+          };
+      }
+    },
+    [g],
+  );
 
   const { loading, refresh } = useRequest(getCurrentSubscription, {
     onSuccess: (res) => {
@@ -32,18 +101,11 @@ const SubscriptionProvider: React.FC<{
         rule_name === PRICE_TYPE_ENUM.FREE_MONTHLY ||
           rule_name === PRICE_TYPE_ENUM.FREE_YEARLY,
       );
-      if (rule_name.startsWith('free')) {
-        setPlanLocale(g('plans.free.title'));
-        setPlan('free');
-      } else if (rule_name.startsWith('basic')) {
-        setPlanLocale(g('plans.basic.title'));
-        setPlan('basic');
-      } else if (rule_name.startsWith('premium')) {
-        setPlanLocale(g('plans.premium.title'));
-        setPlan('premium');
-      } else if (rule_name.startsWith('ultimate')) {
-        setPlanLocale(g('plans.ultimate.title'));
-        setPlan('ultimate');
+
+      const { key, name } = getPlanLocaleConfig(rule_name) || {};
+      if (key && name) {
+        setPlan(key);
+        setPlanLocale(name);
       }
     },
   });
@@ -66,6 +128,7 @@ const SubscriptionProvider: React.FC<{
         is_free: isFree,
         plan_locale: planLocale,
         plan,
+        getPlanLocaleConfig,
       }}
     >
       {children}
