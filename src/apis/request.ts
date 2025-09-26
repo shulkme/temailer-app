@@ -52,7 +52,6 @@ request.interceptors.response.use(
         window.location.replace('/login');
       }
       if (error.response.status === 429) {
-        console.error(error);
         return Promise.reject(error.response);
       }
       // Server error

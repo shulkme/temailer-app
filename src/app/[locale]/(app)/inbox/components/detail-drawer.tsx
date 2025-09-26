@@ -1,9 +1,9 @@
 import { getEmailDetail } from '@/apis/email';
 import { EmailRecord } from '@/apis/email/types';
-import { formatTimeWithTimezone } from '@/utils/time';
 import { RiArrowLeftSLine } from '@remixicon/react';
 import { useRequest } from 'ahooks';
 import { Avatar, Drawer, DrawerProps } from 'antd';
+import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 
 const DetailDrawer: React.FC = () => {
@@ -63,7 +63,7 @@ const DetailDrawer: React.FC = () => {
       extra={
         <div className="text-xs text-black/50">
           {record?.created_time &&
-            formatTimeWithTimezone(record?.created_time, 'YYYY-MM-DD HH:mm')}
+            dayjs(record?.created_time).format('YYYY-MM-DD HH:mm')}
         </div>
       }
       open={open}

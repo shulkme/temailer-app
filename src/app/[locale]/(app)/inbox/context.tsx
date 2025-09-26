@@ -6,6 +6,7 @@ import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
 import { useRequest, useSetState } from 'ahooks';
 import { SetState } from 'ahooks/es/useSetState';
 import { AxiosResponse } from 'axios';
+import dayjs from 'dayjs';
 import { draw, uid } from 'radash';
 import React, {
   createContext,
@@ -25,6 +26,8 @@ const InboxContext = createContext<{
   setCurrentEmails: SetState<Record<string, string | null>>;
   randomEmail: (type: EMAIL_CHANNEL_TYPE_ENUM) => string | null;
   currentEmail: string | null;
+  isImapEmail: boolean;
+  nextRetryTime?: string;
 } | null>(null);
 
 const InboxProvider: React.FC<{
@@ -47,9 +50,18 @@ const InboxProvider: React.FC<{
     [EMAIL_CHANNEL_TYPE_ENUM.MAIL]: null,
   });
 
+  const [nextRetryTime, setNextRetryTime] = useState<string>();
+
   const currentEmail = useMemo(() => {
     return currentEmails?.[currentChannel];
   }, [currentChannel, currentEmails]);
+
+  const isImapEmail = useMemo(() => {
+    return (
+      currentChannel !== EMAIL_CHANNEL_TYPE_ENUM.TEMP &&
+      currentChannel !== EMAIL_CHANNEL_TYPE_ENUM.EDU
+    );
+  }, [currentChannel]);
 
   const randomEmail = useCallback(
     (type: EMAIL_CHANNEL_TYPE_ENUM) => {
@@ -77,8 +89,14 @@ const InboxProvider: React.FC<{
       },
       onError: (e) => {
         const headers = (e as unknown as AxiosResponse).headers;
-        const r = headers['Retry-After'];
-        console.log(headers, r);
+        const second = +headers['retry-after'];
+        if (second > 0) {
+          setNextRetryTime(
+            dayjs().add(second, 'second').format('YYYY-MM-DD HH:mm'),
+          );
+        } else {
+          setNextRetryTime(undefined);
+        }
       },
     },
   );
@@ -128,6 +146,8 @@ const InboxProvider: React.FC<{
         setCurrentChannel,
         randomEmail,
         currentEmail,
+        isImapEmail,
+        nextRetryTime,
       }}
     >
       {children}

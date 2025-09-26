@@ -4,10 +4,10 @@ import { EmailRecord } from '@/apis/email/types';
 import { useInbox } from '@/app/[locale]/(app)/inbox/context';
 import { AntdListItem, AntdTitle } from '@/components/antd';
 import { useCredit } from '@/providers/credit';
-import { formatTimeWithTimezone } from '@/utils/time';
 import { RiRefreshLine } from '@remixicon/react';
 import { useCountDown, useRequest } from 'ahooks';
 import { Button, Card, List, Space } from 'antd';
+import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
@@ -91,7 +91,7 @@ const MessageList: React.FC = () => {
               <div className="flex items-center justify-between">
                 <h4 className="font-bold">{email.from_name}</h4>
                 <span className="text-xs text-black/50">
-                  {formatTimeWithTimezone(email.created_time, 'HH:mm')}
+                  {dayjs(email.created_time).format('HH:mm')}
                 </span>
               </div>
               <div className="text-sm">{email.subject}</div>

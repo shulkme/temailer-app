@@ -1,6 +1,5 @@
 'use client';
 import { addArchive } from '@/apis/archive';
-import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
 import { createIssue } from '@/apis/issue';
 import { ISSUE_TYPE_ENUM } from '@/apis/issue/enums';
 import { useInbox } from '@/app/[locale]/(app)/inbox/context';
@@ -335,6 +334,8 @@ const EmailController: React.FC = () => {
     setCurrentEmails,
     randomEmail,
     loading,
+    isImapEmail,
+    nextRetryTime,
   } = useInbox();
   const { message } = App.useApp();
   const [open, setOpen] = useSetState<{
@@ -384,7 +385,7 @@ const EmailController: React.FC = () => {
           <div className="text-xs text-black/50 mb-4">{t('email.current')}</div>
           <div>
             {loading ? (
-              <AntdSkeletonInput active />
+              <AntdSkeletonInput active className="h-[38px]" />
             ) : (
               <div className="inline-block relative">
                 {currentEmail ? (
@@ -405,8 +406,9 @@ const EmailController: React.FC = () => {
             )}
           </div>
           <div className="-ml-2 mt-6 flex justify-between items-center gap-2 flex-wrap">
-            <Space>
+            <Space size="middle">
               <Button
+                disabled={!currentEmail}
                 type="text"
                 className="leading-none"
                 icon={<RiFileCopyLine size={18} />}
@@ -416,6 +418,7 @@ const EmailController: React.FC = () => {
                 {t('email.actions.copy')}
               </Button>
               <Button
+                disabled={!currentEmail}
                 type="text"
                 className="leading-none"
                 icon={<RiBookmarkLine size={18} />}
@@ -424,6 +427,18 @@ const EmailController: React.FC = () => {
               >
                 {t('email.actions.archive')}
               </Button>
+              {!isImapEmail && (
+                <Button
+                  disabled={!currentEmail}
+                  type="text"
+                  className="leading-none"
+                  icon={<RiEditLine size={18} />}
+                  size="small"
+                  onClick={() => setOpen({ custom: true })}
+                >
+                  {t('email.actions.custom')}
+                </Button>
+              )}
               <Button
                 loading={loading}
                 type="text"
@@ -434,18 +449,6 @@ const EmailController: React.FC = () => {
               >
                 {t('email.actions.random')}
               </Button>
-              {(currentChannel === EMAIL_CHANNEL_TYPE_ENUM.TEMP ||
-                currentChannel === EMAIL_CHANNEL_TYPE_ENUM.EDU) && (
-                <Button
-                  type="text"
-                  className="leading-none"
-                  icon={<RiEditLine size={18} />}
-                  size="small"
-                  onClick={() => setOpen({ custom: true })}
-                >
-                  {t('email.actions.custom')}
-                </Button>
-              )}
             </Space>
             <Space>
               <Button
@@ -460,9 +463,11 @@ const EmailController: React.FC = () => {
             </Space>
           </div>
         </div>
-        <div className="bg-gray-50 px-6 py-2 text-black/50 text-xs rounded-b-lg">
-          {t('email.alert')} 2025-09-24 16:40
-        </div>
+        {isImapEmail && nextRetryTime && (
+          <div className="bg-gray-50 px-6 py-2 text-black/50 text-xs rounded-b-lg">
+            {t('email.alert')} {nextRetryTime}
+          </div>
+        )}
       </Card>
       <CustomModal open={open.custom} setOpen={(o) => setOpen({ custom: o })} />
       <IssueModal open={open.issue} setOpen={(o) => setOpen({ issue: o })} />
