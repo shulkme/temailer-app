@@ -656,7 +656,7 @@
   },
   "auth": {
     "global": {
-      "slogan": "Next-Gen Temporary Email\nRedefining Your Mail Experience",
+      "slogan": "Temp-Mail\nRedefining Your Email Experience",
       "features": [
         "Unlimited Random Email Addresses",
         "Privacy Protection & No Spam",
@@ -664,7 +664,7 @@
         "90.9% Email Delivery Rate",
         "24/7 customer support"
       ],
-      "footer": "Received over 10 million emails"
+      "footer": "Trusted by users with over 10 million emails received"
     },
     "login": {
       "title": "Log in to your account",
