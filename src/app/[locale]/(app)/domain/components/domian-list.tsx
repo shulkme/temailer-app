@@ -2,6 +2,8 @@
 import { DomainSuffixRecord } from '@/apis/domain/types';
 import { useDomain } from '@/app/[locale]/(app)/domain/context';
 import SliderScroller from '@/components/slider-scroller';
+import { useSubscription } from '@/providers/subscription';
+import { cn } from '@/utils/classname';
 import { Card, Tag } from 'antd';
 import { useLocale, useTranslations } from 'next-intl';
 import React, { useCallback } from 'react';
@@ -11,6 +13,7 @@ const DomainItem: React.FC<{
 }> = ({ record }) => {
   const g = useTranslations('global');
   const locale = useLocale();
+  const { is_free } = useSubscription();
 
   const renderDesc = useCallback(
     (record: DomainSuffixRecord) => {
@@ -41,6 +44,7 @@ const DomainItem: React.FC<{
   );
 
   const onClick = useCallback(() => {
+    if (is_free) return;
     window.dispatchEvent(
       new CustomEvent('domain:create', {
         detail: {
@@ -48,11 +52,13 @@ const DomainItem: React.FC<{
         },
       }),
     );
-  }, [record]);
+  }, [is_free, record.name]);
 
   return (
     <div className="w-64 relative shrink-0 snap-start" onClick={onClick}>
-      <Card className="cursor-pointer hover:border-primary-500">
+      <Card
+        className={cn(!is_free && 'cursor-pointer hover:border-primary-500')}
+      >
         <div className="space-y-2">
           {renderTag(record)}
           <h3 className="font-bold text-xl">{record.name}</h3>

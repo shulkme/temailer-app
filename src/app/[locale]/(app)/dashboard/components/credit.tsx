@@ -36,7 +36,7 @@ const Credit: React.FC = () => {
           <div className="absolute bottom-0 right-0 h-full w-1/3 bg-linear-[190deg] from-blue-200/50 to-transparent to-90% -skew-x-45 translate-x-1/2"></div>
           <div className="relative z-10">
             <AntdParagraph className="mb-2" type="secondary">
-              剩余积分
+              {t('available')}
             </AntdParagraph>
             <div className="flex justify-between items-center flex-wrap">
               <AntdTitle level={3} className="m-0">

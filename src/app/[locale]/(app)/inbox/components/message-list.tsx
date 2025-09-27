@@ -3,19 +3,25 @@ import { getEmailMessages } from '@/apis/email';
 import { EmailRecord } from '@/apis/email/types';
 import { useInbox } from '@/app/[locale]/(app)/inbox/context';
 import { AntdListItem, AntdTitle } from '@/components/antd';
+import { Link } from '@/i18n/navigation';
 import { useCredit } from '@/providers/credit';
 import { RiRefreshLine } from '@remixicon/react';
 import { useCountDown, useRequest } from 'ahooks';
-import { Button, Card, List, Space } from 'antd';
+import { Button, Card, ConfigProvider, List, Space, Switch } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 const MessageList: React.FC = () => {
-  const t = useTranslations('app.pages.inbox');
+  const t = useTranslations('app.pages.inbox.messages');
   const [nextRefreshTime, setNextRefreshTime] = useState<number>();
-  const { currentEmail, currentChannel } = useInbox();
-  const { refresh: refreshCredit, available } = useCredit();
+  const { currentEmail, currentChannel, autoRefresh, setAutoRefresh } =
+    useInbox();
+  const {
+    refresh: refreshCredit,
+    available,
+    loading: creditLoading,
+  } = useCredit();
   const [emails, setEmails] = useState<Omit<EmailRecord, 'content'>[]>([]);
   // 刷新倒计时
   const [countDown] = useCountDown({
@@ -49,36 +55,71 @@ const MessageList: React.FC = () => {
   useEffect(() => {
     cancel();
     setNextRefreshTime(undefined);
-    setEmails([]);
-    if (currentEmail && available > 0) {
+    if (currentEmail && available > 0 && autoRefresh) {
       run(currentEmail, currentChannel);
     }
-  }, [available, cancel, currentChannel, currentEmail, run]);
+  }, [available, cancel, currentChannel, currentEmail, run, autoRefresh]);
+
+  useEffect(() => {
+    setEmails([]);
+  }, [currentChannel, currentEmail]);
 
   return (
-    <Card>
+    <Card
+      classNames={{
+        header: 'bg-orange-50',
+      }}
+      title={
+        !available && !creditLoading ? (
+          <div className="font-normal text-sm text-orange-600">
+            {t.rich('alert', {
+              link: (chunks) => (
+                <Link href="/subscription#credit">{chunks}</Link>
+              ),
+            })}
+          </div>
+        ) : null
+      }
+    >
       <div className="flex flex-wrap items-center justify-between gap-2 mb-4 lg:mb-6">
         <div>
           <AntdTitle level={5} className="m-0">
-            {t('messages.title')}
+            {t('title')}
           </AntdTitle>
         </div>
         <div>
           <Space size="middle">
-            <span className="text-black/50">
-              {t('messages.countdown', {
-                num: Math.round(countDown / 1000),
-              })}
-            </span>
+            <div className="flex items-center gap-2 border rounded-sm border-slate-200 h-(--ant-control-height-sm) px-2">
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Switch: {
+                      controlHeight: 32,
+                    },
+                  },
+                }}
+              >
+                <Switch
+                  size="small"
+                  checked={autoRefresh}
+                  onChange={setAutoRefresh}
+                />
+              </ConfigProvider>
+              <span>
+                {t('countdown', {
+                  num: Math.round(countDown / 1000),
+                })}
+              </span>
+            </div>
             <Button
-              disabled={!countDown && !loading}
+              disabled={!available}
               loading={loading}
               size="small"
               className="leading-none"
               icon={<RiRefreshLine size={16} />}
               onClick={refresh}
             >
-              {t('messages.actions.refresh')}
+              {t('actions.refresh')}
             </Button>
           </Space>
         </div>

@@ -44,7 +44,7 @@ const ChannelCard: React.FC<
       <AntdRadioButton
         disabled={disabled || stock < 1 || !available}
         className={cn(
-          'block relative rounded-lg text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5',
+          'block text-black/80 relative rounded-lg text-left h-auto leading-none p-0 m-0 before:hidden [&.ant-radio-button-wrapper-checked]:bg-primary-500/5',
           (disabled || stock < 1 || !available) && 'border-white bg-white',
         )}
         {...props}
@@ -68,7 +68,7 @@ const ChannelCard: React.FC<
         </div>
       </AntdRadioButton>
       {!available && (
-        <div className="absolute z-20 inset-[2px] bg-linear-to-l from-primary-50 to-white/30 flex items-center justify-end p-4">
+        <div className="absolute z-20 inset-[2px] bg-linear-to-l from-primary-50 to-transparent flex items-center justify-end p-4">
           <Link href="/subscription">
             <Button type="primary" size="small" shape="round">
               {t('subscriptionOnly')}

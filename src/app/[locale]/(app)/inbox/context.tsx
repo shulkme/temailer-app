@@ -3,7 +3,7 @@ import { getAllDomains } from '@/apis/domain';
 import { DomainRecord } from '@/apis/domain/types';
 import { getEmailAddress } from '@/apis/email';
 import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
-import { useRequest, useSetState } from 'ahooks';
+import { useLocalStorageState, useRequest, useSetState } from 'ahooks';
 import { SetState } from 'ahooks/es/useSetState';
 import { AxiosResponse } from 'axios';
 import dayjs from 'dayjs';
@@ -28,6 +28,8 @@ const InboxContext = createContext<{
   currentEmail: string | null;
   isImapEmail: boolean;
   nextRetryTime?: string;
+  autoRefresh: boolean;
+  setAutoRefresh: (autoRefresh: boolean) => void;
 } | null>(null);
 
 const InboxProvider: React.FC<{
@@ -51,6 +53,11 @@ const InboxProvider: React.FC<{
   });
 
   const [nextRetryTime, setNextRetryTime] = useState<string>();
+
+  const [autoRefresh, setAutoRefresh] = useLocalStorageState('AUTO_REFRESH', {
+    defaultValue: true,
+    listenStorageChange: true,
+  });
 
   const currentEmail = useMemo(() => {
     return currentEmails?.[currentChannel];
@@ -148,6 +155,8 @@ const InboxProvider: React.FC<{
         currentEmail,
         isImapEmail,
         nextRetryTime,
+        autoRefresh,
+        setAutoRefresh,
       }}
     >
       {children}

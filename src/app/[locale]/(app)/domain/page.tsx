@@ -14,6 +14,7 @@ import {
   AntdInput,
 } from '@/components/antd';
 import { useCredit } from '@/providers/credit';
+import { useSubscription } from '@/providers/subscription';
 import { Title } from '@/providers/title';
 import { RiEditBoxLine, RiSearchLine } from '@remixicon/react';
 import { useAntdTable, useSetState } from 'ahooks';
@@ -24,6 +25,7 @@ import { useCallback, useMemo, useState } from 'react';
 
 export default function Page() {
   const t = useTranslations('app.pages.domain');
+  const g = useTranslations('global');
   const [form] = AntdForm.useForm();
   const [open, setOpen] = useSetState<{
     release: boolean;
@@ -34,6 +36,7 @@ export default function Page() {
   });
   const [currentRecord, setCurrentRecord] = useState<DomainRecord>();
   const { refresh: refreshCredits } = useCredit();
+  const { is_free } = useSubscription();
 
   const statusOptions = useMemo(() => {
     return [
@@ -96,6 +99,7 @@ export default function Page() {
   const { submit } = search;
 
   const handleCreate = () => {
+    if (is_free) return;
     window.dispatchEvent(new CustomEvent('domain:create'));
   };
 
@@ -160,8 +164,18 @@ export default function Page() {
             </div>
             <div>
               <Space size="middle">
-                <Button type="primary" onClick={() => handleCreate()}>
+                <Button
+                  disabled={is_free}
+                  type="primary"
+                  onClick={() => handleCreate()}
+                  className="relative"
+                >
                   {t('table.actions.buy')}
+                  {is_free && (
+                    <span className="absolute top-0 -right-2 translate-x-2 -translate-y-2/3 leading-6 px-2.5 bg-primary-500 text-xs text-white rounded-full rounded-bl-none">
+                      {g('tags.subscriptionOnly')}
+                    </span>
+                  )}
                 </Button>
               </Space>
             </div>

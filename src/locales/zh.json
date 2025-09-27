@@ -92,11 +92,11 @@
     "emails": {
       "temp": {
         "name": "临时邮箱",
-        "desc": "安全&匿名，强烈推荐"
+        "desc": "一次性邮箱，匿名防垃圾"
       },
       "edu": {
         "name": "教育邮箱",
-        "desc": "推荐用于教育优惠"
+        "desc": "高校邮箱，教育优惠福利"
       },
       "gmail": {
         "name": "Gmail",
@@ -104,7 +104,7 @@
       },
       "outlook": {
         "name": "Outlook",
-        "desc": "微软邮箱，专业可靠"
+        "desc": "微软邮箱，企业办公首选"
       },
       "icloud": {
         "name": "iCloud",
@@ -112,15 +112,15 @@
       },
       "gmx": {
         "name": "GMX",
-        "desc": "GMX邮箱，免费且灵活的邮件服务"
+        "desc": "德国邮箱，稳定安全可靠"
       },
       "yahoo": {
         "name": "Yahoo",
-        "desc": "雅虎邮箱，经典且广泛使用"
+        "desc": "雅虎邮箱，经典老牌邮箱"
       },
       "mail": {
         "name": "Mail",
-        "desc": "Mail，自定义域名与全球访问"
+        "desc": "德国邮箱，国际广泛应用"
       }
     }
   },
@@ -183,7 +183,7 @@
           "action": "立即创建"
         },
         "credit": {
-          "available": "可用积分",
+          "available": "剩余积分",
           "actions": {
             "recharge": "充值",
             "upgrade": "升级",
@@ -212,7 +212,8 @@
         },
         "messages": {
           "title": "最新邮件",
-          "countdown": "{num, plural, =0 {} =1 {1秒后自动刷新} other {#秒后自动刷新}}",
+          "alert": "当前积分不足，无法接收邮件，请先 <link>充值积分</link> 。",
+          "countdown": "自动刷新 {num, plural, =0 {} =1 {(1s)} other {(#s)}}",
           "actions": {
             "refresh": "刷新"
           },
