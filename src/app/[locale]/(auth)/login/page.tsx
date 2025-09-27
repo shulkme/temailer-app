@@ -85,6 +85,7 @@ export default function Page() {
       >
         <AntdFormItem>
           <Button
+            disabled
             loading={googleLoading}
             className="leading-none"
             size="large"
