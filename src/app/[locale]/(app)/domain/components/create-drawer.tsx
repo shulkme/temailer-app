@@ -228,6 +228,7 @@ const CreateDrawer: React.FC = () => {
         initialValues={{
           domain_suffix: suffix_list?.[0]?.name,
           quantity: 1,
+          expected_compensation: true,
         }}
         onFinish={onFinish}
       >
