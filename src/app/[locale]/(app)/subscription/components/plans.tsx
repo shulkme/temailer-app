@@ -274,7 +274,6 @@ const Plans: React.FC = () => {
             } else {
               return (
                 <Button
-                  disabled
                   block
                   color="default"
                   variant="filled"

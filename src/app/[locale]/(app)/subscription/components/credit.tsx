@@ -6,14 +6,24 @@ import { useRequest } from 'ahooks';
 import { Button, Card } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Credit: React.FC = () => {
   const t = useTranslations('app.pages.subscription.credit');
   const { subscription } = useSubscription();
-  const { data, loading } = useRequest(async () => {
+  const { data, loading, refresh } = useRequest(async () => {
     return await getCreditBalance().then((res) => res.data);
   });
+
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'PAYMENT_SUCCESS') {
+        refresh();
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
 
   return (
     <Card>
