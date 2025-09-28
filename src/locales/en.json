@@ -640,7 +640,8 @@
             "actions": {
               "current": "Current Plan",
               "upgrade": "Upgrade Now",
-              "free": "Free Trial"
+              "free": "Free Trial",
+              "upOnly": "Upgrade only"
             }
           }
         },

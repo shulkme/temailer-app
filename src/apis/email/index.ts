@@ -6,13 +6,13 @@ import { HttpResponse, PageResult } from '@/apis/types';
 export async function getEmailDetail(
   id: string,
 ): Promise<HttpResponse<EmailRecord>> {
-  return await request.get(`/sys/email/${id}`);
+  return await request.get(`/email/${id}`);
 }
 
 export async function getEmailAddress(
   email_provider: EMAIL_CHANNEL_TYPE_ENUM,
 ): Promise<HttpResponse<string>> {
-  return await request.get('/sys/imap_email/lease', {
+  return await request.get('/email/imap/lease', {
     params: {
       email_provider,
     },
@@ -23,7 +23,7 @@ export async function getEmailMessages(
   to_email: string,
   provider_type: EMAIL_CHANNEL_TYPE_ENUM,
 ): Promise<HttpResponse<PageResult<Omit<EmailRecord, 'content'>>>> {
-  return await request.get('/sys/email', {
+  return await request.get('/email', {
     params: {
       to_email,
       provider_type,

@@ -26,7 +26,7 @@ export async function getCreditRecordList(
  * 获取可用积分
  */
 export async function getAvailableCredits(): Promise<HttpResponse<number>> {
-  return await request.get('/credit/record/available_credits');
+  return await request.get('/credit/record/available-credits');
 }
 
 /**
@@ -35,7 +35,7 @@ export async function getAvailableCredits(): Promise<HttpResponse<number>> {
 export async function getCreditBalance(): Promise<
   HttpResponse<CreditBalanceRecord>
 > {
-  return await request.get('/credit/record/credit_balance');
+  return await request.get('/credit/record/credit-balance');
 }
 
 /**
@@ -45,7 +45,7 @@ export async function getCreditBalance(): Promise<
 export async function getRechargeRecordList(
   params?: CreditRechargeParams,
 ): Promise<HttpResponse<PageResult<CreditRechargeRecord>>> {
-  return await request.get('/credit/record/recharge_records', {
+  return await request.get('/credit/record/recharge-records', {
     params,
   });
 }
@@ -57,7 +57,7 @@ export async function getRechargeRecordList(
 export async function getCreditUsageStatistics(
   days: number,
 ): Promise<HttpResponse<CreditUsageStatisticRecord>> {
-  return await request.get('/credit/record/usage_statistics', {
+  return await request.get('/credit/record/usage-statistics', {
     params: {
       days,
     },
@@ -67,5 +67,5 @@ export async function getCreditUsageStatistics(
 export async function getCurrentSubscription(): Promise<
   HttpResponse<CreditSubscriptionPlanRecord>
 > {
-  return await request.get('/credit/record/current_subscription');
+  return await request.get('/credit/record/current-subscription');
 }

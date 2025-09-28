@@ -2,6 +2,7 @@
 import { checkoutByStripe } from '@/apis/checkout';
 import { CHECKOUT_MODE_ENUM, PRICE_TYPE_ENUM } from '@/apis/checkout/enums';
 import { CheckoutByStripeData } from '@/apis/checkout/types';
+import { PLAN_PERIOD_ENUM } from '@/apis/credit/enums';
 import { AntdTitle } from '@/components/antd';
 import PrimaryButton from '@/components/primary-button';
 import { useChatbot } from '@/providers/chatbot';
@@ -10,7 +11,7 @@ import { RiCheckLine } from '@remixicon/react';
 import { useRequest } from 'ahooks';
 import { App, Button, Card, ConfigProvider, Segmented } from 'antd';
 import { useTranslations } from 'next-intl';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 type PlanType = 'free' | 'basic' | 'premium' | 'ultimate';
 
@@ -46,7 +47,9 @@ const Plans: React.FC = () => {
   const p = useTranslations('global.plans');
   const { plan, subscription } = useSubscription();
   const { openChatbot } = useChatbot();
-  const [period, setPeriod] = useState('yearly');
+  const [period, setPeriod] = useState<PLAN_PERIOD_ENUM>(
+    PLAN_PERIOD_ENUM.YEARLY,
+  );
   const [loading, setLoading] = useState<PlanType>();
   const { message } = App.useApp();
 
@@ -80,7 +83,7 @@ const Plans: React.FC = () => {
           price = plans.ultimate.price;
           break;
       }
-      if (period === 'yearly') {
+      if (period === PLAN_PERIOD_ENUM.YEARLY) {
         price *= 1 - discount;
       }
       return price.toLocaleString('en-US', {
@@ -107,7 +110,7 @@ const Plans: React.FC = () => {
           price = plans.ultimate.price / plans.ultimate.credits;
           break;
       }
-      if (period === 'yearly') {
+      if (period === PLAN_PERIOD_ENUM.YEARLY) {
         price *= 1 - discount;
       }
       return price.toLocaleString('en-US', {
@@ -116,6 +119,10 @@ const Plans: React.FC = () => {
     },
     [period],
   );
+
+  const allowMonthly = useMemo(() => {
+    return !subscription?.subscription_info?.is_yearly;
+  }, [subscription?.subscription_info?.is_yearly]);
 
   const handleCheckout = useCallback(
     (plan_type: PlanType) => {
@@ -126,28 +133,28 @@ const Plans: React.FC = () => {
         case 'free':
           // amount = plans.free.price;
           price_type =
-            period === 'yearly'
+            period === PLAN_PERIOD_ENUM.YEARLY
               ? PRICE_TYPE_ENUM.FREE_YEARLY
               : PRICE_TYPE_ENUM.FREE_MONTHLY;
           break;
         case 'basic':
           // amount = plans.basic.price;
           price_type =
-            period === 'yearly'
+            period === PLAN_PERIOD_ENUM.YEARLY
               ? PRICE_TYPE_ENUM.BASIC_YEARLY
               : PRICE_TYPE_ENUM.BASIC_MONTHLY;
           break;
         case 'premium':
           // amount = plans.premium.price;
           price_type =
-            period === 'yearly'
+            period === PLAN_PERIOD_ENUM.YEARLY
               ? PRICE_TYPE_ENUM.PREMIUM_YEARLY
               : PRICE_TYPE_ENUM.PREMIUM_MONTHLY;
           break;
         case 'ultimate':
           // amount = plans.ultimate.price;
           price_type =
-            period === 'yearly'
+            period === PLAN_PERIOD_ENUM.YEARLY
               ? PRICE_TYPE_ENUM.ULTIMATE_YEARLY
               : PRICE_TYPE_ENUM.ULTIMATE_MONTHLY;
           break;
@@ -177,6 +184,243 @@ const Plans: React.FC = () => {
     ],
   );
 
+  const renderUpgradeButton = useCallback(
+    (type: PlanType) => {
+      if (!allowMonthly && period === PLAN_PERIOD_ENUM.MONTHLY) {
+        return (
+          <Button
+            block
+            color="default"
+            variant="filled"
+            className="pointer-events-none"
+          >
+            {t('template.actions.upOnly')}
+          </Button>
+        );
+      }
+      switch (type) {
+        case 'free':
+          return (
+            <Button
+              block
+              color={plan.key === 'free' ? 'primary' : 'default'}
+              variant="filled"
+              className="pointer-events-none"
+            >
+              {plan.key === 'free'
+                ? t('template.actions.current')
+                : t('template.actions.free')}
+            </Button>
+          );
+        case 'basic':
+          if (plan.fullKey === PRICE_TYPE_ENUM.BASIC_MONTHLY) {
+            if (period === PLAN_PERIOD_ENUM.MONTHLY) {
+              return (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              );
+            } else {
+              return (
+                <PrimaryButton
+                  block
+                  loading={loading === 'basic'}
+                  onClick={() => handleCheckout('basic')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              );
+            }
+          } else if (plan.fullKey === PRICE_TYPE_ENUM.BASIC_YEARLY) {
+            if (period === PLAN_PERIOD_ENUM.MONTHLY) {
+              return (
+                <Button
+                  block
+                  color="default"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.upOnly')}
+                </Button>
+              );
+            } else {
+              return (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              );
+            }
+          } else {
+            if (plan.key === 'free') {
+              return (
+                <PrimaryButton
+                  block
+                  loading={loading === 'basic'}
+                  onClick={() => handleCheckout('basic')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              );
+            } else {
+              return (
+                <Button
+                  disabled
+                  block
+                  color="default"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.upOnly')}
+                </Button>
+              );
+            }
+          }
+        case 'premium':
+          if (plan.fullKey === PRICE_TYPE_ENUM.PREMIUM_MONTHLY) {
+            if (period === PLAN_PERIOD_ENUM.MONTHLY) {
+              return (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              );
+            } else {
+              return (
+                <PrimaryButton
+                  block
+                  loading={loading === 'premium'}
+                  onClick={() => handleCheckout('premium')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              );
+            }
+          } else if (plan.fullKey === PRICE_TYPE_ENUM.PREMIUM_YEARLY) {
+            if (period === PLAN_PERIOD_ENUM.MONTHLY) {
+              return (
+                <Button
+                  block
+                  color="default"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.upOnly')}
+                </Button>
+              );
+            } else {
+              return (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              );
+            }
+          } else {
+            if (plan.key !== 'ultimate') {
+              return (
+                <PrimaryButton
+                  block
+                  loading={loading === 'premium'}
+                  onClick={() => handleCheckout('premium')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              );
+            } else {
+              return (
+                <Button
+                  block
+                  color="default"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.upOnly')}
+                </Button>
+              );
+            }
+          }
+        case 'ultimate':
+          if (plan.fullKey === PRICE_TYPE_ENUM.ULTIMATE_MONTHLY) {
+            if (period === PLAN_PERIOD_ENUM.MONTHLY) {
+              return (
+                <Button
+                  block
+                  color="primary"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              );
+            } else {
+              return (
+                <PrimaryButton
+                  block
+                  loading={loading === 'ultimate'}
+                  onClick={() => handleCheckout('ultimate')}
+                >
+                  {t('template.actions.upgrade')}
+                </PrimaryButton>
+              );
+            }
+          } else if (plan.fullKey === PRICE_TYPE_ENUM.ULTIMATE_YEARLY) {
+            if (period === PLAN_PERIOD_ENUM.MONTHLY) {
+              return (
+                <Button
+                  block
+                  color="default"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.upOnly')}
+                </Button>
+              );
+            } else {
+              return (
+                <Button
+                  block
+                  color="default"
+                  variant="filled"
+                  className="pointer-events-none"
+                >
+                  {t('template.actions.current')}
+                </Button>
+              );
+            }
+          } else {
+            return (
+              <PrimaryButton
+                block
+                loading={loading === 'ultimate'}
+                onClick={() => handleCheckout('ultimate')}
+              >
+                {t('template.actions.upgrade')}
+              </PrimaryButton>
+            );
+          }
+      }
+    },
+    [allowMonthly, handleCheckout, loading, period, plan.fullKey, plan.key, t],
+  );
+
   return (
     <Card id="plan">
       <AntdTitle level={5} className="mb-6">
@@ -200,7 +444,7 @@ const Plans: React.FC = () => {
             options={[
               {
                 label: <>{t('period.monthly')}</>,
-                value: 'monthly',
+                value: PLAN_PERIOD_ENUM.MONTHLY,
               },
               {
                 label: (
@@ -215,7 +459,7 @@ const Plans: React.FC = () => {
                     </span>
                   </>
                 ),
-                value: 'yearly',
+                value: PLAN_PERIOD_ENUM.YEARLY,
               },
             ]}
             onChange={setPeriod}
@@ -237,19 +481,7 @@ const Plans: React.FC = () => {
             <div className="text-sm text-black/50 line-clamp-2 leading-5 h-10">
               {p('free.desc')}
             </div>
-            <div>
-              <Button
-                block
-                disabled={plan.key !== 'free'}
-                color="primary"
-                variant="filled"
-                className="pointer-events-none"
-              >
-                {plan.key === 'free'
-                  ? t('template.actions.current')
-                  : t('template.actions.free')}
-              </Button>
-            </div>
+            <div>{renderUpgradeButton('free')}</div>
             <div className="border-t border-slate-100 my-6"></div>
             <div>
               <ul className="space-y-4">
@@ -295,7 +527,7 @@ const Plans: React.FC = () => {
           <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
             <div className="flex items-center gap-2">
               <div className="font-medium text-lg">{p('basic.title')}</div>
-              {period === 'yearly' && (
+              {period === PLAN_PERIOD_ENUM.YEARLY && (
                 <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
                   {t('template.price.discount', {
                     num: discount * 100 + '%',
@@ -310,7 +542,7 @@ const Plans: React.FC = () => {
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
-              {period === 'yearly' && (
+              {period === PLAN_PERIOD_ENUM.YEARLY && (
                 <span className="text-black/30 line-through font-medium">
                   ${plans.basic.price.toLocaleString()}
                 </span>
@@ -319,27 +551,7 @@ const Plans: React.FC = () => {
             <div className="text-sm text-black/50 line-clamp-2 leading-5 h-10">
               {p('basic.desc')}
             </div>
-            <div>
-              {plan.key === 'basic' ? (
-                <Button
-                  block
-                  color="primary"
-                  variant="filled"
-                  className="pointer-events-none"
-                >
-                  {t('template.actions.current')}
-                </Button>
-              ) : (
-                <PrimaryButton
-                  block
-                  loading={loading === 'basic'}
-                  disabled={plan.key !== 'free'}
-                  onClick={() => handleCheckout('basic')}
-                >
-                  {t('template.actions.upgrade')}
-                </PrimaryButton>
-              )}
-            </div>
+            <div>{renderUpgradeButton('basic')}</div>
             <div className="border-t border-slate-100 my-6"></div>
             <div>
               <ul className="space-y-4">
@@ -414,7 +626,7 @@ const Plans: React.FC = () => {
             </div>
             <div className="flex items-center gap-2">
               <div className="font-medium text-lg">{p('premium.title')}</div>
-              {period === 'yearly' && (
+              {period === PLAN_PERIOD_ENUM.YEARLY && (
                 <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
                   {t('template.price.discount', {
                     num: discount * 100 + '%',
@@ -429,7 +641,7 @@ const Plans: React.FC = () => {
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
-              {period === 'yearly' && (
+              {period === PLAN_PERIOD_ENUM.YEARLY && (
                 <span className="text-black/30 line-through font-medium">
                   ${plans.premium.price.toLocaleString()}
                 </span>
@@ -438,27 +650,7 @@ const Plans: React.FC = () => {
             <div className="text-sm text-black/50 line-clamp-2 leading-5 h-10">
               {p('premium.desc')}
             </div>
-            <div>
-              {plan.key === 'premium' ? (
-                <Button
-                  block
-                  color="primary"
-                  variant="filled"
-                  className="pointer-events-none"
-                >
-                  {t('template.actions.current')}
-                </Button>
-              ) : (
-                <PrimaryButton
-                  block
-                  loading={loading === 'premium'}
-                  disabled={plan.key === 'ultimate'}
-                  onClick={() => handleCheckout('premium')}
-                >
-                  {t('template.actions.upgrade')}
-                </PrimaryButton>
-              )}
-            </div>
+            <div>{renderUpgradeButton('premium')}</div>
             <div className="border-t border-slate-100 my-6"></div>
             <div>
               <ul className="space-y-4">
@@ -532,7 +724,7 @@ const Plans: React.FC = () => {
           <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">
             <div className="flex items-center gap-2">
               <div className="font-medium text-lg">{p('ultimate.title')}</div>
-              {period === 'yearly' && (
+              {period === PLAN_PERIOD_ENUM.YEARLY && (
                 <div className="font-medium text-xs px-2 py-1 bg-primary-50 text-primary-500 rounded-r-full rounded-tl-full">
                   {t('template.price.discount', {
                     num: discount * 100 + '%',
@@ -547,7 +739,7 @@ const Plans: React.FC = () => {
               <span className="text-black/50">
                 /{t('template.price.suffix.monthly')}
               </span>
-              {period === 'yearly' && (
+              {period === PLAN_PERIOD_ENUM.YEARLY && (
                 <span className="text-black/30 line-through font-medium">
                   ${plans.ultimate.price.toLocaleString()}
                 </span>
@@ -556,26 +748,7 @@ const Plans: React.FC = () => {
             <div className="text-sm text-black/50 line-clamp-2 leading-5 h-10">
               {p('ultimate.desc')}
             </div>
-            <div>
-              {plan.key === 'ultimate' ? (
-                <Button
-                  block
-                  color="primary"
-                  variant="filled"
-                  className="pointer-events-none"
-                >
-                  {t('template.actions.current')}
-                </Button>
-              ) : (
-                <PrimaryButton
-                  block
-                  loading={loading === 'ultimate'}
-                  onClick={() => handleCheckout('ultimate')}
-                >
-                  {t('template.actions.upgrade')}
-                </PrimaryButton>
-              )}
-            </div>
+            <div>{renderUpgradeButton('ultimate')}</div>
             <div className="border-t border-slate-100 my-6"></div>
             <div>
               <ul className="space-y-4">

@@ -639,7 +639,8 @@
             "actions": {
               "current": "当前套餐",
               "upgrade": "立即升级",
-              "free": "永久免费"
+              "free": "永久免费",
+              "upOnly": "仅限升级"
             }
           }
         },

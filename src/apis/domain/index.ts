@@ -13,13 +13,13 @@ import { HttpResponse, PageResult } from '@/apis/types';
 export async function getMyDomainList(
   params?: Partial<DomainParams>,
 ): Promise<HttpResponse<PageResult<DomainRecord>>> {
-  return await request.get('/sys/domain/private', {
+  return await request.get('/domain/private', {
     params,
   });
 }
 
 export async function getAllDomains(): Promise<HttpResponse<DomainRecord[]>> {
-  return await request.get('/sys/domain/all', {
+  return await request.get('/domain/all', {
     params: {
       status: DOMAIN_STATUS_ENUM.ACTIVE,
     },
@@ -29,23 +29,23 @@ export async function getAllDomains(): Promise<HttpResponse<DomainRecord[]>> {
 export async function getAllDomainSuffix(): Promise<
   HttpResponse<DomainSuffixRecord[]>
 > {
-  return await request.get('/sys/domain-suffix/all');
+  return await request.get('/domain/suffix/all');
 }
 
 export async function createDomainOrder(
   data: DomainOrderData,
 ): Promise<HttpResponse<CheckoutResponse>> {
-  return await request.post('/sys/domain/order', data);
+  return await request.post('/domain/order', data);
 }
 
 export async function releaseDomain(id: number): Promise<HttpResponse<number>> {
-  return await request.put(`/sys/domain/${id}/release`);
+  return await request.put(`/domain/${id}/release`);
 }
 
 export async function getDomainSalvage(
   id: number,
 ): Promise<HttpResponse<DomainSalvageResponse>> {
-  return await request.get(`/sys/domain/${id}/refund-calculation`);
+  return await request.get(`/domain/${id}/refund-calculation`);
 }
 
 export async function setDomainRemark(
@@ -54,5 +54,5 @@ export async function setDomainRemark(
     remark: string;
   },
 ) {
-  return await request.put(`/sys/domain/${id}/remark`, data);
+  return await request.put(`/domain/${id}/remark`, data);
 }
