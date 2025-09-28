@@ -28,7 +28,7 @@ const Credit: React.FC = () => {
         )}
         <div>
           {t('resetTime')}:{' '}
-          {dayjs(subscription?.subscription_info.expire_at).format(
+          {dayjs(subscription?.subscription_info?.expire_at).format(
             'YYYY-MM-DD HH:mm',
           )}{' '}
           {t('permanentCredits', {

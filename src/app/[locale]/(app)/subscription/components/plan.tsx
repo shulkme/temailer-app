@@ -23,7 +23,7 @@ const Plan: React.FC = () => {
           {t('expiredTime')}:{' '}
           {dayjs(
             subscription?.subscription_info?.yearly_expire_at ||
-              subscription?.subscription_info.expire_at,
+              subscription?.subscription_info?.expire_at,
           ).format('YYYY-MM-DD HH:mm')}
         </div>
         <div>

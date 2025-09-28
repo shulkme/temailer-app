@@ -168,8 +168,8 @@ const Plans: React.FC = () => {
         mode: CHECKOUT_MODE_ENUM.SUBSCRIPTION,
         price_type,
         product_data: {
-          name: subscription?.subscription_info.rule_name || 'subscription',
-          description: subscription?.subscription_info.description || '',
+          name: subscription?.subscription_info?.rule_name || 'subscription',
+          description: subscription?.subscription_info?.description || '',
         },
         // amount: Math.round(amount),
       };
@@ -179,8 +179,8 @@ const Plans: React.FC = () => {
     [
       checkout,
       period,
-      subscription?.subscription_info.description,
-      subscription?.subscription_info.rule_name,
+      subscription?.subscription_info?.description,
+      subscription?.subscription_info?.rule_name,
     ],
   );
 
