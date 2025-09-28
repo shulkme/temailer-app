@@ -16,7 +16,7 @@ const Plan: React.FC = () => {
         {loading ? (
           <AntdSkeletonButton size="small" />
         ) : (
-          <h2 className="text-3xl font-bold">{plan_locale}</h2>
+          <h2 className="text-3xl font-bold">{plan_locale?.fullName}</h2>
         )}
 
         <div>

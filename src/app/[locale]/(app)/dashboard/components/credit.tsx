@@ -28,7 +28,7 @@ const Credit: React.FC = () => {
             <AntdSkeletonButton size="small" />
           ) : (
             <AntdTitle level={5} className="m-0">
-              {plan_locale}
+              {plan_locale?.fullName}
             </AntdTitle>
           )}
         </div>

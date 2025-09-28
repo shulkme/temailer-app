@@ -12,19 +12,21 @@ import React, {
   useState,
 } from 'react';
 
+export interface PlanLocaleRecord {
+  key: string;
+  name: string;
+  fullName: string;
+}
+
 const SubscriptionContext = createContext<{
   subscription?: CreditSubscriptionPlanRecord;
   loading?: boolean;
   is_free?: boolean;
   plan?: string;
-  plan_locale?: string;
-  getPlanLocaleConfig: (price?: PRICE_TYPE_ENUM) =>
-    | {
-        key: string;
-        name: string;
-        fullName: string;
-      }
-    | undefined;
+  plan_locale?: PlanLocaleRecord;
+  getPlanLocaleConfig: (
+    price?: PRICE_TYPE_ENUM,
+  ) => PlanLocaleRecord | undefined;
 } | null>(null);
 
 const SubscriptionProvider: React.FC<{
@@ -34,7 +36,7 @@ const SubscriptionProvider: React.FC<{
   const [subscription, setSubscription] =
     useState<CreditSubscriptionPlanRecord>();
   const [isFree, setIsFree] = useState(true);
-  const [planLocale, setPlanLocale] = useState<string>();
+  const [planLocale, setPlanLocale] = useState<PlanLocaleRecord>();
   const [plan, setPlan] = useState<string>('free');
   const getPlanLocaleConfig = useCallback(
     (price?: PRICE_TYPE_ENUM) => {
@@ -102,10 +104,10 @@ const SubscriptionProvider: React.FC<{
           rule_name === PRICE_TYPE_ENUM.FREE_YEARLY,
       );
 
-      const { key, name } = getPlanLocaleConfig(rule_name) || {};
-      if (key && name) {
-        setPlan(key);
-        setPlanLocale(name);
+      const config = getPlanLocaleConfig(rule_name);
+      if (config) {
+        setPlan(config.key);
+        setPlanLocale(config);
       }
     },
   });

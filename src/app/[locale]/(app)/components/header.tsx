@@ -143,7 +143,9 @@ const AccountDropdown = () => {
           <div className="p-4 space-y-2">
             <h3 className="font-bold m-0">{user?.nickname}</h3>
             <div className="text-xs text-black/50">{user?.email}</div>
-            <div className="text-primary-500 text-xs">{plan_locale}</div>
+            <div className="text-primary-500 text-xs">
+              {plan_locale?.fullName}
+            </div>
           </div>
           <Divider type="horizontal" className="m-0" />
           {React.cloneElement(

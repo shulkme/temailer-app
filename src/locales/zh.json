@@ -609,7 +609,7 @@
           "title": "当前套餐",
           "expiredTime": "到期时间",
           "actions": {
-            "upgrade": "升级"
+            "upgrade": "升级套餐"
           }
         },
         "credit": {
