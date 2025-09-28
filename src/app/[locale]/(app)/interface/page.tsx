@@ -113,7 +113,7 @@ export default function Page() {
               {
                 label: t('info.updatedTime'),
                 children: dayjs(API?.updated_time || API?.created_time).format(
-                  'LLL',
+                  'YYYY-MM-DD HH:mm:ss',
                 ),
               },
             ]}

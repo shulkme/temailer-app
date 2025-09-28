@@ -493,7 +493,8 @@
               "options": {
                 "pending": "处理中",
                 "active": "使用中",
-                "expired": "已过期"
+                "expired": "已过期",
+                "pendingPayment": "待支付"
               }
             },
             "search": {

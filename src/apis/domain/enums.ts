@@ -1,5 +1,6 @@
 export enum DOMAIN_STATUS_ENUM {
-  PENDING = 0,
-  ACTIVE = 1,
-  EXPIRED = 2,
+  PENDING_PAYMENT = 0,
+  PENDING = 1,
+  ACTIVE = 2,
+  EXPIRED = 3,
 }

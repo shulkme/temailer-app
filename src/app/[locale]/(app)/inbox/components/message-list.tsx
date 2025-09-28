@@ -10,7 +10,7 @@ import { useCountDown, useRequest } from 'ahooks';
 import { Button, Card, ConfigProvider, List, Space, Switch } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const MessageList: React.FC = () => {
   const t = useTranslations('app.pages.inbox.messages');
@@ -32,7 +32,6 @@ const MessageList: React.FC = () => {
   const { loading, run, cancel, refresh } = useRequest(getEmailMessages, {
     manual: true,
     pollingInterval: 10000,
-    pollingErrorRetryCount: 2,
     pollingWhenHidden: false, // 页面失活停止请求
     onSuccess: (res) => {
       const emails = res.data.items;
@@ -40,7 +39,9 @@ const MessageList: React.FC = () => {
       if (emails.length > 0) refreshCredit();
     },
     onFinally: () => {
-      setNextRefreshTime(Date.now() + 10000);
+      if (autoRefresh) {
+        setNextRefreshTime(Date.now() + 10000);
+      }
     },
   });
 
@@ -52,13 +53,23 @@ const MessageList: React.FC = () => {
     );
   };
 
+  const handleRefresh = useCallback(() => {
+    if (currentEmail && available > 0) {
+      if (autoRefresh) {
+        refresh();
+      } else {
+        run(currentEmail, currentChannel);
+      }
+    }
+  }, [autoRefresh, available, currentChannel, currentEmail, refresh, run]);
+
   useEffect(() => {
     cancel();
     setNextRefreshTime(undefined);
     if (currentEmail && available > 0 && autoRefresh) {
       run(currentEmail, currentChannel);
     }
-  }, [available, cancel, currentChannel, currentEmail, run, autoRefresh]);
+  }, [autoRefresh, available, cancel, currentChannel, currentEmail, run]);
 
   useEffect(() => {
     setEmails([]);
@@ -117,7 +128,7 @@ const MessageList: React.FC = () => {
               size="small"
               className="leading-none"
               icon={<RiRefreshLine size={16} />}
-              onClick={refresh}
+              onClick={handleRefresh}
             >
               {t('actions.refresh')}
             </Button>

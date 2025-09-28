@@ -494,7 +494,8 @@
               "options": {
                 "pending": "Processing",
                 "active": "Active",
-                "expired": "Expired"
+                "expired": "Expired",
+                "pendingPayment": "Pending Payment"
               }
             },
             "search": {

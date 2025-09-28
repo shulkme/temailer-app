@@ -52,6 +52,10 @@ export default function Page() {
         label: t('table.filters.status.options.expired'),
         value: DOMAIN_STATUS_ENUM.EXPIRED,
       },
+      {
+        label: t('table.filters.status.options.pendingPayment'),
+        value: DOMAIN_STATUS_ENUM.PENDING_PAYMENT,
+      },
     ];
   }, [t]);
 
@@ -89,9 +93,12 @@ export default function Page() {
   );
 
   const domainLabelFilter = useCallback((record: DomainRecord) => {
-    if (record.status === DOMAIN_STATUS_ENUM.PENDING) {
+    if (
+      record.status === DOMAIN_STATUS_ENUM.PENDING ||
+      record.status === DOMAIN_STATUS_ENUM.PENDING_PAYMENT
+    ) {
       const match = record.name.match(/[^.]+\.(.+)$/);
-      return match ? '?.' + match[1] : null;
+      return match ? record.id + '[' + match[1] + ']' : null;
     }
     return record.name;
   }, []);
