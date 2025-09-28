@@ -63,5 +63,17 @@ export interface CreditSubscriptionPlanRecord {
     discount_info: string;
     original_points: number;
     balance_after: number;
+    is_yearly?: boolean;
+    yearly_expire_at: string;
+    current_month: number;
+    total_months: number;
+    monthly_points: number;
   };
+}
+
+export interface CreditBalanceRecord {
+  total_credits: number;
+  permanent_credits: number;
+  subscription_credits: number;
+  free_credits: number;
 }

@@ -1,6 +1,7 @@
 'use client';
 import { PRICE_TYPE_ENUM } from '@/apis/checkout/enums';
 import { getCurrentSubscription } from '@/apis/credit';
+import { PLAN_PERIOD_ENUM } from '@/apis/credit/enums';
 import { CreditSubscriptionPlanRecord } from '@/apis/credit/types';
 import { useRequest } from 'ahooks';
 import { useTranslations } from 'next-intl';
@@ -12,8 +13,10 @@ import React, {
   useState,
 } from 'react';
 
-export interface PlanLocaleRecord {
+export interface PlanRecord {
   key: string;
+  fullKey: PRICE_TYPE_ENUM;
+  period: PLAN_PERIOD_ENUM;
   name: string;
   fullName: string;
 }
@@ -22,11 +25,8 @@ const SubscriptionContext = createContext<{
   subscription?: CreditSubscriptionPlanRecord;
   loading?: boolean;
   is_free?: boolean;
-  plan?: string;
-  plan_locale?: PlanLocaleRecord;
-  getPlanLocaleConfig: (
-    price?: PRICE_TYPE_ENUM,
-  ) => PlanLocaleRecord | undefined;
+  plan: PlanRecord;
+  getPlanLocaleConfig: (price?: PRICE_TYPE_ENUM) => PlanRecord | undefined;
 } | null>(null);
 
 const SubscriptionProvider: React.FC<{
@@ -36,8 +36,14 @@ const SubscriptionProvider: React.FC<{
   const [subscription, setSubscription] =
     useState<CreditSubscriptionPlanRecord>();
   const [isFree, setIsFree] = useState(true);
-  const [planLocale, setPlanLocale] = useState<PlanLocaleRecord>();
-  const [plan, setPlan] = useState<string>('free');
+  const [plan, setPlan] = useState<PlanRecord>({
+    period: PLAN_PERIOD_ENUM.MONTHLY,
+    key: 'free',
+    fullKey: PRICE_TYPE_ENUM.FREE_MONTHLY,
+    name: 'Free',
+    fullName: 'Free',
+  });
+
   const getPlanLocaleConfig = useCallback(
     (price?: PRICE_TYPE_ENUM) => {
       switch (price) {
@@ -45,24 +51,32 @@ const SubscriptionProvider: React.FC<{
         case PRICE_TYPE_ENUM.FREE_YEARLY:
           return {
             key: 'free',
+            fullKey: PRICE_TYPE_ENUM.FREE_MONTHLY,
+            period: PLAN_PERIOD_ENUM.MONTHLY,
             name: g('plans.free.title'),
             fullName: g('plans.free.title'),
           };
         case PRICE_TYPE_ENUM.BASIC_MONTHLY:
           return {
             key: 'basic',
+            fullKey: PRICE_TYPE_ENUM.BASIC_MONTHLY,
+            period: PLAN_PERIOD_ENUM.MONTHLY,
             name: g('plans.basic.title'),
             fullName: [g('plans.basic.title'), g('units.monthly')].join(' / '),
           };
         case PRICE_TYPE_ENUM.BASIC_YEARLY:
           return {
             key: 'basic',
+            fullKey: PRICE_TYPE_ENUM.BASIC_YEARLY,
+            period: PLAN_PERIOD_ENUM.YEARLY,
             name: g('plans.basic.title'),
             fullName: [g('plans.basic.title'), g('units.yearly')].join(' / '),
           };
         case PRICE_TYPE_ENUM.PREMIUM_MONTHLY:
           return {
             key: 'premium',
+            fullKey: PRICE_TYPE_ENUM.PREMIUM_MONTHLY,
+            period: PLAN_PERIOD_ENUM.MONTHLY,
             name: g('plans.premium.title'),
             fullName: [g('plans.premium.title'), g('units.monthly')].join(
               ' / ',
@@ -71,12 +85,16 @@ const SubscriptionProvider: React.FC<{
         case PRICE_TYPE_ENUM.PREMIUM_YEARLY:
           return {
             key: 'premium',
+            fullKey: PRICE_TYPE_ENUM.PREMIUM_YEARLY,
+            period: PLAN_PERIOD_ENUM.YEARLY,
             name: g('plans.premium.title'),
             fullName: [g('plans.premium.title'), g('units.yearly')].join(' / '),
           };
         case PRICE_TYPE_ENUM.ULTIMATE_MONTHLY:
           return {
             key: 'ultimate',
+            fullKey: PRICE_TYPE_ENUM.ULTIMATE_MONTHLY,
+            period: PLAN_PERIOD_ENUM.MONTHLY,
             name: g('plans.ultimate.title'),
             fullName: [g('plans.ultimate.title'), g('units.monthly')].join(
               ' / ',
@@ -85,6 +103,8 @@ const SubscriptionProvider: React.FC<{
         case PRICE_TYPE_ENUM.ULTIMATE_YEARLY:
           return {
             key: 'ultimate',
+            fullKey: PRICE_TYPE_ENUM.ULTIMATE_YEARLY,
+            period: PLAN_PERIOD_ENUM.YEARLY,
             name: g('plans.ultimate.title'),
             fullName: [g('plans.ultimate.title'), g('units.yearly')].join(
               ' / ',
@@ -104,10 +124,9 @@ const SubscriptionProvider: React.FC<{
           rule_name === PRICE_TYPE_ENUM.FREE_YEARLY,
       );
 
-      const config = getPlanLocaleConfig(rule_name);
-      if (config) {
-        setPlan(config.key);
-        setPlanLocale(config);
+      const plan = getPlanLocaleConfig(rule_name);
+      if (plan) {
+        setPlan(plan);
       }
     },
   });
@@ -128,7 +147,6 @@ const SubscriptionProvider: React.FC<{
         subscription,
         loading,
         is_free: isFree,
-        plan_locale: planLocale,
         plan,
         getPlanLocaleConfig,
       }}

@@ -4,7 +4,8 @@
       "day": "{num, plural, =0 {Day} =1 {1 Day} other {# Days}}",
       "year": "{num, plural, =0 {Year} =1 {1 Year} other {# Years}}",
       "monthly": "Monthly",
-      "yearly": "Yearly"
+      "yearly": "Yearly",
+      "credit": "{num, plural, =0 {Credit} =1 {1 Credit} other {# Credits}}"
     },
     "checkout": {
       "payment": {
@@ -614,6 +615,8 @@
         },
         "credit": {
           "title": "Credits Left",
+          "resetTime": "Reset Date",
+          "permanentCredits": "{num, plural, =0 {} =1 {(1 credit permanently valid)} other {(# credits permanently valid)}}",
           "actions": {
             "recharge": "Top Up Credits"
           }

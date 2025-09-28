@@ -614,6 +614,8 @@
         },
         "credit": {
           "title": "剩余积分",
+          "resetTime": "重置时间",
+          "permanentCredits": "{num, plural, =0 {} =1 {(其中 1 个积分永久有效)} other {(其中 # 个积分永久有效)}}",
           "actions": {
             "recharge": "充值积分"
           }

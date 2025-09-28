@@ -1,23 +1,19 @@
 'use client';
+import { getCreditBalance } from '@/apis/credit';
 import { AntdSkeletonButton } from '@/components/antd';
-import { useCredit } from '@/providers/credit';
 import { useSubscription } from '@/providers/subscription';
-import { Button, Card, Progress } from 'antd';
+import { useRequest } from 'ahooks';
+import { Button, Card } from 'antd';
+import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 const Credit: React.FC = () => {
   const t = useTranslations('app.pages.subscription.credit');
-  const { available, loading } = useCredit();
   const { subscription } = useSubscription();
-
-  const percent = useMemo(() => {
-    if (available > 0) {
-      const total = subscription?.subscription_info.original_points || 1;
-      return Math.max((available / total) * 100, 100);
-    }
-    return 0;
-  }, [available, subscription?.subscription_info]);
+  const { data, loading } = useRequest(async () => {
+    return await getCreditBalance().then((res) => res.data);
+  });
 
   return (
     <Card>
@@ -26,15 +22,18 @@ const Credit: React.FC = () => {
         {loading ? (
           <AntdSkeletonButton size="small" />
         ) : (
-          <h2 className="text-3xl font-bold">{available.toLocaleString()}</h2>
+          <h2 className="text-3xl font-bold">
+            {(data?.total_credits || 0).toLocaleString()}
+          </h2>
         )}
         <div>
-          <Progress
-            percent={percent}
-            strokeLinecap="butt"
-            showInfo={false}
-            status="normal"
-          />
+          {t('resetTime')}:{' '}
+          {dayjs(subscription?.subscription_info.expire_at).format(
+            'YYYY-MM-DD HH:mm',
+          )}{' '}
+          {t('permanentCredits', {
+            num: data?.permanent_credits || 0,
+          })}
         </div>
         <div>
           <Button

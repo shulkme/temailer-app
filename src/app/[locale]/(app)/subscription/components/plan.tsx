@@ -8,7 +8,7 @@ import React from 'react';
 
 const Plan: React.FC = () => {
   const t = useTranslations('app.pages.subscription.plan');
-  const { plan_locale, subscription, loading } = useSubscription();
+  const { plan, subscription, loading } = useSubscription();
   return (
     <Card>
       <div className="space-y-4">
@@ -16,12 +16,15 @@ const Plan: React.FC = () => {
         {loading ? (
           <AntdSkeletonButton size="small" />
         ) : (
-          <h2 className="text-3xl font-bold">{plan_locale?.fullName}</h2>
+          <h2 className="text-3xl font-bold">{plan?.fullName}</h2>
         )}
 
         <div>
           {t('expiredTime')}:{' '}
-          {dayjs(subscription?.subscription_info.expire_at).format('LLL')}
+          {dayjs(
+            subscription?.subscription_info?.yearly_expire_at ||
+              subscription?.subscription_info.expire_at,
+          ).format('YYYY-MM-DD HH:mm')}
         </div>
         <div>
           <Button

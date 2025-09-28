@@ -15,7 +15,7 @@ import React from 'react';
 
 const Credit: React.FC = () => {
   const { available } = useCredit();
-  const { plan_locale, loading, is_free, plan } = useSubscription();
+  const { loading, is_free, plan } = useSubscription();
   const t = useTranslations('app.pages.dashboard.credit');
   return (
     <Card>
@@ -28,7 +28,7 @@ const Credit: React.FC = () => {
             <AntdSkeletonButton size="small" />
           ) : (
             <AntdTitle level={5} className="m-0">
-              {plan_locale?.fullName}
+              {plan?.fullName}
             </AntdTitle>
           )}
         </div>
@@ -51,7 +51,7 @@ const Credit: React.FC = () => {
           </div>
         </div>
 
-        {plan !== 'ultimate' && (
+        {plan.key !== 'ultimate' && (
           <div>
             <Link href="/subscription#plan">
               <PrimaryButton block size="large">

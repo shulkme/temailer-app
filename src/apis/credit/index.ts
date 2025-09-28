@@ -1,4 +1,5 @@
 import {
+  CreditBalanceRecord,
   CreditParams,
   CreditRechargeParams,
   CreditRechargeRecord,
@@ -26,6 +27,15 @@ export async function getCreditRecordList(
  */
 export async function getAvailableCredits(): Promise<HttpResponse<number>> {
   return await request.get('/credit/record/available_credits');
+}
+
+/**
+ * 获取积分余量详细信息
+ */
+export async function getCreditBalance(): Promise<
+  HttpResponse<CreditBalanceRecord>
+> {
+  return await request.get('/credit/record/credit_balance');
 }
 
 /**

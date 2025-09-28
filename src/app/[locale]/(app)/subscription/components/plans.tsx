@@ -240,12 +240,12 @@ const Plans: React.FC = () => {
             <div>
               <Button
                 block
-                disabled={plan !== 'free'}
+                disabled={plan.key !== 'free'}
                 color="primary"
                 variant="filled"
                 className="pointer-events-none"
               >
-                {plan === 'free'
+                {plan.key === 'free'
                   ? t('template.actions.current')
                   : t('template.actions.free')}
               </Button>
@@ -320,7 +320,7 @@ const Plans: React.FC = () => {
               {p('basic.desc')}
             </div>
             <div>
-              {plan === 'basic' ? (
+              {plan.key === 'basic' ? (
                 <Button
                   block
                   color="primary"
@@ -333,7 +333,7 @@ const Plans: React.FC = () => {
                 <PrimaryButton
                   block
                   loading={loading === 'basic'}
-                  disabled={plan !== 'free'}
+                  disabled={plan.key !== 'free'}
                   onClick={() => handleCheckout('basic')}
                 >
                   {t('template.actions.upgrade')}
@@ -439,7 +439,7 @@ const Plans: React.FC = () => {
               {p('premium.desc')}
             </div>
             <div>
-              {plan === 'premium' ? (
+              {plan.key === 'premium' ? (
                 <Button
                   block
                   color="primary"
@@ -452,7 +452,7 @@ const Plans: React.FC = () => {
                 <PrimaryButton
                   block
                   loading={loading === 'premium'}
-                  disabled={plan === 'ultimate'}
+                  disabled={plan.key === 'ultimate'}
                   onClick={() => handleCheckout('premium')}
                 >
                   {t('template.actions.upgrade')}
@@ -557,7 +557,7 @@ const Plans: React.FC = () => {
               {p('ultimate.desc')}
             </div>
             <div>
-              {plan === 'ultimate' ? (
+              {plan.key === 'ultimate' ? (
                 <Button
                   block
                   color="primary"

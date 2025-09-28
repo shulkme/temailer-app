@@ -64,7 +64,7 @@ const AccountDropdown = () => {
   const router = useRouter();
   const { lg } = useBreakpoint();
   const { setLocale } = useLanguage();
-  const { plan_locale } = useSubscription();
+  const { plan } = useSubscription();
   const { loading, available } = useCredit();
 
   const menus = useMemo(() => {
@@ -143,9 +143,7 @@ const AccountDropdown = () => {
           <div className="p-4 space-y-2">
             <h3 className="font-bold m-0">{user?.nickname}</h3>
             <div className="text-xs text-black/50">{user?.email}</div>
-            <div className="text-primary-500 text-xs">
-              {plan_locale?.fullName}
-            </div>
+            <div className="text-primary-500 text-xs">{plan?.fullName}</div>
           </div>
           <Divider type="horizontal" className="m-0" />
           {React.cloneElement(
