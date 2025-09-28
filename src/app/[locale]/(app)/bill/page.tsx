@@ -13,7 +13,7 @@ import { useSubscription } from '@/providers/subscription';
 import { Title } from '@/providers/title';
 import { RiSearchLine } from '@remixicon/react';
 import { useAntdTable } from 'ahooks';
-import { Card, FormProps, Select, Table } from 'antd';
+import { Alert, Card, FormProps, Select, Table } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 import { useCallback, useMemo } from 'react';
@@ -169,6 +169,21 @@ export default function Page() {
   return (
     <>
       <Title title={t('title')} />
+      <Alert
+        showIcon
+        banner
+        type="info"
+        message={t.rich('tips', {
+          link: (chunks) => (
+            <a
+              href="https://billing.stripe.com/p/login/eVq5kDblLcm25sf3rN6oo00"
+              target="_blank"
+            >
+              {chunks}
+            </a>
+          ),
+        })}
+      />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <Card>
           <div className="mb-4 lg:mb-6">

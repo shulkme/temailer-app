@@ -585,6 +585,7 @@
       },
       "bill": {
         "title": "Bill",
+        "tips": "To view your order details or manage your subscription, please visit the <link>Stripe Customer Portal</link>.",
         "table": {
           "filters": {
             "status": {
@@ -640,7 +641,7 @@
             },
             "actions": {
               "current": "Current Plan",
-              "upgrade": "Upgrade Now",
+              "upgrade": "Subscribe Now",
               "free": "Free Trial",
               "upOnly": "Upgrade only"
             }

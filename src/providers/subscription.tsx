@@ -118,7 +118,8 @@ const SubscriptionProvider: React.FC<{
   const { loading, refresh } = useRequest(getCurrentSubscription, {
     onSuccess: (res) => {
       setSubscription(res.data);
-      const { rule_name } = res.data?.subscription_info || {};
+      const { rule_name = PRICE_TYPE_ENUM.FREE_MONTHLY } =
+        res.data?.subscription_info || {};
       setIsFree(
         rule_name === PRICE_TYPE_ENUM.FREE_MONTHLY ||
           rule_name === PRICE_TYPE_ENUM.FREE_YEARLY,

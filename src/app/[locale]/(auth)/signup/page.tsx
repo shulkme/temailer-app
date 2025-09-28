@@ -217,7 +217,6 @@ export default function Page() {
             </AntdFormItem>
             <AntdFormItem>
               <Button
-                disabled
                 loading={submitting}
                 size="large"
                 block
