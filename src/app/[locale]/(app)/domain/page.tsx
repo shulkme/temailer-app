@@ -21,7 +21,7 @@ import { useAntdTable, useSetState } from 'ahooks';
 import { Alert, Button, Card, FormProps, Select, Space, Table } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export default function Page() {
   const t = useTranslations('app.pages.domain');
@@ -125,6 +125,16 @@ export default function Page() {
     setCurrentRecord(record);
     setOpen({ remark: true });
   };
+
+  useEffect(() => {
+    const handler = (event: MessageEvent) => {
+      if (event.data?.type === 'PAYMENT_SUCCESS') {
+        refresh();
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
 
   return (
     <DomainProvider>
