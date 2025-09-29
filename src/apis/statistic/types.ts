@@ -5,8 +5,6 @@ export interface UserStatisticRecord {
 }
 
 export interface UsageStatisticRecord {
-  daily_records: {
-    date: string;
-    points: number;
-  }[];
+  date: string;
+  value: number;
 }

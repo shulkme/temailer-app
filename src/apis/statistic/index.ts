@@ -13,7 +13,7 @@ export async function getUserStatistics(): Promise<
 
 export async function getEmailUsageStatistics(
   days: number,
-): Promise<HttpResponse<UsageStatisticRecord>> {
+): Promise<HttpResponse<UsageStatisticRecord[]>> {
   return await request.get('/sys/statistics/email-usage', {
     params: {
       days,
@@ -23,7 +23,7 @@ export async function getEmailUsageStatistics(
 
 export async function getApiUsageStatistics(
   days: number,
-): Promise<HttpResponse<UsageStatisticRecord>> {
+): Promise<HttpResponse<UsageStatisticRecord[]>> {
   return await request.get('/sys/statistics/api-usage', {
     params: {
       days,

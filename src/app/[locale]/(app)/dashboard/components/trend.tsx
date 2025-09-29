@@ -19,10 +19,10 @@ import {
 
 const Trend: React.FC = () => {
   const t = useTranslations('app.pages.dashboard.trend');
-  const [data, setData] = useState<UsageStatisticRecord['daily_records']>(
+  const [data, setData] = useState<UsageStatisticRecord[]>(
     Array.from({ length: 30 }).map((_, i) => ({
       date: dayjs().subtract(i, 'days').format('YYYY-MM-DD'),
-      points: 0,
+      value: 0,
     })),
   );
 
@@ -32,8 +32,8 @@ const Trend: React.FC = () => {
     },
     {
       onSuccess: (res) => {
-        if (res.data.daily_records.length > 0) {
-          setData(res.data.daily_records);
+        if (res.data.length > 0) {
+          setData(res.data);
         }
       },
     },
@@ -104,7 +104,7 @@ const Trend: React.FC = () => {
               }}
             />
             <Area
-              dataKey="points"
+              dataKey="value"
               stroke="var(--ant-color-primary)"
               strokeWidth={2}
               fillOpacity={1}
