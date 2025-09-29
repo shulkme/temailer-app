@@ -45,6 +45,52 @@ const Cover: React.FC = () => {
             ))}
           </ul>
         </div>
+        <div className="flex-none pb-6">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/mail/gmail.png"
+              alt="gmail"
+              width={24}
+              height={24}
+              unoptimized={false}
+            />
+            <Image
+              src="/images/mail/outlook.png"
+              alt="gmail"
+              width={24}
+              height={24}
+              unoptimized={false}
+            />
+            <Image
+              src="/images/mail/mail.png"
+              alt="gmail"
+              width={24}
+              height={24}
+              unoptimized={false}
+            />
+            <Image
+              src="/images/mail/yahoo.png"
+              alt="gmail"
+              width={24}
+              height={24}
+              unoptimized={false}
+            />
+            <Image
+              src="/images/mail/icloud.png"
+              alt="gmail"
+              width={24}
+              height={24}
+              unoptimized={false}
+            />
+            <Image
+              src="/images/mail/gmx.png"
+              alt="gmail"
+              width={24}
+              height={24}
+              unoptimized={false}
+            />
+          </div>
+        </div>
         <div className="flex-none text-white/80">
           <p className="">{t('footer')}</p>
         </div>
