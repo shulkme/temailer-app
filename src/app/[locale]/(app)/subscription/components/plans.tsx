@@ -572,7 +572,7 @@ const Plans: React.FC = () => {
                   </span>
                   <span>
                     {p.rich('basic.features.price', {
-                      strong: () => <strong>{renderPerPrice('basic')}</strong>,
+                      strong: () => <strong>${renderPerPrice('basic')}</strong>,
                     })}
                   </span>
                 </li>
@@ -674,7 +674,7 @@ const Plans: React.FC = () => {
                   <span>
                     {p.rich('premium.features.price', {
                       strong: () => (
-                        <strong>{renderPerPrice('premium')}</strong>
+                        <strong>${renderPerPrice('premium')}</strong>
                       ),
                     })}
                   </span>
@@ -772,7 +772,7 @@ const Plans: React.FC = () => {
                   <span>
                     {p.rich('ultimate.features.price', {
                       strong: () => (
-                        <strong>{renderPerPrice('ultimate')}</strong>
+                        <strong>${renderPerPrice('ultimate')}</strong>
                       ),
                     })}
                   </span>
