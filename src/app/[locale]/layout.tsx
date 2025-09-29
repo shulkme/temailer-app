@@ -1,10 +1,12 @@
 import NProgressBar from '@/app/[locale]/components/nprogress-bar';
 import { routing } from '@/i18n/routing';
+import ClarityProvider from '@/providers/clarity';
 import { IdentityProvider } from '@/providers/identity';
 import { LanguageProvider } from '@/providers/language';
 import { ThemeProvider } from '@/providers/theme';
 import { TitleProvider } from '@/providers/title';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { App } from 'antd';
 import type { Metadata } from 'next';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
@@ -35,26 +37,30 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
       <body>
-        <AntdRegistry>
-          <ThemeProvider>
-            <NProgressBar
-              options={{
-                showSpinner: false,
-              }}
-            />
-            <NextIntlClientProvider>
-              <LanguageProvider>
-                <IdentityProvider>
-                  <TitleProvider>
-                    <App>{children}</App>
-                  </TitleProvider>
-                </IdentityProvider>
-              </LanguageProvider>
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </AntdRegistry>
+        <ClarityProvider>
+          <AntdRegistry>
+            <ThemeProvider>
+              <NProgressBar
+                options={{
+                  showSpinner: false,
+                }}
+              />
+              <NextIntlClientProvider>
+                <LanguageProvider>
+                  <IdentityProvider>
+                    <TitleProvider>
+                      <App>{children}</App>
+                    </TitleProvider>
+                  </IdentityProvider>
+                </LanguageProvider>
+              </NextIntlClientProvider>
+            </ThemeProvider>
+          </AntdRegistry>
+        </ClarityProvider>
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
     </html>
   );
 }
