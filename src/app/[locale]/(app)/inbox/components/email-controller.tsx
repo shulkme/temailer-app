@@ -10,7 +10,6 @@ import {
   AntdInput,
   AntdSkeletonInput,
   AntdTextArea,
-  AntdTitle,
   AntdTooltip,
 } from '@/components/antd';
 import {
@@ -385,28 +384,28 @@ const EmailController: React.FC = () => {
           <div className="text-xs text-black/50 mb-4">{t('email.current')}</div>
           <div>
             {loading ? (
-              <AntdSkeletonInput active className="h-[38px]" />
+              <AntdSkeletonInput active className="h-[36px]" />
             ) : (
               <div className="inline-block relative">
                 {currentEmail ? (
                   <>
-                    <AntdTitle level={2} className="m-0">
+                    <h2 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl m-0">
                       {currentEmail}
-                    </AntdTitle>
+                    </h2>
                     <div className="absolute top-0 -right-2 translate-x-full -translate-y-1/3 leading-6 px-2.5 bg-primary-50 text-xs text-primary-500 rounded-full rounded-bl-none">
                       {creditCost}
                     </div>
                   </>
                 ) : (
-                  <AntdTitle level={2} className="m-0">
+                  <h2 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl m-0">
                     {t('email.empty')}
-                  </AntdTitle>
+                  </h2>
                 )}
               </div>
             )}
           </div>
           <div className="-ml-2 mt-6 flex justify-between items-center gap-2 flex-wrap">
-            <Space size="middle">
+            <div className="flex flex-wrap gap-1 sm:gap-2 lg:gap-4 items-center">
               <Button
                 disabled={!currentEmail}
                 type="text"
@@ -449,7 +448,7 @@ const EmailController: React.FC = () => {
               >
                 {t('email.actions.random')}
               </Button>
-            </Space>
+            </div>
             <Space>
               <Button
                 type="text"
