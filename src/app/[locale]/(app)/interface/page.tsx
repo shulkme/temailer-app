@@ -1,16 +1,19 @@
 'use client';
 import { getApiKeyList, refreshApiKey } from '@/apis/api_key';
+import { ApiKeyRecord } from '@/apis/api_key/types';
 import { getApiUsageStatistics } from '@/apis/statistic';
 import { UsageStatisticRecord } from '@/apis/statistic/types';
 import { AntdText, AntdTitle, AntdTooltip } from '@/components/antd';
+import { Link } from '@/i18n/navigation';
 import { useIdentity } from '@/providers/identity';
+import { useSubscription } from '@/providers/subscription';
 import { Title } from '@/providers/title';
 import { RiResetRightLine } from '@remixicon/react';
 import { useRequest } from 'ahooks';
 import { Alert, App, Button, Card, Descriptions, Spin } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Area,
   AreaChart,
@@ -32,6 +35,8 @@ export default function Page() {
       points: 0,
     })),
   );
+  const { is_free } = useSubscription();
+  const [api, setApi] = useState<ApiKeyRecord>();
 
   const { loading } = useRequest(
     async () => {
@@ -46,14 +51,19 @@ export default function Page() {
     },
   );
 
-  const { data: API, refresh } = useRequest(async () => {
-    return await getApiKeyList().then((res) => res.data.items?.[0]);
+  const { refresh, run: getAPI } = useRequest(getApiKeyList, {
+    manual: true,
+    onSuccess: (res) => {
+      if (res.data.items && res.data.items.length > 0) {
+        setApi(res.data.items[0]);
+      }
+    },
   });
 
   const { run: doRefresh, loading: refreshing } = useRequest(
     async () => {
-      if (API) {
-        return await refreshApiKey(API.api_key);
+      if (api?.api_key) {
+        return await refreshApiKey(api.api_key);
       }
       return null;
     },
@@ -68,6 +78,12 @@ export default function Page() {
       },
     },
   );
+
+  useEffect(() => {
+    if (!is_free) {
+      getAPI();
+    }
+  }, [getAPI, is_free]);
 
   return (
     <>
@@ -96,23 +112,34 @@ export default function Page() {
                 label: t('info.apiKey'),
                 children: (
                   <div className="flex flex-wrap gap-2 items-center">
-                    <AntdText copyable>{API?.api_key || '--'}</AntdText>
-                    <AntdTooltip title={t('info.refresh')}>
-                      <Button
-                        className="leading-none h-auto"
-                        size="small"
-                        type="link"
-                        loading={refreshing}
-                        onClick={doRefresh}
-                        icon={<RiResetRightLine size={16} />}
-                      />
-                    </AntdTooltip>
+                    {is_free ? (
+                      <>
+                        <AntdText>****************</AntdText>
+                        <Link href="/subscription#plan">
+                          {g('tags.subscriptionOnly')}
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <AntdText copyable>{api?.api_key || '--'}</AntdText>
+                        <AntdTooltip title={t('info.refresh')}>
+                          <Button
+                            className="leading-none h-auto"
+                            size="small"
+                            type="link"
+                            loading={refreshing}
+                            onClick={doRefresh}
+                            icon={<RiResetRightLine size={16} />}
+                          />
+                        </AntdTooltip>
+                      </>
+                    )}
                   </div>
                 ),
               },
               {
                 label: t('info.updatedTime'),
-                children: dayjs(API?.updated_time || API?.created_time).format(
+                children: dayjs(api?.updated_time || api?.created_time).format(
                   'YYYY-MM-DD HH:mm:ss',
                 ),
               },

@@ -21,10 +21,10 @@ export default function Page() {
                 <Statistic />
               </Col>
               <Col span={24}>
-                <Task />
+                <Trend />
               </Col>
               <Col span={24}>
-                <Trend />
+                <Task />
               </Col>
             </Row>
           </Col>
