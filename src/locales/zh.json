@@ -4,7 +4,9 @@
       "day": "{num, plural, =0 {天} =1 {1天} other {#天}}",
       "year": "{num, plural, =0 {年} =1 {1年} other {#年}}",
       "monthly": "月付",
-      "yearly": "年付"
+      "yearly": "年付",
+      "forever": "永久",
+      "credit": "{num, plural, =0 {积分} =1 {1 积分} other {# 积分}}"
     },
     "checkout": {
       "payment": {
@@ -610,6 +612,7 @@
         "plan": {
           "title": "当前套餐",
           "expiredTime": "到期时间",
+          "freeForever": "永久免费",
           "actions": {
             "upgrade": "升级套餐"
           }

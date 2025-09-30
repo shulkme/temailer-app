@@ -5,6 +5,7 @@
       "year": "{num, plural, =0 {Year} =1 {1 Year} other {# Years}}",
       "monthly": "Monthly",
       "yearly": "Yearly",
+      "forever": "Forever",
       "credit": "{num, plural, =0 {Credit} =1 {1 Credit} other {# Credits}}"
     },
     "checkout": {
@@ -611,6 +612,7 @@
         "plan": {
           "title": "Current Plan",
           "expiredTime": "Expiration Date",
+          "freeForever": "Free Forever",
           "actions": {
             "upgrade": "Upgrade"
           }

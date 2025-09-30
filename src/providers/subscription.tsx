@@ -54,7 +54,7 @@ const SubscriptionProvider: React.FC<{
             fullKey: PRICE_TYPE_ENUM.FREE_MONTHLY,
             period: PLAN_PERIOD_ENUM.MONTHLY,
             name: g('plans.free.title'),
-            fullName: g('plans.free.title'),
+            fullName: [g('plans.free.title'), g('units.forever')].join(' / '),
           };
         case PRICE_TYPE_ENUM.BASIC_MONTHLY:
           return {
