@@ -7,7 +7,7 @@ import { Link } from '@/i18n/navigation';
 import { Title } from '@/providers/title';
 import { RiEditBoxLine, RiSearchLine } from '@remixicon/react';
 import { useAntdTable, useRequest, useSetState } from 'ahooks';
-import { App, Button, Card, FormProps, Space, Table } from 'antd';
+import { Alert, App, Button, Card, FormProps, Space, Table } from 'antd';
 import { useTranslations } from 'next-intl';
 import React, { useCallback, useState } from 'react';
 
@@ -83,6 +83,7 @@ export default function Page() {
   return (
     <>
       <Title title={t('title')} />
+      <Alert showIcon type="info" banner message={t('alert.message')} />
       <div className="p-4 lg:p-6 space-y-4 lg:space-y-6">
         <Card>
           <div className="flex flex-wrap items-center justify-between gap-2 mb-4 lg:mb-6">

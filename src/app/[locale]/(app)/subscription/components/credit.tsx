@@ -38,9 +38,14 @@ const Credit: React.FC = () => {
         )}
         <div>
           {t('resetTime')}:{' '}
-          {dayjs(subscription?.subscription_info?.expire_at).format(
-            'YYYY-MM-DD HH:mm',
-          )}{' '}
+          {subscription?.subscription_info?.expire_at
+            ? dayjs(subscription?.subscription_info?.expire_at).format(
+                'YYYY-MM-DD HH:mm',
+              )
+            : dayjs()
+                .startOf('month')
+                .add(1, 'month')
+                .format('YYYY-MM-DD HH:mm')}{' '}
           {t('permanentCredits', {
             num: data?.permanent_credits || 0,
           })}

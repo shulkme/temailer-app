@@ -448,6 +448,9 @@
       },
       "archive": {
         "title": "Archive",
+        "alert": {
+          "message": "Saved email addresses allow for quick access to incoming mail and easy history management."
+        },
         "table": {
           "filters": {
             "search": {
@@ -586,7 +589,9 @@
       },
       "bill": {
         "title": "Bill",
-        "tips": "To view your order details or manage your subscription, please visit the <link>Stripe Customer Portal</link>.",
+        "alert": {
+          "message": "To view your order details or manage your subscription, please visit the <link>Stripe Customer Portal</link>."
+        },
         "table": {
           "filters": {
             "status": {

@@ -81,7 +81,7 @@ const Credits: React.FC = () => {
       <AntdTitle level={5} className="mb-6">
         {t('title')}
       </AntdTitle>
-      <AntdParagraph type="secondary">{t('subtitle')}</AntdParagraph>
+      <AntdParagraph>{t('subtitle')}</AntdParagraph>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-6">
         <div className="col-span-1">
           <div className="w-full min-h-full border border-slate-200 p-4 lg:p-6 space-y-4">

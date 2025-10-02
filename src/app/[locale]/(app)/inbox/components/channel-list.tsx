@@ -68,7 +68,7 @@ const ChannelCard: React.FC<
         </div>
       </AntdRadioButton>
       {!available && (
-        <div className="absolute z-20 inset-[2px] bg-linear-to-l from-primary-50 to-transparent flex items-center justify-end p-4">
+        <div className="absolute z-20 inset-[2px] bg-linear-to-l from-primary-50 to-transparent flex items-center justify-end p-4 rounded-r-md">
           <Link href="/subscription">
             <Button type="primary" size="small" shape="round">
               {t('subscriptionOnly')}

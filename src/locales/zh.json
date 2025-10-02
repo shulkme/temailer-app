@@ -448,6 +448,9 @@
       },
       "archive": {
         "title": "收藏",
+        "alert": {
+          "message": "收藏的邮箱地址可用于二次快捷收信，也可用于历史邮箱管理。"
+        },
         "table": {
           "filters": {
             "search": {
@@ -586,7 +589,9 @@
       },
       "bill": {
         "title": "账单",
-        "tips": "如需查看订单明细，或管理您的自动订阅，请前往<link>Stripe客户门户</link>。",
+        "alert": {
+          "message": "如需查看订单明细，或管理您的自动订阅，请前往<link>Stripe客户门户</link>。"
+        },
         "table": {
           "filters": {
             "status": {

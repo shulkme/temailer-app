@@ -173,7 +173,7 @@ export default function Page() {
         showIcon
         banner
         type="info"
-        message={t.rich('tips', {
+        message={t.rich('alert.message', {
           link: (chunks) => (
             <a
               href="https://billing.stripe.com/p/login/eVq5kDblLcm25sf3rN6oo00"
