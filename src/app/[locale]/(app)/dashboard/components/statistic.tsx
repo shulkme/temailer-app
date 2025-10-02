@@ -1,6 +1,7 @@
 'use client';
 import { getUserStatistics } from '@/apis/statistic';
 import { AntdSkeletonButton, AntdText, AntdTitle } from '@/components/antd';
+import { Link } from '@/i18n/navigation';
 import {
   RemixiconComponentType,
   RiArchive2Line,
@@ -18,9 +19,13 @@ const StatisticItem: React.FC<{
   value?: number;
   title: string;
   loading?: boolean;
-}> = ({ icon, title, value, loading }) => {
+  href: string;
+}> = ({ icon, title, value, loading, href }) => {
   return (
-    <div className="h-auto border border-transparent rounded-sm leading-none lg:p-4">
+    <Link
+      href={href}
+      className="block cursor-pointer h-auto border border-transparent rounded-sm leading-none lg:p-4 transition hover:bg-primary-500/5"
+    >
       <div className="flex items-center gap-6">
         <Avatar
           size={48}
@@ -48,7 +53,7 @@ const StatisticItem: React.FC<{
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -65,19 +70,27 @@ const Statistic: React.FC = () => {
           title={t('inbox')}
           loading={loading}
           value={data?.email_claim_count}
+          href="/inbox"
         />
-        <StatisticItem icon={RiMailSendLine} title={t('outbox')} value={0} />
+        <StatisticItem
+          icon={RiMailSendLine}
+          title={t('outbox')}
+          value={0}
+          href="/outbox"
+        />
         <StatisticItem
           icon={RiGlobalLine}
           title={t('domain')}
           loading={loading}
           value={data?.domain_count}
+          href="/domain"
         />
         <StatisticItem
           icon={RiArchive2Line}
           title={t('archive')}
           loading={loading}
           value={data?.mailbox_count}
+          href="/archive"
         />
       </div>
     </Card>
