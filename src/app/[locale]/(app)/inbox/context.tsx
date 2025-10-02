@@ -3,10 +3,12 @@ import { getAllDomains } from '@/apis/domain';
 import { DomainRecord } from '@/apis/domain/types';
 import { getEmailAddress } from '@/apis/email';
 import { EMAIL_CHANNEL_TYPE_ENUM } from '@/apis/email/enums';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import { useLocalStorageState, useRequest, useSetState } from 'ahooks';
 import { SetState } from 'ahooks/es/useSetState';
 import { AxiosResponse } from 'axios';
 import dayjs from 'dayjs';
+import { useSearchParams } from 'next/navigation';
 import { draw, uid } from 'radash';
 import React, {
   createContext,
@@ -51,6 +53,14 @@ const InboxProvider: React.FC<{
     [EMAIL_CHANNEL_TYPE_ENUM.YAHOO]: null,
     [EMAIL_CHANNEL_TYPE_ENUM.MAIL]: null,
   });
+
+  const searchParams = useSearchParams();
+
+  const initEmail = searchParams.get('email');
+
+  const pathname = usePathname();
+
+  const router = useRouter();
 
   const [nextRetryTime, setNextRetryTime] = useState<string>();
 
@@ -119,28 +129,96 @@ const InboxProvider: React.FC<{
   }, [addressLoading, domainLoading]);
 
   useEffect(() => {
-    // init
-    if (domains.length > 0) {
-      setCurrentEmails({
-        [EMAIL_CHANNEL_TYPE_ENUM.TEMP]: randomEmail(
-          EMAIL_CHANNEL_TYPE_ENUM.TEMP,
-        ),
-        [EMAIL_CHANNEL_TYPE_ENUM.EDU]: randomEmail(EMAIL_CHANNEL_TYPE_ENUM.EDU),
-      });
+    const current = currentEmails?.[currentChannel];
+    if (!current) {
+      if (
+        [EMAIL_CHANNEL_TYPE_ENUM.TEMP, EMAIL_CHANNEL_TYPE_ENUM.EDU].includes(
+          currentChannel,
+        )
+      ) {
+        setCurrentEmails({
+          [currentChannel]: randomEmail(currentChannel),
+        });
+      } else {
+        genAddress(currentChannel);
+      }
     }
-  }, [domains, randomEmail, setCurrentEmails]);
+  }, [
+    currentChannel,
+    currentEmails,
+    genAddress,
+    randomEmail,
+    setCurrentEmails,
+  ]);
 
   useEffect(() => {
-    const current = currentEmails?.[currentChannel];
-    if (
-      !current &&
-      ![EMAIL_CHANNEL_TYPE_ENUM.TEMP, EMAIL_CHANNEL_TYPE_ENUM.EDU].includes(
-        currentChannel,
-      )
-    ) {
-      genAddress(currentChannel);
+    if (initEmail) {
+      const match = initEmail.match(/@([a-zA-Z0-9.-]+)\./);
+      if (match) {
+        const domain = match[1];
+        if (domain.endsWith('edu')) {
+          setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.EDU);
+          setCurrentEmails({
+            [EMAIL_CHANNEL_TYPE_ENUM.EDU]: initEmail,
+          });
+          return;
+        }
+
+        switch (domain) {
+          case 'gmail':
+            setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.GMAIL);
+            setCurrentEmails({
+              [EMAIL_CHANNEL_TYPE_ENUM.GMAIL]: initEmail,
+            });
+            break;
+          case 'outlook':
+          case 'live':
+            setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.OUTLOOK);
+            setCurrentEmails({
+              [EMAIL_CHANNEL_TYPE_ENUM.OUTLOOK]: initEmail,
+            });
+            break;
+          case 'yahoo':
+            setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.YAHOO);
+            setCurrentEmails({
+              [EMAIL_CHANNEL_TYPE_ENUM.YAHOO]: initEmail,
+            });
+            break;
+          case 'mail':
+            setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.MAIL);
+            setCurrentEmails({
+              [EMAIL_CHANNEL_TYPE_ENUM.MAIL]: initEmail,
+            });
+            break;
+          case 'gmx':
+            setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.GMX);
+            setCurrentEmails({
+              [EMAIL_CHANNEL_TYPE_ENUM.GMX]: initEmail,
+            });
+            break;
+          case 'icloud':
+            setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.ICLOUD);
+            setCurrentEmails({
+              [EMAIL_CHANNEL_TYPE_ENUM.ICLOUD]: initEmail,
+            });
+            break;
+          default:
+            setCurrentChannel(EMAIL_CHANNEL_TYPE_ENUM.TEMP);
+            setCurrentEmails({
+              [EMAIL_CHANNEL_TYPE_ENUM.TEMP]: initEmail,
+            });
+        }
+      }
     }
-  }, [currentChannel, currentEmails, genAddress]);
+  }, [initEmail, setCurrentEmails]);
+
+  useEffect(() => {
+    if (currentEmail) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('email', currentEmail);
+      router.replace(pathname + '?' + params.toString());
+    }
+  }, [currentEmail, pathname, router, searchParams]);
 
   return (
     <InboxContext.Provider

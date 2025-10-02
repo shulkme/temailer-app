@@ -3,6 +3,7 @@ import { delArchive, getArchiveList } from '@/apis/archive';
 import { ArchiveRecord } from '@/apis/archive/types';
 import RemarkModal from '@/app/[locale]/(app)/archive/components/remark-modal';
 import { AntdForm, AntdFormItem, AntdInput } from '@/components/antd';
+import { Link } from '@/i18n/navigation';
 import { Title } from '@/providers/title';
 import { RiEditBoxLine, RiSearchLine } from '@remixicon/react';
 import { useAntdTable, useRequest, useSetState } from 'ahooks';
@@ -124,6 +125,10 @@ export default function Page() {
               {
                 title: t('table.columns.email'),
                 dataIndex: 'name',
+                width: 300,
+                render: (value) => {
+                  return <Link href={`/inbox?email=${value}`}>{value}</Link>;
+                },
               },
               {
                 title: t('table.columns.remark'),
@@ -145,6 +150,7 @@ export default function Page() {
               {
                 title: t('table.columns.createdTime'),
                 dataIndex: 'created_time',
+                width: 240,
               },
               {
                 title: t('table.columns.operate'),

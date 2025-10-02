@@ -384,7 +384,7 @@ const EmailController: React.FC = () => {
           <div className="text-xs text-black/50 mb-4">{t('email.current')}</div>
           <div>
             {loading ? (
-              <AntdSkeletonInput active className="h-[36px]" />
+              <AntdSkeletonInput active className="h-[40px]" />
             ) : (
               <div className="inline-block relative">
                 {currentEmail ? (
@@ -463,7 +463,7 @@ const EmailController: React.FC = () => {
           </div>
         </div>
         {isImapEmail && nextRetryTime && (
-          <div className="bg-gray-50 px-6 py-2 text-black/50 text-xs rounded-b-lg">
+          <div className="bg-orange-500/5 px-6 py-2 text-orange-500 text-xs rounded-b-lg">
             {t('email.alert')} {nextRetryTime}
           </div>
         )}
