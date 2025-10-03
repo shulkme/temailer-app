@@ -187,6 +187,7 @@ export default function Page() {
                 },
               ]}
               validateTrigger={['onChange', 'onBlur']}
+              initialValue={true}
             >
               <Checkbox>
                 <div>
